@@ -30,7 +30,7 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>STREET OF FOOK</title>
+  <title>FOOK STREET WAR 福街大戰</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@600;700&display=swap');
@@ -749,10 +749,25 @@
     .t-btn:active { transform: scale(0.92); filter: brightness(1.3); }
 
     @media (max-width: 768px) {
+      #char-select-screen {
+        padding: 10px 12px 14px;
+      }
       .char-cards {
         grid-template-columns: 1fr;
-        max-height: 50vh;
+        max-height: 41vh;
         overflow-y: auto;
+        gap: 8px;
+      }
+      .char-card {
+        padding: 9px 11px;
+        gap: 4px;
+      }
+      .char-portrait-thumb {
+        width: 48px;
+        height: 48px;
+      }
+      .char-actions {
+        margin-top: 8px;
       }
       .control-grid {
         grid-template-columns: 1fr;
@@ -831,8 +846,8 @@
 
     <!-- MAIN MENU -->
     <div id="main-menu" class="screen active">
-      <h1 class="arcade-title">STREET BRAWL 2.5D</h1>
-      <div class="arcade-subtitle">3D ARCADE BEAT 'EM UP</div>
+      <h1 class="arcade-title">FOOK STREET WAR</h1>
+      <div class="arcade-subtitle">福 街 大 戰</div>
       <div class="menu-buttons">
         <button class="btn btn-primary" id="btn-start-1p">START GAME</button>
         <button class="btn" id="btn-char-select">CHARACTER SELECT</button>
@@ -863,7 +878,7 @@
           <div><span class="key-badge">J</span> Punch (3-Hit Combo)</div>
           <div><span class="key-badge">K</span> Kick / Air Kick</div>
           <div><span class="key-badge">L</span> Jump</div>
-          <div><span class="key-badge">U</span> AOE Special (35 EN)</div>
+          <div><span class="key-badge">U</span> Special Skill (35 EN)</div>
           <div><span class="key-badge">H / Shift+U</span> Ultimate (100 EN)</div>
           <div><span class="key-badge">I</span> Block / Dodge</div>
           <div><span class="key-badge">O</span> Grab &amp; Throw</div>
@@ -963,7 +978,7 @@
           skin: 0xe8bfa4,
           hair: 0x261b15,
           hairStyle: 'undercut',
-          shirt: 0x191f38,
+          shirt: 0xf0eadc,
           pants: 0x1c2940,
           torsoW: 0.62,
           pocket: false,
@@ -1349,7 +1364,7 @@
           SHING: {
             base: '#e8bfa4', hi: '#f7d9c4', mid: '#ddae90', sh: '#c49275',
             lip: '#c47b74', lipLine: '#844640', hair: '#261b15', hairHi: '#423026',
-            shirt: '#191f38', shirtDark: '#101428', bgA: '#1d2948', bgB: '#0f1324'
+            shirt: '#f0eadc', shirtDark: '#d6cdb8', bgA: '#1d2948', bgB: '#0f1324'
           },
           GEORGE: {
             base: '#e0ad8b', hi: '#f0c6a8', mid: '#d39c7a', sh: '#ba8463',
@@ -2139,22 +2154,19 @@
         ctx.fillStyle = `rgb(${r},${g},${b})`;
         ctx.fillRect(0, 0, 128, 128);
 
-        // Subtle cloth weave & soft natural fabric fold grain
-        const step = kind === 'denim' ? 3 : 4;
-        for (let y = 0; y < 128; y += step) {
-          ctx.fillStyle = y % (step * 2) === 0 ? 'rgba(255,255,255,0.035)' : 'rgba(0,0,0,0.045)';
-          ctx.fillRect(0, y, 128, 1);
-        }
-        for (let x = 0; x < 128; x += step) {
-          ctx.fillStyle = x % (step * 2) === 0 ? 'rgba(255,255,255,0.025)' : 'rgba(0,0,0,0.035)';
-          ctx.fillRect(x, 0, 1, 128);
+        // Fine micro-grain cotton/denim texture (no visible blocky grid)
+        for (let i = 0; i < 950; i++) {
+          const px = (i * 47) % 128;
+          const py = (i * 73 + Math.floor(i / 16)) % 128;
+          ctx.fillStyle = i % 2 === 0 ? 'rgba(255,255,255,0.024)' : 'rgba(0,0,0,0.032)';
+          ctx.fillRect(px, py, kind === 'denim' ? 2 : 1, 1);
         }
 
         // Gentle vertical cloth drape gradient for natural depth
         const grad = ctx.createLinearGradient(0, 0, 0, 128);
-        grad.addColorStop(0, 'rgba(255,255,255,0.06)');
-        grad.addColorStop(0.5, 'rgba(0,0,0,0)');
-        grad.addColorStop(1, 'rgba(0,0,0,0.12)');
+        grad.addColorStop(0, 'rgba(255,255,255,0.05)');
+        grad.addColorStop(0.55, 'rgba(0,0,0,0)');
+        grad.addColorStop(1, 'rgba(0,0,0,0.10)');
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, 128, 128);
 
@@ -2168,70 +2180,75 @@
       }
 
       static createSculptedTorsoGeo(torsoW, isPower = false) {
-        // Organic closed superellipsoid T-shirt torso matching the smooth sculpted head
-        const geo = new THREE.SphereGeometry(1, 28, 22);
+        // Lofted anatomical T-shirt torso with a natural broad sloping shoulder line
+        const geo = new THREE.SphereGeometry(1, 36, 28);
         const pos = geo.attributes.position;
         const halfW = torsoW * 0.49;
-        const halfD = isPower ? 0.215 : 0.192;
-        const halfH = 0.40;
+        const halfD = isPower ? 0.205 : 0.182;
 
         for (let i = 0; i < pos.count; i++) {
           const ux = pos.getX(i);
           const uy = pos.getY(i);
           const uz = pos.getZ(i);
 
-          // Horizontal superellipse fullness (broad natural chest/back with soft rounded sides)
+          // Normalized horizontal cross-section direction (superellipse chest/back)
           const rXZ = Math.hypot(ux, uz);
-          let sx = ux;
-          let sz = uz;
-          if (rXZ > 0.0001) {
-            const c = Math.abs(ux / rXZ);
-            const s = Math.abs(uz / rXZ);
-            const superScale = 1 / Math.pow(Math.pow(c, 2.5) + Math.pow(s, 2.5), 1 / 2.5);
-            const flatMix = Math.max(0, 1 - uy * uy * 0.85);
-            const factor = 1 + (superScale - 1) * 0.65 * flatMix;
-            sx = ux * factor;
-            sz = uz * factor;
+          let sx = 0;
+          let sz = 0;
+          if (rXZ > 1e-4) {
+            const dx = ux / rXZ;
+            const dz = uz / rXZ;
+            const p = 2.45;
+            const se = 1 / Math.pow(Math.pow(Math.abs(dx), p) + Math.pow(Math.abs(dz), p), 1 / p);
+            sx = dx * se;
+            sz = dz * se;
           }
 
-          // Anatomical width & depth silhouette along torso height (uy: -1 hem .. +1 shoulders)
+          // Map unit-sphere latitude uy (-1..1) -> t (0 bottom hem .. 1 neck collar)
+          const t = (uy + 1) * 0.5;
+          let yLocal = 0;
           let wProfile = 1.0;
           let dProfile = 1.0;
-          let yShift = uy * halfH;
 
-          if (uy > 0.72) {
-            // Smoothly sloped trapezius toward crew-neck collar
-            const t = (uy - 0.72) / 0.28;
-            wProfile = 1.08 * (1 - t * t * 0.48);
-            dProfile = 1.0 - t * 0.22;
-          } else if (uy > 0.1) {
-            // Broad rounded shoulders & chest
-            const t = (uy - 0.1) / 0.62;
-            wProfile = 0.96 + 0.12 * Math.sin(t * Math.PI * 0.5);
-            dProfile = 1.0 + 0.08 * Math.sin(t * Math.PI);
-          } else if (uy > -0.76) {
-            // Natural athletic waist taper & relaxed T-shirt drape
-            const t = (0.1 - uy) / 0.86;
-            const waistTaper = isPower ? 0.03 : 0.09;
-            wProfile = 0.96 - waistTaper * Math.sin(t * Math.PI) + t * 0.02;
-            dProfile = 0.98 + (isPower ? 0.04 : -0.02) * Math.sin(t * Math.PI);
+          if (t < 0.08) {
+            // Smoothly closed lower T-shirt hem
+            const u = t / 0.08;
+            const cap = Math.sin(u * Math.PI * 0.5);
+            yLocal = -0.405 + u * 0.015;
+            wProfile = 0.96 * cap;
+            dProfile = 0.96 * cap;
+          } else if (t <= 0.72) {
+            // Relaxed T-shirt waist up to broad upper chest / shoulder outer edge
+            const u = (t - 0.08) / 0.64;
+            yLocal = -0.39 + u * 0.63; // -0.39 -> +0.24 (world y = 0.85 -> 1.48)
+            const waistDip = isPower ? 0.015 : 0.055;
+            wProfile = 0.96 - waistDip * Math.sin(u * Math.PI) + 0.12 * Math.pow(u, 1.35);
+            dProfile = 0.96 + 0.08 * Math.sin(u * Math.PI * 0.65);
+          } else if (t <= 0.94) {
+            // Continuous natural trapezius-to-deltoid shoulder slope (eliminates pinched valley!)
+            const u = (t - 0.72) / 0.22;
+            yLocal = 0.24 + 0.135 * Math.pow(u, 0.82); // +0.24 -> +0.375 (world y = 1.48 -> 1.615)
+            const shoulderCurve = Math.pow(Math.max(0, 1 - Math.pow(u, 1.65)), 0.72);
+            wProfile = 0.36 + 0.72 * shoulderCurve; // smoothly slopes from 1.08 shoulder width to 0.36 collar
+            dProfile = 0.56 + 0.48 * Math.pow(Math.max(0, 1 - u * u), 0.75);
           } else {
-            // Softly rounded T-shirt hem tucked smoothly toward hips
-            const t = (-0.76 - uy) / 0.24;
-            wProfile = 0.98 * (1 - t * 0.25);
-            dProfile = 0.96 * (1 - t * 0.25);
-            yShift = (-0.76 - t * 0.14) * halfH;
+            // Smoothly closed top inside crew-neck collar
+            const u = (1 - t) / 0.06;
+            const cap = Math.sin(u * Math.PI * 0.5);
+            yLocal = 0.375;
+            wProfile = 0.36 * cap;
+            dProfile = 0.56 * cap;
           }
 
-          // Slight pectoral fullness in front (+Z)
-          const chestContour = (uz > 0 && uy > -0.1 && uy < 0.65)
-            ? 0.018 * uz * Math.sin(((uy + 0.1) / 0.75) * Math.PI)
+          // Subtle natural front chest fullness
+          const chestContour = (uz > 0 && t > 0.38 && t < 0.82)
+            ? 0.016 * (uz / Math.max(0.2, rXZ)) * Math.sin(((t - 0.38) / 0.44) * Math.PI)
             : 0;
 
           pos.setXYZ(
             i,
             sx * halfW * wProfile,
-            yShift,
+            yLocal,
             sz * halfD * dProfile + chestContour
           );
         }
@@ -2422,31 +2439,31 @@
           color: CharacterModelBuilder.srgbColor(app.shirt || 0x333333).multiplyScalar(0.84),
           roughness: 0.88
         });
-        const collar = new THREE.Mesh(new THREE.TorusGeometry(0.118, 0.026, 10, 22), collarMat);
+        const collar = new THREE.Mesh(new THREE.TorusGeometry(0.112, 0.017, 10, 24), collarMat);
         collar.rotation.x = Math.PI / 2;
-        collar.position.set(0, 1.59, 0.008);
+        collar.position.set(0, 1.605, 0.004);
         bodyPivot.add(collar);
 
         // Tapered smooth neck connecting torso to sculpted head
-        const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.088, 0.108, 0.19, 16), skinMat);
+        const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.088, 0.106, 0.19, 16), skinMat);
         neck.position.set(0, 1.66, 0);
         neck.castShadow = true;
         bodyPivot.add(neck);
 
-        // Rounded pelvis / hips bridging T-shirt hem to thighs seamlessly
+        // Rounded pelvis / hips tucked cleanly beneath T-shirt hem
         const pelvis = new THREE.Mesh(new THREE.SphereGeometry(1, 20, 14), pantsMat);
-        pelvis.scale.set(torsoW * 0.44, 0.155, isPower ? 0.185 : 0.168);
-        pelvis.position.set(0, 0.86, 0);
+        pelvis.scale.set(torsoW * 0.415, 0.145, isPower ? 0.175 : 0.158);
+        pelvis.position.set(0, 0.84, 0);
         pelvis.castShadow = true;
         bodyPivot.add(pelvis);
 
-        // Subtle dark belt / waistband
+        // Subtle dark belt / waistband resting flush under shirt hem
         const belt = new THREE.Mesh(
-          new THREE.CylinderGeometry(torsoW * 0.425, torsoW * 0.43, 0.055, 20),
+          new THREE.CylinderGeometry(torsoW * 0.41, torsoW * 0.415, 0.045, 20),
           new THREE.MeshStandardMaterial({ color: CharacterModelBuilder.srgbColor(0x181a20), roughness: 0.65 })
         );
-        belt.scale.set(1, 1, (isPower ? 0.185 : 0.168) / (torsoW * 0.43));
-        belt.position.set(0, 0.90, 0);
+        belt.scale.set(1, 1, (isPower ? 0.175 : 0.158) / (torsoW * 0.415));
+        belt.position.set(0, 0.87, 0);
         bodyPivot.add(belt);
 
         // WAI's signature left-chest pocket contoured cleanly on sculpted chest
@@ -2603,32 +2620,32 @@
         }
 
         bodyPivot.add(headGroup);
-
-        // 2. Smooth Articulated Arms (Rounded Shoulders, Short Sleeves, Elbows, Tapered Forearms & Sculpted Fists)
+        // 2. Smooth Articulated Arms (Seamless Sloped Shoulders, Short Sleeves, Elbows, Tapered Forearms & Sculpted Fists)
         const sleeveRimMat = new THREE.MeshStandardMaterial({
-          color: CharacterModelBuilder.srgbColor(app.shirt || 0x333333).multiplyScalar(0.65),
+          color: CharacterModelBuilder.srgbColor(app.shirt || 0x333333).multiplyScalar(0.82),
           roughness: 0.9
         });
         const makeArm = (side) => {
           const shoulderPivot = new THREE.Group();
-          shoulderPivot.position.set(side * (torsoW * 0.46 + 0.055), 1.48, 0);
+          shoulderPivot.position.set(side * (torsoW * 0.505), 1.465, 0);
 
-          // Seamless rounded T-shirt shoulder cap
-          const shoulderCap = new THREE.Mesh(new THREE.SphereGeometry(0.114, 14, 12), shirtMat);
-          shoulderCap.scale.set(0.96, 1.04, 1.02);
+          // Low-profile deltoid cap tucked seamlessly into the sloped torso shoulder
+          const shoulderCap = new THREE.Mesh(new THREE.SphereGeometry(0.104, 16, 12), shirtMat);
+          shoulderCap.scale.set(1.06, 0.86, 1.04);
+          shoulderCap.position.set(-side * 0.018, -0.008, 0);
           shoulderCap.castShadow = true;
           shoulderPivot.add(shoulderCap);
 
-          // Tapered short T-shirt sleeve
-          const sleeve = new THREE.Mesh(new THREE.CylinderGeometry(0.108, 0.098, 0.24, 14), shirtMat);
-          sleeve.position.y = -0.12;
+          // Smooth short T-shirt sleeve flowing continuously from shoulder slope
+          const sleeve = new THREE.Mesh(new THREE.CylinderGeometry(0.100, 0.092, 0.24, 16), shirtMat);
+          sleeve.position.y = -0.125;
           sleeve.castShadow = true;
           shoulderPivot.add(sleeve);
 
           // Sleeve cuff hem ring
-          const cuff = new THREE.Mesh(new THREE.TorusGeometry(0.094, 0.011, 8, 16), sleeveRimMat);
+          const cuff = new THREE.Mesh(new THREE.TorusGeometry(0.090, 0.010, 8, 16), sleeveRimMat);
           cuff.rotation.x = Math.PI / 2;
-          cuff.position.y = -0.24;
+          cuff.position.y = -0.245;
           shoulderPivot.add(cuff);
 
           // Bare upper arm emerging cleanly from sleeve
@@ -4486,6 +4503,39 @@
         this.camera.aspect = window.innerWidth / window.innerHeight;
         this.camera.updateProjectionMatrix();
         this.renderer.setSize(window.innerWidth, window.innerHeight);
+        if (this.state === 'CHAR_SELECT') {
+          this.updateCharSelectLayout();
+        }
+      }
+
+      updateCharSelectLayout() {
+        const aspect = Math.max(0.35, window.innerWidth / Math.max(1, window.innerHeight));
+        const isPortrait = aspect < 1.0;
+
+        // Dynamically tighten character spacing on narrow mobile screens so all 3 fighters stay side-by-side
+        const spacing = isPortrait ? 1.38 : aspect < 1.35 ? 1.85 : 2.35;
+        const xs = { WAI: -spacing, SHING: 0, GEORGE: spacing };
+        if (this.previewRigs) {
+          ['WAI', 'SHING', 'GEORGE'].forEach((key) => {
+            const rig = this.previewRigs[key];
+            if (rig) {
+              rig.root.position.x = xs[key];
+              rig.root.position.y = 0.35;
+            }
+          });
+        }
+
+        if (this.state === 'CHAR_SELECT') {
+          const halfFovRad = THREE.MathUtils.degToRad(this.camera.fov * 0.5);
+          const halfSpanNeeded = spacing + 0.72;
+          const minDistForWidth = halfSpanNeeded / (Math.tan(halfFovRad) * aspect);
+          const camZ = Math.max(6.8, minDistForWidth);
+          // Aim slightly lower on portrait phones so all 3 characters stand cleanly above the cards
+          const camY = isPortrait ? 2.15 : 2.25;
+          const lookY = isPortrait ? 0.22 : aspect < 1.35 ? 1.05 : 1.55;
+          this.camera.position.set(0, camY, camZ);
+          this.camera.lookAt(0, lookY, 0);
+        }
       }
 
       showScreen(id) {
@@ -4617,8 +4667,7 @@
         this.scene.background = new THREE.Color(0x0b0f1e);
         this.scene.fog = null;
         this.previewGroup.visible = true;
-        this.camera.position.set(0, 2.25, 6.8);
-        this.camera.lookAt(0, 1.55, 0);
+        this.updateCharSelectLayout();
         document.getElementById('hud').classList.remove('active');
         this.buildCharSelectCards();
         this.showScreen('char-select-screen');
@@ -5278,8 +5327,9 @@
             if (!rig) return;
             const sel = key === this.selectedChar;
             rig.root.rotation.y = Math.sin(t * (sel ? 1.8 : 0.8)) * 0.25;
-            rig.root.scale.setScalar(sel ? 1.06 : 0.97);
-            CharacterModelBuilder.animateRig(rig, sel ? 'idle' : 'idle', t, 0);
+            rig.root.position.z += ((sel ? 0.35 : 0) - rig.root.position.z) * Math.min(1, dt * 10);
+            rig.root.scale.setScalar(sel ? 1.08 : 0.96);
+            CharacterModelBuilder.animateRig(rig, 'idle', t, 0);
           });
         } else if (this.state === 'PLAYING') {
           this.updatePlaying(dt);
