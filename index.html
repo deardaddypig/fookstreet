@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>FOOK STREET WAR 福街大戰</title>
+  <title>FOOK STREET WAR 福 街 大 戰</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Rajdhani:wght@600;700&display=swap');
@@ -145,22 +145,26 @@
     .char-cards {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-      width: min(980px, 96vw);
+      gap: 9px;
+      width: min(1020px, 96vw);
+      max-height: 44vh;
+      overflow-y: auto;
       margin-top: auto;
+      padding-top: 12px;
+      padding-right: 2px;
     }
 
     .char-card {
       background: rgba(14, 18, 34, 0.88);
       border: 2px solid rgba(255, 255, 255, 0.18);
-      border-radius: 14px;
-      padding: 13px;
+      border-radius: 12px;
+      padding: 9px 11px;
       cursor: pointer;
       touch-action: manipulation;
       transition: all 0.18s ease;
       display: flex;
       flex-direction: column;
-      gap: 7px;
+      gap: 4px;
       position: relative;
     }
 
@@ -197,12 +201,87 @@
     }
 
     .char-portrait-thumb {
-      width: 64px;
-      height: 64px;
+      width: 52px;
+      height: 52px;
       border-radius: 10px;
       object-fit: cover;
       border: 2px solid rgba(255, 209, 102, 0.85);
       background: #1b2030;
+      flex-shrink: 0;
+    }
+
+    .char-title-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .char-name {
+      font-family: 'Black Ops One', cursive;
+      font-size: 1.2rem;
+      color: #fff;
+    }
+
+    .char-role {
+      font-size: 0.74rem;
+      padding: 1px 7px;
+      border-radius: 99px;
+      background: rgba(255, 158, 0, 0.2);
+      color: #ffd166;
+      font-weight: 700;
+      align-self: flex-start;
+    }
+
+    .stat-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+    }
+
+    .stat-label {
+      width: 30px;
+      color: #a9b8d4;
+      font-weight: 700;
+    }
+
+    .stat-bar-bg {
+      flex: 1;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .stat-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, #ff9e00, #ff2a5f);
+    }
+
+    .stat-val {
+      width: 24px;
+      text-align: right;
+      font-weight: 700;
+    }
+
+    .char-specials {
+      font-size: 0.72rem;
+      color: #b7d5ff;
+      line-height: 1.25;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .char-actions {
+      display: flex;
+      gap: 14px;
+      margin-top: 10px;
+      align-items: center;
       flex-shrink: 0;
     }
 
@@ -401,39 +480,6 @@
       height: 100%;
       width: 0%;
       background: linear-gradient(90deg, #00b4d8, #90e0ef);
-      transition: width 0.12s ease;
-    }
-
-    .hud-weapon-bar {
-      display: none;
-      align-items: center;
-      gap: 6px;
-      margin-top: 5px;
-      padding: 2px 7px;
-      border-radius: 6px;
-      background: rgba(255, 196, 61, 0.14);
-      border: 1px solid rgba(255, 196, 61, 0.45);
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: #ffd166;
-    }
-
-    .hud-weapon-bar.active {
-      display: flex;
-    }
-
-    .weapon-dur-bg {
-      flex: 1;
-      height: 6px;
-      background: rgba(255, 255, 255, 0.16);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .weapon-dur-fill {
-      height: 100%;
-      width: 100%;
-      background: linear-gradient(90deg, #ff595e, #ffca3a, #38ef7d);
       transition: width 0.12s ease;
     }
 
@@ -881,21 +927,34 @@
 
     @media (max-width: 768px) {
       #char-select-screen {
-        padding: 10px 12px 14px;
+        padding: 10px 10px max(12px, env(safe-area-inset-bottom));
       }
       .char-cards {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         max-height: 41vh;
         overflow-y: auto;
-        gap: 8px;
+        gap: 7px;
       }
       .char-card {
-        padding: 9px 11px;
-        gap: 4px;
+        padding: 7px 8px;
+        gap: 3px;
       }
       .char-portrait-thumb {
-        width: 48px;
-        height: 48px;
+        width: 40px;
+        height: 40px;
+      }
+      .char-name {
+        font-size: 1rem;
+      }
+      .char-role {
+        font-size: 0.66rem;
+      }
+      .stat-row {
+        font-size: 0.7rem;
+        gap: 4px;
+      }
+      .char-specials {
+        font-size: 0.65rem;
       }
       .char-actions {
         margin-top: 8px;
@@ -933,11 +992,6 @@
               </div>
               <div class="bar-wrap"><div class="hp-fill" id="hud-p1-hp"></div></div>
               <div class="bar-wrap energy-wrap"><div class="energy-fill" id="hud-p1-en"></div></div>
-              <div class="hud-weapon-bar" id="hud-weapon-bar">
-                <span id="hud-weapon-label">木棒</span>
-                <div class="weapon-dur-bg"><div class="weapon-dur-fill" id="hud-weapon-fill"></div></div>
-                <span id="hud-weapon-count">10/10</span>
-              </div>
             </div>
           </div>
         </div>
@@ -989,7 +1043,7 @@
     <!-- MAIN MENU -->
     <div id="main-menu" class="screen active">
       <h1 class="arcade-title">FOOK STREET WAR</h1>
-      <div class="arcade-subtitle">福 街 大 戰</div>
+      <div class="arcade-subtitle">Lidl Avengers: Workday</div>
       <div class="menu-buttons">
         <button class="btn btn-primary" id="btn-start-1p">START GAME</button>
         <button class="btn" id="btn-char-select">CHARACTER SELECT</button>
@@ -1017,9 +1071,9 @@
         <h3>PLAYER CONTROLS</h3>
         <div class="control-grid">
           <div><span class="key-badge">W A S D / Arrows</span> Move (2x Left/Right Dash)</div>
-          <div><span class="key-badge">J / 拳</span> Punch / Pick Up Weapon (玻璃瓶・木棒)</div>
-          <div><span class="key-badge">K</span> Kick / Air Kick</div>
-          <div><span class="key-badge">L</span> Jump</div>
+          <div><span class="key-badge">J</span> Punch 拳 (3-Hit Combo)</div>
+          <div><span class="key-badge">K</span> Kick 腳</div>
+          <div><span class="key-badge">L</span> Jump 跳</div>
           <div><span class="key-badge">J + K / 拳+腳</span> Special (35 EN) / Ult (100 EN)</div>
           <div><span class="key-badge">U</span> AOE Special (35 EN)</div>
           <div><span class="key-badge">H / Shift+U</span> Ultimate (100 EN)</div>
@@ -1027,7 +1081,7 @@
           <div><span class="key-badge">O</span> Grab &amp; Throw</div>
         </div>
         <div style="text-align:center; color:#a9b8d4; margin-bottom:14px; font-size:0.92rem;">
-          手機模式右手精簡為「拳 / 腳 / 跳」三鍵，同時按下「拳 + 腳」即可發動必殺技！靠近地面玻璃瓶或木棒按「拳」可彎腰拾取（耐用 10 下）。
+          手機模式精簡為「拳 / 腳 / 跳」三鍵，同時按下「拳 + 腳」即可發動必殺技！
         </div>
         <div style="text-align:center; color:#a9b8d4; margin-bottom:14px; font-size:0.92rem;">
           Mobile touch controls auto-enable on touchscreens or via the HUD "TOUCH" button.
@@ -1084,76 +1138,278 @@
 
   <script>
     // =========================================================================
-    // 1. CHARACTER STATS & ROSTER (WAI, SHING, GEORGE)
+    // 1. MODULAR CHARACTER REGISTRY (WAI, SHING, GEORGE, MISTY, JOHNNY, MARK)
+    //    Matches the split characters.js structure for effortless maintenance.
     // =========================================================================
-    const CharacterStats = {
-      WAI: {
+    const CharacterDefaults = {
+      moves: {
+        combo: [
+          { anim: 'punch',  duration: 0.24, mult: 0.90, range: 1.50, knockback: 2.2, sfx: 'punch' },
+          { anim: 'punch2', duration: 0.25, mult: 1.05, range: 1.55, knockback: 2.8, sfx: 'punch' },
+          { anim: 'heavy',  duration: 0.36, mult: 1.55, range: 1.75, knockback: 6.2, knockdown: true, sfx: 'heavy' }
+        ],
+        comboWindow: 0.75,
+        dashAttack: { anim: 'heavy', duration: 0.34, mult: 1.50, range: 1.85, knockback: 6.5, knockdown: true, sfx: 'heavy' },
+        kick: { anim: 'kick', duration: 0.32, mult: 1.25, range: 1.80, knockback: 4.8, sfx: 'kick', comboKnockdown: 2 },
+        airKick: { anim: 'kick', duration: 0.34, mult: 1.35, range: 1.80, knockback: 5.8, knockdown: true, sfx: 'kick' },
+        grab: { duration: 0.34, reach: 1.65, reachZ: 0.95, pull: 0.95, damageMult: 0.34, knockback: 9.2, energyGain: 12 },
+        special1: { cost: 35,  duration: 0.48, invuln: 0.45, knockback: 6.5, knockdown: true, color: 0x00d4ff, sfx: 'special', banner: false },
+        special2: { cost: 100, duration: 0.65, invuln: 0.75, knockback: 9.5, knockdown: true, color: 0xff2a5f, sfx: 'special', banner: true }
+      },
+      face: {
+        template: 'sidepart',
+        palette: null,
+        head: { sx: 0.220, sy: 0.270, sz: 0.218, jaw: 0.21, cheek: 0.015 },
+        earX: 0.212,
+        noseScale: 0.88,
+        tex: { noseW: 14, noseY: 21, sideHairY: 210, sideburnSolid: false, earY: 244, faceCy: 240, faceScale: 1.44 }
+      },
+      enemyHead: { sx: 0.218, sy: 0.258, sz: 0.218, jaw: 0.24, cheek: 0.01 }
+    };
+
+    const CharacterRoster = [
+      // 1. WAI — Power Type
+      {
         id: 'WAI',
         name: 'WAI',
         role: 'POWER TYPE',
-        hp: 85,
-        def: 65,
-        atk: 100,
-        spd: 55,
-        special1: { name: 'Earthquake Slam', cost: 35, mult: 1.85, radius: 3.6 },
-        special2: { name: 'Titan Meteor Crush', cost: 100, mult: 3.1, radius: 4.8 },
+        hp: 85, def: 65, atk: 100, spd: 55,
+        special1: { name: 'Earthquake Slam', cost: 35, mult: 1.85, radius: 3.6, color: 0xff9e00 },
+        special2: { name: 'Titan Meteor Crush', cost: 100, mult: 3.1, radius: 4.8, color: 0xff2a5f },
         appearance: {
-          faceId: 'WAI',
-          skin: 0xd9a886,
-          hair: 0x17171a,
-          hairStyle: 'messy',
-          shirt: 0x35382a,
-          pants: 0x15161a,
-          torsoW: 0.68,
-          pocket: true,
-          glasses: null
+          faceId: 'WAI', skin: 0xd9a886, hair: 0x17171a, hairStyle: 'messy',
+          shirt: 0x35382a, pants: 0x15161a, torsoW: 0.68, pocket: true, glasses: null
+        },
+        face: {
+          template: 'messy',
+          palette: {
+            base: '#d9a886', hi: '#e9c2a4', mid: '#ce9977', sh: '#b88260',
+            lip: '#be7b6e', lipLine: '#7a453b', hair: '#17171a', hairHi: '#2f3038',
+            shirt: '#35382a', shirtDark: '#272a1f', bgA: '#2c3024', bgB: '#12151f'
+          },
+          head: { sx: 0.238, sy: 0.258, sz: 0.228, jaw: 0.14, cheek: 0.055 },
+          earX: 0.225, noseScale: 1.08,
+          tex: { noseW: 17.5, noseY: 23, sideHairY: 280, sideburnSolid: true, earY: 244, faceCy: 240, faceScale: 1.48 }
         }
       },
-      SHING: {
+      // 2. SHING — Speed Type
+      {
         id: 'SHING',
         name: 'SHING',
         role: 'SPEED TYPE',
-        hp: 75,
-        def: 55,
-        atk: 75,
-        spd: 100,
-        special1: { name: 'Cyclone Kick', cost: 35, mult: 1.7, radius: 3.8 },
-        special2: { name: 'Hyper Blitz Flurry', cost: 100, mult: 2.95, radius: 5.0 },
+        hp: 75, def: 55, atk: 75, spd: 100,
+        special1: { name: 'Cyclone Kick', cost: 35, mult: 1.7, radius: 3.8, color: 0x00d4ff },
+        special2: { name: 'Hyper Blitz Flurry', cost: 100, mult: 2.95, radius: 5.0, color: 0x00f5d4 },
         appearance: {
-          faceId: 'SHING',
-          skin: 0xe8bfa4,
-          hair: 0x261b15,
-          hairStyle: 'undercut',
-          shirt: 0xf0eadc,
-          pants: 0x1c2940,
-          torsoW: 0.62,
-          pocket: false,
-          glasses: 'silver'
+          faceId: 'SHING', skin: 0xe8bfa4, hair: 0x261b15, hairStyle: 'undercut',
+          shirt: 0xf0eadc, pants: 0x1c2940, torsoW: 0.62, pocket: false, glasses: 'silver'
+        },
+        face: {
+          template: 'undercut',
+          palette: {
+            base: '#e8bfa4', hi: '#f7d9c4', mid: '#ddae90', sh: '#c49275',
+            lip: '#c47b74', lipLine: '#844640', hair: '#261b15', hairHi: '#423026',
+            shirt: '#f0eadc', shirtDark: '#d6cdb8', bgA: '#1d2948', bgB: '#0f1324'
+          },
+          head: { sx: 0.218, sy: 0.258, sz: 0.218, jaw: 0.24, cheek: 0.01 },
+          earX: 0.212, noseScale: 0.88,
+          tex: { noseW: 13.5, noseY: 21, sideHairY: 210, sideburnSolid: false, earY: 244, faceCy: 240, faceScale: 1.44 }
         }
       },
-      GEORGE: {
+      // 3. GEORGE — Defense Type
+      {
         id: 'GEORGE',
         name: 'GEORGE',
         role: 'DEFENSE TYPE',
-        hp: 100,
-        def: 100,
-        atk: 70,
-        spd: 45,
-        special1: { name: 'Aegis Shockwave', cost: 35, mult: 1.75, radius: 4.0 },
-        special2: { name: 'Fortress Nova', cost: 100, mult: 3.0, radius: 5.2 },
+        hp: 100, def: 100, atk: 70, spd: 45,
+        special1: { name: 'Aegis Shockwave', cost: 35, mult: 1.75, radius: 4.0, color: 0x4cc9f0 },
+        special2: { name: 'Fortress Nova', cost: 100, mult: 3.0, radius: 5.2, color: 0x4361ee },
         appearance: {
-          faceId: 'GEORGE',
-          skin: 0xe0ad8b,
-          hair: 0x141518,
-          hairStyle: 'sidepart',
-          shirt: 0x222854,
-          pants: 0xc2b192,
-          torsoW: 0.65,
-          pocket: false,
-          glasses: 'black'
+          faceId: 'GEORGE', skin: 0xe0ad8b, hair: 0x141518, hairStyle: 'sidepart',
+          shirt: 0x222854, pants: 0xc2b192, torsoW: 0.65, pocket: false, glasses: 'black'
+        },
+        face: {
+          template: 'sidepart',
+          palette: {
+            base: '#e0ad8b', hi: '#f0c6a8', mid: '#d39c7a', sh: '#ba8463',
+            lip: '#be796d', lipLine: '#78443a', hair: '#141518', hairHi: '#2a2c33',
+            shirt: '#222854', shirtDark: '#171c3d', bgA: '#1e2752', bgB: '#0f1326'
+          },
+          head: { sx: 0.220, sy: 0.270, sz: 0.218, jaw: 0.21, cheek: 0.015 },
+          earX: 0.212, noseScale: 0.88,
+          tex: { noseW: 14.5, noseY: 21, sideHairY: 210, sideburnSolid: false, earY: 236, faceCy: 236, faceScale: 1.44 }
+        }
+      },
+      // 4. MISTY — Agile Striker (Female, Black Shirt with Doraemon graphic)
+      {
+        id: 'MISTY',
+        name: 'MISTY',
+        role: 'AGILE STRIKER',
+        hp: 78, def: 62, atk: 80, spd: 92,
+        special1: { name: 'Pocket Bell Spin', cost: 35, mult: 1.78, radius: 3.9, color: 0x00b4d8 },
+        special2: { name: 'Midnight Lotus Storm', cost: 100, mult: 3.05, radius: 5.1, color: 0xff4d8d },
+        appearance: {
+          faceId: 'MISTY', gender: 'female',
+          skin: 0xeab996, hair: 0x1c1411, hairStyle: 'longhair',
+          shirt: 0x15171d, pants: 0x222530, torsoW: 0.56,
+          pocket: false, glasses: null, chestPrint: 'doraemon'
+        },
+        face: {
+          template: 'longhair',
+          palette: {
+            base: '#eab996', hi: '#fad5b9', mid: '#dda782', sh: '#c48d6a',
+            lip: '#d8787b', lipLine: '#9c484c', hair: '#1c1411', hairHi: '#3d2a22',
+            shirt: '#15171d', shirtDark: '#0b0c10', bgA: '#2b2038', bgB: '#0e101c'
+          },
+          head: { sx: 0.212, sy: 0.250, sz: 0.212, jaw: 0.27, cheek: 0.032 },
+          earX: 0.200, noseScale: 0.78,
+          tex: { noseW: 12.2, noseY: 20, sideHairY: 325, sideburnSolid: true, earY: 244, faceCy: 240, faceScale: 1.44 }
+        },
+        moves: {
+          combo: [
+            { anim: 'punch',  duration: 0.20, mult: 0.82, range: 1.50, knockback: 1.8, sfx: 'punch' },
+            { anim: 'punch2', duration: 0.20, mult: 0.90, range: 1.55, knockback: 2.2, sfx: 'punch' },
+            { anim: 'kick',   duration: 0.24, mult: 1.15, range: 1.80, knockback: 3.6, sfx: 'kick' },
+            { anim: 'heavy',  duration: 0.32, mult: 1.55, range: 1.85, knockback: 6.4, knockdown: true, sfx: 'heavy' }
+          ],
+          kick: { anim: 'kick', duration: 0.28, mult: 1.35, range: 1.92, knockback: 5.2, sfx: 'kick', comboKnockdown: 2 }
+        }
+      },
+      // 5. JOHNNY — Aerial Brawler (Male, Purple Shirt with NBA graphic, Black Rectangular Glasses)
+      {
+        id: 'JOHNNY',
+        name: 'JOHNNY',
+        role: 'AERIAL BRAWLER',
+        hp: 82, def: 60, atk: 88, spd: 82,
+        special1: { name: 'Alley-Oop Slam', cost: 35, mult: 1.82, radius: 3.8, color: 0x9b5de5 },
+        special2: { name: 'Court Breaker Dunk', cost: 100, mult: 3.15, radius: 5.0, color: 0xffbe0b },
+        appearance: {
+          faceId: 'JOHNNY',
+          skin: 0xdead8c, hair: 0x151519, hairStyle: 'fade',
+          shirt: 0x5c249c, pants: 0x191726, torsoW: 0.65,
+          pocket: false, glasses: 'black', chestPrint: 'nba'
+        },
+        face: {
+          template: 'fade',
+          palette: {
+            base: '#dead8c', hi: '#f0c7ab', mid: '#cf9b79', sh: '#b58060',
+            lip: '#ba7770', lipLine: '#7a4540', hair: '#151519', hairHi: '#30313a',
+            shirt: '#5c249c', shirtDark: '#3f1670', bgA: '#36195e', bgB: '#100c1f'
+          },
+          head: { sx: 0.218, sy: 0.274, sz: 0.218, jaw: 0.25, cheek: 0.015 },
+          earX: 0.212, noseScale: 0.96,
+          tex: { noseW: 15.6, noseY: 22, sideHairY: 192, sideburnSolid: false, earY: 246, faceCy: 246, faceScale: 1.42 }
+        },
+        moves: {
+          dashAttack: { anim: 'heavy', duration: 0.30, mult: 1.65, range: 2.00, knockback: 7.2, knockdown: true, sfx: 'heavy' },
+          airKick: { anim: 'kick', duration: 0.32, mult: 1.60, range: 1.95, knockback: 6.8, knockdown: true, sfx: 'heavy' }
+        }
+      },
+      // 6. MARK — Street Brawler (Male, Hooded Jacket with SUP graphic, Side-swept Hair, Mole & Chin Goatee)
+      {
+        id: 'MARK',
+        name: 'MARK',
+        role: 'STREET BRAWLER',
+        hp: 90, def: 82, atk: 82, spd: 60,
+        special1: { name: 'Hype Shockwave', cost: 35, mult: 1.80, radius: 3.9, color: 0xe6192e },
+        special2: { name: 'Drop Zone Impact', cost: 100, mult: 3.10, radius: 5.1, color: 0xff3b30 },
+        appearance: {
+          faceId: 'MARK',
+          skin: 0xdfb091, hair: 0x161517, hairStyle: 'street',
+          shirt: 0x262a34, pants: 0x15171c, torsoW: 0.67,
+          pocket: false, glasses: null, hoodie: true, chestPrint: 'sup'
+        },
+        face: {
+          template: 'street',
+          palette: {
+            base: '#dfb091', hi: '#f1cab0', mid: '#d19e7e', sh: '#b88567',
+            lip: '#b66c6e', lipLine: '#7a4245', hair: '#161517', hairHi: '#343238',
+            shirt: '#262a34', shirtDark: '#171a21', bgA: '#3b151c', bgB: '#11121c'
+          },
+          head: { sx: 0.232, sy: 0.260, sz: 0.224, jaw: 0.16, cheek: 0.050 },
+          earX: 0.222, noseScale: 1.06,
+          tex: { noseW: 17.8, noseY: 22, sideHairY: 270, sideburnSolid: true, earY: 244, faceCy: 240, faceScale: 1.46 }
+        },
+        moves: {
+          combo: [
+            { anim: 'punch',  duration: 0.24, mult: 0.96, range: 1.55, knockback: 2.6, sfx: 'punch' },
+            { anim: 'punch2', duration: 0.25, mult: 1.12, range: 1.60, knockback: 3.4, sfx: 'punch' },
+            { anim: 'heavy',  duration: 0.35, mult: 1.68, range: 1.82, knockback: 7.0, knockdown: true, sfx: 'heavy' }
+          ],
+          grab: { duration: 0.32, reach: 1.75, reachZ: 1.0, pull: 0.95, damageMult: 0.38, knockback: 9.8, energyGain: 15 }
         }
       }
-    };
+    ];
+
+    const CharacterRegistry = (() => {
+      const byId = {};
+      const ids = [];
+      const hex = (n) => '#' + (n >>> 0).toString(16).padStart(6, '0').slice(-6);
+      const shade = (n, f) => {
+        const ch = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((c) =>
+          Math.max(0, Math.min(255, Math.round(f >= 0 ? c + (255 - c) * f : c * (1 + f))))
+        );
+        return hex((ch[0] << 16) | (ch[1] << 8) | ch[2]);
+      };
+      const autoPalette = (a) => {
+        const skin = a.skin != null ? a.skin : 0xdca583;
+        const hair = a.hair != null ? a.hair : 0x1a1a1a;
+        const shirt = a.shirt != null ? a.shirt : 0x333333;
+        return {
+          base: hex(skin), hi: shade(skin, 0.18), mid: shade(skin, -0.06), sh: shade(skin, -0.20),
+          lip: shade(skin, -0.22), lipLine: shade(skin, -0.50),
+          hair: hex(hair), hairHi: shade(hair, 0.22),
+          shirt: hex(shirt), shirtDark: shade(shirt, -0.25),
+          bgA: shade(shirt, -0.55), bgB: '#0f1324'
+        };
+      };
+      const merge = (def, ov) => Object.assign({}, def, ov || {});
+
+      function register(raw) {
+        if (!raw || !raw.id) throw new Error('CharacterRegistry.register requires id');
+        const D = CharacterDefaults;
+        const m = raw.moves || {};
+        const app = Object.assign({ faceId: raw.id }, raw.appearance || {});
+        const f = raw.face || {};
+        const data = {
+          id: raw.id,
+          name: raw.name || raw.id,
+          role: raw.role || '',
+          hp: raw.hp, def: raw.def, atk: raw.atk, spd: raw.spd,
+          appearance: app,
+          special1: merge(merge(D.moves.special1, m.special1), raw.special1),
+          special2: merge(merge(D.moves.special2, m.special2), raw.special2),
+          moves: {
+            combo: m.combo || D.moves.combo,
+            comboWindow: m.comboWindow != null ? m.comboWindow : D.moves.comboWindow,
+            dashAttack: merge(D.moves.dashAttack, m.dashAttack),
+            kick: merge(D.moves.kick, m.kick),
+            airKick: merge(D.moves.airKick, m.airKick),
+            grab: merge(D.moves.grab, m.grab)
+          },
+          face: {
+            template: f.template || D.face.template,
+            palette: f.palette || autoPalette(app),
+            head: merge(D.face.head, f.head),
+            earX: f.earX != null ? f.earX : D.face.earX,
+            noseScale: f.noseScale != null ? f.noseScale : D.face.noseScale,
+            tex: merge(D.face.tex, f.tex)
+          }
+        };
+        if (!byId[data.id]) ids.push(data.id);
+        byId[data.id] = data;
+        return data;
+      }
+
+      CharacterRoster.forEach(register);
+      return {
+        ids,
+        register,
+        has: (id) => !!byId[id],
+        get: (id) => byId[id] || byId[ids[0]],
+        list: () => ids.map((i) => byId[i])
+      };
+    })();
 
     // =========================================================================
     // 2. AUDIO MANAGER (Procedural Web Audio API SFX + 5-Stage BGM)
@@ -1262,30 +1518,6 @@
           case 'pickup':
             this.tone(520, 0.09, 'sine', 0.2 * v, 780);
             setTimeout(() => this.tone(780, 0.12, 'sine', 0.2 * v, 1040), 75);
-            break;
-          case 'bottleHit':
-            this.noise(0.08, 0.32 * v);
-            this.tone(1120, 0.08, 'triangle', 0.22 * v, 520);
-            this.tone(1680, 0.06, 'sine', 0.15 * v, 900);
-            break;
-          case 'bottleBreak':
-            this.noise(0.24, 0.44 * v);
-            [1850, 1420, 2120, 980, 1620].forEach((f, idx) => {
-              setTimeout(() => this.tone(f, 0.075, 'triangle', 0.2 * v, f * 0.55), idx * 24);
-            });
-            break;
-          case 'batHit':
-            this.noise(0.11, 0.36 * v);
-            this.tone(240, 0.12, 'triangle', 0.34 * v, 74);
-            this.tone(420, 0.06, 'square', 0.14 * v, 165);
-            break;
-          case 'batBreak':
-            this.noise(0.22, 0.42 * v);
-            this.tone(210, 0.12, 'sawtooth', 0.3 * v, 65);
-            setTimeout(() => {
-              this.noise(0.14, 0.34 * v);
-              this.tone(150, 0.16, 'triangle', 0.28 * v, 42);
-            }, 70);
             break;
           case 'bossIntro':
             this.tone(140, 0.28, 'sawtooth', 0.28 * v, 95);
@@ -1645,28 +1877,143 @@
     class FaceTextureManager {
       constructor() {
         this.entries = {};
-        ['WAI', 'SHING', 'GEORGE'].forEach((id) => this.initCharacterFace(id));
+        CharacterRegistry.ids.forEach((id) => this.initCharacterFace(id));
       }
 
-      getPalette(id) {
-        const palettes = {
-          WAI: {
-            base: '#d9a886', hi: '#e9c2a4', mid: '#ce9977', sh: '#b88260',
-            lip: '#be7b6e', lipLine: '#7a453b', hair: '#17171a', hairHi: '#2f3038',
-            shirt: '#35382a', shirtDark: '#272a1f', bgA: '#2c3024', bgB: '#12151f'
-          },
-          SHING: {
-            base: '#e8bfa4', hi: '#f7d9c4', mid: '#ddae90', sh: '#c49275',
-            lip: '#c47b74', lipLine: '#844640', hair: '#261b15', hairHi: '#423026',
-            shirt: '#f0eadc', shirtDark: '#d6cdb8', bgA: '#1d2948', bgB: '#0f1324'
-          },
-          GEORGE: {
-            base: '#e0ad8b', hi: '#f0c6a8', mid: '#d39c7a', sh: '#ba8463',
-            lip: '#be796d', lipLine: '#78443a', hair: '#141518', hairHi: '#2a2c33',
-            shirt: '#222854', shirtDark: '#171c3d', bgA: '#1e2752', bgB: '#0f1326'
-          }
-        };
-        return palettes[id] || palettes.WAI;
+      getPalette(id) { return CharacterRegistry.get(id).face.palette; }
+      getTemplate(id) { return CharacterRegistry.get(id).face.template; }
+      getTex(id) { return CharacterRegistry.get(id).face.tex; }
+      ensure(id) {
+        if (!this.entries[id] && CharacterRegistry.has(id)) this.initCharacterFace(id);
+        return this.entries[id];
+      }
+
+      // Reusable chest print painter (used on BOTH 3D shirt decals and 2D bust portraits)
+      static drawChestPrint(ctx, kind, cx, cy, size) {
+        ctx.save();
+        ctx.translate(cx, cy);
+        const s = size / 200;
+        ctx.scale(s, s);
+
+        if (kind === 'doraemon') {
+          // Cute blue robot-cat graphic (多啦A夢風格)
+          // Blue head circle
+          ctx.fillStyle = '#009fe3';
+          ctx.strokeStyle = '#0c1018';
+          ctx.lineWidth = 5;
+          ctx.beginPath(); ctx.arc(0, -6, 76, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+
+          // White inner lower face
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath(); ctx.arc(0, 8, 60, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+
+          // Two tall white eyes
+          [-16, 16].forEach((ex) => {
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath(); ctx.ellipse(ex, -36, 16, 20, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+            ctx.fillStyle = '#0c1018';
+            ctx.beginPath(); ctx.ellipse(ex + (ex < 0 ? 4 : -4), -34, 5, 7, 0, 0, Math.PI * 2); ctx.fill();
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath(); ctx.arc(ex + (ex < 0 ? 3 : -3), -36, 2.2, 0, Math.PI * 2); ctx.fill();
+          });
+
+          // Shiny red button nose
+          ctx.fillStyle = '#e6192e';
+          ctx.beginPath(); ctx.arc(0, -16, 10.5, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath(); ctx.arc(-3.5, -19, 3, 0, Math.PI * 2); ctx.fill();
+
+          // Center philtrum line & big happy open mouth
+          ctx.strokeStyle = '#0c1018';
+          ctx.lineWidth = 4;
+          ctx.beginPath(); ctx.moveTo(0, -5); ctx.lineTo(0, 18); ctx.stroke();
+
+          ctx.fillStyle = '#d62828';
+          ctx.beginPath();
+          ctx.moveTo(-40, 14);
+          ctx.quadraticCurveTo(0, 24, 40, 14);
+          ctx.quadraticCurveTo(32, 54, 0, 54);
+          ctx.quadraticCurveTo(-32, 54, -40, 14);
+          ctx.closePath();
+          ctx.fill();
+          ctx.stroke();
+
+          // Cute orange-pink tongue
+          ctx.fillStyle = '#ff7b54';
+          ctx.beginPath();
+          ctx.ellipse(0, 44, 18, 8, 0, 0, Math.PI * 2);
+          ctx.fill();
+
+          // 3 whiskers per side
+          ctx.lineWidth = 3.5;
+          [-1, 1].forEach((side) => {
+            ctx.beginPath();
+            ctx.moveTo(side * 20, -4); ctx.lineTo(side * 54, -12);
+            ctx.moveTo(side * 22, 6);  ctx.lineTo(side * 58, 6);
+            ctx.moveTo(side * 20, 16); ctx.lineTo(side * 54, 24);
+            ctx.stroke();
+          });
+
+          // Red collar & golden bell
+          ctx.fillStyle = '#e6192e';
+          ctx.beginPath();
+          ctx.roundRect(-52, 54, 104, 15, 7);
+          ctx.fill();
+          ctx.stroke();
+
+          ctx.fillStyle = '#ffd166';
+          ctx.beginPath(); ctx.arc(0, 68, 13, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(-12, 65); ctx.lineTo(12, 65); ctx.stroke();
+          ctx.fillStyle = '#0c1018';
+          ctx.beginPath(); ctx.arc(0, 72, 3.2, 0, Math.PI * 2); ctx.fill();
+        } else if (kind === 'nba') {
+          // Bold Basketball League "NBA" crest graphic
+          // Blue / Red split rounded badge
+          ctx.save();
+          ctx.beginPath(); ctx.roundRect(-84, -44, 168, 88, 14); ctx.clip();
+          ctx.fillStyle = '#1d428a';
+          ctx.fillRect(-84, -44, 84, 88);
+          ctx.fillStyle = '#c8102e';
+          ctx.fillRect(0, -44, 84, 88);
+          // Stylized center basketball silhouette stripe
+          ctx.fillStyle = 'rgba(255,255,255,0.22)';
+          ctx.beginPath(); ctx.arc(0, 0, 32, 0, Math.PI * 2); ctx.fill();
+          ctx.restore();
+
+          // Crisp white & gold outer border
+          ctx.strokeStyle = '#ffffff';
+          ctx.lineWidth = 6;
+          ctx.beginPath(); ctx.roundRect(-84, -44, 168, 88, 14); ctx.stroke();
+          ctx.strokeStyle = '#fdb927';
+          ctx.lineWidth = 2.5;
+          ctx.beginPath(); ctx.roundRect(-78, -38, 156, 76, 10); ctx.stroke();
+
+          // Huge bold "NBA" typography
+          ctx.fillStyle = '#0b0e18';
+          ctx.font = '900 64px "Rajdhani", sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText('NBA', 3, 7);
+
+          ctx.fillStyle = '#ffffff';
+          ctx.fillText('NBA', 0, 4);
+        } else if (kind === 'sup') {
+          // Iconic streetwear red box logo "SUP"
+          ctx.fillStyle = '#e6192e';
+          ctx.beginPath(); ctx.roundRect(-88, -36, 176, 72, 5); ctx.fill();
+
+          ctx.strokeStyle = 'rgba(255,255,255,0.28)';
+          ctx.lineWidth = 3;
+          ctx.strokeRect(-84, -32, 168, 64);
+
+          ctx.fillStyle = '#ffffff';
+          ctx.font = 'italic 900 58px "Arial Black", "Impact", sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText('SUP', 0, 4);
+        }
+
+        ctx.restore();
       }
 
       initCharacterFace(id) {
@@ -1696,11 +2043,15 @@
       // Shared expressive facial feature painter (centered around cx, cy with scale s)
       drawFacialFeatures(ctx, id, cx, cy, s, includeGlasses = false) {
         const pal = this.getPalette(id);
+        const tpl = this.getTemplate(id);
+        const tx = this.getTex(id);
+        const appr = CharacterRegistry.get(id).appearance;
+        const isFemale = appr.gender === 'female';
         ctx.save();
         ctx.translate(cx, cy);
         ctx.scale(s, s);
 
-        // Subtle natural forehead, nose-bridge & cheek highlights (no cartoonish red blush)
+        // Subtle natural forehead, nose-bridge & cheek highlights
         const fhGrad = ctx.createRadialGradient(0, -68, 6, 0, -64, 58);
         fhGrad.addColorStop(0, 'rgba(255, 240, 225, 0.34)');
         fhGrad.addColorStop(1, 'rgba(255, 240, 225, 0)');
@@ -1709,7 +2060,7 @@
 
         [-44, 44].forEach((chx) => {
           const chGrad = ctx.createRadialGradient(chx, 22, 4, chx, 26, 36);
-          chGrad.addColorStop(0, 'rgba(255, 232, 218, 0.22)');
+          chGrad.addColorStop(0, isFemale ? 'rgba(245, 165, 160, 0.28)' : 'rgba(255, 232, 218, 0.22)');
           chGrad.addColorStop(1, 'rgba(215, 130, 110, 0)');
           ctx.fillStyle = chGrad;
           ctx.beginPath(); ctx.ellipse(chx, 26, 34, 24, 0, 0, Math.PI * 2); ctx.fill();
@@ -1722,124 +2073,145 @@
         ctx.fillStyle = jawGrad;
         ctx.beginPath(); ctx.ellipse(0, 96, 60, 32, 0, 0, Math.PI * 2); ctx.fill();
 
-        // Eyebrows tailored to each reference photo
+        // Eyebrows tailored to each character template
         ctx.strokeStyle = pal.hair;
         ctx.lineCap = 'round';
-        if (id === 'WAI') {
-          // Slightly fuller, warm natural arched brows
+        if (tpl === 'messy') {
           ctx.lineWidth = 8.5;
           ctx.beginPath(); ctx.moveTo(-66, -34); ctx.quadraticCurveTo(-40, -45, -16, -36); ctx.stroke();
           ctx.beginPath(); ctx.moveTo(66, -34); ctx.quadraticCurveTo(40, -45, 16, -36); ctx.stroke();
-        } else if (id === 'SHING') {
-          // Clean, straight-groomed medium brows
+        } else if (tpl === 'undercut') {
           ctx.lineWidth = 7.2;
           ctx.beginPath(); ctx.moveTo(-64, -36); ctx.quadraticCurveTo(-39, -45, -15, -39); ctx.stroke();
           ctx.beginPath(); ctx.moveTo(64, -36); ctx.quadraticCurveTo(39, -45, 15, -39); ctx.stroke();
+        } else if (tpl === 'longhair') {
+          ctx.strokeStyle = 'rgba(104, 76, 60, 0.72)';
+          ctx.lineWidth = 4.2;
+          ctx.beginPath(); ctx.moveTo(-62, -36); ctx.quadraticCurveTo(-39, -46, -17, -38); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(62, -36); ctx.quadraticCurveTo(39, -46, 17, -38); ctx.stroke();
+        } else if (tpl === 'fade') {
+          ctx.lineWidth = 8.8;
+          ctx.beginPath(); ctx.moveTo(-66, -35); ctx.quadraticCurveTo(-41, -46, -14, -37); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(66, -35); ctx.quadraticCurveTo(41, -46, 14, -37); ctx.stroke();
+        } else if (tpl === 'street') {
+          ctx.strokeStyle = 'rgba(38, 32, 30, 0.78)';
+          ctx.lineWidth = 6.2;
+          ctx.beginPath(); ctx.moveTo(-64, -36); ctx.quadraticCurveTo(-40, -46, -17, -38); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(64, -36); ctx.quadraticCurveTo(40, -46, 17, -38); ctx.stroke();
+          ctx.fillStyle = '#2d201a';
+          ctx.beginPath(); ctx.arc(-2.5, -40, 2.7, 0, Math.PI * 2); ctx.fill();
         } else {
-          // GEORGE: Slightly higher, softly arched neat brows
           ctx.lineWidth = 6.2;
           ctx.beginPath(); ctx.moveTo(-63, -40); ctx.quadraticCurveTo(-39, -52, -16, -40); ctx.stroke();
           ctx.beginPath(); ctx.moveTo(63, -40); ctx.quadraticCurveTo(39, -52, 16, -40); ctx.stroke();
         }
 
-        // Expressive East Asian almond eyes with subtle upper lid crease & aegyo-sal
-        const drawEye = (ex, ey, rw, rh, smileLift = 0) => {
-          // Upper eyelid fold
-          ctx.strokeStyle = 'rgba(110, 68, 46, 0.48)';
-          ctx.lineWidth = 2.4;
+        // Expressive eyes
+        const drawEye = (ex, ey, rw, rh, smileLift = 0, feminine = false) => {
+          ctx.strokeStyle = 'rgba(110, 68, 46, 0.45)';
+          ctx.lineWidth = feminine ? 2.0 : 2.4;
           ctx.beginPath();
           ctx.moveTo(ex - rw * 0.95, ey - rh * 0.45);
           ctx.quadraticCurveTo(ex, ey - rh * 1.65, ex + rw * 0.95, ey - rh * 0.4);
           ctx.stroke();
 
-          // Sclera (slightly clipped almond shape)
           ctx.save();
           ctx.beginPath();
           ctx.moveTo(ex - rw, ey + 1);
-          ctx.quadraticCurveTo(ex, ey - rh * 1.18, ex + rw, ey + 1);
-          ctx.quadraticCurveTo(ex, ey + rh * 0.95 - smileLift, ex - rw, ey + 1);
+          ctx.quadraticCurveTo(ex, ey - rh * 1.24, ex + rw, ey + 1);
+          ctx.quadraticCurveTo(ex, ey + rh * 0.96 - smileLift, ex - rw, ey + 1);
           ctx.closePath();
-          ctx.fillStyle = '#f5f3ef';
+          ctx.fillStyle = '#f8f6f2';
           ctx.fill();
           ctx.clip();
 
-          // Dark warm-brown iris
           ctx.fillStyle = '#241813';
           ctx.beginPath();
-          ctx.arc(ex, ey + 0.5, rh * 0.96, 0, Math.PI * 2);
+          ctx.arc(ex, ey + 0.5, rh * (feminine ? 1.04 : 0.96), 0, Math.PI * 2);
           ctx.fill();
 
-          // Pupil
           ctx.fillStyle = '#090707';
           ctx.beginPath();
-          ctx.arc(ex, ey + 0.5, rh * 0.5, 0, Math.PI * 2);
+          ctx.arc(ex, ey + 0.5, rh * 0.52, 0, Math.PI * 2);
           ctx.fill();
 
-          // Crisp catchlights
           ctx.fillStyle = '#ffffff';
-          ctx.beginPath(); ctx.arc(ex - 3.2, ey - 2.4, 2.6, 0, Math.PI * 2); ctx.fill();
-          ctx.fillStyle = 'rgba(255,255,255,0.65)';
-          ctx.beginPath(); ctx.arc(ex + 2.8, ey + 1.8, 1.3, 0, Math.PI * 2); ctx.fill();
+          ctx.beginPath(); ctx.arc(ex - 3.2, ey - 2.6, feminine ? 3.2 : 2.6, 0, Math.PI * 2); ctx.fill();
+          ctx.fillStyle = 'rgba(255,255,255,0.72)';
+          ctx.beginPath(); ctx.arc(ex + 2.8, ey + 1.8, 1.5, 0, Math.PI * 2); ctx.fill();
           ctx.restore();
 
-          // Upper lash line
+          // Upper lash line (with delicate winged lashes for female characters)
           ctx.strokeStyle = '#181312';
-          ctx.lineWidth = 4.2;
+          ctx.lineWidth = feminine ? 4.6 : 4.2;
           ctx.beginPath();
           ctx.moveTo(ex - rw - 1, ey + 1.5);
-          ctx.quadraticCurveTo(ex, ey - rh * 1.25, ex + rw + 1, ey + 1.5);
+          ctx.quadraticCurveTo(ex, ey - rh * 1.28, ex + rw + 1, ey + 1.5);
           ctx.stroke();
 
-          // Soft lower lid / smiling under-eye line
-          ctx.strokeStyle = 'rgba(135, 86, 62, 0.34)';
-          ctx.lineWidth = 2.0;
+          if (feminine) {
+            const wingDir = ex < 0 ? -1 : 1;
+            ctx.lineWidth = 3.2;
+            ctx.beginPath();
+            ctx.moveTo(ex + wingDir * rw, ey);
+            ctx.lineTo(ex + wingDir * (rw + 5.5), ey - 4.2);
+            ctx.stroke();
+          }
+
+          ctx.strokeStyle = 'rgba(135, 86, 62, 0.32)';
+          ctx.lineWidth = 1.9;
           ctx.beginPath();
           ctx.moveTo(ex - rw * 0.72, ey + rh * 1.15);
           ctx.quadraticCurveTo(ex, ey + rh * 1.58, ex + rw * 0.72, ey + rh * 1.1);
           ctx.stroke();
         };
 
-        if (id === 'WAI') {
-          drawEye(-40, -13, 18.5, 9.5, 1.5);
-          drawEye(40, -13, 18.5, 9.5, 1.5);
-        } else if (id === 'SHING') {
-          drawEye(-39, -15, 17.5, 8.6, 2.2);
-          drawEye(39, -15, 17.5, 8.6, 2.2);
+        if (tpl === 'messy') {
+          drawEye(-40, -13, 18.5, 9.5, 1.5, false);
+          drawEye(40, -13, 18.5, 9.5, 1.5, false);
+        } else if (tpl === 'undercut') {
+          drawEye(-39, -15, 17.5, 8.6, 2.2, false);
+          drawEye(39, -15, 17.5, 8.6, 2.2, false);
+        } else if (tpl === 'longhair') {
+          drawEye(-37, -14, 18.0, 10.6, 1.8, true);
+          drawEye(37, -14, 18.0, 10.6, 1.8, true);
+        } else if (tpl === 'fade') {
+          drawEye(-39, -15, 17.8, 8.8, 1.2, false);
+          drawEye(39, -15, 17.8, 8.8, 1.2, false);
+        } else if (tpl === 'street') {
+          drawEye(-39, -14, 18.6, 10.2, 2.6, false);
+          drawEye(39, -14, 18.6, 10.2, 2.6, false);
         } else {
-          drawEye(-39, -16, 17.2, 8.5, 0.8);
-          drawEye(39, -16, 17.2, 8.5, 0.8);
+          drawEye(-39, -16, 17.2, 8.5, 0.8, false);
+          drawEye(39, -16, 17.2, 8.5, 0.8, false);
         }
 
         // Nose bridge highlight & soft shaded nose wings / nostrils
-        const noseW = id === 'WAI' ? 17.5 : id === 'GEORGE' ? 14.5 : 13.5;
-        const noseY = id === 'WAI' ? 23 : 21;
+        const noseW = tx.noseW;
+        const noseY = tx.noseY;
 
-        ctx.strokeStyle = 'rgba(140, 88, 60, 0.32)';
-        ctx.lineWidth = 3;
+        ctx.strokeStyle = 'rgba(140, 88, 60, 0.28)';
+        ctx.lineWidth = isFemale ? 2.2 : 3;
         ctx.beginPath();
-        ctx.moveTo(-4, -10);
-        ctx.quadraticCurveTo(-6, 8, -noseW * 0.55, noseY - 1);
+        ctx.moveTo(-3.5, -10);
+        ctx.quadraticCurveTo(-5, 8, -noseW * 0.52, noseY - 1);
         ctx.stroke();
 
-        // Nose bridge light highlight
         ctx.fillStyle = 'rgba(255, 242, 230, 0.38)';
-        ctx.beginPath(); ctx.ellipse(0, 6, 4.5, 14, 0, 0, Math.PI * 2); ctx.fill();
-        ctx.beginPath(); ctx.ellipse(0, noseY - 2, noseW * 0.55, 6.5, 0, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.ellipse(0, 6, 4.2, 13, 0, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.ellipse(0, noseY - 2, noseW * 0.52, 6.0, 0, 0, Math.PI * 2); ctx.fill();
 
-        // Soft shadow under nose tip
-        ctx.fillStyle = 'rgba(128, 76, 52, 0.34)';
+        ctx.fillStyle = 'rgba(128, 76, 52, 0.28)';
         ctx.beginPath();
-        ctx.ellipse(0, noseY + 5, noseW * 0.85, 4.2, 0, 0, Math.PI * 2);
+        ctx.ellipse(0, noseY + 4.5, noseW * 0.8, 3.8, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        // Nostrils
-        ctx.fillStyle = 'rgba(90, 48, 32, 0.52)';
-        ctx.beginPath(); ctx.ellipse(-noseW * 0.58, noseY + 3.5, 4.2, 2.3, 0.18, 0, Math.PI * 2); ctx.fill();
-        ctx.beginPath(); ctx.ellipse(noseW * 0.58, noseY + 3.5, 4.2, 2.3, -0.18, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = 'rgba(90, 48, 32, 0.45)';
+        ctx.beginPath(); ctx.ellipse(-noseW * 0.55, noseY + 3.2, isFemale ? 3.2 : 4.2, 2.0, 0.18, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.ellipse(noseW * 0.55, noseY + 3.2, isFemale ? 3.2 : 4.2, 2.0, -0.18, 0, Math.PI * 2); ctx.fill();
 
-        // Mouth & Expression tailored to each reference photo
-        if (id === 'WAI') {
-          // Very faint natural upper-lip shadow & friendly dimple creases
+        // Mouth & Expression
+        if (tpl === 'messy') {
           ctx.fillStyle = 'rgba(105, 68, 52, 0.10)';
           ctx.beginPath(); ctx.ellipse(0, 40, 26, 7, 0, 0, Math.PI * 2); ctx.fill();
 
@@ -1848,7 +2220,6 @@
           ctx.beginPath(); ctx.arc(-44, 48, 12, -0.8, 0.75); ctx.stroke();
           ctx.beginPath(); ctx.arc(44, 48, 12, Math.PI - 0.75, Math.PI + 0.8); ctx.stroke();
 
-          // Warm closed-lip gentle smile
           ctx.fillStyle = pal.lip;
           ctx.beginPath();
           ctx.moveTo(-34, 48);
@@ -1863,55 +2234,106 @@
           ctx.quadraticCurveTo(0, 57, 36, 47);
           ctx.stroke();
 
-          // Soft lower lip highlight
           ctx.fillStyle = 'rgba(255, 225, 210, 0.28)';
           ctx.beginPath(); ctx.ellipse(0, 55, 13, 3, 0, 0, Math.PI * 2); ctx.fill();
-        } else if (id === 'SHING') {
-          // Bright open-teeth smile matching Shing.jpg
-          ctx.strokeStyle = 'rgba(135, 82, 62, 0.28)';
-          ctx.lineWidth = 2.2;
-          ctx.beginPath(); ctx.arc(-42, 46, 13, -0.65, 0.65); ctx.stroke();
-          ctx.beginPath(); ctx.arc(42, 46, 13, Math.PI - 0.65, Math.PI + 0.65); ctx.stroke();
+        } else if (tpl === 'undercut' || tpl === 'longhair') {
+          const mw = tpl === 'longhair' ? 33 : 32;
+          ctx.strokeStyle = 'rgba(135, 82, 62, 0.24)';
+          ctx.lineWidth = 2.0;
+          ctx.beginPath(); ctx.arc(-43, 47, 12, -0.65, 0.65); ctx.stroke();
+          ctx.beginPath(); ctx.arc(43, 47, 12, Math.PI - 0.65, Math.PI + 0.65); ctx.stroke();
 
-          // Mouth cavity
-          ctx.fillStyle = '#7e3733';
+          ctx.fillStyle = '#8b3a3a';
           ctx.beginPath();
-          ctx.moveTo(-32, 45);
-          ctx.quadraticCurveTo(0, 49, 32, 45);
-          ctx.quadraticCurveTo(0, 69, -32, 45);
+          ctx.moveTo(-mw, 45);
+          ctx.quadraticCurveTo(0, 48, mw, 45);
+          ctx.quadraticCurveTo(0, 68, -mw, 45);
           ctx.fill();
 
-          // Clean upper white teeth
           ctx.fillStyle = '#fbfaf7';
           ctx.beginPath();
-          ctx.moveTo(-27, 46);
-          ctx.quadraticCurveTo(0, 50, 27, 46);
-          ctx.quadraticCurveTo(0, 59, -27, 46);
+          ctx.moveTo(-(mw - 4), 46);
+          ctx.quadraticCurveTo(0, 49, mw - 4, 46);
+          ctx.quadraticCurveTo(0, 60, -(mw - 4), 46);
           ctx.fill();
 
-          // Subtle tooth dividers
-          ctx.strokeStyle = 'rgba(180, 170, 165, 0.45)';
+          ctx.strokeStyle = 'rgba(180, 170, 165, 0.42)';
           ctx.lineWidth = 1;
-          [-10, 0, 10].forEach((tx) => {
-            ctx.beginPath(); ctx.moveTo(tx, 47); ctx.lineTo(tx, 54); ctx.stroke();
+          [-12, -4, 4, 12].forEach((txPos) => {
+            ctx.beginPath(); ctx.moveTo(txPos, 47); ctx.lineTo(txPos, 55); ctx.stroke();
           });
 
-          // Natural lower lip contour
           ctx.strokeStyle = pal.lip;
-          ctx.lineWidth = 4.2;
+          ctx.lineWidth = isFemale ? 5.6 : 4.2;
           ctx.beginPath();
-          ctx.moveTo(-26, 52);
-          ctx.quadraticCurveTo(0, 66, 26, 52);
+          ctx.moveTo(-(mw - 5), 53);
+          ctx.quadraticCurveTo(0, 68, mw - 5, 53);
           ctx.stroke();
 
           ctx.strokeStyle = pal.lipLine;
-          ctx.lineWidth = 2.2;
+          ctx.lineWidth = 2.0;
           ctx.beginPath();
-          ctx.moveTo(-33, 45);
-          ctx.quadraticCurveTo(0, 49, 33, 45);
+          ctx.moveTo(-(mw + 1), 45);
+          ctx.quadraticCurveTo(0, 48, mw + 1, 45);
           ctx.stroke();
+        } else if (tpl === 'fade') {
+          // JOHNNY: Subtle mustache stubble + warm closed-lip smile
+          ctx.fillStyle = 'rgba(62, 48, 42, 0.22)';
+          ctx.beginPath();
+          ctx.moveTo(-36, 46); ctx.quadraticCurveTo(0, 32, 36, 46); ctx.quadraticCurveTo(0, 41, -36, 46);
+          ctx.fill();
+          ctx.fillStyle = 'rgba(42, 34, 30, 0.34)';
+          for (let i = -30; i <= 30; i += 4) {
+            ctx.fillRect(i, 38 + Math.abs(i) * 0.16 + ((i * 7) % 3), 1.8, 1.8);
+          }
+          ctx.strokeStyle = 'rgba(128, 78, 58, 0.32)';
+          ctx.lineWidth = 2.4;
+          ctx.beginPath(); ctx.arc(-44, 49, 13, -0.7, 0.7); ctx.stroke();
+          ctx.beginPath(); ctx.arc(44, 49, 13, Math.PI - 0.7, Math.PI + 0.7); ctx.stroke();
+
+          ctx.fillStyle = pal.lip;
+          ctx.beginPath();
+          ctx.moveTo(-32, 49); ctx.quadraticCurveTo(0, 43, 32, 49); ctx.quadraticCurveTo(0, 64, -32, 49);
+          ctx.fill();
+          ctx.strokeStyle = pal.lipLine;
+          ctx.lineWidth = 3.0;
+          ctx.beginPath(); ctx.moveTo(-34, 49); ctx.quadraticCurveTo(0, 56, 34, 49); ctx.stroke();
+
+          ctx.fillStyle = 'rgba(65, 50, 44, 0.14)';
+          ctx.beginPath(); ctx.ellipse(0, 77, 22, 8, 0, 0, Math.PI * 2); ctx.fill();
+        } else if (tpl === 'street') {
+          // MARK: Light mustache stubble + friendly open smile + chin goatee
+          ctx.fillStyle = 'rgba(55, 44, 38, 0.22)';
+          ctx.beginPath();
+          ctx.moveTo(-38, 46); ctx.quadraticCurveTo(0, 31, 38, 46); ctx.quadraticCurveTo(0, 40, -38, 46);
+          ctx.fill();
+          ctx.fillStyle = 'rgba(38, 30, 26, 0.36)';
+          for (let i = -32; i <= 32; i += 4) {
+            ctx.fillRect(i, 37 + Math.abs(i) * 0.18 + ((i * 5) % 3), 1.8, 2.0);
+          }
+
+          ctx.fillStyle = pal.lip;
+          ctx.beginPath();
+          ctx.moveTo(-34, 48); ctx.quadraticCurveTo(0, 40, 34, 48); ctx.quadraticCurveTo(0, 71, -34, 48);
+          ctx.fill();
+          ctx.fillStyle = '#f6f3ef';
+          ctx.beginPath();
+          ctx.moveTo(-25, 49); ctx.quadraticCurveTo(0, 51, 25, 49); ctx.quadraticCurveTo(0, 58, -25, 49);
+          ctx.fill();
+          ctx.strokeStyle = pal.lipLine;
+          ctx.lineWidth = 2.6;
+          ctx.beginPath(); ctx.moveTo(-35, 48); ctx.quadraticCurveTo(0, 51, 35, 48); ctx.stroke();
+
+          ctx.strokeStyle = 'rgba(36, 30, 28, 0.72)';
+          ctx.lineWidth = 2.0;
+          for (let gx = -22; gx <= 22; gx += 3.2) {
+            const len = 7 + (1 - Math.abs(gx) / 24) * 5;
+            ctx.beginPath();
+            ctx.moveTo(gx, 80 + Math.abs(gx) * 0.12);
+            ctx.lineTo(gx + gx * 0.06, 80 + len);
+            ctx.stroke();
+          }
         } else {
-          // GEORGE: Composed gentle closed-mouth slight smile + signature chin dimple
           ctx.fillStyle = pal.lip;
           ctx.beginPath();
           ctx.moveTo(-29, 51);
@@ -1926,28 +2348,18 @@
           ctx.quadraticCurveTo(0, 56, 31, 48);
           ctx.stroke();
 
-          // Subtle dimpled chin shadow under lower lip
           ctx.fillStyle = 'rgba(128, 76, 54, 0.25)';
           ctx.beginPath(); ctx.ellipse(0, 69, 13, 5.5, 0, 0, Math.PI * 2); ctx.fill();
         }
 
         // Glasses overlay (drawn on 2D Bust Portrait; 3D model uses physical 3D glasses)
-        if (includeGlasses && id === 'SHING') {
-          // Thin metallic gunmetal-silver semi-rimless rectangular glasses
+        if (includeGlasses && appr.glasses === 'silver') {
           [-39, 39].forEach((gx) => {
             ctx.fillStyle = 'rgba(215, 240, 255, 0.16)';
-            ctx.beginPath();
-            ctx.roundRect(gx - 29, -29, 58, 34, 8);
-            ctx.fill();
-
-            // Thin silver lower rim
+            ctx.beginPath(); ctx.roundRect(gx - 29, -29, 58, 34, 8); ctx.fill();
             ctx.strokeStyle = 'rgba(210, 220, 232, 0.78)';
             ctx.lineWidth = 2.2;
-            ctx.beginPath();
-            ctx.roundRect(gx - 29, -29, 58, 34, 8);
-            ctx.stroke();
-
-            // Darker metallic upper brow frame
+            ctx.beginPath(); ctx.roundRect(gx - 29, -29, 58, 34, 8); ctx.stroke();
             ctx.strokeStyle = '#363b45';
             ctx.lineWidth = 4.4;
             ctx.beginPath();
@@ -1956,33 +2368,22 @@
             ctx.lineTo(gx + 20, -29);
             ctx.quadraticCurveTo(gx + 29, -29, gx + 29, -21);
             ctx.stroke();
-
-            // Diagonal glass highlight
             ctx.strokeStyle = 'rgba(255, 255, 255, 0.42)';
             ctx.lineWidth = 3;
             ctx.beginPath(); ctx.moveTo(gx - 20, -24); ctx.lineTo(gx - 8, -4); ctx.stroke();
           });
-          // Bridge & side hinges
           ctx.strokeStyle = '#484f5c';
           ctx.lineWidth = 3.2;
           ctx.beginPath(); ctx.moveTo(-10, -20); ctx.quadraticCurveTo(0, -24, 10, -20); ctx.stroke();
           ctx.beginPath(); ctx.moveTo(-68, -22); ctx.lineTo(-78, -20); ctx.stroke();
           ctx.beginPath(); ctx.moveTo(68, -22); ctx.lineTo(78, -20); ctx.stroke();
-        } else if (includeGlasses && id === 'GEORGE') {
-          // Thin dark charcoal-black full-rim rounded rectangular glasses
+        } else if (includeGlasses && appr.glasses === 'black') {
           [-39, 39].forEach((gx) => {
             ctx.fillStyle = 'rgba(210, 235, 255, 0.14)';
-            ctx.beginPath();
-            ctx.roundRect(gx - 28, -30, 56, 35, 9);
-            ctx.fill();
-
+            ctx.beginPath(); ctx.roundRect(gx - 28, -30, 56, 35, 9); ctx.fill();
             ctx.strokeStyle = '#181a20';
             ctx.lineWidth = 4.2;
-            ctx.beginPath();
-            ctx.roundRect(gx - 28, -30, 56, 35, 9);
-            ctx.stroke();
-
-            // Subtle lens reflection
+            ctx.beginPath(); ctx.roundRect(gx - 28, -30, 56, 35, 9); ctx.stroke();
             ctx.strokeStyle = 'rgba(255, 255, 255, 0.36)';
             ctx.lineWidth = 2.6;
             ctx.beginPath(); ctx.moveTo(gx - 19, -25); ctx.lineTo(gx - 8, -5); ctx.stroke();
@@ -2000,44 +2401,53 @@
       // 1024x512 Equirectangular 3D Head Texture (front center is px=512, py=256)
       draw3DFaceTexture(ctx, id) {
         const pal = this.getPalette(id);
+        const tpl = this.getTemplate(id);
+        const tx = this.getTex(id);
         ctx.fillStyle = pal.base;
         ctx.fillRect(0, 0, 1024, 512);
 
-        // Soft temple & back-hair skin-fade shading on the sides of the head
-        const sideHairY = id === 'WAI' ? 280 : 210;
+        const sideHairY = tx.sideHairY;
         ctx.fillStyle = pal.hair;
-        ctx.fillRect(0, 0, 1024, 92); // crown
+        ctx.fillRect(0, 0, 1024, 92);
+        ctx.fillRect(0, 0, 260, tpl === 'longhair' ? 430 : 310);
+        ctx.fillRect(764, 0, 260, tpl === 'longhair' ? 430 : 310);
 
-        // Back-of-head hairline (left/right edges of equirectangular wrap)
-        ctx.fillRect(0, 0, 260, 310);
-        ctx.fillRect(764, 0, 260, 310);
-
-        // Tapered sideburn fade
         const sbGradL = ctx.createLinearGradient(255, 0, 365, 0);
         sbGradL.addColorStop(0, pal.hair);
-        sbGradL.addColorStop(0.55, id === 'WAI' ? pal.hair : 'rgba(30,24,20,0.28)');
+        sbGradL.addColorStop(0.55, tx.sideburnSolid ? pal.hair : 'rgba(30,24,20,0.28)');
         sbGradL.addColorStop(1, 'rgba(30,24,20,0)');
         ctx.fillStyle = sbGradL;
         ctx.fillRect(255, 80, 110, sideHairY - 60);
 
         const sbGradR = ctx.createLinearGradient(769, 0, 659, 0);
         sbGradR.addColorStop(0, pal.hair);
-        sbGradR.addColorStop(0.55, id === 'WAI' ? pal.hair : 'rgba(30,24,20,0.28)');
+        sbGradR.addColorStop(0.55, tx.sideburnSolid ? pal.hair : 'rgba(30,24,20,0.28)');
         sbGradR.addColorStop(1, 'rgba(30,24,20,0)');
         ctx.fillStyle = sbGradR;
         ctx.fillRect(659, 80, 110, sideHairY - 60);
 
-        // Natural upper forehead hairline
         ctx.fillStyle = pal.hair;
-        // Natural upper forehead hairline (softly tucked beneath sculpted 3D hair)
-        ctx.fillStyle = pal.hair;
-        if (id === 'WAI') {
+        if (tpl === 'messy' || tpl === 'street') {
           ctx.beginPath();
           ctx.moveTo(315, 0); ctx.lineTo(709, 0); ctx.lineTo(709, 134);
           ctx.quadraticCurveTo(512, 118, 315, 134);
           ctx.closePath();
           ctx.fill();
-        } else if (id === 'SHING') {
+        } else if (tpl === 'longhair') {
+          ctx.beginPath();
+          ctx.moveTo(295, 0); ctx.lineTo(728, 0); ctx.lineTo(728, 168);
+          ctx.quadraticCurveTo(575, 134, 425, 108);
+          ctx.quadraticCurveTo(355, 124, 295, 165);
+          ctx.closePath();
+          ctx.fill();
+        } else if (tpl === 'fade') {
+          ctx.beginPath();
+          ctx.moveTo(325, 0); ctx.lineTo(699, 0); ctx.lineTo(699, 110);
+          ctx.quadraticCurveTo(605, 86, 512, 78);
+          ctx.quadraticCurveTo(415, 82, 325, 114);
+          ctx.closePath();
+          ctx.fill();
+        } else if (tpl === 'undercut') {
           ctx.beginPath();
           ctx.moveTo(328, 0); ctx.lineTo(696, 0); ctx.lineTo(696, 118);
           ctx.quadraticCurveTo(512, 92, 328, 122);
@@ -2052,13 +2462,15 @@
           ctx.fill();
         }
 
-        // Draw crisp centered facial features on front hemisphere (x=512, y=268)
         this.drawFacialFeatures(ctx, id, 512, 268, 1.38, false);
       }
 
       // 512x512 Dedicated Arcade Character Bust Portrait (for Character Select & HUD)
       drawBustPortrait(ctx, id) {
         const pal = this.getPalette(id);
+        const tpl = this.getTemplate(id);
+        const tx = this.getTex(id);
+        const appr = CharacterRegistry.get(id).appearance;
 
         // Stylish arcade backdrop gradient
         const bg = ctx.createRadialGradient(256, 200, 30, 256, 256, 360);
@@ -2067,32 +2479,73 @@
         ctx.fillStyle = bg;
         ctx.fillRect(0, 0, 512, 512);
 
-        // Subtle rim glow behind head
         const rim = ctx.createRadialGradient(256, 215, 65, 256, 215, 215);
         rim.addColorStop(0, 'rgba(255, 209, 102, 0.22)');
         rim.addColorStop(1, 'rgba(255, 209, 102, 0)');
         ctx.fillStyle = rim;
         ctx.fillRect(0, 0, 512, 512);
 
-        // Shoulders & T-Shirt
+        // Long hair back curtain behind shoulders (for MISTY)
+        if (tpl === 'longhair') {
+          ctx.fillStyle = pal.hair;
+          ctx.beginPath();
+          ctx.moveTo(108, 220);
+          ctx.quadraticCurveTo(100, 385, 86, 512);
+          ctx.lineTo(426, 512);
+          ctx.quadraticCurveTo(412, 385, 404, 220);
+          ctx.quadraticCurveTo(400, 74, 256, 62);
+          ctx.quadraticCurveTo(112, 74, 108, 220);
+          ctx.closePath();
+          ctx.fill();
+        }
+
+        // Hood silhouette behind neck for hooded jacket (MARK)
+        if (appr.hoodie) {
+          ctx.fillStyle = pal.shirtDark;
+          ctx.beginPath();
+          ctx.ellipse(256, 392, 138, 66, 0, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.strokeStyle = '#3b4252';
+          ctx.lineWidth = 6;
+          ctx.stroke();
+        }
+
+        // Shoulders & T-Shirt / Hoodie
+        const shL = appr.gender === 'female' ? 88 : 52;
+        const shR = appr.gender === 'female' ? 424 : 460;
         ctx.fillStyle = pal.shirt;
         ctx.beginPath();
-        ctx.moveTo(52, 512);
-        ctx.quadraticCurveTo(72, 396, 174, 382);
+        ctx.moveTo(shL, 512);
+        ctx.quadraticCurveTo(shL + 20, 396, 174, 382);
         ctx.lineTo(338, 382);
-        ctx.quadraticCurveTo(440, 396, 460, 512);
+        ctx.quadraticCurveTo(shR - 20, 396, shR, 512);
         ctx.closePath();
         ctx.fill();
 
-        // Crew-neck rib collar
-        ctx.strokeStyle = pal.shirtDark;
-        ctx.lineWidth = 14;
-        ctx.beginPath();
-        ctx.arc(256, 376, 66, 0.12 * Math.PI, 0.88 * Math.PI);
-        ctx.stroke();
+        // Crew-neck collar or Hoodie collar + white drawstrings
+        if (appr.hoodie) {
+          ctx.strokeStyle = '#11131a';
+          ctx.lineWidth = 18;
+          ctx.beginPath();
+          ctx.arc(256, 372, 76, 0.08 * Math.PI, 0.92 * Math.PI);
+          ctx.stroke();
 
-        // WAI's signature left-chest pocket on olive tee
-        if (id === 'WAI') {
+          // White drawstrings
+          ctx.strokeStyle = '#eef2f7';
+          ctx.lineWidth = 6;
+          ctx.lineCap = 'round';
+          ctx.beginPath(); ctx.moveTo(222, 412); ctx.lineTo(214, 488); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(290, 412); ctx.lineTo(298, 488); ctx.stroke();
+        } else {
+          ctx.strokeStyle = pal.shirtDark;
+          ctx.lineWidth = 14;
+          ctx.beginPath();
+          ctx.arc(256, 376, 66, 0.12 * Math.PI, 0.88 * Math.PI);
+          ctx.stroke();
+        }
+
+        // Left-chest pocket (WAI)
+        if (appr.pocket) {
           ctx.fillStyle = pal.shirtDark;
           ctx.fillRect(326, 444, 58, 56);
           ctx.strokeStyle = 'rgba(255,255,255,0.12)';
@@ -2100,16 +2553,22 @@
           ctx.strokeRect(326, 444, 58, 56);
         }
 
+        // Center chest print graphic (Doraemon / NBA / SUP)
+        if (appr.chestPrint) {
+          FaceTextureManager.drawChestPrint(ctx, appr.chestPrint, 256, 466, appr.chestPrint === 'doraemon' ? 92 : 112);
+        }
+
         // Neck & chin shadow
+        const neckW = appr.gender === 'female' ? 72 : 88;
         ctx.fillStyle = pal.mid;
-        ctx.fillRect(212, 326, 88, 76);
+        ctx.fillRect(256 - neckW / 2, 326, neckW, 76);
         ctx.fillStyle = pal.sh;
         ctx.beginPath();
-        ctx.ellipse(256, 344, 48, 28, 0, 0, Math.PI * 2);
+        ctx.ellipse(256, 344, neckW * 0.54, 28, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        // Back hair volume behind ears (for WAI)
-        if (id === 'WAI') {
+        // Back hair volume behind ears (WAI / MARK)
+        if (tpl === 'messy' || tpl === 'street') {
           ctx.fillStyle = pal.hair;
           ctx.beginPath();
           ctx.ellipse(256, 198, 148, 142, 0, 0, Math.PI * 2);
@@ -2117,15 +2576,16 @@
         }
 
         // Ears
-        const earY = id === 'GEORGE' ? 236 : 244;
-        [-114, 114].forEach((ex) => {
+        const earY = tx.earY;
+        const earOff = appr.gender === 'female' ? 104 : 114;
+        [-earOff, earOff].forEach((ex) => {
           ctx.fillStyle = pal.mid;
-          ctx.beginPath(); ctx.ellipse(256 + ex, earY, 18, 30, ex < 0 ? -0.14 : 0.14, 0, Math.PI * 2); ctx.fill();
+          ctx.beginPath(); ctx.ellipse(256 + ex, earY, 17, 28, ex < 0 ? -0.14 : 0.14, 0, Math.PI * 2); ctx.fill();
           ctx.fillStyle = pal.sh;
-          ctx.beginPath(); ctx.ellipse(256 + ex * 0.96, earY + 2, 9, 17, 0, 0, Math.PI * 2); ctx.fill();
+          ctx.beginPath(); ctx.ellipse(256 + ex * 0.96, earY + 2, 8, 16, 0, 0, Math.PI * 2); ctx.fill();
         });
 
-        // Sculpted Head Silhouette matching each person's exact face contour
+        // Sculpted Head Silhouette
         const headGrad = ctx.createRadialGradient(256, 200, 24, 256, 232, 165);
         headGrad.addColorStop(0, pal.hi);
         headGrad.addColorStop(0.68, pal.base);
@@ -2133,20 +2593,22 @@
         ctx.fillStyle = headGrad;
 
         ctx.beginPath();
-        if (id === 'WAI') {
-          // Slightly fuller, rounder friendly cheeks & soft chin
+        if (tpl === 'messy' || tpl === 'street') {
           ctx.moveTo(140, 212);
           ctx.bezierCurveTo(138, 110, 374, 110, 372, 212);
           ctx.bezierCurveTo(372, 302, 330, 356, 256, 358);
           ctx.bezierCurveTo(182, 356, 140, 302, 140, 212);
-        } else if (id === 'SHING') {
-          // Clean tapered oval with defined chin
+        } else if (tpl === 'longhair') {
+          ctx.moveTo(154, 206);
+          ctx.bezierCurveTo(154, 108, 358, 108, 358, 206);
+          ctx.bezierCurveTo(354, 294, 304, 354, 256, 358);
+          ctx.bezierCurveTo(208, 354, 158, 294, 154, 206);
+        } else if (tpl === 'undercut' || tpl === 'fade') {
           ctx.moveTo(146, 208);
           ctx.bezierCurveTo(146, 102, 366, 102, 366, 208);
           ctx.bezierCurveTo(364, 294, 314, 358, 256, 362);
           ctx.bezierCurveTo(198, 358, 148, 294, 146, 208);
         } else {
-          // GEORGE: Slightly taller refined oval face
           ctx.moveTo(146, 204);
           ctx.bezierCurveTo(146, 92, 366, 92, 366, 204);
           ctx.bezierCurveTo(364, 298, 318, 362, 256, 366);
@@ -2156,39 +2618,56 @@
         ctx.fill();
 
         // Facial features + signature glasses
-        const faceCy = id === 'GEORGE' ? 236 : 240;
-        const faceScale = id === 'WAI' ? 1.48 : 1.44;
-        this.drawFacialFeatures(ctx, id, 256, faceCy, faceScale, true);
+        this.drawFacialFeatures(ctx, id, 256, tx.faceCy, tx.faceScale, true);
 
         // Signature Hair Silhouette on top & sides
         ctx.fillStyle = pal.hair;
-        if (id === 'WAI') {
-          // Fluffy tousled messy black hair with soft feathery bangs across forehead
+        if (tpl === 'messy') {
           ctx.beginPath();
           ctx.moveTo(126, 212);
           ctx.quadraticCurveTo(114, 112, 186, 78);
           ctx.quadraticCurveTo(256, 54, 330, 80);
           ctx.quadraticCurveTo(398, 114, 386, 214);
-          ctx.lineTo(366, 202);
-          ctx.lineTo(354, 168);
-          ctx.lineTo(334, 198);
-          ctx.lineTo(304, 158);
-          ctx.lineTo(276, 196);
-          ctx.lineTo(246, 162);
-          ctx.lineTo(212, 198);
-          ctx.lineTo(182, 166);
-          ctx.lineTo(156, 196);
+          ctx.lineTo(366, 202); ctx.lineTo(354, 168); ctx.lineTo(334, 198);
+          ctx.lineTo(304, 158); ctx.lineTo(276, 196); ctx.lineTo(246, 162);
+          ctx.lineTo(212, 198); ctx.lineTo(182, 166); ctx.lineTo(156, 196);
           ctx.closePath();
           ctx.fill();
 
-          // Soft hair sheen strands
           ctx.strokeStyle = pal.hairHi;
           ctx.lineWidth = 6;
           ctx.lineCap = 'round';
           ctx.beginPath(); ctx.moveTo(175, 118); ctx.quadraticCurveTo(248, 92, 336, 118); ctx.stroke();
           ctx.beginPath(); ctx.moveTo(192, 144); ctx.quadraticCurveTo(256, 126, 320, 146); ctx.stroke();
-        } else if (id === 'SHING') {
-          // Modern dark-brown undercut: faded tapered sides + textured swept-up top
+        } else if (tpl === 'longhair') {
+          // MISTY: Left-parted side-swept bangs & sleek dark-brown long hair
+          ctx.beginPath();
+          ctx.moveTo(124, 385);
+          ctx.quadraticCurveTo(116, 148, 174, 86);
+          ctx.quadraticCurveTo(256, 50, 344, 88);
+          ctx.quadraticCurveTo(400, 148, 392, 392);
+          ctx.quadraticCurveTo(368, 438, 348, 472);
+          ctx.quadraticCurveTo(364, 328, 358, 224);
+          ctx.quadraticCurveTo(334, 152, 238, 126);
+          ctx.quadraticCurveTo(186, 134, 160, 176);
+          ctx.quadraticCurveTo(152, 240, 160, 382);
+          ctx.quadraticCurveTo(140, 412, 124, 385);
+          ctx.closePath();
+          ctx.fill();
+
+          ctx.beginPath();
+          ctx.moveTo(184, 120);
+          ctx.quadraticCurveTo(278, 122, 366, 214);
+          ctx.quadraticCurveTo(342, 156, 252, 108);
+          ctx.closePath();
+          ctx.fill();
+
+          ctx.strokeStyle = pal.hairHi;
+          ctx.lineWidth = 7;
+          ctx.lineCap = 'round';
+          ctx.beginPath(); ctx.moveTo(192, 106); ctx.quadraticCurveTo(272, 92, 342, 132); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(358, 190); ctx.quadraticCurveTo(372, 280, 366, 368); ctx.stroke();
+        } else if (tpl === 'undercut') {
           ctx.fillStyle = 'rgba(38, 27, 21, 0.45)';
           ctx.fillRect(142, 160, 12, 58);
           ctx.fillRect(358, 160, 12, 58);
@@ -2205,14 +2684,59 @@
           ctx.closePath();
           ctx.fill();
 
-          // Textured wispy fringe strands
           ctx.strokeStyle = pal.hairHi;
           ctx.lineWidth = 7;
           ctx.lineCap = 'round';
           ctx.beginPath(); ctx.moveTo(188, 98); ctx.quadraticCurveTo(252, 76, 318, 96); ctx.stroke();
           ctx.beginPath(); ctx.moveTo(205, 120); ctx.quadraticCurveTo(265, 104, 324, 124); ctx.stroke();
+        } else if (tpl === 'fade') {
+          // JOHNNY: High forehead short-cropped fade
+          ctx.fillStyle = 'rgba(21, 21, 25, 0.35)';
+          ctx.fillRect(142, 148, 11, 64);
+          ctx.fillRect(359, 148, 11, 64);
+
+          ctx.fillStyle = pal.hair;
+          ctx.beginPath();
+          ctx.moveTo(144, 178);
+          ctx.quadraticCurveTo(138, 102, 192, 74);
+          ctx.quadraticCurveTo(256, 56, 320, 76);
+          ctx.quadraticCurveTo(372, 104, 368, 178);
+          ctx.lineTo(356, 154);
+          ctx.quadraticCurveTo(340, 106, 260, 96);
+          ctx.quadraticCurveTo(184, 102, 156, 154);
+          ctx.closePath();
+          ctx.fill();
+
+          ctx.fillStyle = 'rgba(21, 21, 25, 0.24)';
+          ctx.beginPath();
+          ctx.ellipse(256, 108, 72, 14, 0, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.strokeStyle = pal.hairHi;
+          ctx.lineWidth = 5;
+          ctx.lineCap = 'round';
+          ctx.beginPath(); ctx.moveTo(188, 86); ctx.quadraticCurveTo(256, 72, 322, 88); ctx.stroke();
+        } else if (tpl === 'street') {
+          // MARK: Full dark hair with thick side-swept bangs
+          ctx.beginPath();
+          ctx.moveTo(130, 216);
+          ctx.quadraticCurveTo(116, 104, 186, 66);
+          ctx.quadraticCurveTo(258, 44, 336, 74);
+          ctx.quadraticCurveTo(394, 108, 382, 214);
+          ctx.lineTo(364, 192);
+          ctx.quadraticCurveTo(352, 152, 316, 142);
+          ctx.quadraticCurveTo(298, 166, 262, 168);
+          ctx.quadraticCurveTo(220, 176, 166, 184);
+          ctx.lineTo(148, 202);
+          ctx.closePath();
+          ctx.fill();
+
+          ctx.strokeStyle = pal.hairHi;
+          ctx.lineWidth = 6;
+          ctx.lineCap = 'round';
+          ctx.beginPath(); ctx.moveTo(178, 104); ctx.quadraticCurveTo(252, 78, 330, 104); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(192, 134); ctx.quadraticCurveTo(252, 126, 306, 118); ctx.stroke();
         } else {
-          // GEORGE: Neat closely-trimmed classic black side-part hair
           ctx.beginPath();
           ctx.moveTo(144, 198);
           ctx.quadraticCurveTo(138, 102, 196, 76);
@@ -2224,7 +2748,6 @@
           ctx.closePath();
           ctx.fill();
 
-          // Clean subtle side-part highlight
           ctx.strokeStyle = pal.hairHi;
           ctx.lineWidth = 6;
           ctx.lineCap = 'round';
@@ -2233,11 +2756,13 @@
       }
 
       getTexture(id) {
-        return this.entries[id] ? this.entries[id].texture : null;
+        const e = this.ensure(id);
+        return e ? e.texture : null;
       }
 
       getPortraitUrl(id) {
-        return this.entries[id] ? this.entries[id].portraitUrl : '';
+        const e = this.ensure(id);
+        return e ? e.portraitUrl : '';
       }
     }
 
@@ -2335,11 +2860,9 @@
     // =========================================================================
     class CharacterModelBuilder {
       static getHeadConfig(faceId) {
-        return faceId === 'WAI'
-          ? { sx: 0.238, sy: 0.258, sz: 0.228, jaw: 0.14, cheek: 0.055 }
-          : faceId === 'SHING'
-          ? { sx: 0.218, sy: 0.258, sz: 0.218, jaw: 0.24, cheek: 0.01 }
-          : { sx: 0.220, sy: 0.270, sz: 0.218, jaw: 0.21, cheek: 0.015 };
+        return faceId && CharacterRegistry.has(faceId)
+          ? CharacterRegistry.get(faceId).face.head
+          : CharacterDefaults.enemyHead;
       }
 
       static evalHeadPoint(ux, uy, uz, cfg) {
@@ -2361,11 +2884,9 @@
       }
 
       static createSculptedHeadGeo(faceId) {
-        // phiStart = -PI/2 maps u=0.5 cleanly to +Z (front center of face) with zero front seam
         const geo = new THREE.SphereGeometry(1, 32, 24, -Math.PI / 2, Math.PI * 2);
         const pos = geo.attributes.position;
         const cfg = CharacterModelBuilder.getHeadConfig(faceId);
-
         for (let i = 0; i < pos.count; i++) {
           const p = CharacterModelBuilder.evalHeadPoint(pos.getX(i), pos.getY(i), pos.getZ(i), cfg);
           pos.setXYZ(i, p.x, p.y, p.z);
@@ -2379,8 +2900,6 @@
         if (CharacterModelBuilder._hairMatCache[baseColorHex]) {
           return CharacterModelBuilder._hairMatCache[baseColorHex];
         }
-
-        // Procedural fine hair-strand texture so 3D hair has natural fiber depth instead of flat clay
         const c = document.createElement('canvas');
         c.width = 256;
         c.height = 256;
@@ -2404,7 +2923,6 @@
           ctx.stroke();
         }
 
-        // Subtle crown specular sheen band
         const sheen = ctx.createLinearGradient(0, 35, 0, 125);
         sheen.addColorStop(0, 'rgba(255,255,255,0)');
         sheen.addColorStop(0.5, 'rgba(255,255,255,0.08)');
@@ -2418,11 +2936,7 @@
         tex.wrapT = THREE.RepeatWrapping;
         tex.repeat.set(3, 2);
 
-        const mat = new THREE.MeshStandardMaterial({
-          map: tex,
-          roughness: 0.72,
-          metalness: 0.08
-        });
+        const mat = new THREE.MeshStandardMaterial({ map: tex, roughness: 0.72, metalness: 0.08 });
         CharacterModelBuilder._hairMatCache[baseColorHex] = mat;
         return mat;
       }
@@ -2448,7 +2962,6 @@
         ctx.fillStyle = `rgb(${r},${g},${b})`;
         ctx.fillRect(0, 0, 128, 128);
 
-        // Fine micro-grain cotton/denim texture (no visible blocky grid)
         for (let i = 0; i < 950; i++) {
           const px = (i * 47) % 128;
           const py = (i * 73 + Math.floor(i / 16)) % 128;
@@ -2456,7 +2969,6 @@
           ctx.fillRect(px, py, kind === 'denim' ? 2 : 1, 1);
         }
 
-        // Gentle vertical cloth drape gradient for natural depth
         const grad = ctx.createLinearGradient(0, 0, 0, 128);
         grad.addColorStop(0, 'rgba(255,255,255,0.05)');
         grad.addColorStop(0.55, 'rgba(0,0,0,0)');
@@ -2473,60 +2985,48 @@
         return tex;
       }
 
-      static createSculptedTorsoGeo(torsoW, isPower = false) {
-        // Lofted anatomical T-shirt torso with a natural broad sloping shoulder line
+      static createSculptedTorsoGeo(torsoW, isPower = false, isSlim = false) {
         const geo = new THREE.SphereGeometry(1, 36, 28);
         const pos = geo.attributes.position;
         const halfW = torsoW * 0.49;
-        const halfD = isPower ? 0.205 : 0.182;
+        const halfD = isSlim ? 0.166 : isPower ? 0.205 : 0.182;
 
         for (let i = 0; i < pos.count; i++) {
           const ux = pos.getX(i);
           const uy = pos.getY(i);
           const uz = pos.getZ(i);
-
-          // Normalized horizontal cross-section direction (superellipse chest/back)
           const rXZ = Math.hypot(ux, uz);
-          let sx = 0;
-          let sz = 0;
+          let sx = 0, sz = 0;
           if (rXZ > 1e-4) {
-            const dx = ux / rXZ;
-            const dz = uz / rXZ;
+            const dx = ux / rXZ, dz = uz / rXZ;
             const p = 2.45;
             const se = 1 / Math.pow(Math.pow(Math.abs(dx), p) + Math.pow(Math.abs(dz), p), 1 / p);
             sx = dx * se;
             sz = dz * se;
           }
 
-          // Map unit-sphere latitude uy (-1..1) -> t (0 bottom hem .. 1 neck collar)
           const t = (uy + 1) * 0.5;
-          let yLocal = 0;
-          let wProfile = 1.0;
-          let dProfile = 1.0;
+          let yLocal = 0, wProfile = 1.0, dProfile = 1.0;
 
           if (t < 0.08) {
-            // Smoothly closed lower T-shirt hem
             const u = t / 0.08;
             const cap = Math.sin(u * Math.PI * 0.5);
             yLocal = -0.405 + u * 0.015;
             wProfile = 0.96 * cap;
             dProfile = 0.96 * cap;
           } else if (t <= 0.72) {
-            // Relaxed T-shirt waist up to broad upper chest / shoulder outer edge
             const u = (t - 0.08) / 0.64;
-            yLocal = -0.39 + u * 0.63; // -0.39 -> +0.24 (world y = 0.85 -> 1.48)
-            const waistDip = isPower ? 0.015 : 0.055;
-            wProfile = 0.96 - waistDip * Math.sin(u * Math.PI) + 0.12 * Math.pow(u, 1.35);
+            yLocal = -0.39 + u * 0.63;
+            const waistDip = isSlim ? 0.12 : isPower ? 0.015 : 0.055;
+            wProfile = 0.96 - waistDip * Math.sin(u * Math.PI) + (isSlim ? 0.08 : 0.12) * Math.pow(u, 1.35);
             dProfile = 0.96 + 0.08 * Math.sin(u * Math.PI * 0.65);
           } else if (t <= 0.94) {
-            // Continuous natural trapezius-to-deltoid shoulder slope (eliminates pinched valley!)
             const u = (t - 0.72) / 0.22;
-            yLocal = 0.24 + 0.135 * Math.pow(u, 0.82); // +0.24 -> +0.375 (world y = 1.48 -> 1.615)
+            yLocal = 0.24 + 0.135 * Math.pow(u, 0.82);
             const shoulderCurve = Math.pow(Math.max(0, 1 - Math.pow(u, 1.65)), 0.72);
-            wProfile = 0.36 + 0.72 * shoulderCurve; // smoothly slopes from 1.08 shoulder width to 0.36 collar
+            wProfile = 0.36 + (isSlim ? 0.68 : 0.72) * shoulderCurve;
             dProfile = 0.56 + 0.48 * Math.pow(Math.max(0, 1 - u * u), 0.75);
           } else {
-            // Smoothly closed top inside crew-neck collar
             const u = (1 - t) / 0.06;
             const cap = Math.sin(u * Math.PI * 0.5);
             yLocal = 0.375;
@@ -2534,30 +3034,71 @@
             dProfile = 0.56 * cap;
           }
 
-          // Subtle natural front chest fullness
           const chestContour = (uz > 0 && t > 0.38 && t < 0.82)
-            ? 0.016 * (uz / Math.max(0.2, rXZ)) * Math.sin(((t - 0.38) / 0.44) * Math.PI)
+            ? (isSlim ? 0.024 : 0.016) * (uz / Math.max(0.2, rXZ)) * Math.sin(((t - 0.38) / 0.44) * Math.PI)
             : 0;
 
-          pos.setXYZ(
-            i,
-            sx * halfW * wProfile,
-            yLocal,
-            sz * halfD * dProfile + chestContour
-          );
+          pos.setXYZ(i, sx * halfW * wProfile, yLocal, sz * halfD * dProfile + chestContour);
         }
 
         geo.computeVertexNormals();
         return geo;
       }
 
+      static createChestPrintMesh(kind, torsoW, isPower = false, isSlim = false) {
+        if (!CharacterModelBuilder._chestPrintCache) CharacterModelBuilder._chestPrintCache = {};
+        if (!CharacterModelBuilder._chestPrintCache[kind]) {
+          const c = document.createElement('canvas');
+          c.width = 512;
+          c.height = 512;
+          const ctx = c.getContext('2d');
+          ctx.clearRect(0, 0, 512, 512);
+          FaceTextureManager.drawChestPrint(ctx, kind, 256, 256, 440);
+          const tex = new THREE.CanvasTexture(c);
+          tex.encoding = THREE.sRGBEncoding;
+          tex.needsUpdate = true;
+          CharacterModelBuilder._chestPrintCache[kind] = new THREE.MeshStandardMaterial({
+            map: tex, transparent: true, alphaTest: 0.08, roughness: 0.62, metalness: 0.02
+          });
+        }
+
+        const wPatch = kind === 'doraemon' ? 0.25 : 0.31;
+        const hPatch = kind === 'doraemon' ? 0.25 : 0.31;
+        const geo = new THREE.PlaneGeometry(wPatch, hPatch, 14, 14);
+        const pos = geo.attributes.position;
+        const halfW = torsoW * 0.49;
+        const halfD = isSlim ? 0.166 : isPower ? 0.205 : 0.182;
+        const yCenter = kind === 'sup' ? 0.08 : 0.055;
+
+        for (let i = 0; i < pos.count; i++) {
+          const x = pos.getX(i);
+          const y = pos.getY(i) + yCenter;
+          const u = Math.max(0, Math.min(1, (y + 0.39) / 0.63));
+          const t = 0.08 + u * 0.64;
+          const waistDip = isSlim ? 0.12 : isPower ? 0.015 : 0.055;
+          const wProfile = 0.96 - waistDip * Math.sin(u * Math.PI) + (isSlim ? 0.08 : 0.12) * Math.pow(u, 1.35);
+          const dProfile = 0.96 + 0.08 * Math.sin(u * Math.PI * 0.65);
+
+          const A = halfW * wProfile;
+          const B = halfD * dProfile;
+          const nx = Math.min(0.92, Math.abs(x) / Math.max(0.05, A));
+          const zBase = B * Math.pow(Math.max(0.02, 1 - Math.pow(nx, 2.45)), 1 / 2.45);
+          const chestContour = (t > 0.38 && t < 0.82)
+            ? (isSlim ? 0.024 : 0.016) * Math.sin(((t - 0.38) / 0.44) * Math.PI) * (1 - nx * 0.35)
+            : 0;
+
+          pos.setXYZ(i, x, y, zBase + chestContour + 0.011);
+        }
+        geo.computeVertexNormals();
+        return new THREE.Mesh(geo, CharacterModelBuilder._chestPrintCache[kind]);
+      }
+
       static createSculptedHair(faceId, hairColorHex) {
         const group = new THREE.Group();
         const mat = CharacterModelBuilder.createHairMaterial(hairColorHex);
         const cfg = CharacterModelBuilder.getHeadConfig(faceId);
+        const tpl = faceId && CharacterRegistry.has(faceId) ? CharacterRegistry.get(faceId).face.template : 'sidepart';
 
-        // Single continuous high-res sculpted hair shell that hugs the exact head geometry
-        // and tucks cleanly beneath the scalp below the organic hairline (zero helmet / bun seams)
         const geo = new THREE.SphereGeometry(1, 56, 36, -Math.PI / 2, Math.PI * 2);
         const pos = geo.attributes.position;
 
@@ -2570,47 +3111,69 @@
           const ux = pos.getX(i);
           const uy = pos.getY(i);
           const uz = pos.getZ(i);
-          const phi = Math.atan2(ux, uz); // 0 = front center, +-PI/2 = ears, +-PI = back
+          const phi = Math.atan2(ux, uz);
           const absPhi = Math.abs(phi);
 
           let hairline = 0.56;
           let thickness = 0.025;
           let liftY = 0;
 
-          if (faceId === 'WAI') {
-            // Full shaggy black hair: feathery fringe stays high above eyebrows (eyebrows ~0.26), fuller sides
+          if (tpl === 'messy') {
             const frontWeight = Math.exp(-Math.pow(absPhi / 0.85, 2));
             const backWeight = smoothstep(1.3, 2.5, absPhi);
             const fringeWave = (0.042 * Math.sin(phi * 11.0) + 0.022 * Math.cos(phi * 19.0 + 0.6)) * frontWeight;
             hairline = 0.44 * frontWeight + (-0.06) * (1 - frontWeight) * (1 - backWeight) + (-0.36) * backWeight + fringeWave;
-
             const topW = smoothstep(0.35, 0.95, uy);
             const sideFluff = Math.exp(-Math.pow((absPhi - 1.35) / 0.55, 2)) * smoothstep(-0.05, 0.55, uy);
             const strandTex = 0.008 * Math.sin(phi * 15.0 + uy * 4.5) + 0.005 * Math.cos(phi * 23.0 - uy * 6.0);
             thickness = 0.024 + topW * 0.026 + sideFluff * 0.018 + strandTex;
             liftY = topW * 0.014;
-          } else if (faceId === 'SHING') {
-            // Modern dark-brown undercut: high exposed forehead, tight faded sides, textured swept-up top
+          } else if (tpl === 'longhair') {
+            const frontWeight = Math.exp(-Math.pow(absPhi / 0.86, 2));
+            const backWeight = smoothstep(1.15, 2.2, absPhi);
+            const sideSweep = -0.14 * Math.sin(phi - 0.25) * frontWeight;
+            hairline = (0.50 + sideSweep) * frontWeight + (-0.35) * (1 - frontWeight) * (1 - backWeight) + (-0.65) * backWeight;
+            const topW = smoothstep(0.30, 0.95, uy);
+            const sideVol = Math.exp(-Math.pow((absPhi - 1.35) / 0.65, 2)) * smoothstep(-0.45, 0.55, uy);
+            thickness = 0.022 + topW * 0.022 + sideVol * 0.024;
+            liftY = topW * 0.016;
+          } else if (tpl === 'undercut') {
             const frontWeight = Math.exp(-Math.pow(absPhi / 0.82, 2));
             const backWeight = smoothstep(1.5, 2.6, absPhi);
             const partDip = -0.028 * Math.exp(-Math.pow((phi - 0.35) / 0.35, 2));
             const wispWave = 0.016 * Math.sin(phi * 13.0) * frontWeight;
             hairline = 0.60 * frontWeight + 0.24 * (1 - frontWeight) * (1 - backWeight) + (-0.22) * backWeight + partDip + wispWave;
-
-            // Tight buzzed sides, smoothly rising textured top volume (no detached bun!)
             const crownCap = smoothstep(0.54, 0.88, uy);
             const frontLift = crownCap * Math.max(0, uz + 0.35);
             const sideTaper = Math.exp(-Math.pow((absPhi - 1.55) / 0.48, 2));
             const brushTex = (0.007 * Math.sin(phi * 17.0 + uy * 7.0) + 0.004 * Math.cos(phi * 27.0)) * crownCap;
             thickness = 0.010 + crownCap * 0.032 + frontLift * 0.014 - sideTaper * 0.005 + brushTex;
             liftY = crownCap * 0.022 + frontLift * 0.012;
+          } else if (tpl === 'fade') {
+            // JOHNNY: High exposed forehead with neat short close-cropped fade
+            const frontWeight = Math.exp(-Math.pow(absPhi / 0.90, 2));
+            const backWeight = smoothstep(1.55, 2.6, absPhi);
+            const sideSweep = -0.04 * Math.exp(-Math.pow((phi + 0.52) / 0.35, 2));
+            hairline = 0.72 * frontWeight + 0.28 * (1 - frontWeight) * (1 - backWeight) + (-0.18) * backWeight + sideSweep;
+            const topFlat = smoothstep(0.62, 0.90, uy);
+            thickness = 0.007 + topFlat * 0.015;
+            liftY = topFlat * 0.008;
+          } else if (tpl === 'street') {
+            // MARK: Full dark hair with thick side-swept bangs
+            const frontWeight = Math.exp(-Math.pow(absPhi / 0.88, 2));
+            const backWeight = smoothstep(1.30, 2.4, absPhi);
+            const sidePart = 0.07 * Math.exp(-Math.pow((phi - 0.42) / 0.32, 2));
+            const sweepDip = -0.08 * Math.exp(-Math.pow((phi + 0.38) / 0.48, 2));
+            hairline = (0.46 + sidePart + sweepDip) * frontWeight + (-0.04) * (1 - frontWeight) * (1 - backWeight) + (-0.34) * backWeight;
+            const topW = smoothstep(0.36, 0.92, uy);
+            const sideFluff = Math.exp(-Math.pow((absPhi - 1.35) / 0.55, 2)) * smoothstep(-0.02, 0.52, uy);
+            thickness = 0.024 + topW * 0.030 + sideFluff * 0.016 + 0.006 * Math.cos(phi * 16.0) * topW;
+            liftY = topW * 0.018;
           } else {
-            // GEORGE: Neat, closely-cropped classic black side-part hair with high clean forehead
             const frontWeight = Math.exp(-Math.pow(absPhi / 0.88, 2));
             const backWeight = smoothstep(1.45, 2.6, absPhi);
             const neatPart = 0.022 * Math.exp(-Math.pow((phi + 0.42) / 0.32, 2));
             hairline = 0.62 * frontWeight + 0.14 * (1 - frontWeight) * (1 - backWeight) + (-0.28) * backWeight + neatPart;
-
             const topW = smoothstep(0.45, 0.92, uy);
             const subtleSidePartSweep = topW * 0.008 * Math.sin(phi + 0.45);
             const fineTex = 0.0035 * Math.sin(phi * 22.0 + uy * 5.0) * topW;
@@ -2620,19 +3183,14 @@
 
           const hp = CharacterModelBuilder.evalHeadPoint(ux, uy, uz, cfg);
           const blend = smoothstep(hairline - 0.04, hairline + 0.08, uy);
-
-          // Below hairline: gently tuck slightly inside the head mesh so there is zero sharp shelf/rim
           const radialOffset = (blend === 0) ? -0.012 : (-0.012 * (1 - blend) + thickness * blend);
           const len = Math.hypot(hp.x, hp.y, hp.z) || 1;
-          const nx = hp.x / len;
-          const ny = hp.y / len;
-          const nz = hp.z / len;
 
           pos.setXYZ(
             i,
-            hp.x + nx * radialOffset,
-            hp.y + ny * radialOffset + liftY * blend,
-            hp.z + nz * radialOffset
+            hp.x + (hp.x / len) * radialOffset,
+            hp.y + (hp.y / len) * radialOffset + liftY * blend,
+            hp.z + (hp.z / len) * radialOffset
           );
         }
 
@@ -2641,10 +3199,8 @@
         shell.castShadow = true;
         group.add(shell);
 
-        // Add subtle, slim tapered fringe wisps for WAI & SHING (thin organic locks, never round balls)
-        if (faceId === 'WAI') {
+        if (tpl === 'messy') {
           const wisps = [
-            // [x, y, z, rotX, rotY, rotZ, w, len]
             [-0.145, 0.138, 0.178, 0.32, -0.42, 0.24, 0.036, 0.105],
             [-0.088, 0.148, 0.205, 0.24, -0.22, 0.14, 0.038, 0.115],
             [-0.022, 0.154, 0.214, 0.20, -0.05, 0.08, 0.036, 0.108],
@@ -2654,102 +3210,85 @@
           ];
           wisps.forEach(([wx, wy, wz, rx, ry, rz, w, l]) => {
             const wGeo = new THREE.ConeGeometry(w, l, 6);
-            wGeo.scale(1.0, 1.0, 0.32); // flat feathered hair lock
+            wGeo.scale(1.0, 1.0, 0.32);
             const wisp = new THREE.Mesh(wGeo, mat);
             wisp.position.set(wx, wy, wz);
-            wisp.rotation.set(Math.PI + rx, ry, rz); // point tip softly downward onto upper forehead
+            wisp.rotation.set(Math.PI + rx, ry, rz);
             group.add(wisp);
           });
-        } else if (faceId === 'SHING') {
-          // Subtle upward-swept textured tips along front crown matching Shing.jpg
+        } else if (tpl === 'street') {
+          const sweptBangs = [
+            [-0.145, 0.126, 0.178, 0.30, -0.42, 0.42, 0.046, 0.132],
+            [-0.082, 0.140, 0.204, 0.24, -0.22, 0.38, 0.052, 0.145],
+            [-0.015, 0.150, 0.212, 0.22, -0.04, 0.34, 0.048, 0.135],
+            [0.048, 0.158, 0.208, 0.22, 0.12, 0.26, 0.042, 0.118],
+            [0.132, 0.142, 0.180, 0.30, 0.38, -0.24, 0.038, 0.105]
+          ];
+          sweptBangs.forEach(([wx, wy, wz, rx, ry, rz, w, l]) => {
+            const wGeo = new THREE.ConeGeometry(w, l, 6);
+            wGeo.scale(1.15, 1.0, 0.34);
+            const wisp = new THREE.Mesh(wGeo, mat);
+            wisp.position.set(wx, wy, wz);
+            wisp.rotation.set(Math.PI + rx, ry, rz);
+            group.add(wisp);
+          });
+        } else if (tpl === 'undercut') {
           const tufts = [
             [-0.085, 0.222, 0.145, 0.55, -0.20, 0.22, 0.034, 0.088],
             [-0.028, 0.236, 0.152, 0.48, -0.06, 0.12, 0.036, 0.095],
             [0.032, 0.238, 0.148, 0.50, 0.08, -0.14, 0.036, 0.092],
             [0.088, 0.224, 0.136, 0.58, 0.22, -0.24, 0.032, 0.082]
           ];
-          tufts.forEach(([tx, ty, tz, rx, ry, rz, w, l]) => {
+          tufts.forEach(([txPos, ty, tz, rx, ry, rz, w, l]) => {
             const tGeo = new THREE.ConeGeometry(w, l, 6);
             tGeo.scale(1.1, 1.0, 0.35);
             const tuft = new THREE.Mesh(tGeo, mat);
-            tuft.position.set(tx, ty, tz);
+            tuft.position.set(txPos, ty, tz);
             tuft.rotation.set(rx, ry, rz);
             group.add(tuft);
           });
+        } else if (tpl === 'longhair') {
+          const backDrapePivot = new THREE.Group();
+          backDrapePivot.name = 'longHairDrape';
+          backDrapePivot.position.set(0, 0.02, -0.05);
+
+          const drapeGeo = new THREE.CylinderGeometry(0.232, 0.275, 0.62, 20, 6, false, Math.PI * 0.48, Math.PI * 1.04);
+          drapeGeo.scale(1.0, 1.0, 0.85);
+          const drape = new THREE.Mesh(drapeGeo, mat);
+          drape.position.set(0, -0.28, -0.04);
+          drape.castShadow = true;
+          backDrapePivot.add(drape);
+
+          [-0.14, -0.05, 0.05, 0.14].forEach((bx, idx) => {
+            const tipGeo = new THREE.ConeGeometry(0.072, 0.20, 8);
+            tipGeo.scale(1.0, 1.0, 0.42);
+            const tip = new THREE.Mesh(tipGeo, mat);
+            tip.position.set(bx, -0.60, -0.22 + Math.abs(bx) * 0.32);
+            tip.rotation.x = Math.PI + 0.12;
+            tip.rotation.z = (idx - 1.5) * 0.06;
+            backDrapePivot.add(tip);
+          });
+          group.add(backDrapePivot);
+
+          [-1, 1].forEach((side) => {
+            const lock = new THREE.Mesh(new THREE.CylinderGeometry(0.052, 0.026, 0.44, 10), mat);
+            lock.scale.set(0.68, 1.0, 1.08);
+            lock.position.set(side * 0.205, -0.17, 0.04);
+            lock.rotation.z = side * 0.10;
+            lock.rotation.x = 0.14;
+            lock.castShadow = true;
+            group.add(lock);
+          });
+
+          const bangGeo = new THREE.ConeGeometry(0.048, 0.16, 6);
+          bangGeo.scale(1.2, 1.0, 0.3);
+          const bang = new THREE.Mesh(bangGeo, mat);
+          bang.position.set(0.07, 0.145, 0.195);
+          bang.rotation.set(Math.PI + 0.28, 0.24, -0.58);
+          group.add(bang);
         }
 
         return group;
-      }
-
-      static createWeaponMesh(type) {
-        const g = new THREE.Group();
-        if (type === 'bottle') {
-          // Street glass bottle (grip at bottle neck y = 0, extending outward along +Y)
-          const glassMat = new THREE.MeshStandardMaterial({
-            color: CharacterModelBuilder.srgbColor(0x2a9d63),
-            roughness: 0.16,
-            metalness: 0.12,
-            transparent: true,
-            opacity: 0.88
-          });
-          const labelMat = new THREE.MeshStandardMaterial({
-            color: CharacterModelBuilder.srgbColor(0xf4ead5),
-            roughness: 0.72
-          });
-          const capMat = new THREE.MeshStandardMaterial({
-            color: CharacterModelBuilder.srgbColor(0xd99b26),
-            metalness: 0.75,
-            roughness: 0.25
-          });
-
-          const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.032, 0.036, 0.20, 12), glassMat);
-          neck.position.y = 0.02;
-          const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.038, 0.038, 0.035, 12), capMat);
-          cap.position.y = -0.085;
-          const shoulder = new THREE.Mesh(new THREE.CylinderGeometry(0.088, 0.035, 0.13, 14), glassMat);
-          shoulder.position.y = 0.185;
-          const body = new THREE.Mesh(new THREE.CylinderGeometry(0.088, 0.088, 0.36, 14), glassMat);
-          body.position.y = 0.43;
-          body.castShadow = true;
-          const label = new THREE.Mesh(new THREE.CylinderGeometry(0.091, 0.091, 0.16, 14), labelMat);
-          label.position.y = 0.41;
-          const base = new THREE.Mesh(new THREE.CylinderGeometry(0.086, 0.082, 0.04, 14), glassMat);
-          base.position.y = 0.625;
-          g.add(neck, cap, shoulder, body, label, base);
-        } else {
-          // Heavy wooden street bat (grip handle at y = 0, barrel extending along +Y)
-          const woodMat = new THREE.MeshStandardMaterial({
-            color: CharacterModelBuilder.srgbColor(0xb07740),
-            roughness: 0.68,
-            metalness: 0.04
-          });
-          const gripMat = new THREE.MeshStandardMaterial({
-            color: CharacterModelBuilder.srgbColor(0x1f2229),
-            roughness: 0.9
-          });
-          const stripeMat = new THREE.MeshStandardMaterial({
-            color: CharacterModelBuilder.srgbColor(0xd62828),
-            roughness: 0.55
-          });
-
-          const pommel = new THREE.Mesh(new THREE.SphereGeometry(0.045, 10, 8), gripMat);
-          pommel.position.y = -0.10;
-          const grip = new THREE.Mesh(new THREE.CylinderGeometry(0.033, 0.030, 0.28, 12), gripMat);
-          grip.position.y = 0.04;
-          const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.068, 0.033, 0.48, 14), woodMat);
-          shaft.position.y = 0.42;
-          shaft.castShadow = true;
-          const stripe = new THREE.Mesh(new THREE.CylinderGeometry(0.069, 0.066, 0.055, 14), stripeMat);
-          stripe.position.y = 0.66;
-          const barrel = new THREE.Mesh(new THREE.CylinderGeometry(0.072, 0.068, 0.34, 14), woodMat);
-          barrel.position.y = 0.84;
-          barrel.castShadow = true;
-          const tip = new THREE.Mesh(new THREE.SphereGeometry(0.072, 12, 10), woodMat);
-          tip.scale.set(1, 0.6, 1);
-          tip.position.y = 1.01;
-          g.add(pommel, grip, shaft, stripe, barrel, tip);
-        }
-        return g;
       }
 
       static createRig(app, isBoss = false, scaleMult = 1.0) {
@@ -2757,41 +3296,25 @@
         const bodyPivot = new THREE.Group();
         root.add(bodyPivot);
 
-        // Linear-space skin color & roughness matched exactly to sculpted 3D head texture
         const skinMat = new THREE.MeshStandardMaterial({
           color: CharacterModelBuilder.srgbColor(app.skin || 0xdca583),
-          roughness: 0.56,
-          metalness: 0.02
+          roughness: 0.56, metalness: 0.02
         });
         const shirtTex = CharacterModelBuilder.createFabricTexture(app.shirt || 0x333333, 'cotton');
-        const shirtMat = new THREE.MeshStandardMaterial({
-          map: shirtTex,
-          roughness: 0.82,
-          metalness: 0.02
-        });
+        const shirtMat = new THREE.MeshStandardMaterial({ map: shirtTex, roughness: 0.82, metalness: 0.02 });
         const pantsTex = CharacterModelBuilder.createFabricTexture(app.pants || 0x1a1a1a, 'denim');
-        const pantsMat = new THREE.MeshStandardMaterial({
-          map: pantsTex,
-          roughness: 0.85,
-          metalness: 0.02
-        });
+        const pantsMat = new THREE.MeshStandardMaterial({ map: pantsTex, roughness: 0.85, metalness: 0.02 });
         const hairMat = CharacterModelBuilder.createHairMaterial(app.hair || 0x181818);
-        const shoeMat = new THREE.MeshStandardMaterial({
-          color: CharacterModelBuilder.srgbColor(0x23262e),
-          roughness: 0.68,
-          metalness: 0.08
-        });
-        const soleMat = new THREE.MeshStandardMaterial({
-          color: CharacterModelBuilder.srgbColor(0xdcdde2),
-          roughness: 0.78
-        });
+        const shoeMat = new THREE.MeshStandardMaterial({ color: CharacterModelBuilder.srgbColor(0x23262e), roughness: 0.68, metalness: 0.08 });
+        const soleMat = new THREE.MeshStandardMaterial({ color: CharacterModelBuilder.srgbColor(0xdcdde2), roughness: 0.78 });
 
         const torsoW = app.torsoW || 0.64;
         const isPower = torsoW >= 0.67;
+        const isSlim = app.gender === 'female';
+        const isHoodie = !!app.hoodie;
 
-        // 1. Sculpted Organic Torso (T-Shirt)
         const torso = new THREE.Mesh(
-          CharacterModelBuilder.createSculptedTorsoGeo(torsoW, isPower),
+          CharacterModelBuilder.createSculptedTorsoGeo(torsoW, isPower, isSlim),
           shirtMat
         );
         torso.position.y = 1.24;
@@ -2799,44 +3322,79 @@
         torso.receiveShadow = true;
         bodyPivot.add(torso);
 
-        // Smooth ribbed crew-neck collar ring
+        if (app.chestPrint) {
+          torso.add(CharacterModelBuilder.createChestPrintMesh(app.chestPrint, torsoW, isPower, isSlim));
+        }
+
         const collarMat = new THREE.MeshStandardMaterial({
           color: CharacterModelBuilder.srgbColor(app.shirt || 0x333333).multiplyScalar(0.84),
           roughness: 0.88
         });
-        const collar = new THREE.Mesh(new THREE.TorusGeometry(0.112, 0.017, 10, 24), collarMat);
-        collar.rotation.x = Math.PI / 2;
-        collar.position.set(0, 1.605, 0.004);
-        bodyPivot.add(collar);
+        if (isHoodie) {
+          const hoodRim = new THREE.Mesh(new THREE.TorusGeometry(0.142, 0.036, 12, 24), collarMat);
+          hoodRim.rotation.x = Math.PI / 2 + 0.14;
+          hoodRim.position.set(0, 1.595, -0.01);
+          bodyPivot.add(hoodRim);
 
-        // Tapered smooth neck connecting torso to sculpted head
-        const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.088, 0.106, 0.19, 16), skinMat);
+          const hoodBack = new THREE.Mesh(new THREE.SphereGeometry(0.215, 18, 14), shirtMat);
+          hoodBack.scale.set(1.18, 0.78, 1.05);
+          hoodBack.position.set(0, 1.555, -0.145);
+          hoodBack.rotation.x = 0.25;
+          hoodBack.castShadow = true;
+          bodyPivot.add(hoodBack);
+
+          const hoodInner = new THREE.Mesh(
+            new THREE.SphereGeometry(0.165, 14, 10),
+            new THREE.MeshStandardMaterial({ color: CharacterModelBuilder.srgbColor(0x11131a), roughness: 0.92 })
+          );
+          hoodInner.scale.set(1.05, 0.55, 0.82);
+          hoodInner.position.set(0, 1.60, -0.12);
+          bodyPivot.add(hoodInner);
+
+          const cordMat = new THREE.MeshStandardMaterial({ color: CharacterModelBuilder.srgbColor(0xf2f4f8), roughness: 0.65 });
+          [-0.056, 0.056].forEach((cx) => {
+            const cord = new THREE.Mesh(new THREE.CylinderGeometry(0.007, 0.007, 0.23, 8), cordMat);
+            cord.position.set(cx, 1.46, 0.198);
+            cord.rotation.x = -0.14;
+            cord.rotation.z = cx < 0 ? 0.06 : -0.06;
+            bodyPivot.add(cord);
+          });
+
+          const kPocket = new THREE.Mesh(new THREE.BoxGeometry(torsoW * 0.56, 0.17, 0.035), collarMat);
+          kPocket.position.set(0, -0.23, isPower ? 0.195 : 0.178);
+          torso.add(kPocket);
+        } else {
+          const collar = new THREE.Mesh(new THREE.TorusGeometry(isSlim ? 0.104 : 0.112, 0.017, 10, 24), collarMat);
+          collar.rotation.x = Math.PI / 2;
+          collar.position.set(0, 1.605, 0.004);
+          bodyPivot.add(collar);
+        }
+
+        const neck = new THREE.Mesh(
+          new THREE.CylinderGeometry(isSlim ? 0.076 : 0.088, isSlim ? 0.092 : 0.106, 0.19, 16),
+          skinMat
+        );
         neck.position.set(0, 1.66, 0);
         neck.castShadow = true;
         bodyPivot.add(neck);
 
-        // Rounded pelvis / hips tucked cleanly beneath T-shirt hem
+        const hipD = isSlim ? 0.150 : isPower ? 0.175 : 0.158;
         const pelvis = new THREE.Mesh(new THREE.SphereGeometry(1, 20, 14), pantsMat);
-        pelvis.scale.set(torsoW * 0.415, 0.145, isPower ? 0.175 : 0.158);
+        pelvis.scale.set(torsoW * (isSlim ? 0.44 : 0.415), 0.145, hipD);
         pelvis.position.set(0, 0.84, 0);
         pelvis.castShadow = true;
         bodyPivot.add(pelvis);
 
-        // Subtle dark belt / waistband resting flush under shirt hem
         const belt = new THREE.Mesh(
           new THREE.CylinderGeometry(torsoW * 0.41, torsoW * 0.415, 0.045, 20),
           new THREE.MeshStandardMaterial({ color: CharacterModelBuilder.srgbColor(0x181a20), roughness: 0.65 })
         );
-        belt.scale.set(1, 1, (isPower ? 0.175 : 0.158) / (torsoW * 0.415));
+        belt.scale.set(1, 1, hipD / (torsoW * 0.415));
         belt.position.set(0, 0.87, 0);
         bodyPivot.add(belt);
 
-        // WAI's signature left-chest pocket contoured cleanly on sculpted chest
         if (app.pocket) {
-          const pocketMat = new THREE.MeshStandardMaterial({
-            color: CharacterModelBuilder.srgbColor(0x272a1f),
-            roughness: 0.88
-          });
+          const pocketMat = new THREE.MeshStandardMaterial({ color: CharacterModelBuilder.srgbColor(0x272a1f), roughness: 0.88 });
           const pocket = new THREE.Mesh(new THREE.BoxGeometry(0.135, 0.145, 0.022), pocketMat);
           pocket.position.set(0.145, 0.10, isPower ? 0.205 : 0.185);
           pocket.rotation.y = 0.24;
@@ -2844,13 +3402,8 @@
           torso.add(pocket);
         }
 
-        // Smooth contoured shoulder pauldrons for armored enemies / bosses
         if (app.armor) {
-          const armorMat = new THREE.MeshStandardMaterial({
-            color: CharacterModelBuilder.srgbColor(0x6c757d),
-            metalness: 0.68,
-            roughness: 0.32
-          });
+          const armorMat = new THREE.MeshStandardMaterial({ color: CharacterModelBuilder.srgbColor(0x6c757d), metalness: 0.68, roughness: 0.32 });
           [-1, 1].forEach((side) => {
             const pad = new THREE.Mesh(new THREE.SphereGeometry(0.165, 14, 10, 0, Math.PI * 2, 0, Math.PI * 0.62), armorMat);
             pad.scale.set(1.05, 0.9, 1.15);
@@ -2865,199 +3418,153 @@
         const faceTex = app.faceId ? faceTexMgr.getTexture(app.faceId) : null;
 
         if (faceTex) {
-          // Sculpted 3D Head for our 3 playable protagonists (WAI, SHING, GEORGE)
-          const headGeo = CharacterModelBuilder.createSculptedHeadGeo(app.faceId);
-          const headMat = new THREE.MeshStandardMaterial({
-            map: faceTex,
-            roughness: 0.56,
-            metalness: 0.02
-          });
-          const headMesh = new THREE.Mesh(headGeo, headMat);
+          const headMesh = new THREE.Mesh(
+            CharacterModelBuilder.createSculptedHeadGeo(app.faceId),
+            new THREE.MeshStandardMaterial({ map: faceTex, roughness: 0.56, metalness: 0.02 })
+          );
           headMesh.castShadow = true;
           headGroup.add(headMesh);
 
-          // 3D Ears (exact skin tone match)
-          const earX = app.faceId === 'WAI' ? 0.225 : 0.212;
+          const earX = CharacterRegistry.get(app.faceId).face.earX;
           [-earX, earX].forEach((ex) => {
-            const ear = new THREE.Mesh(new THREE.SphereGeometry(0.052, 12, 10), skinMat);
-            ear.scale.set(0.52, 1.24, 0.80);
+            const ear = new THREE.Mesh(new THREE.SphereGeometry(0.050, 12, 10), skinMat);
+            ear.scale.set(0.50, 1.22, 0.78);
             ear.position.set(ex, -0.015, -0.01);
             headGroup.add(ear);
           });
 
-          // Subtle 3D sculpted nose bridge & tip
           const nose = new THREE.Mesh(new THREE.SphereGeometry(0.024, 10, 8), skinMat);
-          nose.scale.set(app.faceId === 'WAI' ? 1.08 : 0.88, 1.30, 0.80);
-          nose.position.set(0, -0.034, 0.210);
+          nose.scale.set(CharacterRegistry.get(app.faceId).face.noseScale, 1.28, 0.78);
+          nose.position.set(0, -0.034, isSlim ? 0.200 : 0.210);
           headGroup.add(nose);
 
-          // Seamless Sculpted 3D Hair matching each reference photo
           headGroup.add(CharacterModelBuilder.createSculptedHair(app.faceId, app.hair));
 
-          // Sleek Realistic 3D Glasses with Temples for SHING & GEORGE
           if (app.glasses) {
             const isSilver = app.glasses === 'silver';
-            const topMat = new THREE.MeshStandardMaterial({
-              color: CharacterModelBuilder.srgbColor(isSilver ? 0x3b424d : 0x14161c),
-              metalness: isSilver ? 0.78 : 0.3,
-              roughness: 0.25
-            });
-            const rimMat = new THREE.MeshStandardMaterial({
-              color: CharacterModelBuilder.srgbColor(isSilver ? 0xcfd6e0 : 0x14161c),
-              metalness: isSilver ? 0.85 : 0.3,
-              roughness: 0.22
-            });
-            const lensMat = new THREE.MeshStandardMaterial({
-              color: CharacterModelBuilder.srgbColor(0xdaf2ff),
-              transparent: true,
-              opacity: 0.2,
-              roughness: 0.08,
-              metalness: 0.25
-            });
+            const topMat = new THREE.MeshStandardMaterial({ color: CharacterModelBuilder.srgbColor(isSilver ? 0x3b424d : 0x14161c), metalness: isSilver ? 0.78 : 0.3, roughness: 0.25 });
+            const rimMat = new THREE.MeshStandardMaterial({ color: CharacterModelBuilder.srgbColor(isSilver ? 0xcfd6e0 : 0x14161c), metalness: isSilver ? 0.85 : 0.3, roughness: 0.22 });
+            const lensMat = new THREE.MeshStandardMaterial({ color: CharacterModelBuilder.srgbColor(0xdaf2ff), transparent: true, opacity: 0.2, roughness: 0.08, metalness: 0.25 });
 
             const gGroup = new THREE.Group();
             gGroup.position.set(0, 0.02, 0.215);
-
             [-0.088, 0.088].forEach((gx) => {
-              const w = 0.132;
-              const h = 0.078;
-              const topBar = new THREE.Mesh(new THREE.BoxGeometry(w, 0.014, 0.014), topMat);
-              topBar.position.set(gx, h / 2, 0);
-              const botBar = new THREE.Mesh(new THREE.BoxGeometry(w, isSilver ? 0.008 : 0.013, 0.012), rimMat);
-              botBar.position.set(gx, -h / 2, 0);
-              const inBar = new THREE.Mesh(new THREE.BoxGeometry(isSilver ? 0.008 : 0.013, h, 0.012), rimMat);
-              inBar.position.set(gx + (gx < 0 ? w / 2 : -w / 2), 0, 0);
-              const outBar = new THREE.Mesh(new THREE.BoxGeometry(isSilver ? 0.01 : 0.013, h, 0.012), topMat);
-              outBar.position.set(gx + (gx < 0 ? -w / 2 : w / 2), 0, 0);
-              const lens = new THREE.Mesh(new THREE.PlaneGeometry(w - 0.014, h - 0.014), lensMat);
-              lens.position.set(gx, 0, -0.002);
+              const w = 0.132, h = 0.078;
+              const topBar = new THREE.Mesh(new THREE.BoxGeometry(w, 0.014, 0.014), topMat); topBar.position.set(gx, h / 2, 0);
+              const botBar = new THREE.Mesh(new THREE.BoxGeometry(w, isSilver ? 0.008 : 0.013, 0.012), rimMat); botBar.position.set(gx, -h / 2, 0);
+              const inBar = new THREE.Mesh(new THREE.BoxGeometry(isSilver ? 0.008 : 0.013, h, 0.012), rimMat); inBar.position.set(gx + (gx < 0 ? w / 2 : -w / 2), 0, 0);
+              const outBar = new THREE.Mesh(new THREE.BoxGeometry(isSilver ? 0.01 : 0.013, h, 0.012), topMat); outBar.position.set(gx + (gx < 0 ? -w / 2 : w / 2), 0, 0);
+              const lens = new THREE.Mesh(new THREE.PlaneGeometry(w - 0.014, h - 0.014), lensMat); lens.position.set(gx, 0, -0.002);
               gGroup.add(topBar, botBar, inBar, outBar, lens);
             });
-
-            // Nose bridge
             const bridge = new THREE.Mesh(new THREE.BoxGeometry(0.048, 0.011, 0.012), topMat);
             bridge.position.set(0, 0.018, 0.002);
             gGroup.add(bridge);
-
-            // Side temples extending back to the 3D ears
-            [-0.16, 0.16].forEach((tx) => {
+            [-0.16, 0.16].forEach((txPos) => {
               const temple = new THREE.Mesh(new THREE.BoxGeometry(0.011, 0.012, 0.24), topMat);
-              temple.position.set(tx, 0.02, -0.12);
-              temple.rotation.y = tx < 0 ? -0.16 : 0.16;
+              temple.position.set(txPos, 0.02, -0.12);
+              temple.rotation.y = txPos < 0 ? -0.16 : 0.16;
               gGroup.add(temple);
             });
-
             headGroup.add(gGroup);
           }
         } else {
-          // Smooth sculpted arcade enemy/boss head matching unified 3D style
-          const eHead = new THREE.Mesh(CharacterModelBuilder.createSculptedHeadGeo('SHING'), skinMat);
+          const eHead = new THREE.Mesh(CharacterModelBuilder.createSculptedHeadGeo(null), skinMat);
           eHead.castShadow = true;
           headGroup.add(eHead);
-
           [-0.21, 0.21].forEach((ex) => {
             const ear = new THREE.Mesh(new THREE.SphereGeometry(0.048, 10, 8), skinMat);
             ear.scale.set(0.5, 1.2, 0.78);
             ear.position.set(ex, -0.015, -0.01);
             headGroup.add(ear);
           });
-
-          // Sculpted enemy hair cap
-          const eHair = new THREE.Mesh(
-            new THREE.SphereGeometry(0.245, 18, 14, 0, Math.PI * 2, 0, Math.PI * 0.56),
-            hairMat
-          );
+          const eHair = new THREE.Mesh(new THREE.SphereGeometry(0.245, 18, 14, 0, Math.PI * 2, 0, Math.PI * 0.56), hairMat);
           eHair.scale.set(0.96, 1.12, 0.98);
           eHair.position.set(0, 0.03, -0.015);
           eHair.rotation.x = -0.18;
           headGroup.add(eHair);
-
-          // Sleek dark arcade shades / visor so enemies look sharp & readable
           const shadeMat = new THREE.MeshStandardMaterial({
             color: CharacterModelBuilder.srgbColor(isBoss ? 0x2b0a14 : 0x11131a),
-            metalness: 0.75,
-            roughness: 0.2,
-            emissive: isBoss ? 0x550018 : 0x000000
+            metalness: 0.75, roughness: 0.2, emissive: isBoss ? 0x550018 : 0x000000
           });
           const visor = new THREE.Mesh(new THREE.CylinderGeometry(0.215, 0.215, 0.075, 18, 1, true, -0.78, 1.56), shadeMat);
           visor.position.set(0, 0.02, 0.02);
           headGroup.add(visor);
         }
-
         bodyPivot.add(headGroup);
-        // 2. Smooth Articulated Arms (Seamless Sloped Shoulders, Short Sleeves, Elbows, Tapered Forearms & Sculpted Fists)
+
         const sleeveRimMat = new THREE.MeshStandardMaterial({
           color: CharacterModelBuilder.srgbColor(app.shirt || 0x333333).multiplyScalar(0.82),
           roughness: 0.9
         });
+        const armThick = isSlim ? 0.84 : isHoodie ? 1.08 : 1.0;
         const makeArm = (side) => {
           const shoulderPivot = new THREE.Group();
           shoulderPivot.position.set(side * (torsoW * 0.505), 1.465, 0);
 
-          // Low-profile deltoid cap tucked seamlessly into the sloped torso shoulder
-          const shoulderCap = new THREE.Mesh(new THREE.SphereGeometry(0.104, 16, 12), shirtMat);
+          const shoulderCap = new THREE.Mesh(new THREE.SphereGeometry(0.104 * armThick, 16, 12), shirtMat);
           shoulderCap.scale.set(1.06, 0.86, 1.04);
           shoulderCap.position.set(-side * 0.018, -0.008, 0);
           shoulderCap.castShadow = true;
           shoulderPivot.add(shoulderCap);
 
-          // Smooth short T-shirt sleeve flowing continuously from shoulder slope
-          const sleeve = new THREE.Mesh(new THREE.CylinderGeometry(0.100, 0.092, 0.24, 16), shirtMat);
-          sleeve.position.y = -0.125;
-          sleeve.castShadow = true;
-          shoulderPivot.add(sleeve);
+          if (isHoodie) {
+            const upperSleeve = new THREE.Mesh(new THREE.CylinderGeometry(0.102 * armThick, 0.090 * armThick, 0.34, 16), shirtMat);
+            upperSleeve.position.y = -0.165;
+            upperSleeve.castShadow = true;
+            shoulderPivot.add(upperSleeve);
+          } else {
+            const sleeve = new THREE.Mesh(new THREE.CylinderGeometry(0.100 * armThick, 0.092 * armThick, 0.24, 16), shirtMat);
+            sleeve.position.y = -0.125;
+            sleeve.castShadow = true;
+            shoulderPivot.add(sleeve);
 
-          // Sleeve cuff hem ring
-          const cuff = new THREE.Mesh(new THREE.TorusGeometry(0.090, 0.010, 8, 16), sleeveRimMat);
-          cuff.rotation.x = Math.PI / 2;
-          cuff.position.y = -0.245;
-          shoulderPivot.add(cuff);
+            const cuff = new THREE.Mesh(new THREE.TorusGeometry(0.090 * armThick, 0.010, 8, 16), sleeveRimMat);
+            cuff.rotation.x = Math.PI / 2;
+            cuff.position.y = -0.245;
+            shoulderPivot.add(cuff);
 
-          // Bare upper arm emerging cleanly from sleeve
-          const bicep = new THREE.Mesh(new THREE.CylinderGeometry(0.082, 0.075, 0.11, 14), skinMat);
-          bicep.position.y = -0.275;
-          bicep.castShadow = true;
-          shoulderPivot.add(bicep);
+            const bicep = new THREE.Mesh(new THREE.CylinderGeometry(0.082 * armThick, 0.075 * armThick, 0.11, 14), skinMat);
+            bicep.position.y = -0.275;
+            bicep.castShadow = true;
+            shoulderPivot.add(bicep);
+          }
 
-          // Elbow joint for realistic fighting stance & punches
           const elbowPivot = new THREE.Group();
           elbowPivot.position.set(0, -0.33, 0);
+          elbowPivot.add(new THREE.Mesh(new THREE.SphereGeometry(0.074 * armThick, 12, 10), isHoodie ? shirtMat : skinMat));
 
-          const elbowCap = new THREE.Mesh(new THREE.SphereGeometry(0.074, 12, 10), skinMat);
-          elbowPivot.add(elbowCap);
-
-          // Tapered smooth forearm
-          const forearm = new THREE.Mesh(new THREE.CylinderGeometry(0.074, 0.056, 0.27, 14), skinMat);
+          const forearm = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.074 * armThick, (isHoodie ? 0.064 : 0.056) * armThick, 0.27, 14),
+            isHoodie ? shirtMat : skinMat
+          );
           forearm.position.y = -0.135;
           forearm.castShadow = true;
           elbowPivot.add(forearm);
 
-          // Sculpted fist / hand with thumb
-          const fist = new THREE.Mesh(new THREE.SphereGeometry(0.068, 12, 10), skinMat);
+          if (isHoodie) {
+            const wristCuff = new THREE.Mesh(new THREE.TorusGeometry(0.062 * armThick, 0.012, 8, 16), sleeveRimMat);
+            wristCuff.rotation.x = Math.PI / 2;
+            wristCuff.position.y = -0.26;
+            elbowPivot.add(wristCuff);
+          }
+
+          const fist = new THREE.Mesh(new THREE.SphereGeometry(0.068 * (isSlim ? 0.86 : 1.0), 12, 10), skinMat);
           fist.scale.set(0.86, 1.08, 1.08);
           fist.position.set(0, -0.295, 0.008);
           fist.castShadow = true;
           elbowPivot.add(fist);
 
-          const thumb = new THREE.Mesh(new THREE.SphereGeometry(0.030, 8, 8), skinMat);
+          const thumb = new THREE.Mesh(new THREE.SphereGeometry(0.030 * (isSlim ? 0.86 : 1.0), 8, 8), skinMat);
           thumb.scale.set(0.85, 1.32, 0.92);
           thumb.position.set(-side * 0.044, -0.28, 0.042);
           thumb.rotation.x = 0.28;
           elbowPivot.add(thumb);
 
-          const handAnchor = new THREE.Group();
-          handAnchor.position.set(0, -0.30, 0.025);
-          elbowPivot.add(handAnchor);
-
           if (app.blades) {
             const blade = new THREE.Mesh(
               new THREE.BoxGeometry(0.045, 0.56, 0.11),
-              new THREE.MeshStandardMaterial({
-                color: CharacterModelBuilder.srgbColor(0x00f5d4),
-                emissive: 0x00a896,
-                metalness: 0.8,
-                roughness: 0.2
-              })
+              new THREE.MeshStandardMaterial({ color: CharacterModelBuilder.srgbColor(0x00f5d4), emissive: 0x00a896, metalness: 0.8, roughness: 0.2 })
             );
             blade.position.set(0, -0.46, 0.18);
             blade.rotation.x = Math.PI / 3;
@@ -3066,61 +3573,48 @@
 
           shoulderPivot.add(elbowPivot);
           bodyPivot.add(shoulderPivot);
-          return { pivot: shoulderPivot, elbow: elbowPivot, hand: handAnchor };
+          return { pivot: shoulderPivot, elbow: elbowPivot };
         };
         const leftArm = makeArm(-1);
         const rightArm = makeArm(1);
-        const armL = leftArm.pivot;
-        const armR = rightArm.pivot;
 
-        // 3. Smooth Articulated Legs (Hips, Tapered Trousers/Jeans, Knees & Sculpted Sneakers)
+        const legThick = isSlim ? 0.88 : 1.0;
         const cuffMat = new THREE.MeshStandardMaterial({
           color: CharacterModelBuilder.srgbColor(app.pants || 0x1a1a1a).multiplyScalar(0.75),
           roughness: 0.9
         });
         const makeLeg = (side) => {
           const hipPivot = new THREE.Group();
-          hipPivot.position.set(side * 0.155, 0.82, 0);
+          hipPivot.position.set(side * (isSlim ? 0.135 : 0.155), 0.82, 0);
+          hipPivot.add(new THREE.Mesh(new THREE.SphereGeometry(0.118 * legThick, 14, 12), pantsMat));
 
-          // Smooth rounded hip cap
-          const hipCap = new THREE.Mesh(new THREE.SphereGeometry(0.118, 14, 12), pantsMat);
-          hipPivot.add(hipCap);
-
-          // Tapered upper leg (thigh)
-          const thigh = new THREE.Mesh(new THREE.CylinderGeometry(0.118, 0.102, 0.36, 14), pantsMat);
+          const thigh = new THREE.Mesh(new THREE.CylinderGeometry(0.118 * legThick, 0.102 * legThick, 0.36, 14), pantsMat);
           thigh.position.y = -0.18;
           thigh.castShadow = true;
           hipPivot.add(thigh);
 
-          // Articulated knee joint
           const kneePivot = new THREE.Group();
           kneePivot.position.set(0, -0.36, 0);
+          kneePivot.add(new THREE.Mesh(new THREE.SphereGeometry(0.10 * legThick, 12, 10), pantsMat));
 
-          const kneeCap = new THREE.Mesh(new THREE.SphereGeometry(0.10, 12, 10), pantsMat);
-          kneePivot.add(kneeCap);
-
-          // Tapered lower pant leg (calf)
-          const shin = new THREE.Mesh(new THREE.CylinderGeometry(0.10, 0.084, 0.34, 14), pantsMat);
+          const shin = new THREE.Mesh(new THREE.CylinderGeometry(0.10 * legThick, 0.084 * legThick, 0.34, 14), pantsMat);
           shin.position.y = -0.17;
           shin.castShadow = true;
           kneePivot.add(shin);
 
-          // Subtle trouser hem cuff
-          const hem = new THREE.Mesh(new THREE.TorusGeometry(0.084, 0.012, 8, 16), cuffMat);
+          const hem = new THREE.Mesh(new THREE.TorusGeometry(0.084 * legThick, 0.012, 8, 16), cuffMat);
           hem.rotation.x = Math.PI / 2;
           hem.position.y = -0.34;
           kneePivot.add(hem);
 
-          // Sculpted rounded sneaker resting cleanly at ground y = 0 (0.82 - 0.36 - 0.46 = 0)
           const shoeUpper = new THREE.Mesh(new THREE.SphereGeometry(1, 14, 10), shoeMat);
-          shoeUpper.scale.set(0.094, 0.072, 0.172);
+          shoeUpper.scale.set(0.094 * legThick, 0.072, 0.172 * (isSlim ? 0.92 : 1.0));
           shoeUpper.position.set(0, -0.382, 0.048);
           shoeUpper.castShadow = true;
           kneePivot.add(shoeUpper);
 
-          // Crisp athletic midsole / outsole
-          const shoeSole = new THREE.Mesh(new THREE.CylinderGeometry(0.095, 0.098, 0.044, 14), soleMat);
-          shoeSole.scale.set(1.0, 1.0, 1.82);
+          const shoeSole = new THREE.Mesh(new THREE.CylinderGeometry(0.095 * legThick, 0.098 * legThick, 0.044, 14), soleMat);
+          shoeSole.scale.set(1.0, 1.0, 1.82 * (isSlim ? 0.92 : 1.0));
           shoeSole.position.set(0, -0.438, 0.048);
           kneePivot.add(shoeSole);
 
@@ -3130,8 +3624,6 @@
         };
         const leftLeg = makeLeg(-1);
         const rightLeg = makeLeg(1);
-        const legL = leftLeg.pivot;
-        const legR = rightLeg.pivot;
 
         const shadow = new THREE.Mesh(
           new THREE.CircleGeometry(0.55, 18),
@@ -3141,7 +3633,6 @@
         shadow.position.y = 0.02;
         root.add(shadow);
 
-        // Player foot ring indicator
         if (app.isPlayerRing) {
           const ring = new THREE.Mesh(
             new THREE.RingGeometry(0.56, 0.68, 24),
@@ -3158,14 +3649,13 @@
           bodyPivot,
           torso,
           head: headGroup,
-          armL,
-          armR,
+          hairDrape: headGroup.getObjectByName('longHairDrape') || null,
+          armL: leftArm.pivot,
+          armR: rightArm.pivot,
           elbowL: leftArm.elbow,
           elbowR: rightArm.elbow,
-          handL: leftArm.hand,
-          handR: rightArm.hand,
-          legL,
-          legR,
+          legL: leftLeg.pivot,
+          legR: rightLeg.pivot,
           kneeL: leftLeg.knee,
           kneeR: rightLeg.knee,
           shadow
@@ -3173,7 +3663,7 @@
       }
 
       static animateRig(rig, state, time, progress = 0) {
-        const { bodyPivot, armL, armR, elbowL, elbowR, legL, legR, kneeL, kneeR, head } = rig;
+        const { bodyPivot, armL, armR, elbowL, elbowR, legL, legR, kneeL, kneeR, head, hairDrape } = rig;
         bodyPivot.position.set(0, 0, 0);
         bodyPivot.rotation.set(0, 0, 0);
         head.rotation.set(0, 0, 0);
@@ -3185,6 +3675,10 @@
         legR.rotation.set(0, 0, 0);
         if (kneeL) kneeL.rotation.set(0, 0, 0);
         if (kneeR) kneeR.rotation.set(0, 0, 0);
+        if (hairDrape) {
+          hairDrape.rotation.x = state === 'run' ? 0.34 : state === 'walk' ? 0.18 : 0.05 + Math.sin(time * 3.2) * 0.04;
+          hairDrape.rotation.z = Math.sin(time * 2.6) * 0.04;
+        }
 
         if (state === 'idle') {
           const b = Math.sin(time * 4.2);
@@ -3241,44 +3735,6 @@
           if (elbowR) elbowR.rotation.x = -0.12;
           if (elbowL) elbowL.rotation.x = -0.35;
           bodyPivot.rotation.x = 0.24 * swing;
-        } else if (state === 'pickup') {
-          // Bend down smoothly at waist and knees while reaching right hand to the ground
-          const bend = Math.sin(Math.min(1, progress) * Math.PI);
-          bodyPivot.position.y = -0.34 * bend;
-          bodyPivot.rotation.x = 0.72 * bend;
-          head.rotation.x = -0.25 * bend;
-          legL.rotation.x = -0.42 * bend;
-          legR.rotation.x = -0.30 * bend;
-          if (kneeL) kneeL.rotation.x = 0.92 * bend;
-          if (kneeR) kneeR.rotation.x = 0.82 * bend;
-          armR.rotation.x = -0.95 * bend;
-          if (elbowR) elbowR.rotation.x = -0.18 * bend;
-          armL.rotation.x = 0.22 * bend;
-          if (elbowL) elbowL.rotation.x = -0.45 * bend;
-        } else if (state === 'weaponSwing') {
-          // Wide horizontal-diagonal weapon swing with right hand
-          const p = Math.min(1, progress);
-          const windup = p < 0.25 ? (p / 0.25) : 1;
-          const slash = p >= 0.25 ? Math.min(1, (p - 0.25) / 0.5) : 0;
-          armR.rotation.x = -1.95 * windup + 1.55 * slash;
-          armR.rotation.z = -0.55 * windup + 0.95 * slash;
-          if (elbowR) elbowR.rotation.x = -0.45 * (1 - slash) - 0.12 * slash;
-          armL.rotation.x = -0.45;
-          if (elbowL) elbowL.rotation.x = -0.85;
-          bodyPivot.rotation.y = 0.35 * windup - 0.82 * slash;
-          bodyPivot.rotation.x = 0.14 * slash;
-        } else if (state === 'weaponHeavy') {
-          // Overhead heavy smash with held bottle or wooden bat
-          const p = Math.min(1, progress);
-          const raise = p < 0.35 ? (p / 0.35) : 1;
-          const slam = p >= 0.35 ? Math.min(1, (p - 0.35) / 0.45) : 0;
-          armR.rotation.x = -2.65 * raise + 2.15 * slam;
-          armR.rotation.z = -0.18;
-          if (elbowR) elbowR.rotation.x = -0.35 * (1 - slam) - 0.08 * slam;
-          armL.rotation.x = -0.95 * raise + 0.55 * slam;
-          if (elbowL) elbowL.rotation.x = -0.65;
-          bodyPivot.rotation.x = -0.18 * raise + 0.46 * slam;
-          bodyPivot.position.y = 0.06 * raise - 0.08 * slam;
         } else if (state === 'kick') {
           const swing = Math.sin(Math.min(1, progress) * Math.PI);
           legR.rotation.x = -1.5 * swing;
@@ -3360,9 +3816,8 @@
         this.deathTimer = 1.4;
         this.removeTimer = 1.2;
         this.bodyRadius = this.isBoss ? 0.68 : 0.52;
-        this.enteringZone = !!cfg.enteringZone;
-        this.enterMaxX = Math.max(cfg.x || 0, 0) + 0.5;
-        const app = Object.assign({ isPlayerRing: this.isPlayer }, cfg.appearance || {});
+
+        const app = Object.assign({}, cfg.appearance || {}, { isPlayerRing: this.isPlayer });
         this.rig = CharacterModelBuilder.createRig(app, this.isBoss, cfg.scaleMult || 1.0);
         this.rig.root.position.copy(this.pos);
         this.rig.root.rotation.y = this.facing * (Math.PI * 0.44);
@@ -3413,8 +3868,7 @@
           hitStart: opts.hitStart || 0.25,
           hitEnd: opts.hitEnd || 0.72,
           hitTargets: new Set(),
-          sfx: opts.sfx || 'punch',
-          weaponType: opts.weaponType || null
+          sfx: opts.sfx || 'punch'
         };
       }
 
@@ -3530,23 +3984,15 @@
           }
         }
 
-        // Horizontal & depth movement integration + arcade friction
+        // Horizontal movement & friction
         this.pos.x += this.vel.x * dt;
         this.pos.z += this.vel.z * dt;
-        const drag = this.pos.y > 0 ? 0.96 : 0.84;
-        this.vel.x *= Math.pow(drag, dt * 60);
-        this.vel.z *= Math.pow(drag, dt * 60);
+        const friction = this.pos.y > 0 ? 2.5 : 10.5;
+        this.vel.x *= Math.max(0, 1 - friction * dt);
+        this.vel.z *= Math.max(0, 1 - friction * dt);
 
-        // Clamp within stage combat lane (allow entering enemies to stride in smoothly from off-screen right)
-        if (this.enteringZone) {
-          this.enterMaxX = Math.min(this.enterMaxX, Math.max(maxX, this.pos.x + 0.4));
-          this.pos.x = Math.max(minX, Math.min(this.enterMaxX, this.pos.x));
-          if (this.pos.x <= maxX - 0.85) {
-            this.enteringZone = false;
-          }
-        } else {
-          this.pos.x = Math.max(minX, Math.min(maxX, this.pos.x));
-        }
+        // Clamp within stage combat lane
+        this.pos.x = Math.max(minX, Math.min(maxX, this.pos.x));
         this.pos.z = Math.max(-3.8, Math.min(3.8, this.pos.z));
 
         // State timer progression
@@ -3586,7 +4032,7 @@
     // =========================================================================
     class Player extends Fighter {
       constructor(scene, charKey, x, z) {
-        const data = CharacterStats[charKey] || CharacterStats.WAI;
+        const data = CharacterRegistry.get(charKey);
         super(scene, {
           name: data.name,
           isPlayer: true,
@@ -3601,260 +4047,121 @@
         this.charKey = data.id;
         this.special1 = data.special1;
         this.special2 = data.special2;
+        this.moves = data.moves;
         this.dashTimer = 0;
         this.grabbedEnemy = null;
-        this.weapon = null;
       }
 
-      equipWeapon(type, uses = 10) {
-        this.clearWeaponMesh();
-        const mesh = CharacterModelBuilder.createWeaponMesh(type);
-        // Orient grip naturally in right hand (extending forward-upward along fist axis)
-        mesh.rotation.set(Math.PI * 0.42, 0, -0.08);
-        if (this.rig.handR) {
-          this.rig.handR.add(mesh);
-        }
-        this.weapon = {
-          type,
-          name: type === 'bottle' ? '玻璃瓶' : '木棒',
-          uses,
-          maxUses: 10,
-          mesh
-        };
-      }
-
-      clearWeaponMesh() {
-        if (this.weapon && this.weapon.mesh && this.rig.handR) {
-          this.rig.handR.remove(this.weapon.mesh);
-        }
-        this.weapon = null;
-      }
-
-      breakWeapon(game) {
-        if (!this.weapon) return;
-        const type = this.weapon.type;
-        const pos = new THREE.Vector3(this.pos.x + this.facing * 0.85, this.pos.y + 1.25, this.pos.z);
-        if (type === 'bottle') {
-          game.audio.sfx('bottleBreak');
-          game.particles.spawnHitSparks(pos, 0x38ef7d, 18, game.highQuality);
-          game.particles.spawnHitSparks(pos, 0xd8f3dc, 10, game.highQuality);
-          spawnFloatingText(this.pos, game.camera, '玻璃瓶碎了!', 'crit');
-        } else {
-          game.audio.sfx('batBreak');
-          game.particles.spawnHitSparks(pos, 0xc98c4e, 18, game.highQuality);
-          game.particles.spawnHitSparks(pos, 0x6f4518, 10, game.highQuality);
-          spawnFloatingText(this.pos, game.camera, '木棒斷了!', 'crit');
-        }
-        this.clearWeaponMesh();
+      castSpecial(sp, game) {
+        this.energy -= sp.cost;
+        this.invulnTimer = sp.invuln;
+        this.startAttack(sp.anim || 'special', Object.assign({}, sp, { aoe: true }));
+        game.audio.sfx(sp.sfx || 'special');
+        game.particles.spawnShockwave(this.pos, sp.color, sp.radius);
+        if (sp.banner) game.showBanner(sp.name.toUpperCase() + '!');
       }
 
       updatePlayer(dt, input, game, minX, maxX) {
         if (this.dead) {
-          this.clearWeaponMesh();
           this.updateBase(dt, minX, maxX);
           return;
         }
 
-        const busy = ['punch', 'punch2', 'heavy', 'weaponSwing', 'weaponHeavy', 'pickup', 'kick', 'special', 'hit', 'fall', 'grab'].includes(this.state);
+        const busy = ['punch', 'punch2', 'heavy', 'kick', 'special', 'hit', 'fall', 'grab'].includes(this.state);
 
+        // Dash trigger
+        const dashDir = input.consumeDash();
+        if (dashDir && !busy && this.pos.y === 0) {
+          this.facing = dashDir;
+          this.vel.x = dashDir * (this.getMoveSpeed() * 2.15);
+          this.dashTimer = 0.25;
+          this.invulnTimer = 0.22;
+        }
         if (this.dashTimer > 0) this.dashTimer -= dt;
 
-        // Block (I)
+        // Blocking
         if (input.isHeld(['KeyI']) && !busy && this.pos.y === 0) {
           this.state = 'block';
-          this.vel.x *= 0.4;
-          this.vel.z *= 0.4;
+          this.vel.x *= 0.5;
+          this.vel.z *= 0.5;
+          this.updateBase(dt, minX, maxX);
+          return;
         } else if (this.state === 'block') {
           this.state = 'idle';
         }
 
-        // Movement & Double-Tap Dash
-        if (!busy && this.state !== 'block') {
-          const dash = input.consumeDash();
-          if (dash !== 0) {
-            this.facing = dash;
-            this.dashTimer = 0.26;
-            this.vel.x = dash * this.getMoveSpeed() * 1.9;
-          }
-          const mv = input.getMoveVector();
-          if (Math.abs(mv.x) > 0.08 || Math.abs(mv.z) > 0.08) {
-            const spd = this.getMoveSpeed() * (this.dashTimer > 0 ? 1.55 : 1.0);
+        // Movement
+        const mv = input.getMoveVector();
+        if (!busy) {
+          const spd = this.getMoveSpeed() * (this.dashTimer > 0 ? 1.45 : 1.0);
+          if (Math.abs(mv.x) > 0.05 || Math.abs(mv.z) > 0.05) {
             this.vel.x = mv.x * spd;
-            this.vel.z = mv.z * spd * 0.72;
-            if (Math.abs(mv.x) > 0.1) this.facing = mv.x > 0 ? 1 : -1;
+            this.vel.z = mv.z * (spd * 0.72);
+            if (mv.x > 0.1) this.facing = 1;
+            else if (mv.x < -0.1) this.facing = -1;
             if (this.pos.y === 0) this.state = this.dashTimer > 0 ? 'run' : 'walk';
-          } else if (this.pos.y === 0) {
+          } else if (this.pos.y === 0 && this.state !== 'jump') {
             this.state = 'idle';
           }
         }
 
         // Jump (L)
-        if (input.consumeAny(['KeyL']) && this.pos.y === 0 && !['hit', 'fall', 'special', 'pickup'].includes(this.state)) {
+        if (input.consumeAny(['KeyL']) && !busy && this.pos.y === 0) {
           this.vel.y = 9.8;
           this.state = 'jump';
           game.audio.sfx('jump');
         }
 
         // Simultaneous Punch + Kick (拳+腳 / J+K) Special & Ultimate trigger
-        // Allows cancelling out of early Punch/Kick startup frames if one finger lands slightly first
         const chordSpec = input.consumeChordSpecial();
         const canCancelToSpecial = !busy || (
-          ['punch', 'punch2', 'heavy', 'weaponSwing', 'weaponHeavy', 'kick'].includes(this.state) &&
+          ['punch', 'punch2', 'heavy', 'kick'].includes(this.state) &&
           (this.stateDuration - this.stateTimer) < 0.28
         );
-        const shiftHeld = input.isHeld(['ShiftLeft', 'ShiftRight']);
-        const pressUlt = (chordSpec && this.energy >= this.special2.cost) || input.consumeAny(['KeyH']);
-        const pressSpec = (chordSpec && this.energy < this.special2.cost) || input.consumeAny(['KeyU']);
 
-        if (pressUlt && canCancelToSpecial && this.energy >= this.special2.cost) {
-          this.energy -= this.special2.cost;
-          this.invulnTimer = 0.72;
-          this.startAttack('special', {
-            duration: 0.65,
-            mult: this.special2.mult,
-            aoe: true,
-            radius: this.special2.radius,
-            knockback: 9.0,
-            knockdown: true,
-            sfx: 'special'
-          });
-          game.audio.sfx('special');
-          game.particles.spawnShockwave(this.pos, 0xff9e00, this.special2.radius);
-          game.showBanner(`${this.special2.name.toUpperCase()}!`, 1.2);
-        } else if (pressSpec && shiftHeld && canCancelToSpecial && this.energy >= this.special2.cost) {
-          this.energy -= this.special2.cost;
-          this.invulnTimer = 0.72;
-          this.startAttack('special', {
-            duration: 0.65,
-            mult: this.special2.mult,
-            aoe: true,
-            radius: this.special2.radius,
-            knockback: 9.0,
-            knockdown: true,
-            sfx: 'special'
-          });
-          game.audio.sfx('special');
-          game.particles.spawnShockwave(this.pos, 0xff9e00, this.special2.radius);
-          game.showBanner(`${this.special2.name.toUpperCase()}!`, 1.2);
-        } else if (pressSpec && canCancelToSpecial && this.energy >= this.special1.cost) {
-          this.energy -= this.special1.cost;
-          this.invulnTimer = 0.48;
-          this.startAttack('special', {
-            duration: 0.5,
-            mult: this.special1.mult,
-            aoe: true,
-            radius: this.special1.radius,
-            knockback: 6.8,
-            knockdown: true,
-            sfx: 'special'
-          });
-          game.audio.sfx('special');
-          game.particles.spawnShockwave(this.pos, 0x00d4ff, this.special1.radius);
-          spawnFloatingText(this.pos, game.camera, `${this.special1.name}!`, 'crit');
-        } else if (chordSpec && this.energy < this.special1.cost) {
-          spawnFloatingText(this.pos, game.camera, '能量不足!');
-        }
-        // Punch 3-Hit Combo / Bend Down Pickup Weapon / Weapon Swing (J)
-        else if (input.consumeAny(['KeyJ']) && this.attackCooldown <= 0 && !['hit', 'fall', 'special', 'pickup'].includes(this.state)) {
-          // If unarmed and grounded near a street weapon (玻璃瓶 / 木棒), bend down to pick it up
-          const nearWeapon = (!this.weapon && this.pos.y === 0)
-            ? game.levelMgr.findNearestWeapon(this.pos, 1.55, 1.15)
-            : null;
+        const sp1 = this.special1;
+        const sp2 = this.special2;
+        const moves = this.moves;
 
-          if (nearWeapon) {
-            this.vel.x *= 0.2;
-            this.vel.z *= 0.2;
-            this.state = 'pickup';
-            this.stateTimer = 0.28;
-            this.stateDuration = 0.28;
-            this.attackCooldown = 0.26;
-            this.comboStep = 0;
-            this.equipWeapon(nearWeapon.type, nearWeapon.uses);
-            game.levelMgr.removeGroundWeapon(nearWeapon);
-            game.audio.sfx('pickup');
-            spawnFloatingText(this.pos, game.camera, `拾取${this.weapon.name}!`, 'heal');
-          } else if (this.weapon) {
-            // Armed attack with held glass bottle or wooden bat
-            const isBat = this.weapon.type === 'bat';
-            const wSfx = isBat ? 'batHit' : 'bottleHit';
-            const wRange = isBat ? 2.15 : 1.88;
-            const wMultBase = isBat ? 1.52 : 1.36;
-            const wKnock = isBat ? 5.6 : 4.2;
+        const ultPressed = input.consumeAny(['KeyH']) ||
+          (input.isHeld(['ShiftLeft', 'ShiftRight']) && input.consumeAny(['KeyU'])) ||
+          (chordSpec && this.energy >= sp2.cost);
 
-            if (this.dashTimer > 0) {
-              this.startAttack('weaponHeavy', {
-                duration: 0.36,
-                mult: wMultBase * 1.28,
-                range: wRange + 0.2,
-                knockback: wKnock + 2.6,
-                knockdown: true,
-                sfx: wSfx,
-                weaponType: this.weapon.type
-              });
-            } else {
-              this.comboStep = (this.comboStep % 3) + 1;
-              this.comboWindow = 0.8;
-              if (this.comboStep < 3) {
-                this.startAttack('weaponSwing', {
-                  duration: isBat ? 0.30 : 0.26,
-                  mult: wMultBase * (this.comboStep === 1 ? 0.95 : 1.12),
-                  range: wRange,
-                  knockback: wKnock,
-                  knockdown: false,
-                  sfx: wSfx,
-                  weaponType: this.weapon.type
-                });
-              } else {
-                this.startAttack('weaponHeavy', {
-                  duration: isBat ? 0.40 : 0.35,
-                  mult: wMultBase * 1.38,
-                  range: wRange + 0.15,
-                  knockback: wKnock + 2.4,
-                  knockdown: true,
-                  sfx: wSfx,
-                  weaponType: this.weapon.type
-                });
-                this.comboStep = 0;
-              }
-            }
-          } else if (this.dashTimer > 0) {
-            this.startAttack('heavy', { duration: 0.34, mult: 1.5, range: 1.85, knockback: 6.5, knockdown: true, sfx: 'heavy' });
+        if (ultPressed && canCancelToSpecial && this.energy >= sp2.cost) {
+          this.castSpecial(sp2, game);
+        } else if ((input.consumeAny(['KeyU']) || chordSpec) && canCancelToSpecial && this.energy >= sp1.cost) {
+          this.castSpecial(sp1, game);
+        } else if (chordSpec && canCancelToSpecial && this.energy < sp1.cost) {
+          spawnFloatingText(this.pos, game.camera, `NEED ${sp1.cost} EN`);
+        } else if (input.consumeAny(['KeyJ']) && this.attackCooldown <= 0 && !['hit', 'fall', 'special'].includes(this.state)) {
+          if (this.dashTimer > 0) {
+            this.startAttack(moves.dashAttack.anim || 'heavy', moves.dashAttack);
           } else {
-            this.comboStep = (this.comboStep % 3) + 1;
-            this.comboWindow = 0.75;
-            if (this.comboStep === 1) {
-              this.startAttack('punch', { duration: 0.24, mult: 0.9, range: 1.5, knockback: 2.2, sfx: 'punch' });
-            } else if (this.comboStep === 2) {
-              this.startAttack('punch2', { duration: 0.25, mult: 1.05, range: 1.55, knockback: 2.8, sfx: 'punch' });
-            } else {
-              this.startAttack('heavy', { duration: 0.36, mult: 1.55, range: 1.75, knockback: 6.2, knockdown: true, sfx: 'heavy' });
-              this.comboStep = 0;
-            }
+            const combo = moves.combo;
+            this.comboStep = (this.comboStep % combo.length) + 1;
+            this.comboWindow = moves.comboWindow;
+            const step = combo[this.comboStep - 1];
+            this.startAttack(step.anim || 'punch', step);
+            if (this.comboStep === combo.length) this.comboStep = 0;
           }
-        }
-        // Kick / Air Kick (K)
-        else if (input.consumeAny(['KeyK']) && this.attackCooldown <= 0 && !['hit', 'fall', 'special'].includes(this.state)) {
+        } else if (input.consumeAny(['KeyK']) && this.attackCooldown <= 0 && !['hit', 'fall', 'special'].includes(this.state)) {
           const air = this.pos.y > 0.25;
-          this.startAttack('kick', {
-            duration: air ? 0.34 : 0.32,
-            mult: air ? 1.35 : 1.25,
-            range: 1.8,
-            knockback: air ? 5.8 : 4.8,
-            knockdown: air || this.comboStep >= 2,
-            sfx: 'kick'
-          });
+          const k = air ? moves.airKick : moves.kick;
+          const knockdown = air
+            ? !!k.knockdown
+            : (!!k.knockdown || this.comboStep >= (moves.kick.comboKnockdown != null ? moves.kick.comboKnockdown : 2));
+          this.startAttack(k.anim || 'kick', Object.assign({}, k, { knockdown }));
           this.comboStep = 0;
-        }
-        // Grab & Throw (O)
-        else if (input.consumeAny(['KeyO']) && !busy && this.pos.y === 0) {
-          const target = game.enemies.find((e) => !e.dead && !e.isBoss && Math.abs(e.pos.x - this.pos.x) < 1.65 && Math.abs(e.pos.z - this.pos.z) < 0.95);
+        } else if (input.consumeAny(['KeyO']) && !busy && this.pos.y === 0) {
+          const g = moves.grab;
+          const target = game.enemies.find((e) => !e.dead && !e.isBoss && Math.abs(e.pos.x - this.pos.x) < g.reach && Math.abs(e.pos.z - this.pos.z) < g.reachZ);
           this.state = 'grab';
-          this.stateTimer = 0.34;
-          this.stateDuration = 0.34;
+          this.stateTimer = g.duration;
+          this.stateDuration = g.duration;
           if (target) {
-            target.pos.x = this.pos.x + this.facing * 0.95;
-            target.takeDamage(Math.round(this.stats.atk * 0.34), this.facing, 9.2, true, game);
-            this.energy = Math.min(this.maxEnergy, this.energy + 12);
+            target.pos.x = this.pos.x + this.facing * g.pull;
+            target.takeDamage(Math.round(this.stats.atk * g.damageMult), this.facing, g.knockback, true, game);
+            this.energy = Math.min(this.maxEnergy, this.energy + g.energyGain);
             game.registerHit(this);
             spawnFloatingText(target.pos, game.camera, 'THROW!', 'crit');
           }
@@ -3879,16 +4186,6 @@
       updateAI(dt, player, game, minX, maxX) {
         if (this.dead || !player || player.dead) {
           if (!this.dead && this.state !== 'hit' && this.state !== 'fall') this.state = 'idle';
-          this.updateBase(dt, minX, maxX);
-          return;
-        }
-
-        // Smoothly walk into the active combat zone from off-screen right before engaging
-        if (this.enteringZone) {
-          this.facing = -1;
-          this.vel.x = -this.getMoveSpeed() * 0.92;
-          this.vel.z = 0;
-          this.state = 'walk';
           this.updateBase(dt, minX, maxX);
           return;
         }
@@ -3986,16 +4283,6 @@
 
       updateAI(dt, player, game, minX, maxX) {
         if (this.dead || !player || player.dead) {
-          this.updateBase(dt, minX, maxX);
-          return;
-        }
-
-        // Dramatic entrance stride from off-screen right into boss arena
-        if (this.enteringZone) {
-          this.facing = -1;
-          this.vel.x = -this.getMoveSpeed() * 0.85;
-          this.vel.z = 0;
-          this.state = 'walk';
           this.updateBase(dt, minX, maxX);
           return;
         }
@@ -4151,7 +4438,6 @@
         this.scene.add(this.envGroup);
         this.crates = [];
         this.pickups = [];
-        this.weapons = [];
         this.textures = [];
         this.stageIndex = 0;
         this.zoneIndex = 0;
@@ -4167,11 +4453,9 @@
         }
         this.crates.forEach((c) => this.scene.remove(c.mesh));
         this.pickups.forEach((p) => this.scene.remove(p.mesh));
-        this.weapons.forEach((w) => this.scene.remove(w.mesh));
         this.textures.forEach((t) => t.dispose());
         this.crates = [];
         this.pickups = [];
-        this.weapons = [];
         this.textures = [];
       }
 
@@ -4960,77 +5244,6 @@
             broken: false
           });
         });
-
-        // Spawn interactive street weapons (玻璃瓶 & 木棒, 10 uses each) across all zones
-        const weaponSpots = [
-          { type: 'bottle', x: 2.2, z: 2.1 },
-          { type: 'bat', x: 18.2, z: -2.1 },
-          { type: 'bottle', x: 34.5, z: 2.2 },
-          { type: 'bat', x: 47.8, z: -2.0 },
-          { type: 'bat', x: 60.5, z: -2.1 },
-          { type: 'bottle', x: 63.8, z: 2.2 }
-        ];
-        weaponSpots.forEach((wp) => this.spawnGroundWeapon(wp.type, wp.x, wp.z, 10));
-      }
-
-      spawnGroundWeapon(type, x, z, uses = 10) {
-        const group = new THREE.Group();
-        const itemMesh = CharacterModelBuilder.createWeaponMesh(type);
-        if (type === 'bottle') {
-          itemMesh.rotation.set(0, 0.4, Math.PI * 0.46);
-          itemMesh.position.set(-0.24, 0.14, 0);
-        } else {
-          itemMesh.rotation.set(0.08, 0.3, Math.PI * 0.48);
-          itemMesh.position.set(-0.42, 0.12, 0);
-        }
-
-        const ringColor = type === 'bottle' ? 0x38ef7d : 0xffb703;
-        const ringMat = new THREE.MeshBasicMaterial({
-          color: ringColor,
-          side: THREE.DoubleSide,
-          transparent: true,
-          opacity: 0.65
-        });
-        const ring = new THREE.Mesh(new THREE.RingGeometry(0.42, 0.56, 20), ringMat);
-        ring.rotation.x = -Math.PI / 2;
-        ring.position.y = 0.03;
-
-        group.add(itemMesh, ring);
-        group.position.set(x, 0, z);
-        this.scene.add(group);
-        this.weapons.push({
-          type,
-          uses,
-          mesh: group,
-          itemMesh,
-          ring,
-          pos: new THREE.Vector3(x, 0, z)
-        });
-      }
-
-      findNearestWeapon(pos, maxDx = 1.55, maxDz = 1.15) {
-        let best = null;
-        let bestDist = Infinity;
-        for (const w of this.weapons) {
-          const dx = Math.abs(w.pos.x - pos.x);
-          const dz = Math.abs(w.pos.z - pos.z);
-          if (dx <= maxDx && dz <= maxDz) {
-            const d = Math.hypot(dx, dz);
-            if (d < bestDist) {
-              bestDist = d;
-              best = w;
-            }
-          }
-        }
-        return best;
-      }
-
-      removeGroundWeapon(w) {
-        const idx = this.weapons.indexOf(w);
-        if (idx >= 0) {
-          this.scene.remove(w.mesh);
-          this.weapons.splice(idx, 1);
-        }
       }
 
       spawnPickup(x, z) {
@@ -5104,9 +5317,9 @@
 
         this.highQuality = true;
         this.state = 'MENU'; // MENU, CHAR_SELECT, PLAYING, PAUSED, STAGE_CLEAR, GAME_OVER, VICTORY
-        this.selectedChar = 'WAI';
+        this.selectedChar = CharacterRegistry.ids[0];
         this.currentStage = 0;
-
+        this.charSelectCamX = 0;
         this.players = [];
         this.enemies = [];
         this.projectiles = [];
@@ -5149,30 +5362,36 @@
       updateCharSelectLayout() {
         const aspect = Math.max(0.35, window.innerWidth / Math.max(1, window.innerHeight));
         const isPortrait = aspect < 1.0;
+        const ids = CharacterRegistry.ids;
+        const n = ids.length;
 
-        // Dynamically tighten character spacing on narrow mobile screens so all 3 fighters stay side-by-side
-        const spacing = isPortrait ? 1.38 : aspect < 1.35 ? 1.85 : 2.35;
-        const xs = { WAI: -spacing, SHING: 0, GEORGE: spacing };
+        const spacing = isPortrait ? 1.55 : aspect < 1.35 ? 1.38 : 1.52;
         if (this.previewRigs) {
-          ['WAI', 'SHING', 'GEORGE'].forEach((key) => {
+          ids.forEach((key, i) => {
             const rig = this.previewRigs[key];
             if (rig) {
-              rig.root.position.x = xs[key];
+              rig.root.position.x = (i - (n - 1) / 2) * spacing;
               rig.root.position.y = 0.35;
             }
           });
         }
 
         if (this.state === 'CHAR_SELECT') {
-          const halfFovRad = THREE.MathUtils.degToRad(this.camera.fov * 0.5);
-          const halfSpanNeeded = spacing + 0.72;
-          const minDistForWidth = halfSpanNeeded / (Math.tan(halfFovRad) * aspect);
-          const camZ = Math.max(6.8, minDistForWidth);
-          // Aim slightly lower on portrait phones so all 3 characters stand cleanly above the cards
-          const camY = isPortrait ? 2.15 : 2.25;
-          const lookY = isPortrait ? 0.22 : aspect < 1.35 ? 1.05 : 1.55;
-          this.camera.position.set(0, camY, camZ);
-          this.camera.lookAt(0, lookY, 0);
+          const selRig = this.previewRigs && this.previewRigs[this.selectedChar];
+          if (isPortrait) {
+            const targetX = selRig ? selRig.root.position.x : 0;
+            this.charSelectCamX = targetX;
+            this.camera.position.set(targetX, 2.05, 6.4);
+            this.camera.lookAt(targetX, 0.55, 0);
+          } else {
+            const halfFovRad = THREE.MathUtils.degToRad(this.camera.fov * 0.5);
+            const halfSpanNeeded = ((n - 1) / 2) * spacing + 0.75;
+            const minDistForWidth = halfSpanNeeded / (Math.tan(halfFovRad) * aspect);
+            const camZ = Math.max(7.4, minDistForWidth);
+            this.charSelectCamX = 0;
+            this.camera.position.set(0, 2.25, camZ);
+            this.camera.lookAt(0, aspect < 1.35 ? 0.95 : 1.25, 0);
+          }
         }
       }
 
@@ -5250,8 +5469,8 @@
       buildCharSelectCards() {
         const container = document.getElementById('char-cards');
         container.innerHTML = '';
-        ['WAI', 'SHING', 'GEORGE'].forEach((key) => {
-          const c = CharacterStats[key];
+        CharacterRegistry.ids.forEach((key) => {
+          const c = CharacterRegistry.get(key);
           const card = document.createElement('div');
           card.className = 'char-card' + (this.selectedChar === key ? ' selected-p1' : '');
           card.dataset.char = key;
@@ -5287,11 +5506,13 @@
       buildPreviewModels() {
         this.previewGroup.clear();
         this.previewRigs = {};
-        const xs = { WAI: -2.35, SHING: 0, GEORGE: 2.35 };
-        ['WAI', 'SHING', 'GEORGE'].forEach((key) => {
-          const rig = CharacterModelBuilder.createRig(CharacterStats[key].appearance, false, 1.18);
-          rig.root.position.set(xs[key], 0.35, 0);
-          rig.root.rotation.y = 0; // Face forward on Character Select showcase
+        const ids = CharacterRegistry.ids;
+        const n = ids.length;
+        const step = 1.52;
+        ids.forEach((key, i) => {
+          const rig = CharacterModelBuilder.createRig(CharacterRegistry.get(key).appearance, false, 1.12);
+          rig.root.position.set((i - (n - 1) / 2) * step, 0.35, 0);
+          rig.root.rotation.y = 0;
           this.previewGroup.add(rig.root);
           this.previewRigs[key] = rig;
         });
@@ -5361,7 +5582,6 @@
         this.previewGroup.visible = false;
         this.levelMgr.loadStage(stageIndex, this.highQuality);
 
-        // Spawn Player
         const p1 = new Player(this.scene, this.selectedChar, -4, 0.4);
         this.players = [p1];
 
@@ -5370,7 +5590,6 @@
         this.comboTimer = 0;
         this.state = 'PLAYING';
 
-        // Update HUD static elements
         document.getElementById('hud-p1-name').textContent = p1.name;
         document.getElementById('hud-p1-portrait').src = faceTexMgr.getPortraitUrl(this.selectedChar);
         document.getElementById('hud-p1-ko').classList.remove('show');
@@ -5393,35 +5612,22 @@
         this.levelMgr.zoneMaxX = 12 + zoneIdx * 20;
         this.levelMgr.waveSpawned = true;
 
-        // Calculate right off-screen X dynamically so enemies NEVER pop out behind the player on GO transitions
-        const p1 = this.players[0];
-        const p1X = p1 ? p1.pos.x : 0;
-        const halfH = Math.tan(THREE.MathUtils.degToRad(this.camera.fov * 0.5)) * this.camera.position.z;
-        const halfW = halfH * this.camera.aspect;
-        const offscreenRightX = Math.max(this.camera.position.x + halfW + 1.8, p1X + 8.5);
-
-        // Zone 3 is Boss Zone
         if (zoneIdx >= 3) {
           this.levelMgr.bossSpawned = true;
           const bCfg = st.boss;
-          const bossX = Math.max(offscreenRightX + 0.8, this.levelMgr.zoneMaxX - 1.5);
           const boss = new Boss(this.scene, Object.assign({}, bCfg, {
             stageIndex: this.currentStage,
-            x: bossX,
-            z: 0,
-            enteringZone: bossX > this.levelMgr.zoneMaxX - 1.0
+            x: this.levelMgr.zoneMaxX - 2.2,
+            z: 0
           }));
           this.enemies.push(boss);
           this.activeBoss = boss;
 
-          // Boss support minions marching in from off-screen right
           for (let i = 0; i < 2; i++) {
             const tmpl = st.enemies[i % st.enemies.length];
-            const mx = bossX + 1.8 + i * 1.5;
             this.enemies.push(new Enemy(this.scene, Object.assign({}, tmpl, {
-              x: mx,
-              z: i === 0 ? -2.2 : 2.2,
-              enteringZone: mx > this.levelMgr.zoneMaxX - 1.0
+              x: this.levelMgr.zoneMaxX - 3.5 - i * 1.6,
+              z: i === 0 ? -2.2 : 2.2
             })));
           }
 
@@ -5433,19 +5639,12 @@
           return;
         }
 
-        // Standard wave enemies: always enter naturally from the front-right (never behind the player)
         const count = 3 + zoneIdx;
         for (let i = 0; i < count; i++) {
           const tmpl = st.enemies[(i + zoneIdx) % st.enemies.length];
-          const ex = zoneIdx === 0
-            ? (8.2 + i * 1.7 + Math.random() * 0.5)
-            : (offscreenRightX + i * 1.55 + Math.random() * 0.4);
-          const ez = -2.4 + (i / Math.max(1, count - 1)) * 4.8;
-          this.enemies.push(new Enemy(this.scene, Object.assign({}, tmpl, {
-            x: ex,
-            z: ez,
-            enteringZone: ex > this.levelMgr.zoneMaxX - 0.9
-          })));
+          const ex = this.levelMgr.zoneMaxX - 1.5 - Math.random() * 2.5;
+          const ez = -2.6 + (i / Math.max(1, count - 1)) * 5.2;
+          this.enemies.push(new Enemy(this.scene, Object.assign({}, tmpl, { x: ex, z: ez })));
         }
       }
 
@@ -5477,38 +5676,26 @@
         const h = params.height || 1.05;
         const d = params.depth || 1.05;
 
-        mesh.material = new THREE.MeshStandardMaterial({
-          color: 0x5c381c,
-          roughness: 0.9,
-          metalness: 0.05
-        });
+        mesh.material = new THREE.MeshStandardMaterial({ color: 0x5c381c, roughness: 0.9, metalness: 0.05 });
 
         const frameMat = new THREE.MeshStandardMaterial({ color: 0x945f2f, roughness: 0.76, metalness: 0.06 });
         const braceMat = new THREE.MeshStandardMaterial({ color: 0x7d4e24, roughness: 0.82, metalness: 0.05 });
         const grooveMat = new THREE.MeshStandardMaterial({ color: 0x2b1709, roughness: 0.95 });
         const metalMat = new THREE.MeshStandardMaterial({ color: 0x3b424d, metalness: 0.78, roughness: 0.32 });
         const badgeMat = new THREE.MeshStandardMaterial({
-          color: 0xffb703,
-          emissive: 0xff8800,
-          emissiveIntensity: 0.45,
-          roughness: 0.35
+          color: 0xffb703, emissive: 0xff8800, emissiveIntensity: 0.45, roughness: 0.35
         });
 
-        const t = 0.11;
-        const p = 0.035;
-
-        // 1. Horizontal plank grooves
+        const t = 0.11, p = 0.035;
         [-h * 0.18, h * 0.18].forEach((gy) => {
           const gFB = new THREE.Mesh(new THREE.BoxGeometry(w - t * 1.4, 0.025, d + 0.015), grooveMat);
           gFB.position.y = gy;
           mesh.add(gFB);
-
           const gLR = new THREE.Mesh(new THREE.BoxGeometry(w + 0.015, 0.025, d - t * 1.4), grooveMat);
           gLR.position.y = gy;
           mesh.add(gLR);
         });
 
-        // 2. 12 Raised outer timber frame rails
         [-1, 1].forEach((sx) => {
           [-1, 1].forEach((sz) => {
             const post = new THREE.Mesh(new THREE.BoxGeometry(t, h + p * 2, t), frameMat);
@@ -5536,7 +5723,6 @@
           });
         });
 
-        // 3. Diagonal cross-braces on front, back, and top
         const diagLen = Math.hypot(w - t * 1.5, h - t * 1.5);
         [-1, 1].forEach((sz) => {
           const brace = new THREE.Mesh(new THREE.BoxGeometry(diagLen, 0.09, 0.045), braceMat);
@@ -5549,7 +5735,6 @@
         topBrace.rotation.y = Math.PI / 4;
         mesh.add(topBrace);
 
-        // 4. 8 Reinforced metal corner brackets
         const capSize = t + 0.035;
         [-1, 1].forEach((sx) => {
           [-1, 1].forEach((sy) => {
@@ -5565,28 +5750,15 @@
           });
         });
 
-        // 5. Center metal plates & glowing amber supply cross emblem
         const plateF = new THREE.Mesh(new THREE.BoxGeometry(0.32, 0.32, 0.03), metalMat);
         plateF.position.set(0, 0, d / 2 + 0.035);
         mesh.add(plateF);
-
         const crossFH = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.065, 0.02), badgeMat);
         crossFH.position.set(0, 0, d / 2 + 0.052);
         const crossFV = new THREE.Mesh(new THREE.BoxGeometry(0.065, 0.2, 0.02), badgeMat);
         crossFV.position.set(0, 0, d / 2 + 0.052);
         mesh.add(crossFH, crossFV);
 
-        const plateT = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.03, 0.3), metalMat);
-        plateT.position.set(0, h / 2 + 0.035, 0);
-        mesh.add(plateT);
-
-        const crossTH = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.02, 0.06), badgeMat);
-        crossTH.position.set(0, h / 2 + 0.052, 0);
-        const crossTV = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.02, 0.18), badgeMat);
-        crossTV.position.set(0, h / 2 + 0.052, 0);
-        mesh.add(crossTH, crossTV);
-
-        // 6. Ground contact shadow
         const shadow = new THREE.Mesh(
           new THREE.CircleGeometry(Math.max(w, d) * 0.68, 18),
           new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.38 })
@@ -5605,7 +5777,6 @@
         const crates = this.levelMgr.crates.filter((c) => c && !c.broken && c.hp > 0);
         const crateRadius = 0.56;
 
-        // Upgrade crate visuals & prevent crates from overlapping each other
         for (let i = 0; i < crates.length; i++) {
           this.enhanceCrateMesh(crates[i]);
           const posA = crates[i].pos;
@@ -5618,12 +5789,10 @@
             if (dist < minCrateDist) {
               if (dist < 0.001) { dx = 0.01; dz = 0; dist = 0.01; }
               const push = (minCrateDist - dist) * 0.5;
-              const nx = dx / dist;
-              const nz = dz / dist;
-              posA.x -= nx * push;
-              posA.z = Math.max(-3.6, Math.min(3.6, posA.z - nz * push));
-              posB.x += nx * push;
-              posB.z = Math.max(-3.6, Math.min(3.6, posB.z + nz * push));
+              posA.x -= (dx / dist) * push;
+              posA.z = Math.max(-3.6, Math.min(3.6, posA.z - (dz / dist) * push));
+              posB.x += (dx / dist) * push;
+              posB.z = Math.max(-3.6, Math.min(3.6, posB.z + (dz / dist) * push));
               crates[i].mesh.position.set(posA.x, crates[i].mesh.position.y, posA.z);
               crates[j].mesh.position.set(posB.x, crates[j].mesh.position.y, posB.z);
             }
@@ -5633,7 +5802,6 @@
         if (active.length === 0) return;
 
         for (let iter = 0; iter < 2; iter++) {
-          // 1. Fighter vs Fighter separation
           for (let i = 0; i < active.length; i++) {
             for (let j = i + 1; j < active.length; j++) {
               const a = active[i];
@@ -5652,8 +5820,7 @@
                   dist = Math.hypot(dx, dz);
                 }
                 const overlap = minDist - dist;
-                const nx = dx / dist;
-                const nz = dz / dist;
+                const nx = dx / dist, nz = dz / dist;
                 const weightA = a.isBoss ? 0.35 : 0.5;
                 const weightB = b.isBoss ? 0.35 : 0.5;
                 const totalW = weightA + weightB;
@@ -5666,7 +5833,6 @@
             }
           }
 
-          // 2. Fighter vs Crate solid collision
           for (let i = 0; i < active.length; i++) {
             const f = active[i];
             if (f.pos.y > 1.05) continue;
@@ -5692,7 +5858,7 @@
           }
 
           for (const f of active) {
-            const maxX = f.isPlayer ? maxPlayerX : (f.enteringZone ? f.enterMaxX : this.levelMgr.zoneMaxX);
+            const maxX = f.isPlayer ? maxPlayerX : this.levelMgr.zoneMaxX;
             f.pos.x = Math.max(this.levelMgr.zoneMinX, Math.min(maxX, f.pos.x));
             f.pos.z = Math.max(-3.8, Math.min(3.8, f.pos.z));
             f.rig.root.position.set(f.pos.x, f.pos.y, f.pos.z);
@@ -5704,7 +5870,6 @@
         const p1 = this.players[0];
         if (!p1) return;
 
-        // Player attacks vs Enemies & Crates
         const pBox = p1.getHitbox();
         if (pBox) {
           for (const e of this.enemies) {
@@ -5712,39 +5877,7 @@
             if (Math.abs(e.pos.x - pBox.x) <= pBox.rx && Math.abs(e.pos.z - pBox.z) <= pBox.rz) {
               pBox.attack.hitTargets.add(e);
               const dir = e.pos.x >= p1.pos.x ? 1 : -1;
-
-              // Check weapon hit & 10-hit durability break finisher
-              let hitDmg = pBox.attack.damage;
-              let hitKnockdown = pBox.attack.knockdown;
-              let hitKnockback = pBox.attack.knockback;
-              let brokeNow = false;
-              const usedWeaponType = pBox.attack.weaponType;
-
-              if (usedWeaponType && p1.weapon) {
-                p1.weapon.uses -= 1;
-                if (p1.weapon.uses <= 0) {
-                  brokeNow = true;
-                  hitDmg = Math.round(hitDmg * 1.45);
-                  hitKnockdown = true;
-                  hitKnockback += 3.0;
-                }
-              }
-
-              if (e.takeDamage(hitDmg, dir, hitKnockback, hitKnockdown, this)) {
-                if (usedWeaponType) {
-                  if (brokeNow) {
-                    p1.breakWeapon(this);
-                  } else {
-                    this.audio.sfx(usedWeaponType === 'bottle' ? 'bottleHit' : 'batHit');
-                    this.particles.spawnHitSparks(
-                      new THREE.Vector3(e.pos.x, e.pos.y + 1.3, e.pos.z),
-                      usedWeaponType === 'bottle' ? 0x52b788 : 0xd4a373,
-                      8,
-                      this.highQuality
-                    );
-                  }
-                }
-
+              if (e.takeDamage(pBox.attack.damage, dir, pBox.attack.knockback, pBox.attack.knockdown, this)) {
                 p1.energy = Math.min(p1.maxEnergy, p1.energy + 9);
                 this.registerHit(p1);
                 if (e.dead) {
@@ -5765,16 +5898,7 @@
             if (Math.abs(c.pos.x - pBox.x) <= pBox.rx + 0.45 && Math.abs(c.pos.z - pBox.z) <= pBox.rz + 0.45) {
               pBox.attack.hitTargets.add(c);
               c.hp -= pBox.attack.damage;
-              if (pBox.attack.weaponType && p1.weapon) {
-                p1.weapon.uses -= 1;
-                if (p1.weapon.uses <= 0) {
-                  p1.breakWeapon(this);
-                } else {
-                  this.audio.sfx(pBox.attack.weaponType === 'bottle' ? 'bottleHit' : 'batHit');
-                }
-              } else {
-                this.audio.sfx('heavy');
-              }
+              this.audio.sfx('heavy');
               this.particles.spawnHitSparks(new THREE.Vector3(c.pos.x, 0.7, c.pos.z), 0xd4a373, 10, this.highQuality);
               if (c.hp <= 0) {
                 c.broken = true;
@@ -5870,16 +5994,6 @@
           }
         }
 
-        // Animate Ground Weapons (pulse indicator ring brightly when player is in pickup range)
-        for (const w of this.levelMgr.weapons) {
-          const near = p1 && !p1.dead && !p1.weapon &&
-            Math.abs(p1.pos.x - w.pos.x) <= 1.55 &&
-            Math.abs(p1.pos.z - w.pos.z) <= 1.15;
-          const pulse = 1 + Math.sin(this.stageTimer * (near ? 10 : 4.2)) * (near ? 0.16 : 0.08);
-          w.ring.scale.setScalar(pulse);
-          w.ring.material.opacity = near ? 0.95 : 0.52;
-        }
-
         this.particles.update(dt);
 
         // Zone progression & GO indicator
@@ -5920,19 +6034,6 @@
           document.getElementById('hud-p1-hp').style.width = `${hpPct}%`;
           document.getElementById('hud-p1-en').style.width = `${(p1.energy / p1.maxEnergy) * 100}%`;
           document.getElementById('hud-p1-ko').classList.toggle('show', p1.dead);
-
-          // Held weapon durability HUD bar
-          const wBar = document.getElementById('hud-weapon-bar');
-          if (wBar) {
-            if (p1.weapon && !p1.dead) {
-              wBar.classList.add('active');
-              document.getElementById('hud-weapon-label').textContent = p1.weapon.type === 'bottle' ? '🍾 玻璃瓶' : '🏏 木棒';
-              document.getElementById('hud-weapon-count').textContent = `${p1.weapon.uses}/${p1.weapon.maxUses}`;
-              document.getElementById('hud-weapon-fill').style.width = `${Math.max(0, (p1.weapon.uses / p1.weapon.maxUses) * 100)}%`;
-            } else {
-              wBar.classList.remove('active');
-            }
-          }
 
           // Highlight 拳 & 腳 buttons and hint pill when Special / Ultimate is ready
           const btnP = document.getElementById('btn-t-punch');
@@ -6054,15 +6155,22 @@
 
         if (this.state === 'CHAR_SELECT') {
           const t = now * 0.001;
-          ['WAI', 'SHING', 'GEORGE'].forEach((key) => {
+          const isPortrait = (window.innerWidth / Math.max(1, window.innerHeight)) < 1.0;
+          CharacterRegistry.ids.forEach((key) => {
             const rig = this.previewRigs[key];
             if (!rig) return;
             const sel = key === this.selectedChar;
-            rig.root.rotation.y = Math.sin(t * (sel ? 1.8 : 0.8)) * 0.25;
-            rig.root.position.z += ((sel ? 0.35 : 0) - rig.root.position.z) * Math.min(1, dt * 10);
-            rig.root.scale.setScalar(sel ? 1.08 : 0.96);
+            rig.root.rotation.y = Math.sin(t * (sel ? 1.8 : 0.8)) * 0.24;
+            rig.root.position.z += ((sel ? 0.55 : 0) - rig.root.position.z) * Math.min(1, dt * 10);
+            rig.root.scale.setScalar(sel ? 1.09 : 0.94);
             CharacterModelBuilder.animateRig(rig, 'idle', t, 0);
           });
+          if (isPortrait && this.previewRigs && this.previewRigs[this.selectedChar]) {
+            const targetX = this.previewRigs[this.selectedChar].root.position.x;
+            this.charSelectCamX += (targetX - this.charSelectCamX) * Math.min(1, dt * 8);
+            this.camera.position.set(this.charSelectCamX, 2.05, 6.4);
+            this.camera.lookAt(this.charSelectCamX, 0.55, 0);
+          }
         } else if (this.state === 'PLAYING') {
           this.updatePlaying(dt);
         }
