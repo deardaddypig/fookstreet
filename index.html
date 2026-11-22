@@ -1,35 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<meta name="robots" content="noindex, nofollow, noai, noimageai">
-<meta name="googlebot" content="noindex, nofollow, noai">
-<meta name="GPTBot" content="noindex, nofollow">
-<meta name="ChatGPT-User" content="noindex, nofollow">
-<meta name="ClaudeBot" content="noindex, nofollow">
-<meta name="PerplexityBot" content="noindex, nofollow">
-
-<script>
-  // 禁用右鍵
-  document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-  });
-
-  // 禁用快捷鍵 (F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U, Ctrl+S)
-  document.addEventListener('keydown', function(e) {
-    if (
-      e.key === 'F12' || 
-      (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j')) ||
-      (e.ctrlKey && (e.key === 'U' || e.key === 'u' || e.key === 'S' || e.key === 's'))
-    ) {
-      e.preventDefault();
-      return false;
-    }
-  });
-</script>
-
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>FOOK STREET WAR 福街大戰</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <style>
@@ -42,12 +15,14 @@
       user-select: none;
       -webkit-user-select: none;
       -webkit-touch-callout: none;
+      -webkit-tap-highlight-color: transparent;
     }
 
     html, body {
       width: 100%;
       height: 100%;
       overflow: hidden;
+      overscroll-behavior: none;
       background: #07080d;
       color: #f4f6fa;
       font-family: 'Rajdhani', sans-serif;
@@ -58,13 +33,16 @@
       position: relative;
       width: 100vw;
       height: 100vh;
+      height: 100dvh;
       overflow: hidden;
+      touch-action: none;
     }
 
     #game-canvas {
       display: block;
       width: 100%;
       height: 100%;
+      touch-action: none;
     }
 
     /* Overlay Screens */
@@ -124,6 +102,7 @@
       background: linear-gradient(135deg, rgba(28, 35, 60, 0.92), rgba(14, 18, 32, 0.95));
       color: #fff;
       cursor: pointer;
+      touch-action: manipulation;
       transition: transform 0.12s ease, border-color 0.15s ease, box-shadow 0.15s ease;
       text-transform: uppercase;
       box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
@@ -177,6 +156,7 @@
       border-radius: 14px;
       padding: 13px;
       cursor: pointer;
+      touch-action: manipulation;
       transition: all 0.18s ease;
       display: flex;
       flex-direction: column;
@@ -424,6 +404,39 @@
       transition: width 0.12s ease;
     }
 
+    .hud-weapon-bar {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      margin-top: 5px;
+      padding: 2px 7px;
+      border-radius: 6px;
+      background: rgba(255, 196, 61, 0.14);
+      border: 1px solid rgba(255, 196, 61, 0.45);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #ffd166;
+    }
+
+    .hud-weapon-bar.active {
+      display: flex;
+    }
+
+    .weapon-dur-bg {
+      flex: 1;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.16);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .weapon-dur-fill {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, #ff595e, #ffca3a, #38ef7d);
+      transition: width 0.12s ease;
+    }
+
     .stage-hud {
       text-align: center;
       background: rgba(10, 14, 26, 0.74);
@@ -461,6 +474,7 @@
       background: rgba(12, 16, 30, 0.82);
       color: #fff;
       cursor: pointer;
+      touch-action: manipulation;
     }
 
     .mini-btn:hover {
@@ -684,6 +698,7 @@
       pointer-events: none;
       display: none;
       z-index: 15;
+      touch-action: none;
     }
 
     #touch-controls.active {
@@ -692,13 +707,13 @@
 
     #joystick-zone {
       position: absolute;
-      left: 20px;
-      bottom: 24px;
+      left: max(18px, env(safe-area-inset-left));
+      bottom: max(22px, env(safe-area-inset-bottom));
       width: 136px;
       height: 136px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.08);
-      border: 2px solid rgba(255, 255, 255, 0.22);
+      border: 2px solid rgba(255, 255, 255, 0.24);
       pointer-events: auto;
       touch-action: none;
     }
@@ -717,36 +732,152 @@
       box-shadow: 0 0 14px rgba(255, 136, 0, 0.65);
     }
 
+    /* Ergonomic 3-button right-thumb arc with generous spacing to avoid mispresses */
     .touch-buttons {
       position: absolute;
-      right: 16px;
-      bottom: 20px;
-      display: grid;
-      grid-template-columns: repeat(3, 62px);
-      gap: 10px;
-      pointer-events: auto;
-    }
-
-    .t-btn {
-      width: 62px;
-      height: 62px;
-      border-radius: 50%;
-      border: 2px solid rgba(255, 255, 255, 0.35);
-      background: rgba(20, 26, 48, 0.72);
-      color: #fff;
-      font-family: 'Rajdhani', sans-serif;
-      font-weight: 700;
-      font-size: 0.8rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      right: max(14px, env(safe-area-inset-right));
+      bottom: max(14px, env(safe-area-inset-bottom));
+      width: 234px;
+      height: 212px;
+      pointer-events: none;
       touch-action: none;
     }
 
-    .t-btn.red { background: rgba(255, 42, 95, 0.72); }
-    .t-btn.orange { background: rgba(255, 136, 0, 0.72); }
-    .t-btn.blue { background: rgba(0, 180, 216, 0.72); }
-    .t-btn:active { transform: scale(0.92); filter: brightness(1.3); }
+    .t-btn {
+      position: absolute;
+      border-radius: 50%;
+      border: 2.5px solid rgba(255, 255, 255, 0.42);
+      background: rgba(20, 26, 48, 0.78);
+      color: #fff;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      line-height: 1.05;
+      pointer-events: auto;
+      touch-action: none;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5), inset 0 2px 6px rgba(255, 255, 255, 0.22);
+      transition: transform 0.08s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    }
+
+    .t-btn .t-main {
+      font-size: 1.38rem;
+      letter-spacing: 0.5px;
+    }
+
+    .t-btn .t-sub {
+      font-size: 0.62rem;
+      opacity: 0.85;
+      letter-spacing: 1px;
+    }
+
+    .t-btn span {
+      pointer-events: none;
+    }
+
+    /* Primary Attack: Punch (lower-left of right cluster, natural thumb rest) */
+    #btn-t-punch {
+      width: 76px;
+      height: 76px;
+      left: 6px;
+      bottom: 24px;
+      background: radial-gradient(circle at 32% 30%, rgba(255, 72, 118, 0.92), rgba(185, 16, 56, 0.86));
+      border-color: rgba(255, 170, 190, 0.72);
+    }
+
+    /* Secondary Attack: Kick (right-middle along thumb sweep arc, ~36px clear gap from Punch) */
+    #btn-t-kick {
+      width: 76px;
+      height: 76px;
+      right: 6px;
+      bottom: 62px;
+      background: radial-gradient(circle at 32% 30%, rgba(255, 168, 38, 0.92), rgba(206, 94, 0, 0.86));
+      border-color: rgba(255, 222, 148, 0.72);
+    }
+
+    /* Jump (upper-left above Punch, ~44px clear vertical gap) */
+    #btn-t-jump {
+      width: 68px;
+      height: 68px;
+      left: 44px;
+      top: 4px;
+      background: radial-gradient(circle at 32% 30%, rgba(45, 212, 191, 0.88), rgba(14, 116, 144, 0.84));
+      border-color: rgba(153, 246, 228, 0.68);
+    }
+
+    .t-btn.pressed, .t-btn:active {
+      transform: scale(0.91);
+      filter: brightness(1.28);
+    }
+
+    .t-btn.spec-ready {
+      box-shadow: 0 0 18px rgba(0, 212, 255, 0.85), inset 0 2px 8px rgba(255, 255, 255, 0.35);
+      border-color: #72efdd;
+    }
+
+    .t-btn.ult-ready {
+      box-shadow: 0 0 22px rgba(255, 209, 102, 0.95), inset 0 2px 10px rgba(255, 255, 255, 0.45);
+      border-color: #ffd166;
+      animation: pulseUlt 0.9s infinite alternate;
+    }
+
+    @keyframes pulseUlt {
+      from { transform: scale(1); }
+      to { transform: scale(1.045); }
+    }
+
+    #touch-spec-hint {
+      position: absolute;
+      right: 4px;
+      bottom: 0;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      padding: 3px 10px;
+      border-radius: 99px;
+      background: rgba(10, 14, 26, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: rgba(255, 255, 255, 0.62);
+      white-space: nowrap;
+      pointer-events: none;
+      transition: all 0.18s ease;
+    }
+
+    #touch-spec-hint.ready {
+      color: #8ce0ff;
+      border-color: #00d4ff;
+      background: rgba(0, 62, 92, 0.82);
+      box-shadow: 0 0 12px rgba(0, 212, 255, 0.55);
+    }
+
+    #touch-spec-hint.ult {
+      color: #ffd166;
+      border-color: #ff9e00;
+      background: rgba(110, 24, 18, 0.88);
+      box-shadow: 0 0 14px rgba(255, 158, 0, 0.75);
+    }
+
+    @media (max-width: 480px) {
+      #joystick-zone {
+        width: 122px;
+        height: 122px;
+      }
+      .touch-buttons {
+        width: 212px;
+        height: 196px;
+      }
+      #btn-t-punch, #btn-t-kick {
+        width: 70px;
+        height: 70px;
+      }
+      #btn-t-jump {
+        width: 62px;
+        height: 62px;
+        left: 38px;
+      }
+    }
 
     @media (max-width: 768px) {
       #char-select-screen {
@@ -802,6 +933,11 @@
               </div>
               <div class="bar-wrap"><div class="hp-fill" id="hud-p1-hp"></div></div>
               <div class="bar-wrap energy-wrap"><div class="energy-fill" id="hud-p1-en"></div></div>
+              <div class="hud-weapon-bar" id="hud-weapon-bar">
+                <span id="hud-weapon-label">木棒</span>
+                <div class="weapon-dur-bg"><div class="weapon-dur-fill" id="hud-weapon-fill"></div></div>
+                <span id="hud-weapon-count">10/10</span>
+              </div>
             </div>
           </div>
         </div>
@@ -834,13 +970,19 @@
     <div id="touch-controls">
       <div id="joystick-zone"><div id="joystick-knob"></div></div>
       <div class="touch-buttons">
-        <button class="t-btn blue" data-action="special1">SPEC</button>
-        <button class="t-btn blue" data-action="special2">ULT</button>
-        <button class="t-btn" data-action="block">BLK</button>
-        <button class="t-btn red" data-action="punch">PUNCH</button>
-        <button class="t-btn orange" data-action="kick">KICK</button>
-        <button class="t-btn" data-action="jump">JUMP</button>
-        <button class="t-btn" data-action="grab" style="grid-column: 2;">GRAB</button>
+        <button class="t-btn" id="btn-t-jump" data-action="jump">
+          <span class="t-main">跳</span>
+          <span class="t-sub">JUMP</span>
+        </button>
+        <button class="t-btn" id="btn-t-punch" data-action="punch">
+          <span class="t-main">拳</span>
+          <span class="t-sub">PUNCH</span>
+        </button>
+        <button class="t-btn" id="btn-t-kick" data-action="kick">
+          <span class="t-main">腳</span>
+          <span class="t-sub">KICK</span>
+        </button>
+        <div id="touch-spec-hint">拳+腳 必殺</div>
       </div>
     </div>
 
@@ -875,13 +1017,17 @@
         <h3>PLAYER CONTROLS</h3>
         <div class="control-grid">
           <div><span class="key-badge">W A S D / Arrows</span> Move (2x Left/Right Dash)</div>
-          <div><span class="key-badge">J</span> Punch (3-Hit Combo)</div>
+          <div><span class="key-badge">J / 拳</span> Punch / Pick Up Weapon (玻璃瓶・木棒)</div>
           <div><span class="key-badge">K</span> Kick / Air Kick</div>
           <div><span class="key-badge">L</span> Jump</div>
-          <div><span class="key-badge">U</span> Special Skill (35 EN)</div>
+          <div><span class="key-badge">J + K / 拳+腳</span> Special (35 EN) / Ult (100 EN)</div>
+          <div><span class="key-badge">U</span> AOE Special (35 EN)</div>
           <div><span class="key-badge">H / Shift+U</span> Ultimate (100 EN)</div>
           <div><span class="key-badge">I</span> Block / Dodge</div>
           <div><span class="key-badge">O</span> Grab &amp; Throw</div>
+        </div>
+        <div style="text-align:center; color:#a9b8d4; margin-bottom:14px; font-size:0.92rem;">
+          手機模式右手精簡為「拳 / 腳 / 跳」三鍵，同時按下「拳 + 腳」即可發動必殺技！靠近地面玻璃瓶或木棒按「拳」可彎腰拾取（耐用 10 下）。
         </div>
         <div style="text-align:center; color:#a9b8d4; margin-bottom:14px; font-size:0.92rem;">
           Mobile touch controls auto-enable on touchscreens or via the HUD "TOUCH" button.
@@ -1117,6 +1263,30 @@
             this.tone(520, 0.09, 'sine', 0.2 * v, 780);
             setTimeout(() => this.tone(780, 0.12, 'sine', 0.2 * v, 1040), 75);
             break;
+          case 'bottleHit':
+            this.noise(0.08, 0.32 * v);
+            this.tone(1120, 0.08, 'triangle', 0.22 * v, 520);
+            this.tone(1680, 0.06, 'sine', 0.15 * v, 900);
+            break;
+          case 'bottleBreak':
+            this.noise(0.24, 0.44 * v);
+            [1850, 1420, 2120, 980, 1620].forEach((f, idx) => {
+              setTimeout(() => this.tone(f, 0.075, 'triangle', 0.2 * v, f * 0.55), idx * 24);
+            });
+            break;
+          case 'batHit':
+            this.noise(0.11, 0.36 * v);
+            this.tone(240, 0.12, 'triangle', 0.34 * v, 74);
+            this.tone(420, 0.06, 'square', 0.14 * v, 165);
+            break;
+          case 'batBreak':
+            this.noise(0.22, 0.42 * v);
+            this.tone(210, 0.12, 'sawtooth', 0.3 * v, 65);
+            setTimeout(() => {
+              this.noise(0.14, 0.34 * v);
+              this.tone(150, 0.16, 'triangle', 0.28 * v, 42);
+            }, 70);
+            break;
           case 'bossIntro':
             this.tone(140, 0.28, 'sawtooth', 0.28 * v, 95);
             setTimeout(() => this.tone(95, 0.45, 'sawtooth', 0.32 * v, 55), 240);
@@ -1174,12 +1344,108 @@
         this.dashDir = 0;
         this.lastLeftTap = 0;
         this.lastRightTap = 0;
+        this.lastPunchTime = -9999;
+        this.lastKickTime = -9999;
+        this.chordSpecialTriggered = false;
+        this.chordLockUntil = 0;
         this.joyVec = { x: 0, z: 0 };
         this.joyActive = false;
         this.joyTouchId = null;
 
         this.bindKeyboard();
         this.bindTouch();
+        this.preventMobileZoom();
+      }
+
+      // Prevent iOS Safari / Android Chrome pinch-zoom & rapid double-tap auto-zoom
+      preventMobileZoom() {
+        // 1. Block Safari gesture pinch-to-zoom events
+        ['gesturestart', 'gesturechange', 'gestureend'].forEach((ev) => {
+          document.addEventListener(ev, (e) => e.preventDefault(), { passive: false });
+        });
+
+        // 2. Block native double-click zoom
+        document.addEventListener('dblclick', (e) => e.preventDefault(), { passive: false });
+
+        // 3. Block accidental multi-touch pinch anywhere outside game controls
+        document.addEventListener('touchstart', (e) => {
+          if (e.touches.length > 1) {
+            let allOnControls = true;
+            for (const t of e.touches) {
+              const el = t.target;
+              if (!el || !el.closest || (!el.closest('.t-btn') && !el.closest('#joystick-zone'))) {
+                allOnControls = false;
+                break;
+              }
+            }
+            if (!allOnControls) e.preventDefault();
+          }
+        }, { passive: false });
+
+        document.addEventListener('touchmove', (e) => {
+          if (e.touches.length > 1) {
+            e.preventDefault();
+          }
+        }, { passive: false });
+
+        // 4. Block rapid double-tap auto-zoom on non-UI areas (and canvas)
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', (e) => {
+          const now = performance.now();
+          const target = e.target;
+          const isUiClickable = target && target.closest && target.closest('.btn, .mini-btn, .char-card, input');
+          if (!isUiClickable && now - lastTouchEnd <= 350) {
+            e.preventDefault();
+          }
+          lastTouchEnd = now;
+        }, { passive: false });
+
+        // 5. Lock all touch events directly on the WebGL canvas
+        const canvas = document.getElementById('game-canvas');
+        if (canvas) {
+          ['touchstart', 'touchmove', 'touchend'].forEach((ev) => {
+            canvas.addEventListener(ev, (e) => e.preventDefault(), { passive: false });
+          });
+        }
+      }
+
+      registerActionPress(code) {
+        const now = performance.now();
+        this.keys.add(code);
+
+        // Simultaneous Punch (KeyJ) + Kick (KeyK) chord detection (220ms forgiveness window)
+        if (code === 'KeyJ') {
+          this.lastPunchTime = now;
+          if (this.keys.has('KeyK') || now - this.lastKickTime <= 220) {
+            this.chordSpecialTriggered = true;
+            this.chordLockUntil = now + 240;
+            this.justPressed.delete('KeyJ');
+            this.justPressed.delete('KeyK');
+            return;
+          }
+        } else if (code === 'KeyK') {
+          this.lastKickTime = now;
+          if (this.keys.has('KeyJ') || now - this.lastPunchTime <= 220) {
+            this.chordSpecialTriggered = true;
+            this.chordLockUntil = now + 240;
+            this.justPressed.delete('KeyJ');
+            this.justPressed.delete('KeyK');
+            return;
+          }
+        }
+
+        if ((code === 'KeyJ' || code === 'KeyK') && now < this.chordLockUntil) {
+          return;
+        }
+        this.justPressed.add(code);
+      }
+
+      consumeChordSpecial() {
+        if (this.chordSpecialTriggered) {
+          this.chordSpecialTriggered = false;
+          return true;
+        }
+        return false;
       }
 
       bindKeyboard() {
@@ -1188,7 +1454,6 @@
             e.preventDefault();
           }
           if (!e.repeat) {
-            this.justPressed.add(e.code);
             const now = performance.now();
             if (e.code === 'KeyA' || e.code === 'ArrowLeft') {
               if (now - this.lastLeftTap < 260) this.dashDir = -1;
@@ -1197,8 +1462,10 @@
               if (now - this.lastRightTap < 260) this.dashDir = 1;
               this.lastRightTap = now;
             }
+            this.registerActionPress(e.code);
+          } else {
+            this.keys.add(e.code);
           }
-          this.keys.add(e.code);
         });
 
         window.addEventListener('keyup', (e) => {
@@ -1208,6 +1475,7 @@
         window.addEventListener('blur', () => {
           this.keys.clear();
           this.justPressed.clear();
+          this.chordSpecialTriggered = false;
           this.joyVec.x = 0;
           this.joyVec.z = 0;
         });
@@ -1261,41 +1529,67 @@
           }, { passive: false });
 
           zone.addEventListener('touchend', (e) => {
+            e.preventDefault();
             for (const t of e.changedTouches) {
               if (t.identifier === this.joyTouchId) resetJoy();
             }
-          });
+          }, { passive: false });
           zone.addEventListener('touchcancel', resetJoy);
         }
 
         const actionMap = {
           punch: 'KeyJ',
           kick: 'KeyK',
-          jump: 'KeyL',
-          special1: 'KeyU',
-          special2: 'KeyH',
-          block: 'KeyI',
-          grab: 'KeyO'
+          jump: 'KeyL'
         };
 
+        let lastTouchTs = 0;
         document.querySelectorAll('.t-btn').forEach((btn) => {
           const code = actionMap[btn.dataset.action];
           if (!code) return;
-          const press = (e) => {
+          const activeTouchIds = new Set();
+
+          const pressTouch = (e) => {
             e.preventDefault();
-            this.keys.add(code);
-            this.justPressed.add(code);
+            lastTouchTs = performance.now();
+            const wasDown = activeTouchIds.size > 0;
+            for (const t of e.changedTouches) activeTouchIds.add(t.identifier);
+            if (!wasDown) {
+              btn.classList.add('pressed');
+              this.registerActionPress(code);
+            }
           };
-          const release = (e) => {
+
+          const releaseTouch = (e) => {
             e.preventDefault();
+            lastTouchTs = performance.now();
+            for (const t of e.changedTouches) activeTouchIds.delete(t.identifier);
+            if (activeTouchIds.size === 0) {
+              btn.classList.remove('pressed');
+              this.keys.delete(code);
+            }
+          };
+
+          const pressMouse = (e) => {
+            if (performance.now() - lastTouchTs < 600) return;
+            e.preventDefault();
+            btn.classList.add('pressed');
+            this.registerActionPress(code);
+          };
+
+          const releaseMouse = (e) => {
+            if (performance.now() - lastTouchTs < 600) return;
+            e.preventDefault();
+            btn.classList.remove('pressed');
             this.keys.delete(code);
           };
-          btn.addEventListener('touchstart', press, { passive: false });
-          btn.addEventListener('touchend', release, { passive: false });
-          btn.addEventListener('touchcancel', release, { passive: false });
-          btn.addEventListener('mousedown', press);
-          btn.addEventListener('mouseup', release);
-          btn.addEventListener('mouseleave', release);
+
+          btn.addEventListener('touchstart', pressTouch, { passive: false });
+          btn.addEventListener('touchend', releaseTouch, { passive: false });
+          btn.addEventListener('touchcancel', releaseTouch, { passive: false });
+          btn.addEventListener('mousedown', pressMouse);
+          btn.addEventListener('mouseup', releaseMouse);
+          btn.addEventListener('mouseleave', releaseMouse);
         });
       }
 
@@ -2387,6 +2681,77 @@
         return group;
       }
 
+      static createWeaponMesh(type) {
+        const g = new THREE.Group();
+        if (type === 'bottle') {
+          // Street glass bottle (grip at bottle neck y = 0, extending outward along +Y)
+          const glassMat = new THREE.MeshStandardMaterial({
+            color: CharacterModelBuilder.srgbColor(0x2a9d63),
+            roughness: 0.16,
+            metalness: 0.12,
+            transparent: true,
+            opacity: 0.88
+          });
+          const labelMat = new THREE.MeshStandardMaterial({
+            color: CharacterModelBuilder.srgbColor(0xf4ead5),
+            roughness: 0.72
+          });
+          const capMat = new THREE.MeshStandardMaterial({
+            color: CharacterModelBuilder.srgbColor(0xd99b26),
+            metalness: 0.75,
+            roughness: 0.25
+          });
+
+          const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.032, 0.036, 0.20, 12), glassMat);
+          neck.position.y = 0.02;
+          const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.038, 0.038, 0.035, 12), capMat);
+          cap.position.y = -0.085;
+          const shoulder = new THREE.Mesh(new THREE.CylinderGeometry(0.088, 0.035, 0.13, 14), glassMat);
+          shoulder.position.y = 0.185;
+          const body = new THREE.Mesh(new THREE.CylinderGeometry(0.088, 0.088, 0.36, 14), glassMat);
+          body.position.y = 0.43;
+          body.castShadow = true;
+          const label = new THREE.Mesh(new THREE.CylinderGeometry(0.091, 0.091, 0.16, 14), labelMat);
+          label.position.y = 0.41;
+          const base = new THREE.Mesh(new THREE.CylinderGeometry(0.086, 0.082, 0.04, 14), glassMat);
+          base.position.y = 0.625;
+          g.add(neck, cap, shoulder, body, label, base);
+        } else {
+          // Heavy wooden street bat (grip handle at y = 0, barrel extending along +Y)
+          const woodMat = new THREE.MeshStandardMaterial({
+            color: CharacterModelBuilder.srgbColor(0xb07740),
+            roughness: 0.68,
+            metalness: 0.04
+          });
+          const gripMat = new THREE.MeshStandardMaterial({
+            color: CharacterModelBuilder.srgbColor(0x1f2229),
+            roughness: 0.9
+          });
+          const stripeMat = new THREE.MeshStandardMaterial({
+            color: CharacterModelBuilder.srgbColor(0xd62828),
+            roughness: 0.55
+          });
+
+          const pommel = new THREE.Mesh(new THREE.SphereGeometry(0.045, 10, 8), gripMat);
+          pommel.position.y = -0.10;
+          const grip = new THREE.Mesh(new THREE.CylinderGeometry(0.033, 0.030, 0.28, 12), gripMat);
+          grip.position.y = 0.04;
+          const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.068, 0.033, 0.48, 14), woodMat);
+          shaft.position.y = 0.42;
+          shaft.castShadow = true;
+          const stripe = new THREE.Mesh(new THREE.CylinderGeometry(0.069, 0.066, 0.055, 14), stripeMat);
+          stripe.position.y = 0.66;
+          const barrel = new THREE.Mesh(new THREE.CylinderGeometry(0.072, 0.068, 0.34, 14), woodMat);
+          barrel.position.y = 0.84;
+          barrel.castShadow = true;
+          const tip = new THREE.Mesh(new THREE.SphereGeometry(0.072, 12, 10), woodMat);
+          tip.scale.set(1, 0.6, 1);
+          tip.position.y = 1.01;
+          g.add(pommel, grip, shaft, stripe, barrel, tip);
+        }
+        return g;
+      }
+
       static createRig(app, isBoss = false, scaleMult = 1.0) {
         const root = new THREE.Group();
         const bodyPivot = new THREE.Group();
@@ -2680,6 +3045,10 @@
           thumb.rotation.x = 0.28;
           elbowPivot.add(thumb);
 
+          const handAnchor = new THREE.Group();
+          handAnchor.position.set(0, -0.30, 0.025);
+          elbowPivot.add(handAnchor);
+
           if (app.blades) {
             const blade = new THREE.Mesh(
               new THREE.BoxGeometry(0.045, 0.56, 0.11),
@@ -2697,7 +3066,7 @@
 
           shoulderPivot.add(elbowPivot);
           bodyPivot.add(shoulderPivot);
-          return { pivot: shoulderPivot, elbow: elbowPivot };
+          return { pivot: shoulderPivot, elbow: elbowPivot, hand: handAnchor };
         };
         const leftArm = makeArm(-1);
         const rightArm = makeArm(1);
@@ -2793,6 +3162,8 @@
           armR,
           elbowL: leftArm.elbow,
           elbowR: rightArm.elbow,
+          handL: leftArm.hand,
+          handR: rightArm.hand,
           legL,
           legR,
           kneeL: leftLeg.knee,
@@ -2870,6 +3241,44 @@
           if (elbowR) elbowR.rotation.x = -0.12;
           if (elbowL) elbowL.rotation.x = -0.35;
           bodyPivot.rotation.x = 0.24 * swing;
+        } else if (state === 'pickup') {
+          // Bend down smoothly at waist and knees while reaching right hand to the ground
+          const bend = Math.sin(Math.min(1, progress) * Math.PI);
+          bodyPivot.position.y = -0.34 * bend;
+          bodyPivot.rotation.x = 0.72 * bend;
+          head.rotation.x = -0.25 * bend;
+          legL.rotation.x = -0.42 * bend;
+          legR.rotation.x = -0.30 * bend;
+          if (kneeL) kneeL.rotation.x = 0.92 * bend;
+          if (kneeR) kneeR.rotation.x = 0.82 * bend;
+          armR.rotation.x = -0.95 * bend;
+          if (elbowR) elbowR.rotation.x = -0.18 * bend;
+          armL.rotation.x = 0.22 * bend;
+          if (elbowL) elbowL.rotation.x = -0.45 * bend;
+        } else if (state === 'weaponSwing') {
+          // Wide horizontal-diagonal weapon swing with right hand
+          const p = Math.min(1, progress);
+          const windup = p < 0.25 ? (p / 0.25) : 1;
+          const slash = p >= 0.25 ? Math.min(1, (p - 0.25) / 0.5) : 0;
+          armR.rotation.x = -1.95 * windup + 1.55 * slash;
+          armR.rotation.z = -0.55 * windup + 0.95 * slash;
+          if (elbowR) elbowR.rotation.x = -0.45 * (1 - slash) - 0.12 * slash;
+          armL.rotation.x = -0.45;
+          if (elbowL) elbowL.rotation.x = -0.85;
+          bodyPivot.rotation.y = 0.35 * windup - 0.82 * slash;
+          bodyPivot.rotation.x = 0.14 * slash;
+        } else if (state === 'weaponHeavy') {
+          // Overhead heavy smash with held bottle or wooden bat
+          const p = Math.min(1, progress);
+          const raise = p < 0.35 ? (p / 0.35) : 1;
+          const slam = p >= 0.35 ? Math.min(1, (p - 0.35) / 0.45) : 0;
+          armR.rotation.x = -2.65 * raise + 2.15 * slam;
+          armR.rotation.z = -0.18;
+          if (elbowR) elbowR.rotation.x = -0.35 * (1 - slam) - 0.08 * slam;
+          armL.rotation.x = -0.95 * raise + 0.55 * slam;
+          if (elbowL) elbowL.rotation.x = -0.65;
+          bodyPivot.rotation.x = -0.18 * raise + 0.46 * slam;
+          bodyPivot.position.y = 0.06 * raise - 0.08 * slam;
         } else if (state === 'kick') {
           const swing = Math.sin(Math.min(1, progress) * Math.PI);
           legR.rotation.x = -1.5 * swing;
@@ -2951,8 +3360,9 @@
         this.deathTimer = 1.4;
         this.removeTimer = 1.2;
         this.bodyRadius = this.isBoss ? 0.68 : 0.52;
-
-        const app = Object.assign({}, cfg.appearance || {}, { isPlayerRing: this.isPlayer });
+        this.enteringZone = !!cfg.enteringZone;
+        this.enterMaxX = Math.max(cfg.x || 0, 0) + 0.5;
+        const app = Object.assign({ isPlayerRing: this.isPlayer }, cfg.appearance || {});
         this.rig = CharacterModelBuilder.createRig(app, this.isBoss, cfg.scaleMult || 1.0);
         this.rig.root.position.copy(this.pos);
         this.rig.root.rotation.y = this.facing * (Math.PI * 0.44);
@@ -3003,7 +3413,8 @@
           hitStart: opts.hitStart || 0.25,
           hitEnd: opts.hitEnd || 0.72,
           hitTargets: new Set(),
-          sfx: opts.sfx || 'punch'
+          sfx: opts.sfx || 'punch',
+          weaponType: opts.weaponType || null
         };
       }
 
@@ -3119,15 +3530,23 @@
           }
         }
 
-        // Horizontal movement & friction
+        // Horizontal & depth movement integration + arcade friction
         this.pos.x += this.vel.x * dt;
         this.pos.z += this.vel.z * dt;
-        const friction = this.pos.y > 0 ? 2.5 : 10.5;
-        this.vel.x *= Math.max(0, 1 - friction * dt);
-        this.vel.z *= Math.max(0, 1 - friction * dt);
+        const drag = this.pos.y > 0 ? 0.96 : 0.84;
+        this.vel.x *= Math.pow(drag, dt * 60);
+        this.vel.z *= Math.pow(drag, dt * 60);
 
-        // Clamp within stage combat lane
-        this.pos.x = Math.max(minX, Math.min(maxX, this.pos.x));
+        // Clamp within stage combat lane (allow entering enemies to stride in smoothly from off-screen right)
+        if (this.enteringZone) {
+          this.enterMaxX = Math.min(this.enterMaxX, Math.max(maxX, this.pos.x + 0.4));
+          this.pos.x = Math.max(minX, Math.min(this.enterMaxX, this.pos.x));
+          if (this.pos.x <= maxX - 0.85) {
+            this.enteringZone = false;
+          }
+        } else {
+          this.pos.x = Math.max(minX, Math.min(maxX, this.pos.x));
+        }
         this.pos.z = Math.max(-3.8, Math.min(3.8, this.pos.z));
 
         // State timer progression
@@ -3184,96 +3603,221 @@
         this.special2 = data.special2;
         this.dashTimer = 0;
         this.grabbedEnemy = null;
+        this.weapon = null;
+      }
+
+      equipWeapon(type, uses = 10) {
+        this.clearWeaponMesh();
+        const mesh = CharacterModelBuilder.createWeaponMesh(type);
+        // Orient grip naturally in right hand (extending forward-upward along fist axis)
+        mesh.rotation.set(Math.PI * 0.42, 0, -0.08);
+        if (this.rig.handR) {
+          this.rig.handR.add(mesh);
+        }
+        this.weapon = {
+          type,
+          name: type === 'bottle' ? '玻璃瓶' : '木棒',
+          uses,
+          maxUses: 10,
+          mesh
+        };
+      }
+
+      clearWeaponMesh() {
+        if (this.weapon && this.weapon.mesh && this.rig.handR) {
+          this.rig.handR.remove(this.weapon.mesh);
+        }
+        this.weapon = null;
+      }
+
+      breakWeapon(game) {
+        if (!this.weapon) return;
+        const type = this.weapon.type;
+        const pos = new THREE.Vector3(this.pos.x + this.facing * 0.85, this.pos.y + 1.25, this.pos.z);
+        if (type === 'bottle') {
+          game.audio.sfx('bottleBreak');
+          game.particles.spawnHitSparks(pos, 0x38ef7d, 18, game.highQuality);
+          game.particles.spawnHitSparks(pos, 0xd8f3dc, 10, game.highQuality);
+          spawnFloatingText(this.pos, game.camera, '玻璃瓶碎了!', 'crit');
+        } else {
+          game.audio.sfx('batBreak');
+          game.particles.spawnHitSparks(pos, 0xc98c4e, 18, game.highQuality);
+          game.particles.spawnHitSparks(pos, 0x6f4518, 10, game.highQuality);
+          spawnFloatingText(this.pos, game.camera, '木棒斷了!', 'crit');
+        }
+        this.clearWeaponMesh();
       }
 
       updatePlayer(dt, input, game, minX, maxX) {
         if (this.dead) {
+          this.clearWeaponMesh();
           this.updateBase(dt, minX, maxX);
           return;
         }
 
-        const busy = ['punch', 'punch2', 'heavy', 'kick', 'special', 'hit', 'fall', 'grab'].includes(this.state);
+        const busy = ['punch', 'punch2', 'heavy', 'weaponSwing', 'weaponHeavy', 'pickup', 'kick', 'special', 'hit', 'fall', 'grab'].includes(this.state);
 
-        // Dash trigger
-        const dashDir = input.consumeDash();
-        if (dashDir && !busy && this.pos.y === 0) {
-          this.facing = dashDir;
-          this.vel.x = dashDir * (this.getMoveSpeed() * 2.15);
-          this.dashTimer = 0.25;
-          this.invulnTimer = 0.22;
-        }
         if (this.dashTimer > 0) this.dashTimer -= dt;
 
-        // Blocking
+        // Block (I)
         if (input.isHeld(['KeyI']) && !busy && this.pos.y === 0) {
           this.state = 'block';
-          this.vel.x *= 0.5;
-          this.vel.z *= 0.5;
-          this.updateBase(dt, minX, maxX);
-          return;
+          this.vel.x *= 0.4;
+          this.vel.z *= 0.4;
         } else if (this.state === 'block') {
           this.state = 'idle';
         }
 
-        // Movement
-        const mv = input.getMoveVector();
-        if (!busy) {
-          const spd = this.getMoveSpeed() * (this.dashTimer > 0 ? 1.45 : 1.0);
-          if (Math.abs(mv.x) > 0.05 || Math.abs(mv.z) > 0.05) {
+        // Movement & Double-Tap Dash
+        if (!busy && this.state !== 'block') {
+          const dash = input.consumeDash();
+          if (dash !== 0) {
+            this.facing = dash;
+            this.dashTimer = 0.26;
+            this.vel.x = dash * this.getMoveSpeed() * 1.9;
+          }
+          const mv = input.getMoveVector();
+          if (Math.abs(mv.x) > 0.08 || Math.abs(mv.z) > 0.08) {
+            const spd = this.getMoveSpeed() * (this.dashTimer > 0 ? 1.55 : 1.0);
             this.vel.x = mv.x * spd;
-            this.vel.z = mv.z * (spd * 0.72);
-            if (mv.x > 0.1) this.facing = 1;
-            else if (mv.x < -0.1) this.facing = -1;
+            this.vel.z = mv.z * spd * 0.72;
+            if (Math.abs(mv.x) > 0.1) this.facing = mv.x > 0 ? 1 : -1;
             if (this.pos.y === 0) this.state = this.dashTimer > 0 ? 'run' : 'walk';
-          } else if (this.pos.y === 0 && this.state !== 'jump') {
+          } else if (this.pos.y === 0) {
             this.state = 'idle';
           }
         }
 
         // Jump (L)
-        if (input.consumeAny(['KeyL']) && !busy && this.pos.y === 0) {
+        if (input.consumeAny(['KeyL']) && this.pos.y === 0 && !['hit', 'fall', 'special', 'pickup'].includes(this.state)) {
           this.vel.y = 9.8;
           this.state = 'jump';
           game.audio.sfx('jump');
         }
 
-        // Ultimate (H or Shift+U)
-        const ultPressed = input.consumeAny(['KeyH']) || (input.isHeld(['ShiftLeft', 'ShiftRight']) && input.consumeAny(['KeyU']));
-        if (ultPressed && !busy && this.energy >= this.special2.cost) {
+        // Simultaneous Punch + Kick (拳+腳 / J+K) Special & Ultimate trigger
+        // Allows cancelling out of early Punch/Kick startup frames if one finger lands slightly first
+        const chordSpec = input.consumeChordSpecial();
+        const canCancelToSpecial = !busy || (
+          ['punch', 'punch2', 'heavy', 'weaponSwing', 'weaponHeavy', 'kick'].includes(this.state) &&
+          (this.stateDuration - this.stateTimer) < 0.28
+        );
+        const shiftHeld = input.isHeld(['ShiftLeft', 'ShiftRight']);
+        const pressUlt = (chordSpec && this.energy >= this.special2.cost) || input.consumeAny(['KeyH']);
+        const pressSpec = (chordSpec && this.energy < this.special2.cost) || input.consumeAny(['KeyU']);
+
+        if (pressUlt && canCancelToSpecial && this.energy >= this.special2.cost) {
           this.energy -= this.special2.cost;
-          this.invulnTimer = 0.75;
+          this.invulnTimer = 0.72;
           this.startAttack('special', {
             duration: 0.65,
             mult: this.special2.mult,
             aoe: true,
             radius: this.special2.radius,
-            knockback: 9.5,
+            knockback: 9.0,
             knockdown: true,
             sfx: 'special'
           });
           game.audio.sfx('special');
-          game.particles.spawnShockwave(this.pos, 0xff2a5f, this.special2.radius);
-          game.showBanner(this.special2.name.toUpperCase() + '!');
-        }
-        // AOE Special (U)
-        else if (input.consumeAny(['KeyU']) && !busy && this.energy >= this.special1.cost) {
-          this.energy -= this.special1.cost;
-          this.invulnTimer = 0.45;
+          game.particles.spawnShockwave(this.pos, 0xff9e00, this.special2.radius);
+          game.showBanner(`${this.special2.name.toUpperCase()}!`, 1.2);
+        } else if (pressSpec && shiftHeld && canCancelToSpecial && this.energy >= this.special2.cost) {
+          this.energy -= this.special2.cost;
+          this.invulnTimer = 0.72;
           this.startAttack('special', {
-            duration: 0.48,
+            duration: 0.65,
+            mult: this.special2.mult,
+            aoe: true,
+            radius: this.special2.radius,
+            knockback: 9.0,
+            knockdown: true,
+            sfx: 'special'
+          });
+          game.audio.sfx('special');
+          game.particles.spawnShockwave(this.pos, 0xff9e00, this.special2.radius);
+          game.showBanner(`${this.special2.name.toUpperCase()}!`, 1.2);
+        } else if (pressSpec && canCancelToSpecial && this.energy >= this.special1.cost) {
+          this.energy -= this.special1.cost;
+          this.invulnTimer = 0.48;
+          this.startAttack('special', {
+            duration: 0.5,
             mult: this.special1.mult,
             aoe: true,
             radius: this.special1.radius,
-            knockback: 6.5,
+            knockback: 6.8,
             knockdown: true,
             sfx: 'special'
           });
           game.audio.sfx('special');
           game.particles.spawnShockwave(this.pos, 0x00d4ff, this.special1.radius);
+          spawnFloatingText(this.pos, game.camera, `${this.special1.name}!`, 'crit');
+        } else if (chordSpec && this.energy < this.special1.cost) {
+          spawnFloatingText(this.pos, game.camera, '能量不足!');
         }
-        // Punch 3-Hit Combo (J)
-        else if (input.consumeAny(['KeyJ']) && this.attackCooldown <= 0 && !['hit', 'fall', 'special'].includes(this.state)) {
-          if (this.dashTimer > 0) {
+        // Punch 3-Hit Combo / Bend Down Pickup Weapon / Weapon Swing (J)
+        else if (input.consumeAny(['KeyJ']) && this.attackCooldown <= 0 && !['hit', 'fall', 'special', 'pickup'].includes(this.state)) {
+          // If unarmed and grounded near a street weapon (玻璃瓶 / 木棒), bend down to pick it up
+          const nearWeapon = (!this.weapon && this.pos.y === 0)
+            ? game.levelMgr.findNearestWeapon(this.pos, 1.55, 1.15)
+            : null;
+
+          if (nearWeapon) {
+            this.vel.x *= 0.2;
+            this.vel.z *= 0.2;
+            this.state = 'pickup';
+            this.stateTimer = 0.28;
+            this.stateDuration = 0.28;
+            this.attackCooldown = 0.26;
+            this.comboStep = 0;
+            this.equipWeapon(nearWeapon.type, nearWeapon.uses);
+            game.levelMgr.removeGroundWeapon(nearWeapon);
+            game.audio.sfx('pickup');
+            spawnFloatingText(this.pos, game.camera, `拾取${this.weapon.name}!`, 'heal');
+          } else if (this.weapon) {
+            // Armed attack with held glass bottle or wooden bat
+            const isBat = this.weapon.type === 'bat';
+            const wSfx = isBat ? 'batHit' : 'bottleHit';
+            const wRange = isBat ? 2.15 : 1.88;
+            const wMultBase = isBat ? 1.52 : 1.36;
+            const wKnock = isBat ? 5.6 : 4.2;
+
+            if (this.dashTimer > 0) {
+              this.startAttack('weaponHeavy', {
+                duration: 0.36,
+                mult: wMultBase * 1.28,
+                range: wRange + 0.2,
+                knockback: wKnock + 2.6,
+                knockdown: true,
+                sfx: wSfx,
+                weaponType: this.weapon.type
+              });
+            } else {
+              this.comboStep = (this.comboStep % 3) + 1;
+              this.comboWindow = 0.8;
+              if (this.comboStep < 3) {
+                this.startAttack('weaponSwing', {
+                  duration: isBat ? 0.30 : 0.26,
+                  mult: wMultBase * (this.comboStep === 1 ? 0.95 : 1.12),
+                  range: wRange,
+                  knockback: wKnock,
+                  knockdown: false,
+                  sfx: wSfx,
+                  weaponType: this.weapon.type
+                });
+              } else {
+                this.startAttack('weaponHeavy', {
+                  duration: isBat ? 0.40 : 0.35,
+                  mult: wMultBase * 1.38,
+                  range: wRange + 0.15,
+                  knockback: wKnock + 2.4,
+                  knockdown: true,
+                  sfx: wSfx,
+                  weaponType: this.weapon.type
+                });
+                this.comboStep = 0;
+              }
+            }
+          } else if (this.dashTimer > 0) {
             this.startAttack('heavy', { duration: 0.34, mult: 1.5, range: 1.85, knockback: 6.5, knockdown: true, sfx: 'heavy' });
           } else {
             this.comboStep = (this.comboStep % 3) + 1;
@@ -3335,6 +3879,16 @@
       updateAI(dt, player, game, minX, maxX) {
         if (this.dead || !player || player.dead) {
           if (!this.dead && this.state !== 'hit' && this.state !== 'fall') this.state = 'idle';
+          this.updateBase(dt, minX, maxX);
+          return;
+        }
+
+        // Smoothly walk into the active combat zone from off-screen right before engaging
+        if (this.enteringZone) {
+          this.facing = -1;
+          this.vel.x = -this.getMoveSpeed() * 0.92;
+          this.vel.z = 0;
+          this.state = 'walk';
           this.updateBase(dt, minX, maxX);
           return;
         }
@@ -3432,6 +3986,16 @@
 
       updateAI(dt, player, game, minX, maxX) {
         if (this.dead || !player || player.dead) {
+          this.updateBase(dt, minX, maxX);
+          return;
+        }
+
+        // Dramatic entrance stride from off-screen right into boss arena
+        if (this.enteringZone) {
+          this.facing = -1;
+          this.vel.x = -this.getMoveSpeed() * 0.85;
+          this.vel.z = 0;
+          this.state = 'walk';
           this.updateBase(dt, minX, maxX);
           return;
         }
@@ -3587,6 +4151,7 @@
         this.scene.add(this.envGroup);
         this.crates = [];
         this.pickups = [];
+        this.weapons = [];
         this.textures = [];
         this.stageIndex = 0;
         this.zoneIndex = 0;
@@ -3602,9 +4167,11 @@
         }
         this.crates.forEach((c) => this.scene.remove(c.mesh));
         this.pickups.forEach((p) => this.scene.remove(p.mesh));
+        this.weapons.forEach((w) => this.scene.remove(w.mesh));
         this.textures.forEach((t) => t.dispose());
         this.crates = [];
         this.pickups = [];
+        this.weapons = [];
         this.textures = [];
       }
 
@@ -4393,6 +4960,77 @@
             broken: false
           });
         });
+
+        // Spawn interactive street weapons (玻璃瓶 & 木棒, 10 uses each) across all zones
+        const weaponSpots = [
+          { type: 'bottle', x: 2.2, z: 2.1 },
+          { type: 'bat', x: 18.2, z: -2.1 },
+          { type: 'bottle', x: 34.5, z: 2.2 },
+          { type: 'bat', x: 47.8, z: -2.0 },
+          { type: 'bat', x: 60.5, z: -2.1 },
+          { type: 'bottle', x: 63.8, z: 2.2 }
+        ];
+        weaponSpots.forEach((wp) => this.spawnGroundWeapon(wp.type, wp.x, wp.z, 10));
+      }
+
+      spawnGroundWeapon(type, x, z, uses = 10) {
+        const group = new THREE.Group();
+        const itemMesh = CharacterModelBuilder.createWeaponMesh(type);
+        if (type === 'bottle') {
+          itemMesh.rotation.set(0, 0.4, Math.PI * 0.46);
+          itemMesh.position.set(-0.24, 0.14, 0);
+        } else {
+          itemMesh.rotation.set(0.08, 0.3, Math.PI * 0.48);
+          itemMesh.position.set(-0.42, 0.12, 0);
+        }
+
+        const ringColor = type === 'bottle' ? 0x38ef7d : 0xffb703;
+        const ringMat = new THREE.MeshBasicMaterial({
+          color: ringColor,
+          side: THREE.DoubleSide,
+          transparent: true,
+          opacity: 0.65
+        });
+        const ring = new THREE.Mesh(new THREE.RingGeometry(0.42, 0.56, 20), ringMat);
+        ring.rotation.x = -Math.PI / 2;
+        ring.position.y = 0.03;
+
+        group.add(itemMesh, ring);
+        group.position.set(x, 0, z);
+        this.scene.add(group);
+        this.weapons.push({
+          type,
+          uses,
+          mesh: group,
+          itemMesh,
+          ring,
+          pos: new THREE.Vector3(x, 0, z)
+        });
+      }
+
+      findNearestWeapon(pos, maxDx = 1.55, maxDz = 1.15) {
+        let best = null;
+        let bestDist = Infinity;
+        for (const w of this.weapons) {
+          const dx = Math.abs(w.pos.x - pos.x);
+          const dz = Math.abs(w.pos.z - pos.z);
+          if (dx <= maxDx && dz <= maxDz) {
+            const d = Math.hypot(dx, dz);
+            if (d < bestDist) {
+              bestDist = d;
+              best = w;
+            }
+          }
+        }
+        return best;
+      }
+
+      removeGroundWeapon(w) {
+        const idx = this.weapons.indexOf(w);
+        if (idx >= 0) {
+          this.scene.remove(w.mesh);
+          this.weapons.splice(idx, 1);
+        }
       }
 
       spawnPickup(x, z) {
@@ -4755,24 +5393,35 @@
         this.levelMgr.zoneMaxX = 12 + zoneIdx * 20;
         this.levelMgr.waveSpawned = true;
 
+        // Calculate right off-screen X dynamically so enemies NEVER pop out behind the player on GO transitions
+        const p1 = this.players[0];
+        const p1X = p1 ? p1.pos.x : 0;
+        const halfH = Math.tan(THREE.MathUtils.degToRad(this.camera.fov * 0.5)) * this.camera.position.z;
+        const halfW = halfH * this.camera.aspect;
+        const offscreenRightX = Math.max(this.camera.position.x + halfW + 1.8, p1X + 8.5);
+
         // Zone 3 is Boss Zone
         if (zoneIdx >= 3) {
           this.levelMgr.bossSpawned = true;
           const bCfg = st.boss;
+          const bossX = Math.max(offscreenRightX + 0.8, this.levelMgr.zoneMaxX - 1.5);
           const boss = new Boss(this.scene, Object.assign({}, bCfg, {
             stageIndex: this.currentStage,
-            x: this.levelMgr.zoneMaxX - 2.2,
-            z: 0
+            x: bossX,
+            z: 0,
+            enteringZone: bossX > this.levelMgr.zoneMaxX - 1.0
           }));
           this.enemies.push(boss);
           this.activeBoss = boss;
 
-          // Boss support minions
+          // Boss support minions marching in from off-screen right
           for (let i = 0; i < 2; i++) {
             const tmpl = st.enemies[i % st.enemies.length];
+            const mx = bossX + 1.8 + i * 1.5;
             this.enemies.push(new Enemy(this.scene, Object.assign({}, tmpl, {
-              x: this.levelMgr.zoneMaxX - 3.5 - i * 1.6,
-              z: i === 0 ? -2.2 : 2.2
+              x: mx,
+              z: i === 0 ? -2.2 : 2.2,
+              enteringZone: mx > this.levelMgr.zoneMaxX - 1.0
             })));
           }
 
@@ -4784,16 +5433,19 @@
           return;
         }
 
-        // Standard wave enemies (spawned inside reachable zone bounds)
+        // Standard wave enemies: always enter naturally from the front-right (never behind the player)
         const count = 3 + zoneIdx;
         for (let i = 0; i < count; i++) {
           const tmpl = st.enemies[(i + zoneIdx) % st.enemies.length];
-          const fromLeft = i % 3 === 2 && zoneIdx > 0;
-          const ex = fromLeft
-            ? this.levelMgr.zoneMinX + 1.5 + Math.random() * 1.2
-            : this.levelMgr.zoneMaxX - 1.5 - Math.random() * 2.5;
-          const ez = -2.6 + (i / Math.max(1, count - 1)) * 5.2;
-          this.enemies.push(new Enemy(this.scene, Object.assign({}, tmpl, { x: ex, z: ez })));
+          const ex = zoneIdx === 0
+            ? (8.2 + i * 1.7 + Math.random() * 0.5)
+            : (offscreenRightX + i * 1.55 + Math.random() * 0.4);
+          const ez = -2.4 + (i / Math.max(1, count - 1)) * 4.8;
+          this.enemies.push(new Enemy(this.scene, Object.assign({}, tmpl, {
+            x: ex,
+            z: ez,
+            enteringZone: ex > this.levelMgr.zoneMaxX - 0.9
+          })));
         }
       }
 
@@ -5040,7 +5692,7 @@
           }
 
           for (const f of active) {
-            const maxX = f.isPlayer ? maxPlayerX : this.levelMgr.zoneMaxX;
+            const maxX = f.isPlayer ? maxPlayerX : (f.enteringZone ? f.enterMaxX : this.levelMgr.zoneMaxX);
             f.pos.x = Math.max(this.levelMgr.zoneMinX, Math.min(maxX, f.pos.x));
             f.pos.z = Math.max(-3.8, Math.min(3.8, f.pos.z));
             f.rig.root.position.set(f.pos.x, f.pos.y, f.pos.z);
@@ -5060,7 +5712,39 @@
             if (Math.abs(e.pos.x - pBox.x) <= pBox.rx && Math.abs(e.pos.z - pBox.z) <= pBox.rz) {
               pBox.attack.hitTargets.add(e);
               const dir = e.pos.x >= p1.pos.x ? 1 : -1;
-              if (e.takeDamage(pBox.attack.damage, dir, pBox.attack.knockback, pBox.attack.knockdown, this)) {
+
+              // Check weapon hit & 10-hit durability break finisher
+              let hitDmg = pBox.attack.damage;
+              let hitKnockdown = pBox.attack.knockdown;
+              let hitKnockback = pBox.attack.knockback;
+              let brokeNow = false;
+              const usedWeaponType = pBox.attack.weaponType;
+
+              if (usedWeaponType && p1.weapon) {
+                p1.weapon.uses -= 1;
+                if (p1.weapon.uses <= 0) {
+                  brokeNow = true;
+                  hitDmg = Math.round(hitDmg * 1.45);
+                  hitKnockdown = true;
+                  hitKnockback += 3.0;
+                }
+              }
+
+              if (e.takeDamage(hitDmg, dir, hitKnockback, hitKnockdown, this)) {
+                if (usedWeaponType) {
+                  if (brokeNow) {
+                    p1.breakWeapon(this);
+                  } else {
+                    this.audio.sfx(usedWeaponType === 'bottle' ? 'bottleHit' : 'batHit');
+                    this.particles.spawnHitSparks(
+                      new THREE.Vector3(e.pos.x, e.pos.y + 1.3, e.pos.z),
+                      usedWeaponType === 'bottle' ? 0x52b788 : 0xd4a373,
+                      8,
+                      this.highQuality
+                    );
+                  }
+                }
+
                 p1.energy = Math.min(p1.maxEnergy, p1.energy + 9);
                 this.registerHit(p1);
                 if (e.dead) {
@@ -5081,7 +5765,16 @@
             if (Math.abs(c.pos.x - pBox.x) <= pBox.rx + 0.45 && Math.abs(c.pos.z - pBox.z) <= pBox.rz + 0.45) {
               pBox.attack.hitTargets.add(c);
               c.hp -= pBox.attack.damage;
-              this.audio.sfx('heavy');
+              if (pBox.attack.weaponType && p1.weapon) {
+                p1.weapon.uses -= 1;
+                if (p1.weapon.uses <= 0) {
+                  p1.breakWeapon(this);
+                } else {
+                  this.audio.sfx(pBox.attack.weaponType === 'bottle' ? 'bottleHit' : 'batHit');
+                }
+              } else {
+                this.audio.sfx('heavy');
+              }
               this.particles.spawnHitSparks(new THREE.Vector3(c.pos.x, 0.7, c.pos.z), 0xd4a373, 10, this.highQuality);
               if (c.hp <= 0) {
                 c.broken = true;
@@ -5177,6 +5870,16 @@
           }
         }
 
+        // Animate Ground Weapons (pulse indicator ring brightly when player is in pickup range)
+        for (const w of this.levelMgr.weapons) {
+          const near = p1 && !p1.dead && !p1.weapon &&
+            Math.abs(p1.pos.x - w.pos.x) <= 1.55 &&
+            Math.abs(p1.pos.z - w.pos.z) <= 1.15;
+          const pulse = 1 + Math.sin(this.stageTimer * (near ? 10 : 4.2)) * (near ? 0.16 : 0.08);
+          w.ring.scale.setScalar(pulse);
+          w.ring.material.opacity = near ? 0.95 : 0.52;
+        }
+
         this.particles.update(dt);
 
         // Zone progression & GO indicator
@@ -5217,6 +5920,35 @@
           document.getElementById('hud-p1-hp').style.width = `${hpPct}%`;
           document.getElementById('hud-p1-en').style.width = `${(p1.energy / p1.maxEnergy) * 100}%`;
           document.getElementById('hud-p1-ko').classList.toggle('show', p1.dead);
+
+          // Held weapon durability HUD bar
+          const wBar = document.getElementById('hud-weapon-bar');
+          if (wBar) {
+            if (p1.weapon && !p1.dead) {
+              wBar.classList.add('active');
+              document.getElementById('hud-weapon-label').textContent = p1.weapon.type === 'bottle' ? '🍾 玻璃瓶' : '🏏 木棒';
+              document.getElementById('hud-weapon-count').textContent = `${p1.weapon.uses}/${p1.weapon.maxUses}`;
+              document.getElementById('hud-weapon-fill').style.width = `${Math.max(0, (p1.weapon.uses / p1.weapon.maxUses) * 100)}%`;
+            } else {
+              wBar.classList.remove('active');
+            }
+          }
+
+          // Highlight 拳 & 腳 buttons and hint pill when Special / Ultimate is ready
+          const btnP = document.getElementById('btn-t-punch');
+          const btnK = document.getElementById('btn-t-kick');
+          const hint = document.getElementById('touch-spec-hint');
+          if (btnP && btnK && hint) {
+            const ultReady = p1.energy >= p1.special2.cost;
+            const specReady = p1.energy >= p1.special1.cost;
+            btnP.classList.toggle('ult-ready', ultReady);
+            btnK.classList.toggle('ult-ready', ultReady);
+            btnP.classList.toggle('spec-ready', !ultReady && specReady);
+            btnK.classList.toggle('spec-ready', !ultReady && specReady);
+            hint.classList.toggle('ult', ultReady);
+            hint.classList.toggle('ready', !ultReady && specReady);
+            hint.textContent = ultReady ? '拳+腳 超必殺 MAX!' : specReady ? '拳+腳 必殺就緒!' : '拳+腳 必殺';
+          }
         }
 
         document.getElementById('hud-score').textContent = `SCORE ${String(this.score).padStart(5, '0')}`;
