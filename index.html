@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-HK">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
@@ -126,18 +126,19 @@
     /* Character Select */
     #char-select-screen {
       justify-content: space-between;
-      padding: 16px 22px 20px;
-      background: linear-gradient(180deg, rgba(8, 10, 20, 0.86) 0%, rgba(8, 10, 20, 0.22) 48%, rgba(8, 10, 20, 0.92) 100%);
+      padding: max(12px, env(safe-area-inset-top)) 18px max(16px, env(safe-area-inset-bottom));
+      background: linear-gradient(180deg, rgba(8, 10, 20, 0.86) 0%, rgba(8, 10, 20, 0.20) 45%, rgba(8, 10, 20, 0.94) 100%);
       backdrop-filter: none;
     }
 
     .char-select-header {
       text-align: center;
+      flex-shrink: 0;
     }
 
     .char-select-header h2 {
       font-family: 'Black Ops One', cursive;
-      font-size: clamp(1.5rem, 3.4vw, 2.5rem);
+      font-size: clamp(1.35rem, 3.2vw, 2.4rem);
       color: #ffd166;
       letter-spacing: 2px;
     }
@@ -145,46 +146,46 @@
     .char-cards {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 9px;
+      gap: 11px;
       width: min(1020px, 96vw);
-      max-height: 44vh;
+      max-height: 48vh;
       overflow-y: auto;
+      padding: 12px 4px 4px;
       margin-top: auto;
-      padding-top: 12px;
-      padding-right: 2px;
+      -webkit-overflow-scrolling: touch;
     }
 
     .char-card {
       background: rgba(14, 18, 34, 0.88);
       border: 2px solid rgba(255, 255, 255, 0.18);
-      border-radius: 12px;
-      padding: 9px 11px;
+      border-radius: 13px;
+      padding: 10px 12px;
       cursor: pointer;
       touch-action: manipulation;
       transition: all 0.18s ease;
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 5px;
       position: relative;
     }
 
     .char-card.selected-p1 {
       border-color: #ff9e00;
-      background: rgba(36, 24, 16, 0.92);
-      box-shadow: 0 0 22px rgba(255, 158, 0, 0.45);
-      transform: translateY(-4px);
+      background: rgba(36, 24, 16, 0.94);
+      box-shadow: 0 0 20px rgba(255, 158, 0, 0.45);
+      transform: translateY(-2px);
     }
 
     .player-badges {
       display: flex;
       gap: 6px;
       position: absolute;
-      top: -11px;
+      top: -10px;
       right: 10px;
     }
 
     .p-badge {
-      font-size: 0.78rem;
+      font-size: 0.72rem;
       font-weight: 700;
       padding: 2px 8px;
       border-radius: 99px;
@@ -197,12 +198,12 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 10px;
+      gap: 9px;
     }
 
     .char-portrait-thumb {
-      width: 52px;
-      height: 52px;
+      width: 54px;
+      height: 54px;
       border-radius: 10px;
       object-fit: cover;
       border: 2px solid rgba(255, 209, 102, 0.85);
@@ -212,6 +213,7 @@
 
     .char-title-group {
       flex: 1;
+      min-width: 0;
       display: flex;
       flex-direction: column;
       gap: 2px;
@@ -219,25 +221,27 @@
 
     .char-name {
       font-family: 'Black Ops One', cursive;
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       color: #fff;
+      line-height: 1.1;
     }
 
     .char-role {
-      font-size: 0.74rem;
-      padding: 1px 7px;
+      font-size: 0.76rem;
+      padding: 2px 7px;
       border-radius: 99px;
       background: rgba(255, 158, 0, 0.2);
       color: #ffd166;
       font-weight: 700;
       align-self: flex-start;
+      white-space: nowrap;
     }
 
     .stat-row {
       display: flex;
       align-items: center;
       gap: 6px;
-      font-size: 0.78rem;
+      font-size: 0.8rem;
     }
 
     .stat-label {
@@ -248,7 +252,7 @@
 
     .stat-bar-bg {
       flex: 1;
-      height: 6px;
+      height: 7px;
       background: rgba(255, 255, 255, 0.12);
       border-radius: 4px;
       overflow: hidden;
@@ -267,11 +271,11 @@
     }
 
     .char-specials {
-      font-size: 0.72rem;
+      font-size: 0.76rem;
       color: #b7d5ff;
       line-height: 1.25;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
-      padding-top: 4px;
+      padding-top: 5px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -283,77 +287,6 @@
       margin-top: 10px;
       align-items: center;
       flex-shrink: 0;
-    }
-
-    .char-title-group {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .char-name {
-      font-family: 'Black Ops One', cursive;
-      font-size: 1.4rem;
-      color: #fff;
-    }
-
-    .char-role {
-      font-size: 0.82rem;
-      padding: 2px 8px;
-      border-radius: 99px;
-      background: rgba(255, 158, 0, 0.2);
-      color: #ffd166;
-      font-weight: 700;
-      align-self: flex-start;
-    }
-
-    .stat-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.86rem;
-    }
-
-    .stat-label {
-      width: 34px;
-      color: #a9b8d4;
-      font-weight: 700;
-    }
-
-    .stat-bar-bg {
-      flex: 1;
-      height: 8px;
-      background: rgba(255, 255, 255, 0.12);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .stat-bar-fill {
-      height: 100%;
-      border-radius: 4px;
-      background: linear-gradient(90deg, #ff9e00, #ff2a5f);
-    }
-
-    .stat-val {
-      width: 28px;
-      text-align: right;
-      font-weight: 700;
-    }
-
-    .char-specials {
-      font-size: 0.8rem;
-      color: #b7d5ff;
-      line-height: 1.3;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      padding-top: 6px;
-    }
-
-    .char-actions {
-      display: flex;
-      gap: 14px;
-      margin-top: 12px;
-      align-items: center;
     }
 
     /* HUD */
@@ -373,7 +306,7 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      padding: 12px 16px;
+      padding: max(10px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) 10px max(12px, env(safe-area-inset-left));
       gap: 10px;
     }
 
@@ -384,11 +317,11 @@
     }
 
     .player-hud {
-      background: rgba(10, 14, 26, 0.8);
+      background: rgba(10, 14, 26, 0.82);
       border: 2px solid rgba(255, 158, 0, 0.45);
       border-radius: 12px;
       padding: 8px 12px;
-      width: min(310px, 46vw);
+      width: min(315px, 48vw);
       backdrop-filter: blur(4px);
       display: flex;
       align-items: center;
@@ -397,8 +330,8 @@
 
     .hud-portrait-wrap {
       position: relative;
-      width: 56px;
-      height: 56px;
+      width: 54px;
+      height: 54px;
       flex-shrink: 0;
     }
 
@@ -440,16 +373,17 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 5px;
+      gap: 6px;
     }
 
     .hud-char-name {
       font-family: 'Black Ops One', cursive;
-      font-size: 1.08rem;
+      font-size: 1.05rem;
       color: #ffd166;
     }
 
     .hud-score {
-      font-size: 0.98rem;
+      font-size: 0.92rem;
       color: #8ce0ff;
       font-weight: 700;
     }
@@ -483,6 +417,49 @@
       transition: width 0.12s ease;
     }
 
+    #hud-weapon {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      margin-top: 5px;
+      padding: 2px 7px;
+      border-radius: 6px;
+      background: rgba(255, 183, 3, 0.16);
+      border: 1px solid rgba(255, 183, 3, 0.55);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #ffd166;
+    }
+
+    #hud-weapon.active {
+      display: flex;
+    }
+
+    #hud-weapon.low {
+      background: rgba(255, 42, 95, 0.22);
+      border-color: #ff2a5f;
+      color: #ff8fa3;
+    }
+
+    .weapon-dur-bg {
+      flex: 1;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.16);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    #hud-weapon-fill {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, #ffd166, #38ef7d);
+      transition: width 0.12s ease;
+    }
+
+    #hud-weapon.low #hud-weapon-fill {
+      background: linear-gradient(90deg, #ff0040, #ff6b6b);
+    }
+
     .stage-hud {
       text-align: center;
       background: rgba(10, 14, 26, 0.74);
@@ -493,13 +470,13 @@
 
     .stage-title {
       font-family: 'Black Ops One', cursive;
-      font-size: clamp(0.85rem, 1.8vw, 1.18rem);
+      font-size: clamp(0.82rem, 1.8vw, 1.15rem);
       color: #fff;
       letter-spacing: 1px;
     }
 
     .stage-meta {
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       color: #ffd166;
       font-weight: 700;
     }
@@ -507,17 +484,19 @@
     .hud-right-controls {
       pointer-events: auto;
       display: flex;
-      gap: 8px;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
     }
 
     .mini-btn {
       font-family: 'Rajdhani', sans-serif;
       font-weight: 700;
-      font-size: 0.88rem;
-      padding: 7px 11px;
+      font-size: 0.84rem;
+      padding: 7px 10px;
       border-radius: 8px;
       border: 1px solid rgba(255, 255, 255, 0.25);
-      background: rgba(12, 16, 30, 0.82);
+      background: rgba(12, 16, 30, 0.84);
       color: #fff;
       cursor: pointer;
       touch-action: manipulation;
@@ -527,10 +506,16 @@
       border-color: #ff9e00;
     }
 
+    .mini-btn.bgm-off {
+      border-color: rgba(255, 42, 95, 0.65);
+      color: #ff8fa3;
+      opacity: 0.85;
+    }
+
     /* Boss HUD */
     #boss-hud {
       position: absolute;
-      top: 94px;
+      top: 98px;
       left: 50%;
       transform: translateX(-50%);
       width: min(560px, 86vw);
@@ -580,9 +565,9 @@
     #combo-display {
       position: absolute;
       left: 20px;
-      top: 122px;
+      top: 130px;
       font-family: 'Black Ops One', cursive;
-      font-size: 2.1rem;
+      font-size: 2.0rem;
       color: #ffd166;
       text-shadow: 0 4px 12px rgba(255, 80, 0, 0.8);
       opacity: 0;
@@ -647,10 +632,11 @@
       color: #ffd166;
       text-shadow: 0 2px 6px #000;
       animation: floatUp 0.75s ease-out forwards;
+      white-space: nowrap;
     }
 
     .dmg-num.crit {
-      font-size: 1.85rem;
+      font-size: 1.8rem;
       color: #ff2a5f;
     }
 
@@ -663,7 +649,7 @@
       100% { opacity: 0; transform: translate(-50%, -52px) scale(0.85); }
     }
 
-    /* Modal Panels (Controls, Options, Results) */
+    /* Modal Panels (Controls, Options, Results, Missing File Error) */
     .panel {
       background: rgba(14, 18, 34, 0.95);
       border: 2px solid rgba(255, 255, 255, 0.2);
@@ -823,7 +809,6 @@
       pointer-events: none;
     }
 
-    /* Primary Attack: Punch (lower-left of right cluster, natural thumb rest) */
     #btn-t-punch {
       width: 76px;
       height: 76px;
@@ -833,7 +818,6 @@
       border-color: rgba(255, 170, 190, 0.72);
     }
 
-    /* Secondary Attack: Kick (right-middle along thumb sweep arc, ~36px clear gap from Punch) */
     #btn-t-kick {
       width: 76px;
       height: 76px;
@@ -843,7 +827,6 @@
       border-color: rgba(255, 222, 148, 0.72);
     }
 
-    /* Jump (upper-left above Punch, ~44px clear vertical gap) */
     #btn-t-jump {
       width: 68px;
       height: 68px;
@@ -905,6 +888,54 @@
       box-shadow: 0 0 14px rgba(255, 158, 0, 0.75);
     }
 
+    @media (max-width: 768px) {
+      #char-select-screen {
+        padding: max(8px, env(safe-area-inset-top)) 10px max(12px, env(safe-area-inset-bottom));
+      }
+      .char-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        max-height: 41vh;
+        overflow-y: auto;
+        gap: 7px;
+      }
+      .char-card {
+        padding: 7px 8px;
+        gap: 3px;
+      }
+      .char-portrait-thumb {
+        width: 40px;
+        height: 40px;
+      }
+      .char-name { font-size: 1.0rem; }
+      .char-role { font-size: 0.64rem; padding: 1px 6px; }
+      .stat-row { font-size: 0.68rem; gap: 4px; }
+      .stat-label { width: 24px; }
+      .stat-val { width: 20px; }
+      .char-specials { font-size: 0.64rem; padding-top: 3px; }
+      .char-actions {
+        margin-top: 8px;
+        gap: 10px;
+      }
+      .char-actions .btn {
+        font-size: 1.02rem;
+        padding: 10px 20px;
+      }
+      .control-grid {
+        grid-template-columns: 1fr;
+      }
+      .hud-top {
+        padding: max(6px, env(safe-area-inset-top)) 8px 6px;
+      }
+      .player-hud {
+        padding: 6px 8px;
+        width: min(230px, 50vw);
+      }
+      .hud-portrait-wrap {
+        width: 44px;
+        height: 44px;
+      }
+    }
+
     @media (max-width: 480px) {
       #joystick-zone {
         width: 122px;
@@ -925,48 +956,13 @@
       }
     }
 
-    @media (max-width: 768px) {
-      #char-select-screen {
-        padding: 10px 10px max(12px, env(safe-area-inset-bottom));
-      }
+    @media (max-height: 680px) {
       .char-cards {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        max-height: 41vh;
-        overflow-y: auto;
-        gap: 7px;
+        max-height: 36vh;
       }
-      .char-card {
-        padding: 7px 8px;
-        gap: 3px;
-      }
-      .char-portrait-thumb {
-        width: 40px;
-        height: 40px;
-      }
-      .char-name {
-        font-size: 1rem;
-      }
-      .char-role {
-        font-size: 0.66rem;
-      }
-      .stat-row {
-        font-size: 0.7rem;
-        gap: 4px;
-      }
-      .char-specials {
-        font-size: 0.65rem;
-      }
-      .char-actions {
-        margin-top: 8px;
-      }
-      .control-grid {
-        grid-template-columns: 1fr;
-      }
-      .hud-top {
-        padding: 8px 10px;
-      }
-      .player-hud {
-        padding: 6px 9px;
+      .char-actions .btn {
+        padding: 8px 18px;
+        font-size: 0.96rem;
       }
     }
   </style>
@@ -992,6 +988,10 @@
               </div>
               <div class="bar-wrap"><div class="hp-fill" id="hud-p1-hp"></div></div>
               <div class="bar-wrap energy-wrap"><div class="energy-fill" id="hud-p1-en"></div></div>
+              <div id="hud-weapon">
+                <span id="hud-weapon-label">🍾 玻璃瓶 10/10</span>
+                <div class="weapon-dur-bg"><div id="hud-weapon-fill"></div></div>
+              </div>
             </div>
           </div>
         </div>
@@ -1002,6 +1002,7 @@
         </div>
 
         <div class="hud-right-controls">
+          <button class="mini-btn" id="btn-toggle-bgm">BGM ON</button>
           <button class="mini-btn" id="btn-toggle-touch">TOUCH</button>
           <button class="mini-btn" id="btn-pause">PAUSE</button>
         </div>
@@ -1043,7 +1044,7 @@
     <!-- MAIN MENU -->
     <div id="main-menu" class="screen active">
       <h1 class="arcade-title">FOOK STREET WAR</h1>
-      <div class="arcade-subtitle">Lidl Avengers: Workday</div>
+      <div class="arcade-subtitle">LIDL Avengers: Workday</div>
       <div class="menu-buttons">
         <button class="btn btn-primary" id="btn-start-1p">START GAME</button>
         <button class="btn" id="btn-char-select">CHARACTER SELECT</button>
@@ -1071,20 +1072,20 @@
         <h3>PLAYER CONTROLS</h3>
         <div class="control-grid">
           <div><span class="key-badge">W A S D / Arrows</span> Move (2x Left/Right Dash)</div>
-          <div><span class="key-badge">J</span> Punch 拳 (3-Hit Combo)</div>
-          <div><span class="key-badge">K</span> Kick 腳</div>
-          <div><span class="key-badge">L</span> Jump 跳</div>
+          <div><span class="key-badge">J / 拳</span> Punch Combo &amp; Pick Up Weapons</div>
+          <div><span class="key-badge">K / 腳</span> Kick / Air Kick</div>
+          <div><span class="key-badge">L / 跳</span> Jump</div>
           <div><span class="key-badge">J + K / 拳+腳</span> Special (35 EN) / Ult (100 EN)</div>
           <div><span class="key-badge">U</span> AOE Special (35 EN)</div>
           <div><span class="key-badge">H / Shift+U</span> Ultimate (100 EN)</div>
           <div><span class="key-badge">I</span> Block / Dodge</div>
           <div><span class="key-badge">O</span> Grab &amp; Throw</div>
         </div>
-        <div style="text-align:center; color:#a9b8d4; margin-bottom:14px; font-size:0.92rem;">
-          手機模式精簡為「拳 / 腳 / 跳」三鍵，同時按下「拳 + 腳」即可發動必殺技！
+        <div style="text-align:center; color:#ffd166; margin-bottom:10px; font-size:0.94rem;">
+          靠近「玻璃瓶 / 木棒」時按拳鍵即可彎腰拾取並握在手上攻擊（10 次命中後碎裂）！
         </div>
         <div style="text-align:center; color:#a9b8d4; margin-bottom:14px; font-size:0.92rem;">
-          Mobile touch controls auto-enable on touchscreens or via the HUD "TOUCH" button.
+          手機精簡為「拳 / 腳 / 跳」三鍵，同時按下「拳 + 腳」即可發動必殺技！
         </div>
         <div style="text-align:center;">
           <button class="btn btn-primary" id="btn-controls-close">CLOSE</button>
@@ -1098,11 +1099,11 @@
         <h2>OPTIONS</h2>
         <div class="option-row">
           <span>BGM Volume</span>
-          <input type="range" id="opt-bgm" min="0" max="1" step="0.05" value="0.45" />
+          <input type="range" id="opt-bgm" min="0" max="1" step="0.05" value="0.55" />
         </div>
         <div class="option-row">
           <span>SFX Volume</span>
-          <input type="range" id="opt-sfx" min="0" max="1" step="0.05" value="0.7" />
+          <input type="range" id="opt-sfx" min="0" max="1" step="0.05" value="0.75" />
         </div>
         <div class="option-row">
           <span>Graphics Quality</span>
@@ -1134,403 +1135,419 @@
         <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;" id="result-buttons"></div>
       </div>
     </div>
+
+    <!-- MISSING CHARACTERS.JS NOTICE -->
+    <div id="error-screen" class="screen">
+      <div class="panel" style="text-align:center;">
+        <h2>MISSING characters.js</h2>
+        <p style="color:#b7d5ff; font-size:1.05rem; line-height:1.5; margin-bottom:14px;">
+          找不到 <strong>characters.js</strong>！請將 <code>index.html</code> 與 <code>characters.js</code> 放在同一個資料夾後重新整理頁面。
+        </p>
+      </div>
+    </div>
   </div>
 
+  <!-- External Character Data (WAI, SHING, GEORGE, MISTY, JOHNNY, MARK) -->
+  <script src="characters.js"></script>
   <script>
     // =========================================================================
-    // 1. MODULAR CHARACTER REGISTRY (WAI, SHING, GEORGE, MISTY, JOHNNY, MARK)
-    //    Matches the split characters.js structure for effortless maintenance.
+    // 1. CHARACTER DATA  ->  Loaded from characters.js (CharacterRegistry)
     // =========================================================================
-    const CharacterDefaults = {
-      moves: {
-        combo: [
-          { anim: 'punch',  duration: 0.24, mult: 0.90, range: 1.50, knockback: 2.2, sfx: 'punch' },
-          { anim: 'punch2', duration: 0.25, mult: 1.05, range: 1.55, knockback: 2.8, sfx: 'punch' },
-          { anim: 'heavy',  duration: 0.36, mult: 1.55, range: 1.75, knockback: 6.2, knockdown: true, sfx: 'heavy' }
-        ],
-        comboWindow: 0.75,
-        dashAttack: { anim: 'heavy', duration: 0.34, mult: 1.50, range: 1.85, knockback: 6.5, knockdown: true, sfx: 'heavy' },
-        kick: { anim: 'kick', duration: 0.32, mult: 1.25, range: 1.80, knockback: 4.8, sfx: 'kick', comboKnockdown: 2 },
-        airKick: { anim: 'kick', duration: 0.34, mult: 1.35, range: 1.80, knockback: 5.8, knockdown: true, sfx: 'kick' },
-        grab: { duration: 0.34, reach: 1.65, reachZ: 0.95, pull: 0.95, damageMult: 0.34, knockback: 9.2, energyGain: 12 },
-        special1: { cost: 35,  duration: 0.48, invuln: 0.45, knockback: 6.5, knockdown: true, color: 0x00d4ff, sfx: 'special', banner: false },
-        special2: { cost: 100, duration: 0.65, invuln: 0.75, knockback: 9.5, knockdown: true, color: 0xff2a5f, sfx: 'special', banner: true }
-      },
-      face: {
-        template: 'sidepart',
-        palette: null,
-        head: { sx: 0.220, sy: 0.270, sz: 0.218, jaw: 0.21, cheek: 0.015 },
-        earX: 0.212,
-        noseScale: 0.88,
-        tex: { noseW: 14, noseY: 21, sideHairY: 210, sideburnSolid: false, earY: 244, faceCy: 240, faceScale: 1.44 }
-      },
-      enemyHead: { sx: 0.218, sy: 0.258, sz: 0.218, jaw: 0.24, cheek: 0.01 }
-    };
-
-    const CharacterRoster = [
-      // 1. WAI — Power Type
-      {
-        id: 'WAI',
-        name: 'WAI',
-        role: 'POWER TYPE',
-        hp: 85, def: 65, atk: 100, spd: 55,
-        special1: { name: 'Earthquake Slam', cost: 35, mult: 1.85, radius: 3.6, color: 0xff9e00 },
-        special2: { name: 'Titan Meteor Crush', cost: 100, mult: 3.1, radius: 4.8, color: 0xff2a5f },
-        appearance: {
-          faceId: 'WAI', skin: 0xd9a886, hair: 0x17171a, hairStyle: 'messy',
-          shirt: 0x35382a, pants: 0x15161a, torsoW: 0.68, pocket: true, glasses: null
-        },
-        face: {
-          template: 'messy',
-          palette: {
-            base: '#d9a886', hi: '#e9c2a4', mid: '#ce9977', sh: '#b88260',
-            lip: '#be7b6e', lipLine: '#7a453b', hair: '#17171a', hairHi: '#2f3038',
-            shirt: '#35382a', shirtDark: '#272a1f', bgA: '#2c3024', bgB: '#12151f'
-          },
-          head: { sx: 0.238, sy: 0.258, sz: 0.228, jaw: 0.14, cheek: 0.055 },
-          earX: 0.225, noseScale: 1.08,
-          tex: { noseW: 17.5, noseY: 23, sideHairY: 280, sideburnSolid: true, earY: 244, faceCy: 240, faceScale: 1.48 }
-        }
-      },
-      // 2. SHING — Speed Type
-      {
-        id: 'SHING',
-        name: 'SHING',
-        role: 'SPEED TYPE',
-        hp: 75, def: 55, atk: 75, spd: 100,
-        special1: { name: 'Cyclone Kick', cost: 35, mult: 1.7, radius: 3.8, color: 0x00d4ff },
-        special2: { name: 'Hyper Blitz Flurry', cost: 100, mult: 2.95, radius: 5.0, color: 0x00f5d4 },
-        appearance: {
-          faceId: 'SHING', skin: 0xe8bfa4, hair: 0x261b15, hairStyle: 'undercut',
-          shirt: 0xf0eadc, pants: 0x1c2940, torsoW: 0.62, pocket: false, glasses: 'silver'
-        },
-        face: {
-          template: 'undercut',
-          palette: {
-            base: '#e8bfa4', hi: '#f7d9c4', mid: '#ddae90', sh: '#c49275',
-            lip: '#c47b74', lipLine: '#844640', hair: '#261b15', hairHi: '#423026',
-            shirt: '#f0eadc', shirtDark: '#d6cdb8', bgA: '#1d2948', bgB: '#0f1324'
-          },
-          head: { sx: 0.218, sy: 0.258, sz: 0.218, jaw: 0.24, cheek: 0.01 },
-          earX: 0.212, noseScale: 0.88,
-          tex: { noseW: 13.5, noseY: 21, sideHairY: 210, sideburnSolid: false, earY: 244, faceCy: 240, faceScale: 1.44 }
-        }
-      },
-      // 3. GEORGE — Defense Type
-      {
-        id: 'GEORGE',
-        name: 'GEORGE',
-        role: 'DEFENSE TYPE',
-        hp: 100, def: 100, atk: 70, spd: 45,
-        special1: { name: 'Aegis Shockwave', cost: 35, mult: 1.75, radius: 4.0, color: 0x4cc9f0 },
-        special2: { name: 'Fortress Nova', cost: 100, mult: 3.0, radius: 5.2, color: 0x4361ee },
-        appearance: {
-          faceId: 'GEORGE', skin: 0xe0ad8b, hair: 0x141518, hairStyle: 'sidepart',
-          shirt: 0x222854, pants: 0xc2b192, torsoW: 0.65, pocket: false, glasses: 'black'
-        },
-        face: {
-          template: 'sidepart',
-          palette: {
-            base: '#e0ad8b', hi: '#f0c6a8', mid: '#d39c7a', sh: '#ba8463',
-            lip: '#be796d', lipLine: '#78443a', hair: '#141518', hairHi: '#2a2c33',
-            shirt: '#222854', shirtDark: '#171c3d', bgA: '#1e2752', bgB: '#0f1326'
-          },
-          head: { sx: 0.220, sy: 0.270, sz: 0.218, jaw: 0.21, cheek: 0.015 },
-          earX: 0.212, noseScale: 0.88,
-          tex: { noseW: 14.5, noseY: 21, sideHairY: 210, sideburnSolid: false, earY: 236, faceCy: 236, faceScale: 1.44 }
-        }
-      },
-      // 4. MISTY — Agile Striker (Female, Black Shirt with Doraemon graphic)
-      {
-        id: 'MISTY',
-        name: 'MISTY',
-        role: 'AGILE STRIKER',
-        hp: 78, def: 62, atk: 80, spd: 92,
-        special1: { name: 'Pocket Bell Spin', cost: 35, mult: 1.78, radius: 3.9, color: 0x00b4d8 },
-        special2: { name: 'Midnight Lotus Storm', cost: 100, mult: 3.05, radius: 5.1, color: 0xff4d8d },
-        appearance: {
-          faceId: 'MISTY', gender: 'female',
-          skin: 0xeab996, hair: 0x1c1411, hairStyle: 'longhair',
-          shirt: 0x15171d, pants: 0x222530, torsoW: 0.56,
-          pocket: false, glasses: null, chestPrint: 'doraemon'
-        },
-        face: {
-          template: 'longhair',
-          palette: {
-            base: '#eab996', hi: '#fad5b9', mid: '#dda782', sh: '#c48d6a',
-            lip: '#d8787b', lipLine: '#9c484c', hair: '#1c1411', hairHi: '#3d2a22',
-            shirt: '#15171d', shirtDark: '#0b0c10', bgA: '#2b2038', bgB: '#0e101c'
-          },
-          head: { sx: 0.212, sy: 0.250, sz: 0.212, jaw: 0.27, cheek: 0.032 },
-          earX: 0.200, noseScale: 0.78,
-          tex: { noseW: 12.2, noseY: 20, sideHairY: 325, sideburnSolid: true, earY: 244, faceCy: 240, faceScale: 1.44 }
-        },
-        moves: {
-          combo: [
-            { anim: 'punch',  duration: 0.20, mult: 0.82, range: 1.50, knockback: 1.8, sfx: 'punch' },
-            { anim: 'punch2', duration: 0.20, mult: 0.90, range: 1.55, knockback: 2.2, sfx: 'punch' },
-            { anim: 'kick',   duration: 0.24, mult: 1.15, range: 1.80, knockback: 3.6, sfx: 'kick' },
-            { anim: 'heavy',  duration: 0.32, mult: 1.55, range: 1.85, knockback: 6.4, knockdown: true, sfx: 'heavy' }
-          ],
-          kick: { anim: 'kick', duration: 0.28, mult: 1.35, range: 1.92, knockback: 5.2, sfx: 'kick', comboKnockdown: 2 }
-        }
-      },
-      // 5. JOHNNY — Aerial Brawler (Male, Purple Shirt with NBA graphic, Black Rectangular Glasses)
-      {
-        id: 'JOHNNY',
-        name: 'JOHNNY',
-        role: 'AERIAL BRAWLER',
-        hp: 82, def: 60, atk: 88, spd: 82,
-        special1: { name: 'Alley-Oop Slam', cost: 35, mult: 1.82, radius: 3.8, color: 0x9b5de5 },
-        special2: { name: 'Court Breaker Dunk', cost: 100, mult: 3.15, radius: 5.0, color: 0xffbe0b },
-        appearance: {
-          faceId: 'JOHNNY',
-          skin: 0xdead8c, hair: 0x151519, hairStyle: 'fade',
-          shirt: 0x5c249c, pants: 0x191726, torsoW: 0.65,
-          pocket: false, glasses: 'black', chestPrint: 'nba'
-        },
-        face: {
-          template: 'fade',
-          palette: {
-            base: '#dead8c', hi: '#f0c7ab', mid: '#cf9b79', sh: '#b58060',
-            lip: '#ba7770', lipLine: '#7a4540', hair: '#151519', hairHi: '#30313a',
-            shirt: '#5c249c', shirtDark: '#3f1670', bgA: '#36195e', bgB: '#100c1f'
-          },
-          head: { sx: 0.218, sy: 0.274, sz: 0.218, jaw: 0.25, cheek: 0.015 },
-          earX: 0.212, noseScale: 0.96,
-          tex: { noseW: 15.6, noseY: 22, sideHairY: 192, sideburnSolid: false, earY: 246, faceCy: 246, faceScale: 1.42 }
-        },
-        moves: {
-          dashAttack: { anim: 'heavy', duration: 0.30, mult: 1.65, range: 2.00, knockback: 7.2, knockdown: true, sfx: 'heavy' },
-          airKick: { anim: 'kick', duration: 0.32, mult: 1.60, range: 1.95, knockback: 6.8, knockdown: true, sfx: 'heavy' }
-        }
-      },
-      // 6. MARK — Street Brawler (Male, Hooded Jacket with SUP graphic, Side-swept Hair, Mole & Chin Goatee)
-      {
-        id: 'MARK',
-        name: 'MARK',
-        role: 'STREET BRAWLER',
-        hp: 90, def: 82, atk: 82, spd: 60,
-        special1: { name: 'Hype Shockwave', cost: 35, mult: 1.80, radius: 3.9, color: 0xe6192e },
-        special2: { name: 'Drop Zone Impact', cost: 100, mult: 3.10, radius: 5.1, color: 0xff3b30 },
-        appearance: {
-          faceId: 'MARK',
-          skin: 0xdfb091, hair: 0x161517, hairStyle: 'street',
-          shirt: 0x262a34, pants: 0x15171c, torsoW: 0.67,
-          pocket: false, glasses: null, hoodie: true, chestPrint: 'sup'
-        },
-        face: {
-          template: 'street',
-          palette: {
-            base: '#dfb091', hi: '#f1cab0', mid: '#d19e7e', sh: '#b88567',
-            lip: '#b66c6e', lipLine: '#7a4245', hair: '#161517', hairHi: '#343238',
-            shirt: '#262a34', shirtDark: '#171a21', bgA: '#3b151c', bgB: '#11121c'
-          },
-          head: { sx: 0.232, sy: 0.260, sz: 0.224, jaw: 0.16, cheek: 0.050 },
-          earX: 0.222, noseScale: 1.06,
-          tex: { noseW: 17.8, noseY: 22, sideHairY: 270, sideburnSolid: true, earY: 244, faceCy: 240, faceScale: 1.46 }
-        },
-        moves: {
-          combo: [
-            { anim: 'punch',  duration: 0.24, mult: 0.96, range: 1.55, knockback: 2.6, sfx: 'punch' },
-            { anim: 'punch2', duration: 0.25, mult: 1.12, range: 1.60, knockback: 3.4, sfx: 'punch' },
-            { anim: 'heavy',  duration: 0.35, mult: 1.68, range: 1.82, knockback: 7.0, knockdown: true, sfx: 'heavy' }
-          ],
-          grab: { duration: 0.32, reach: 1.75, reachZ: 1.0, pull: 0.95, damageMult: 0.38, knockback: 9.8, energyGain: 15 }
-        }
-      }
-    ];
-
-    const CharacterRegistry = (() => {
-      const byId = {};
-      const ids = [];
-      const hex = (n) => '#' + (n >>> 0).toString(16).padStart(6, '0').slice(-6);
-      const shade = (n, f) => {
-        const ch = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((c) =>
-          Math.max(0, Math.min(255, Math.round(f >= 0 ? c + (255 - c) * f : c * (1 + f))))
-        );
-        return hex((ch[0] << 16) | (ch[1] << 8) | ch[2]);
-      };
-      const autoPalette = (a) => {
-        const skin = a.skin != null ? a.skin : 0xdca583;
-        const hair = a.hair != null ? a.hair : 0x1a1a1a;
-        const shirt = a.shirt != null ? a.shirt : 0x333333;
-        return {
-          base: hex(skin), hi: shade(skin, 0.18), mid: shade(skin, -0.06), sh: shade(skin, -0.20),
-          lip: shade(skin, -0.22), lipLine: shade(skin, -0.50),
-          hair: hex(hair), hairHi: shade(hair, 0.22),
-          shirt: hex(shirt), shirtDark: shade(shirt, -0.25),
-          bgA: shade(shirt, -0.55), bgB: '#0f1324'
-        };
-      };
-      const merge = (def, ov) => Object.assign({}, def, ov || {});
-
-      function register(raw) {
-        if (!raw || !raw.id) throw new Error('CharacterRegistry.register requires id');
-        const D = CharacterDefaults;
-        const m = raw.moves || {};
-        const app = Object.assign({ faceId: raw.id }, raw.appearance || {});
-        const f = raw.face || {};
-        const data = {
-          id: raw.id,
-          name: raw.name || raw.id,
-          role: raw.role || '',
-          hp: raw.hp, def: raw.def, atk: raw.atk, spd: raw.spd,
-          appearance: app,
-          special1: merge(merge(D.moves.special1, m.special1), raw.special1),
-          special2: merge(merge(D.moves.special2, m.special2), raw.special2),
-          moves: {
-            combo: m.combo || D.moves.combo,
-            comboWindow: m.comboWindow != null ? m.comboWindow : D.moves.comboWindow,
-            dashAttack: merge(D.moves.dashAttack, m.dashAttack),
-            kick: merge(D.moves.kick, m.kick),
-            airKick: merge(D.moves.airKick, m.airKick),
-            grab: merge(D.moves.grab, m.grab)
-          },
-          face: {
-            template: f.template || D.face.template,
-            palette: f.palette || autoPalette(app),
-            head: merge(D.face.head, f.head),
-            earX: f.earX != null ? f.earX : D.face.earX,
-            noseScale: f.noseScale != null ? f.noseScale : D.face.noseScale,
-            tex: merge(D.face.tex, f.tex)
-          }
-        };
-        if (!byId[data.id]) ids.push(data.id);
-        byId[data.id] = data;
-        return data;
-      }
-
-      CharacterRoster.forEach(register);
-      return {
-        ids,
-        register,
-        has: (id) => !!byId[id],
-        get: (id) => byId[id] || byId[ids[0]],
-        list: () => ids.map((i) => byId[i])
-      };
-    })();
 
     // =========================================================================
-    // 2. AUDIO MANAGER (Procedural Web Audio API SFX + 5-Stage BGM)
+    // 2. AUDIO MANAGER (Multi-Track 5-Stage Rhythm BGM + Boss Mode + Weapon SFX)
     // =========================================================================
     class AudioManager {
       constructor() {
         this.ctx = null;
-        this.bgmVol = 0.45;
-        this.sfxVol = 0.7;
-        this.bgmInterval = null;
+        this.compressor = null;
+        this.bgmGain = null;
+        this.sfxGain = null;
+        this.noiseBuf = null;
+
+        this.bgmVol = 0.55;
+        this.sfxVol = 0.75;
+        this.bgmMuted = false;
+
+        this.bgmTimer = null;
+        this.currentStage = 0;
+        this.bossMode = false;
         this.bgmStep = 0;
+        this.nextNoteTime = 0;
+
+        const unlock = () => {
+          this.ensureCtx();
+          if (this.ctx && this.ctx.state === 'running') {
+            window.removeEventListener('touchstart', unlock);
+            window.removeEventListener('pointerdown', unlock);
+            window.removeEventListener('keydown', unlock);
+          }
+        };
+        window.addEventListener('touchstart', unlock, { passive: true });
+        window.addEventListener('pointerdown', unlock, { passive: true });
+        window.addEventListener('keydown', unlock, { passive: true });
       }
 
       ensureCtx() {
         try {
           if (!this.ctx) {
             const AC = window.AudioContext || window.webkitAudioContext;
-            if (AC) this.ctx = new AC();
+            if (!AC) return;
+            this.ctx = new AC();
+
+            this.compressor = this.ctx.createDynamicsCompressor();
+            this.compressor.threshold.setValueAtTime(-16, this.ctx.currentTime);
+            this.compressor.knee.setValueAtTime(18, this.ctx.currentTime);
+            this.compressor.ratio.setValueAtTime(4, this.ctx.currentTime);
+            this.compressor.attack.setValueAtTime(0.005, this.ctx.currentTime);
+            this.compressor.release.setValueAtTime(0.16, this.ctx.currentTime);
+            this.compressor.connect(this.ctx.destination);
+
+            this.bgmGain = this.ctx.createGain();
+            this.bgmGain.gain.setValueAtTime(this.bgmMuted ? 0 : this.bgmVol, this.ctx.currentTime);
+            this.bgmGain.connect(this.compressor);
+
+            this.sfxGain = this.ctx.createGain();
+            this.sfxGain.gain.setValueAtTime(this.sfxVol, this.ctx.currentTime);
+            this.sfxGain.connect(this.compressor);
+
+            const len = Math.floor(this.ctx.sampleRate * 0.5);
+            this.noiseBuf = this.ctx.createBuffer(1, len, this.ctx.sampleRate);
+            const data = this.noiseBuf.getChannelData(0);
+            for (let i = 0; i < len; i++) data[i] = Math.random() * 2 - 1;
           }
-          if (this.ctx && this.ctx.state === 'suspended') {
+          if (this.ctx.state === 'suspended') {
             this.ctx.resume();
           }
-        } catch (e) {
-          // Ignore audio initialization restrictions
+        } catch (e) {}
+      }
+
+      setBgmVol(v) {
+        this.bgmVol = Math.max(0, Math.min(1, v));
+        if (this.ctx && this.bgmGain) {
+          this.bgmGain.gain.setTargetAtTime(this.bgmMuted ? 0 : this.bgmVol, this.ctx.currentTime, 0.03);
         }
+      }
+
+      setSfxVol(v) {
+        this.sfxVol = Math.max(0, Math.min(1, v));
+        if (this.ctx && this.sfxGain) {
+          this.sfxGain.gain.setTargetAtTime(this.sfxVol, this.ctx.currentTime, 0.03);
+        }
+      }
+
+      toggleBgmMute() {
+        this.bgmMuted = !this.bgmMuted;
+        if (this.ctx && this.bgmGain) {
+          this.bgmGain.gain.setTargetAtTime(this.bgmMuted ? 0 : this.bgmVol, this.ctx.currentTime, 0.03);
+        }
+        return !this.bgmMuted;
+      }
+
+      setBossMode(enabled) {
+        this.bossMode = !!enabled;
       }
 
       tone(freq, dur, type = 'square', vol = 0.2, slideTo = null) {
         try {
           this.ensureCtx();
-          if (!this.ctx || vol <= 0) return;
+          if (!this.ctx || !this.sfxGain || vol <= 0) return;
           const now = this.ctx.currentTime;
           const osc = this.ctx.createOscillator();
           const gain = this.ctx.createGain();
           osc.type = type;
           osc.frequency.setValueAtTime(freq, now);
-          if (slideTo) {
-            osc.frequency.exponentialRampToValueAtTime(Math.max(20, slideTo), now + dur);
-          }
+          if (slideTo) osc.frequency.exponentialRampToValueAtTime(Math.max(20, slideTo), now + dur);
           gain.gain.setValueAtTime(vol, now);
           gain.gain.exponentialRampToValueAtTime(0.001, now + dur);
           osc.connect(gain);
-          gain.connect(this.ctx.destination);
+          gain.connect(this.sfxGain);
           osc.start(now);
           osc.stop(now + dur + 0.02);
-        } catch (e) {
-          // Safe fallback if audio context is unavailable
-        }
+        } catch (e) {}
       }
 
       noise(dur = 0.1, vol = 0.25) {
         try {
           this.ensureCtx();
-          if (!this.ctx || vol <= 0) return;
-          const bufSize = Math.floor(this.ctx.sampleRate * dur);
-          const buf = this.ctx.createBuffer(1, bufSize, this.ctx.sampleRate);
-          const data = buf.getChannelData(0);
-          for (let i = 0; i < bufSize; i++) {
-            data[i] = (Math.random() * 2 - 1) * (1 - i / bufSize);
-          }
+          if (!this.ctx || !this.sfxGain || !this.noiseBuf || vol <= 0) return;
+          const now = this.ctx.currentTime;
           const src = this.ctx.createBufferSource();
-          src.buffer = buf;
+          src.buffer = this.noiseBuf;
           const gain = this.ctx.createGain();
-          gain.gain.setValueAtTime(vol, this.ctx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + dur);
+          gain.gain.setValueAtTime(vol, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + dur);
           src.connect(gain);
-          gain.connect(this.ctx.destination);
-          src.start();
+          gain.connect(this.sfxGain);
+          src.start(now);
+          src.stop(now + dur + 0.01);
         } catch (e) {}
       }
 
+      schedKick(t, gain = 0.42, punch = 148) {
+        const osc = this.ctx.createOscillator();
+        const g = this.ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(punch, t);
+        osc.frequency.exponentialRampToValueAtTime(42, t + 0.11);
+        g.gain.setValueAtTime(gain, t);
+        g.gain.exponentialRampToValueAtTime(0.001, t + 0.15);
+        osc.connect(g);
+        g.connect(this.bgmGain);
+        osc.start(t);
+        osc.stop(t + 0.16);
+      }
+
+      schedSnare(t, gain = 0.24, bright = 1800) {
+        if (this.noiseBuf) {
+          const src = this.ctx.createBufferSource();
+          src.buffer = this.noiseBuf;
+          const filt = this.ctx.createBiquadFilter();
+          filt.type = 'bandpass';
+          filt.frequency.setValueAtTime(bright, t);
+          filt.Q.setValueAtTime(1.1, t);
+          const g = this.ctx.createGain();
+          g.gain.setValueAtTime(gain, t);
+          g.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
+          src.connect(filt);
+          filt.connect(g);
+          g.connect(this.bgmGain);
+          src.start(t);
+          src.stop(t + 0.13);
+        }
+        const body = this.ctx.createOscillator();
+        const bg = this.ctx.createGain();
+        body.type = 'triangle';
+        body.frequency.setValueAtTime(210, t);
+        body.frequency.exponentialRampToValueAtTime(105, t + 0.06);
+        bg.gain.setValueAtTime(gain * 0.55, t);
+        bg.gain.exponentialRampToValueAtTime(0.001, t + 0.075);
+        body.connect(bg);
+        bg.connect(this.bgmGain);
+        body.start(t);
+        body.stop(t + 0.08);
+      }
+
+      schedHat(t, gain = 0.11, open = false) {
+        if (!this.noiseBuf) return;
+        const dur = open ? 0.14 : 0.045;
+        const src = this.ctx.createBufferSource();
+        src.buffer = this.noiseBuf;
+        const filt = this.ctx.createBiquadFilter();
+        filt.type = 'highpass';
+        filt.frequency.setValueAtTime(open ? 6200 : 8200, t);
+        const g = this.ctx.createGain();
+        g.gain.setValueAtTime(gain, t);
+        g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+        src.connect(filt);
+        filt.connect(g);
+        g.connect(this.bgmGain);
+        src.start(t);
+        src.stop(t + dur + 0.01);
+      }
+
+      schedClang(t, gain = 0.14) {
+        [520, 795, 1180].forEach((f, idx) => {
+          const osc = this.ctx.createOscillator();
+          const g = this.ctx.createGain();
+          osc.type = 'square';
+          osc.frequency.setValueAtTime(f, t);
+          g.gain.setValueAtTime(gain / (idx + 1.4), t);
+          g.gain.exponentialRampToValueAtTime(0.001, t + 0.16);
+          osc.connect(g);
+          g.connect(this.bgmGain);
+          osc.start(t);
+          osc.stop(t + 0.17);
+        });
+      }
+
+      schedSynth(t, freq, dur, type = 'sawtooth', gain = 0.14, cutoff = 1600) {
+        const osc = this.ctx.createOscillator();
+        const filt = this.ctx.createBiquadFilter();
+        const g = this.ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, t);
+        filt.type = 'lowpass';
+        filt.frequency.setValueAtTime(cutoff, t);
+        filt.frequency.exponentialRampToValueAtTime(Math.max(220, cutoff * 0.35), t + dur);
+        g.gain.setValueAtTime(0.001, t);
+        g.gain.linearRampToValueAtTime(gain, t + 0.008);
+        g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+        osc.connect(filt);
+        filt.connect(g);
+        g.connect(this.bgmGain);
+        osc.start(t);
+        osc.stop(t + dur + 0.02);
+      }
+
+      getStageTrack(stageIdx) {
+        const tracks = [
+          // STAGE 1: City Street — 124 BPM 90s Urban Funk Electro (A minor)
+          {
+            bpm: 124, bassType: 'sawtooth', leadType: 'square', bassCut: 920, leadCut: 2600,
+            kick:  [1,0,0,0, 0,0,1,0, 1,0,1,0, 0,0,0,0],
+            snare: [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,1],
+            hat:   [1,0,1,1, 1,0,2,0, 1,0,1,1, 1,0,2,0],
+            bass:  [110,0,110,0, 130.8,0,146.8,0, 110,0,164.8,0, 146.8,130.8,98,0],
+            leadA: [440,0,523.3,0, 587.3,523.3,440,0, 392,0,440,523.3, 659.3,0,587.3,0],
+            leadB: [523.3,0,659.3,0, 784,659.3,587.3,0, 523.3,440,392,0, 440,0,0,0],
+            chord: { 0: [220, 261.6, 329.6], 8: [196, 246.9, 293.7] }
+          },
+          // STAGE 2: Industrial Zone — 118 BPM Heavy Mechanical Breakbeat (E minor + metal clangs)
+          {
+            bpm: 118, bassType: 'sawtooth', leadType: 'sawtooth', bassCut: 740, leadCut: 1900, clang: true,
+            kick:  [1,0,0,1, 0,0,1,0, 1,0,0,0, 0,1,1,0],
+            snare: [0,0,0,0, 1,0,0,0, 0,0,1,0, 1,0,0,0],
+            hat:   [1,1,0,1, 1,1,2,0, 1,1,0,1, 1,0,2,1],
+            bass:  [82.4,82.4,0,98, 82.4,0,110,98, 82.4,0,123.5,110, 98,0,73.4,82.4],
+            leadA: [329.6,0,0,392, 0,329.6,293.7,0, 329.6,0,440,0, 392,329.6,293.7,0],
+            leadB: [440,0,392,0, 329.6,0,293.7,246.9, 329.6,392,440,0, 493.9,0,392,0],
+            chord: { 0: [164.8, 196, 246.9], 12: [146.8, 174.6, 220] }
+          },
+          // STAGE 3: Neon District — 134 BPM High-Speed Synthwave / Eurobeat (C minor)
+          {
+            bpm: 134, bassType: 'sawtooth', leadType: 'triangle', bassCut: 1200, leadCut: 3600,
+            kick:  [1,0,0,0, 1,0,0,0, 1,0,0,0, 1,0,1,0],
+            snare: [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,0],
+            hat:   [1,1,2,1, 1,1,2,1, 1,1,2,1, 1,1,2,1],
+            bass:  [130.8,261.6,130.8,261.6, 155.6,311.1,155.6,311.1, 174.6,349.2,174.6,349.2, 196,392,155.6,174.6],
+            leadA: [523.3,622.3,784,622.3, 698.5,622.3,587.3,523.3, 466.2,523.3,622.3,784, 932.3,784,698.5,622.3],
+            leadB: [784,0,698.5,622.3, 523.3,622.3,698.5,784, 1046.5,0,932.3,784, 698.5,622.3,587.3,0],
+            chord: { 0: [261.6, 311.1, 392], 8: [233.1, 293.7, 349.2] }
+          },
+          // STAGE 4: Criminal HQ — 128 BPM Dark Syndicate Techno (F# minor)
+          {
+            bpm: 128, bassType: 'square', leadType: 'sawtooth', bassCut: 860, leadCut: 2300,
+            kick:  [1,0,0,0, 1,0,0,1, 1,0,0,0, 1,0,1,0],
+            snare: [0,0,0,0, 1,0,0,0, 0,0,0,1, 1,0,0,0],
+            hat:   [0,1,1,1, 0,1,2,1, 0,1,1,1, 0,1,2,1],
+            bass:  [92.5,0,92.5,110, 92.5,0,123.5,0, 138.6,0,123.5,110, 92.5,82.4,92.5,0],
+            leadA: [370,0,440,370, 493.9,0,440,0, 554.4,493.9,440,0, 370,329.6,370,0],
+            leadB: [554.4,0,659.3,554.4, 493.9,440,370,0, 440,493.9,554.4,0, 659.3,554.4,493.9,0],
+            chord: { 0: [185, 220, 277.2], 8: [164.8, 207.7, 246.9] }
+          },
+          // STAGE 5: Final Showdown — 142 BPM Climactic Arcade Rock (D minor)
+          {
+            bpm: 142, bassType: 'sawtooth', leadType: 'square', bassCut: 1150, leadCut: 3400,
+            kick:  [1,0,1,0, 0,0,1,0, 1,1,0,0, 1,0,1,1],
+            snare: [0,0,0,0, 1,0,0,0, 0,0,0,0, 1,0,0,1],
+            hat:   [1,1,1,2, 1,1,1,2, 1,1,1,2, 1,1,2,1],
+            bass:  [146.8,146.8,174.6,146.8, 130.8,130.8,164.8,130.8, 116.5,116.5,146.8,116.5, 130.8,146.8,164.8,174.6],
+            leadA: [587.3,0,698.5,880, 784,698.5,659.3,587.3, 466.2,587.3,698.5,784, 880,784,698.5,659.3],
+            leadB: [880,0,1046.5,880, 784,698.5,880,0, 698.5,659.3,587.3,523.3, 587.3,659.3,698.5,880],
+            chord: { 0: [293.7, 349.2, 440], 4: [261.6, 329.6, 392], 8: [233.1, 293.7, 349.2], 12: [261.6, 329.6, 440] }
+          }
+        ];
+        return tracks[stageIdx % tracks.length];
+      }
+
+      scheduleStep(step, t) {
+        if (!this.ctx || !this.bgmGain || this.bgmMuted || this.bgmVol <= 0.01) return;
+        const tr = this.getStageTrack(this.currentStage);
+        const s = step % 16;
+        const isPhraseB = Math.floor(step / 16) % 2 === 1;
+        const stepDur = (60 / (tr.bpm * (this.bossMode ? 1.12 : 1.0))) / 4;
+
+        if (tr.kick[s] || (this.bossMode && (s === 10 || s === 14))) {
+          this.schedKick(t, this.bossMode ? 0.46 : 0.38, this.currentStage === 1 ? 128 : 152);
+        }
+        if (tr.snare[s]) {
+          this.schedSnare(t, 0.24, this.currentStage === 2 ? 2400 : 1750);
+        }
+        if (tr.hat[s] || (this.bossMode && s % 2 === 1)) {
+          this.schedHat(t, tr.hat[s] === 2 ? 0.12 : 0.085, tr.hat[s] === 2);
+        }
+        if (tr.clang && (s === 6 || s === 14)) {
+          this.schedClang(t, 0.11);
+        }
+        const bFreq = tr.bass[s];
+        if (bFreq > 0) {
+          this.schedSynth(t, bFreq, stepDur * 1.45, tr.bassType, 0.19, tr.bassCut);
+        }
+        if (tr.chord && tr.chord[s]) {
+          tr.chord[s].forEach((cf) => {
+            this.schedSynth(t, cf, stepDur * 2.6, 'triangle', 0.06, 1500);
+          });
+        }
+        const lFreq = (isPhraseB ? tr.leadB : tr.leadA)[s];
+        if (lFreq > 0) {
+          this.schedSynth(t, lFreq, stepDur * 1.35, tr.leadType, this.bossMode ? 0.13 : 0.105, tr.leadCut);
+        }
+      }
+
       sfx(type) {
-        const v = this.sfxVol;
-        if (v <= 0) return;
+        if (this.sfxVol <= 0) return;
         switch (type) {
           case 'punch':
-            this.noise(0.07, 0.28 * v);
-            this.tone(190, 0.08, 'triangle', 0.22 * v, 65);
+            this.noise(0.07, 0.28);
+            this.tone(190, 0.08, 'triangle', 0.24, 65);
             break;
           case 'kick':
-            this.noise(0.09, 0.32 * v);
-            this.tone(150, 0.11, 'sawtooth', 0.24 * v, 48);
+            this.noise(0.09, 0.32);
+            this.tone(150, 0.11, 'sawtooth', 0.26, 48);
             break;
           case 'heavy':
-            this.noise(0.14, 0.42 * v);
-            this.tone(120, 0.16, 'sawtooth', 0.34 * v, 35);
+            this.noise(0.14, 0.42);
+            this.tone(120, 0.16, 'sawtooth', 0.34, 35);
+            break;
+          case 'bottleHit':
+            this.noise(0.08, 0.34);
+            this.tone(1240, 0.08, 'triangle', 0.26, 560);
+            this.tone(1820, 0.06, 'sine', 0.18, 960);
+            break;
+          case 'bottleBreak':
+            this.noise(0.24, 0.45);
+            [1920, 1480, 2240, 1020, 1680].forEach((f, idx) => {
+              setTimeout(() => this.tone(f, 0.075, 'triangle', 0.22, f * 0.55), idx * 24);
+            });
+            break;
+          case 'batHit':
+            this.noise(0.11, 0.38);
+            this.tone(245, 0.12, 'triangle', 0.36, 72);
+            this.tone(430, 0.06, 'square', 0.16, 160);
+            break;
+          case 'batBreak':
+            this.noise(0.22, 0.44);
+            this.tone(210, 0.12, 'sawtooth', 0.32, 65);
+            setTimeout(() => {
+              this.noise(0.14, 0.36);
+              this.tone(150, 0.16, 'triangle', 0.3, 42);
+            }, 68);
             break;
           case 'hurt':
-            this.tone(240, 0.1, 'square', 0.16 * v, 110);
+            this.tone(240, 0.1, 'square', 0.18, 110);
             break;
           case 'knockdown':
-            this.noise(0.18, 0.36 * v);
-            this.tone(110, 0.24, 'triangle', 0.3 * v, 30);
+            this.noise(0.18, 0.36);
+            this.tone(110, 0.24, 'triangle', 0.32, 30);
             break;
           case 'death':
-            this.tone(220, 0.35, 'sawtooth', 0.26 * v, 45);
-            this.noise(0.22, 0.3 * v);
+            this.tone(220, 0.35, 'sawtooth', 0.28, 45);
+            this.noise(0.22, 0.3);
             break;
           case 'jump':
-            this.tone(180, 0.12, 'sine', 0.18 * v, 420);
+            this.tone(180, 0.12, 'sine', 0.2, 420);
             break;
           case 'special':
-            this.tone(260, 0.36, 'sawtooth', 0.26 * v, 780);
-            this.noise(0.22, 0.34 * v);
+            this.tone(260, 0.36, 'sawtooth', 0.28, 780);
+            this.noise(0.22, 0.34);
             break;
           case 'pickup':
-            this.tone(520, 0.09, 'sine', 0.2 * v, 780);
-            setTimeout(() => this.tone(780, 0.12, 'sine', 0.2 * v, 1040), 75);
+            this.tone(520, 0.09, 'sine', 0.22, 780);
+            setTimeout(() => this.tone(780, 0.12, 'sine', 0.22, 1040), 75);
             break;
           case 'bossIntro':
-            this.tone(140, 0.28, 'sawtooth', 0.28 * v, 95);
-            setTimeout(() => this.tone(95, 0.45, 'sawtooth', 0.32 * v, 55), 240);
+            this.tone(140, 0.28, 'sawtooth', 0.3, 95);
+            setTimeout(() => this.tone(95, 0.45, 'sawtooth', 0.34, 55), 240);
             break;
           case 'stageClear':
             [523, 659, 784, 1046].forEach((f, idx) => {
-              setTimeout(() => this.tone(f, 0.18, 'triangle', 0.24 * v), idx * 120);
+              setTimeout(() => this.tone(f, 0.18, 'triangle', 0.26), idx * 120);
             });
             break;
           case 'gameOver':
             [330, 294, 247, 196].forEach((f, idx) => {
-              setTimeout(() => this.tone(f, 0.26, 'sawtooth', 0.22 * v, f * 0.88), idx * 180);
+              setTimeout(() => this.tone(f, 0.26, 'sawtooth', 0.24, f * 0.88), idx * 180);
             });
             break;
         }
@@ -1538,36 +1555,38 @@
 
       startBGM(stageIndex = 0) {
         this.stopBGM();
-        const tracks = [
-          { tempo: 175, bass: [110, 110, 130.8, 146.8, 110, 110, 164.8, 146.8], lead: [220, 0, 261.6, 293.7, 329.6, 0, 293.7, 261.6] },
-          { tempo: 165, bass: [82.4, 82.4, 98, 110, 82.4, 98, 123.5, 110], lead: [164.8, 196, 0, 220, 196, 164.8, 146.8, 0] },
-          { tempo: 145, bass: [130.8, 130.8, 155.6, 174.6, 130.8, 155.6, 196, 174.6], lead: [392, 0, 466.2, 523.3, 466.2, 392, 349.2, 311.1] },
-          { tempo: 155, bass: [92.5, 92.5, 110, 123.5, 92.5, 110, 138.6, 123.5], lead: [277.2, 246.9, 220, 0, 277.2, 329.6, 293.7, 246.9] },
-          { tempo: 135, bass: [98, 98, 116.5, 130.8, 146.8, 130.8, 116.5, 98], lead: [392, 466.2, 523.3, 587.3, 523.3, 466.2, 392, 349.2] }
-        ];
-        const tr = tracks[stageIndex % tracks.length];
+        this.ensureCtx();
+        this.currentStage = stageIndex % 5;
+        this.bossMode = false;
         this.bgmStep = 0;
-        this.bgmInterval = setInterval(() => {
-          if (this.bgmVol <= 0.01) return;
-          const idx = this.bgmStep % tr.bass.length;
-          const bFreq = tr.bass[idx];
-          const lFreq = tr.lead[idx];
-          if (bFreq > 0) this.tone(bFreq, 0.13, 'sawtooth', 0.085 * this.bgmVol);
-          if (lFreq > 0 && this.bgmStep % 2 === 0) this.tone(lFreq, 0.11, 'square', 0.055 * this.bgmVol);
-          this.bgmStep++;
-        }, tr.tempo);
+        this.nextNoteTime = this.ctx ? this.ctx.currentTime + 0.05 : 0;
+
+        this.bgmTimer = setInterval(() => {
+          if (!this.ctx || this.ctx.state !== 'running') return;
+          const tr = this.getStageTrack(this.currentStage);
+          const stepDur = (60 / (tr.bpm * (this.bossMode ? 1.12 : 1.0))) / 4;
+          if (this.nextNoteTime < this.ctx.currentTime - 0.2) {
+            this.nextNoteTime = this.ctx.currentTime + 0.02;
+          }
+          while (this.nextNoteTime < this.ctx.currentTime + 0.14) {
+            this.scheduleStep(this.bgmStep, this.nextNoteTime);
+            this.nextNoteTime += stepDur;
+            this.bgmStep++;
+          }
+        }, 40);
       }
 
       stopBGM() {
-        if (this.bgmInterval) {
-          clearInterval(this.bgmInterval);
-          this.bgmInterval = null;
+        if (this.bgmTimer) {
+          clearInterval(this.bgmTimer);
+          this.bgmTimer = null;
         }
+        this.bossMode = false;
       }
     }
 
     // =========================================================================
-    // 3. INPUT MANAGER (Keyboard Multi-Key + Double-Tap Dash + Mobile Touch)
+    // 3. INPUT MANAGER (Keyboard + Double-Tap Dash + Mobile 3-Button & Zoom Lock)
     // =========================================================================
     class InputManager {
       constructor() {
@@ -1589,17 +1608,13 @@
         this.preventMobileZoom();
       }
 
-      // Prevent iOS Safari / Android Chrome pinch-zoom & rapid double-tap auto-zoom
       preventMobileZoom() {
-        // 1. Block Safari gesture pinch-to-zoom events
         ['gesturestart', 'gesturechange', 'gestureend'].forEach((ev) => {
           document.addEventListener(ev, (e) => e.preventDefault(), { passive: false });
         });
 
-        // 2. Block native double-click zoom
         document.addEventListener('dblclick', (e) => e.preventDefault(), { passive: false });
 
-        // 3. Block accidental multi-touch pinch anywhere outside game controls
         document.addEventListener('touchstart', (e) => {
           if (e.touches.length > 1) {
             let allOnControls = true;
@@ -1615,12 +1630,9 @@
         }, { passive: false });
 
         document.addEventListener('touchmove', (e) => {
-          if (e.touches.length > 1) {
-            e.preventDefault();
-          }
+          if (e.touches.length > 1) e.preventDefault();
         }, { passive: false });
 
-        // 4. Block rapid double-tap auto-zoom on non-UI areas (and canvas)
         let lastTouchEnd = 0;
         document.addEventListener('touchend', (e) => {
           const now = performance.now();
@@ -1632,7 +1644,6 @@
           lastTouchEnd = now;
         }, { passive: false });
 
-        // 5. Lock all touch events directly on the WebGL canvas
         const canvas = document.getElementById('game-canvas');
         if (canvas) {
           ['touchstart', 'touchmove', 'touchend'].forEach((ev) => {
@@ -1645,7 +1656,6 @@
         const now = performance.now();
         this.keys.add(code);
 
-        // Simultaneous Punch (KeyJ) + Kick (KeyK) chord detection (220ms forgiveness window)
         if (code === 'KeyJ') {
           this.lastPunchTime = now;
           if (this.keys.has('KeyK') || now - this.lastKickTime <= 220) {
@@ -1877,7 +1887,9 @@
     class FaceTextureManager {
       constructor() {
         this.entries = {};
-        CharacterRegistry.ids.forEach((id) => this.initCharacterFace(id));
+        if (typeof CharacterRegistry !== 'undefined') {
+          CharacterRegistry.ids.forEach((id) => this.initCharacterFace(id));
+        }
       }
 
       getPalette(id) { return CharacterRegistry.get(id).face.palette; }
@@ -1888,7 +1900,7 @@
         return this.entries[id];
       }
 
-      // Reusable chest print painter (used on BOTH 3D shirt decals and 2D bust portraits)
+      // Shared chest print artwork (Doraemon / NBA / SUP) for both 3D torso & 2D portraits
       static drawChestPrint(ctx, kind, cx, cy, size) {
         ctx.save();
         ctx.translate(cx, cy);
@@ -1896,18 +1908,14 @@
         ctx.scale(s, s);
 
         if (kind === 'doraemon') {
-          // Cute blue robot-cat graphic (多啦A夢風格)
-          // Blue head circle
           ctx.fillStyle = '#009fe3';
           ctx.strokeStyle = '#0c1018';
           ctx.lineWidth = 5;
           ctx.beginPath(); ctx.arc(0, -6, 76, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
 
-          // White inner lower face
           ctx.fillStyle = '#ffffff';
           ctx.beginPath(); ctx.arc(0, 8, 60, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
 
-          // Two tall white eyes
           [-16, 16].forEach((ex) => {
             ctx.fillStyle = '#ffffff';
             ctx.beginPath(); ctx.ellipse(ex, -36, 16, 20, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
@@ -1917,13 +1925,11 @@
             ctx.beginPath(); ctx.arc(ex + (ex < 0 ? 3 : -3), -36, 2.2, 0, Math.PI * 2); ctx.fill();
           });
 
-          // Shiny red button nose
           ctx.fillStyle = '#e6192e';
           ctx.beginPath(); ctx.arc(0, -16, 10.5, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
           ctx.fillStyle = '#ffffff';
           ctx.beginPath(); ctx.arc(-3.5, -19, 3, 0, Math.PI * 2); ctx.fill();
 
-          // Center philtrum line & big happy open mouth
           ctx.strokeStyle = '#0c1018';
           ctx.lineWidth = 4;
           ctx.beginPath(); ctx.moveTo(0, -5); ctx.lineTo(0, 18); ctx.stroke();
@@ -1938,13 +1944,9 @@
           ctx.fill();
           ctx.stroke();
 
-          // Cute orange-pink tongue
           ctx.fillStyle = '#ff7b54';
-          ctx.beginPath();
-          ctx.ellipse(0, 44, 18, 8, 0, 0, Math.PI * 2);
-          ctx.fill();
+          ctx.beginPath(); ctx.ellipse(0, 44, 18, 8, 0, 0, Math.PI * 2); ctx.fill();
 
-          // 3 whiskers per side
           ctx.lineWidth = 3.5;
           [-1, 1].forEach((side) => {
             ctx.beginPath();
@@ -1954,12 +1956,8 @@
             ctx.stroke();
           });
 
-          // Red collar & golden bell
           ctx.fillStyle = '#e6192e';
-          ctx.beginPath();
-          ctx.roundRect(-52, 54, 104, 15, 7);
-          ctx.fill();
-          ctx.stroke();
+          ctx.beginPath(); ctx.roundRect(-52, 54, 104, 15, 7); ctx.fill(); ctx.stroke();
 
           ctx.fillStyle = '#ffd166';
           ctx.beginPath(); ctx.arc(0, 68, 13, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
@@ -1967,20 +1965,16 @@
           ctx.fillStyle = '#0c1018';
           ctx.beginPath(); ctx.arc(0, 72, 3.2, 0, Math.PI * 2); ctx.fill();
         } else if (kind === 'nba') {
-          // Bold Basketball League "NBA" crest graphic
-          // Blue / Red split rounded badge
           ctx.save();
           ctx.beginPath(); ctx.roundRect(-84, -44, 168, 88, 14); ctx.clip();
           ctx.fillStyle = '#1d428a';
           ctx.fillRect(-84, -44, 84, 88);
           ctx.fillStyle = '#c8102e';
           ctx.fillRect(0, -44, 84, 88);
-          // Stylized center basketball silhouette stripe
           ctx.fillStyle = 'rgba(255,255,255,0.22)';
           ctx.beginPath(); ctx.arc(0, 0, 32, 0, Math.PI * 2); ctx.fill();
           ctx.restore();
 
-          // Crisp white & gold outer border
           ctx.strokeStyle = '#ffffff';
           ctx.lineWidth = 6;
           ctx.beginPath(); ctx.roundRect(-84, -44, 168, 88, 14); ctx.stroke();
@@ -1988,7 +1982,6 @@
           ctx.lineWidth = 2.5;
           ctx.beginPath(); ctx.roundRect(-78, -38, 156, 76, 10); ctx.stroke();
 
-          // Huge bold "NBA" typography
           ctx.fillStyle = '#0b0e18';
           ctx.font = '900 64px "Rajdhani", sans-serif';
           ctx.textAlign = 'center';
@@ -1998,7 +1991,6 @@
           ctx.fillStyle = '#ffffff';
           ctx.fillText('NBA', 0, 4);
         } else if (kind === 'sup') {
-          // Iconic streetwear red box logo "SUP"
           ctx.fillStyle = '#e6192e';
           ctx.beginPath(); ctx.roundRect(-88, -36, 176, 72, 5); ctx.fill();
 
@@ -2017,7 +2009,6 @@
       }
 
       initCharacterFace(id) {
-        // 1. 1024x512 seamless equirectangular texture for sculpted 3D head
         const faceCanvas = document.createElement('canvas');
         faceCanvas.width = 1024;
         faceCanvas.height = 512;
@@ -2027,7 +2018,6 @@
         texture.encoding = THREE.sRGBEncoding;
         texture.needsUpdate = true;
 
-        // 2. 512x512 dedicated high-detail bust portrait for Character Select & HUD
         const portCanvas = document.createElement('canvas');
         portCanvas.width = 512;
         portCanvas.height = 512;
@@ -2040,7 +2030,6 @@
         };
       }
 
-      // Shared expressive facial feature painter (centered around cx, cy with scale s)
       drawFacialFeatures(ctx, id, cx, cy, s, includeGlasses = false) {
         const pal = this.getPalette(id);
         const tpl = this.getTemplate(id);
@@ -2051,7 +2040,6 @@
         ctx.translate(cx, cy);
         ctx.scale(s, s);
 
-        // Subtle natural forehead, nose-bridge & cheek highlights
         const fhGrad = ctx.createRadialGradient(0, -68, 6, 0, -64, 58);
         fhGrad.addColorStop(0, 'rgba(255, 240, 225, 0.34)');
         fhGrad.addColorStop(1, 'rgba(255, 240, 225, 0)');
@@ -2066,14 +2054,13 @@
           ctx.beginPath(); ctx.ellipse(chx, 26, 34, 24, 0, 0, Math.PI * 2); ctx.fill();
         });
 
-        // Subtle natural jawline soft contour
         const jawGrad = ctx.createRadialGradient(0, 96, 8, 0, 100, 62);
         jawGrad.addColorStop(0, 'rgba(130, 82, 56, 0.14)');
         jawGrad.addColorStop(1, 'rgba(130, 82, 56, 0)');
         ctx.fillStyle = jawGrad;
         ctx.beginPath(); ctx.ellipse(0, 96, 60, 32, 0, 0, Math.PI * 2); ctx.fill();
 
-        // Eyebrows tailored to each character template
+        // Eyebrows tailored to each reference photo
         ctx.strokeStyle = pal.hair;
         ctx.lineCap = 'round';
         if (tpl === 'messy') {
@@ -2098,6 +2085,8 @@
           ctx.lineWidth = 6.2;
           ctx.beginPath(); ctx.moveTo(-64, -36); ctx.quadraticCurveTo(-40, -46, -17, -38); ctx.stroke();
           ctx.beginPath(); ctx.moveTo(64, -36); ctx.quadraticCurveTo(40, -46, 17, -38); ctx.stroke();
+
+          // MARK signature mole between/above brows
           ctx.fillStyle = '#2d201a';
           ctx.beginPath(); ctx.arc(-2.5, -40, 2.7, 0, Math.PI * 2); ctx.fill();
         } else {
@@ -2126,22 +2115,15 @@
           ctx.clip();
 
           ctx.fillStyle = '#241813';
-          ctx.beginPath();
-          ctx.arc(ex, ey + 0.5, rh * (feminine ? 1.04 : 0.96), 0, Math.PI * 2);
-          ctx.fill();
-
+          ctx.beginPath(); ctx.arc(ex, ey + 0.5, rh * (feminine ? 1.04 : 0.96), 0, Math.PI * 2); ctx.fill();
           ctx.fillStyle = '#090707';
-          ctx.beginPath();
-          ctx.arc(ex, ey + 0.5, rh * 0.52, 0, Math.PI * 2);
-          ctx.fill();
-
+          ctx.beginPath(); ctx.arc(ex, ey + 0.5, rh * 0.52, 0, Math.PI * 2); ctx.fill();
           ctx.fillStyle = '#ffffff';
           ctx.beginPath(); ctx.arc(ex - 3.2, ey - 2.6, feminine ? 3.2 : 2.6, 0, Math.PI * 2); ctx.fill();
           ctx.fillStyle = 'rgba(255,255,255,0.72)';
           ctx.beginPath(); ctx.arc(ex + 2.8, ey + 1.8, 1.5, 0, Math.PI * 2); ctx.fill();
           ctx.restore();
 
-          // Upper lash line (with delicate winged lashes for female characters)
           ctx.strokeStyle = '#181312';
           ctx.lineWidth = feminine ? 4.6 : 4.2;
           ctx.beginPath();
@@ -2186,10 +2168,9 @@
           drawEye(39, -16, 17.2, 8.5, 0.8, false);
         }
 
-        // Nose bridge highlight & soft shaded nose wings / nostrils
+        // Nose
         const noseW = tx.noseW;
         const noseY = tx.noseY;
-
         ctx.strokeStyle = 'rgba(140, 88, 60, 0.28)';
         ctx.lineWidth = isFemale ? 2.2 : 3;
         ctx.beginPath();
@@ -2202,19 +2183,16 @@
         ctx.beginPath(); ctx.ellipse(0, noseY - 2, noseW * 0.52, 6.0, 0, 0, Math.PI * 2); ctx.fill();
 
         ctx.fillStyle = 'rgba(128, 76, 52, 0.28)';
-        ctx.beginPath();
-        ctx.ellipse(0, noseY + 4.5, noseW * 0.8, 3.8, 0, 0, Math.PI * 2);
-        ctx.fill();
+        ctx.beginPath(); ctx.ellipse(0, noseY + 4.5, noseW * 0.8, 3.8, 0, 0, Math.PI * 2); ctx.fill();
 
         ctx.fillStyle = 'rgba(90, 48, 32, 0.45)';
         ctx.beginPath(); ctx.ellipse(-noseW * 0.55, noseY + 3.2, isFemale ? 3.2 : 4.2, 2.0, 0.18, 0, Math.PI * 2); ctx.fill();
         ctx.beginPath(); ctx.ellipse(noseW * 0.55, noseY + 3.2, isFemale ? 3.2 : 4.2, 2.0, -0.18, 0, Math.PI * 2); ctx.fill();
 
-        // Mouth & Expression
+        // Mouth & facial hair tailored to each character
         if (tpl === 'messy') {
           ctx.fillStyle = 'rgba(105, 68, 52, 0.10)';
           ctx.beginPath(); ctx.ellipse(0, 40, 26, 7, 0, 0, Math.PI * 2); ctx.fill();
-
           ctx.strokeStyle = 'rgba(130, 78, 56, 0.36)';
           ctx.lineWidth = 2.6;
           ctx.beginPath(); ctx.arc(-44, 48, 12, -0.8, 0.75); ctx.stroke();
@@ -2222,20 +2200,11 @@
 
           ctx.fillStyle = pal.lip;
           ctx.beginPath();
-          ctx.moveTo(-34, 48);
-          ctx.quadraticCurveTo(0, 42, 34, 48);
-          ctx.quadraticCurveTo(0, 65, -34, 48);
+          ctx.moveTo(-34, 48); ctx.quadraticCurveTo(0, 42, 34, 48); ctx.quadraticCurveTo(0, 65, -34, 48);
           ctx.fill();
-
           ctx.strokeStyle = pal.lipLine;
           ctx.lineWidth = 3.2;
-          ctx.beginPath();
-          ctx.moveTo(-36, 47);
-          ctx.quadraticCurveTo(0, 57, 36, 47);
-          ctx.stroke();
-
-          ctx.fillStyle = 'rgba(255, 225, 210, 0.28)';
-          ctx.beginPath(); ctx.ellipse(0, 55, 13, 3, 0, 0, Math.PI * 2); ctx.fill();
+          ctx.beginPath(); ctx.moveTo(-36, 47); ctx.quadraticCurveTo(0, 57, 36, 47); ctx.stroke();
         } else if (tpl === 'undercut' || tpl === 'longhair') {
           const mw = tpl === 'longhair' ? 33 : 32;
           ctx.strokeStyle = 'rgba(135, 82, 62, 0.24)';
@@ -2245,16 +2214,12 @@
 
           ctx.fillStyle = '#8b3a3a';
           ctx.beginPath();
-          ctx.moveTo(-mw, 45);
-          ctx.quadraticCurveTo(0, 48, mw, 45);
-          ctx.quadraticCurveTo(0, 68, -mw, 45);
+          ctx.moveTo(-mw, 45); ctx.quadraticCurveTo(0, 48, mw, 45); ctx.quadraticCurveTo(0, 68, -mw, 45);
           ctx.fill();
 
           ctx.fillStyle = '#fbfaf7';
           ctx.beginPath();
-          ctx.moveTo(-(mw - 4), 46);
-          ctx.quadraticCurveTo(0, 49, mw - 4, 46);
-          ctx.quadraticCurveTo(0, 60, -(mw - 4), 46);
+          ctx.moveTo(-(mw - 4), 46); ctx.quadraticCurveTo(0, 49, mw - 4, 46); ctx.quadraticCurveTo(0, 60, -(mw - 4), 46);
           ctx.fill();
 
           ctx.strokeStyle = 'rgba(180, 170, 165, 0.42)';
@@ -2265,27 +2230,25 @@
 
           ctx.strokeStyle = pal.lip;
           ctx.lineWidth = isFemale ? 5.6 : 4.2;
-          ctx.beginPath();
-          ctx.moveTo(-(mw - 5), 53);
-          ctx.quadraticCurveTo(0, 68, mw - 5, 53);
-          ctx.stroke();
-
+          ctx.beginPath(); ctx.moveTo(-(mw - 5), 53); ctx.quadraticCurveTo(0, 68, mw - 5, 53); ctx.stroke();
           ctx.strokeStyle = pal.lipLine;
           ctx.lineWidth = 2.0;
-          ctx.beginPath();
-          ctx.moveTo(-(mw + 1), 45);
-          ctx.quadraticCurveTo(0, 48, mw + 1, 45);
-          ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(-(mw + 1), 45); ctx.quadraticCurveTo(0, 48, mw + 1, 45); ctx.stroke();
         } else if (tpl === 'fade') {
-          // JOHNNY: Subtle mustache stubble + warm closed-lip smile
+          // JOHNNY: Light mustache stubble + gentle closed smile
           ctx.fillStyle = 'rgba(62, 48, 42, 0.22)';
           ctx.beginPath();
-          ctx.moveTo(-36, 46); ctx.quadraticCurveTo(0, 32, 36, 46); ctx.quadraticCurveTo(0, 41, -36, 46);
+          ctx.moveTo(-36, 46);
+          ctx.quadraticCurveTo(0, 32, 36, 46);
+          ctx.quadraticCurveTo(0, 41, -36, 46);
           ctx.fill();
+
           ctx.fillStyle = 'rgba(42, 34, 30, 0.34)';
           for (let i = -30; i <= 30; i += 4) {
-            ctx.fillRect(i, 38 + Math.abs(i) * 0.16 + ((i * 7) % 3), 1.8, 1.8);
+            const yOff = 38 + Math.abs(i) * 0.16 + ((i * 7) % 3);
+            ctx.fillRect(i, yOff, 1.8, 1.8);
           }
+
           ctx.strokeStyle = 'rgba(128, 78, 58, 0.32)';
           ctx.lineWidth = 2.4;
           ctx.beginPath(); ctx.arc(-44, 49, 13, -0.7, 0.7); ctx.stroke();
@@ -2302,24 +2265,32 @@
           ctx.fillStyle = 'rgba(65, 50, 44, 0.14)';
           ctx.beginPath(); ctx.ellipse(0, 77, 22, 8, 0, 0, Math.PI * 2); ctx.fill();
         } else if (tpl === 'street') {
-          // MARK: Light mustache stubble + friendly open smile + chin goatee
+          // MARK: Light mustache + natural slight toothy smile + signature chin goatee patch
           ctx.fillStyle = 'rgba(55, 44, 38, 0.22)';
           ctx.beginPath();
-          ctx.moveTo(-38, 46); ctx.quadraticCurveTo(0, 31, 38, 46); ctx.quadraticCurveTo(0, 40, -38, 46);
+          ctx.moveTo(-38, 46);
+          ctx.quadraticCurveTo(0, 31, 38, 46);
+          ctx.quadraticCurveTo(0, 40, -38, 46);
           ctx.fill();
+
           ctx.fillStyle = 'rgba(38, 30, 26, 0.36)';
           for (let i = -32; i <= 32; i += 4) {
-            ctx.fillRect(i, 37 + Math.abs(i) * 0.18 + ((i * 5) % 3), 1.8, 2.0);
+            const yOff = 37 + Math.abs(i) * 0.18 + ((i * 5) % 3);
+            ctx.fillRect(i, yOff, 1.8, 2.0);
           }
 
           ctx.fillStyle = pal.lip;
           ctx.beginPath();
-          ctx.moveTo(-34, 48); ctx.quadraticCurveTo(0, 40, 34, 48); ctx.quadraticCurveTo(0, 71, -34, 48);
+          ctx.moveTo(-34, 48); ctx.quadraticCurveTo(0, 40, 34, 48);
+          ctx.quadraticCurveTo(0, 71, -34, 48);
           ctx.fill();
+
           ctx.fillStyle = '#f6f3ef';
           ctx.beginPath();
-          ctx.moveTo(-25, 49); ctx.quadraticCurveTo(0, 51, 25, 49); ctx.quadraticCurveTo(0, 58, -25, 49);
+          ctx.moveTo(-25, 49); ctx.quadraticCurveTo(0, 51, 25, 49);
+          ctx.quadraticCurveTo(0, 58, -25, 49);
           ctx.fill();
+
           ctx.strokeStyle = pal.lipLine;
           ctx.lineWidth = 2.6;
           ctx.beginPath(); ctx.moveTo(-35, 48); ctx.quadraticCurveTo(0, 51, 35, 48); ctx.stroke();
@@ -2336,23 +2307,16 @@
         } else {
           ctx.fillStyle = pal.lip;
           ctx.beginPath();
-          ctx.moveTo(-29, 51);
-          ctx.quadraticCurveTo(0, 43, 29, 49);
-          ctx.quadraticCurveTo(0, 65, -29, 51);
+          ctx.moveTo(-29, 51); ctx.quadraticCurveTo(0, 43, 29, 49); ctx.quadraticCurveTo(0, 65, -29, 51);
           ctx.fill();
-
           ctx.strokeStyle = pal.lipLine;
           ctx.lineWidth = 3.0;
-          ctx.beginPath();
-          ctx.moveTo(-31, 51);
-          ctx.quadraticCurveTo(0, 56, 31, 48);
-          ctx.stroke();
-
+          ctx.beginPath(); ctx.moveTo(-31, 51); ctx.quadraticCurveTo(0, 56, 31, 48); ctx.stroke();
           ctx.fillStyle = 'rgba(128, 76, 54, 0.25)';
           ctx.beginPath(); ctx.ellipse(0, 69, 13, 5.5, 0, 0, Math.PI * 2); ctx.fill();
         }
 
-        // Glasses overlay (drawn on 2D Bust Portrait; 3D model uses physical 3D glasses)
+        // Glasses overlay on 2D Bust Portrait
         if (includeGlasses && appr.glasses === 'silver') {
           [-39, 39].forEach((gx) => {
             ctx.fillStyle = 'rgba(215, 240, 255, 0.16)';
@@ -2363,10 +2327,8 @@
             ctx.strokeStyle = '#363b45';
             ctx.lineWidth = 4.4;
             ctx.beginPath();
-            ctx.moveTo(gx - 29, -21);
-            ctx.quadraticCurveTo(gx - 29, -29, gx - 20, -29);
-            ctx.lineTo(gx + 20, -29);
-            ctx.quadraticCurveTo(gx + 29, -29, gx + 29, -21);
+            ctx.moveTo(gx - 29, -21); ctx.quadraticCurveTo(gx - 29, -29, gx - 20, -29);
+            ctx.lineTo(gx + 20, -29); ctx.quadraticCurveTo(gx + 29, -29, gx + 29, -21);
             ctx.stroke();
             ctx.strokeStyle = 'rgba(255, 255, 255, 0.42)';
             ctx.lineWidth = 3;
@@ -2398,7 +2360,6 @@
         ctx.restore();
       }
 
-      // 1024x512 Equirectangular 3D Head Texture (front center is px=512, py=256)
       draw3DFaceTexture(ctx, id) {
         const pal = this.getPalette(id);
         const tpl = this.getTemplate(id);
@@ -2465,14 +2426,12 @@
         this.drawFacialFeatures(ctx, id, 512, 268, 1.38, false);
       }
 
-      // 512x512 Dedicated Arcade Character Bust Portrait (for Character Select & HUD)
       drawBustPortrait(ctx, id) {
         const pal = this.getPalette(id);
         const tpl = this.getTemplate(id);
         const tx = this.getTex(id);
         const appr = CharacterRegistry.get(id).appearance;
 
-        // Stylish arcade backdrop gradient
         const bg = ctx.createRadialGradient(256, 200, 30, 256, 256, 360);
         bg.addColorStop(0, pal.bgA);
         bg.addColorStop(1, pal.bgB);
@@ -2485,7 +2444,6 @@
         ctx.fillStyle = rim;
         ctx.fillRect(0, 0, 512, 512);
 
-        // Long hair back curtain behind shoulders (for MISTY)
         if (tpl === 'longhair') {
           ctx.fillStyle = pal.hair;
           ctx.beginPath();
@@ -2499,7 +2457,6 @@
           ctx.fill();
         }
 
-        // Hood silhouette behind neck for hooded jacket (MARK)
         if (appr.hoodie) {
           ctx.fillStyle = pal.shirtDark;
           ctx.beginPath();
@@ -2510,7 +2467,6 @@
           ctx.stroke();
         }
 
-        // Shoulders & T-Shirt / Hoodie
         const shL = appr.gender === 'female' ? 88 : 52;
         const shR = appr.gender === 'female' ? 424 : 460;
         ctx.fillStyle = pal.shirt;
@@ -2522,15 +2478,11 @@
         ctx.closePath();
         ctx.fill();
 
-        // Crew-neck collar or Hoodie collar + white drawstrings
         if (appr.hoodie) {
           ctx.strokeStyle = '#11131a';
           ctx.lineWidth = 18;
-          ctx.beginPath();
-          ctx.arc(256, 372, 76, 0.08 * Math.PI, 0.92 * Math.PI);
-          ctx.stroke();
+          ctx.beginPath(); ctx.arc(256, 372, 76, 0.08 * Math.PI, 0.92 * Math.PI); ctx.stroke();
 
-          // White drawstrings
           ctx.strokeStyle = '#eef2f7';
           ctx.lineWidth = 6;
           ctx.lineCap = 'round';
@@ -2539,12 +2491,9 @@
         } else {
           ctx.strokeStyle = pal.shirtDark;
           ctx.lineWidth = 14;
-          ctx.beginPath();
-          ctx.arc(256, 376, 66, 0.12 * Math.PI, 0.88 * Math.PI);
-          ctx.stroke();
+          ctx.beginPath(); ctx.arc(256, 376, 66, 0.12 * Math.PI, 0.88 * Math.PI); ctx.stroke();
         }
 
-        // Left-chest pocket (WAI)
         if (appr.pocket) {
           ctx.fillStyle = pal.shirtDark;
           ctx.fillRect(326, 444, 58, 56);
@@ -2553,29 +2502,21 @@
           ctx.strokeRect(326, 444, 58, 56);
         }
 
-        // Center chest print graphic (Doraemon / NBA / SUP)
         if (appr.chestPrint) {
           FaceTextureManager.drawChestPrint(ctx, appr.chestPrint, 256, 466, appr.chestPrint === 'doraemon' ? 92 : 112);
         }
 
-        // Neck & chin shadow
         const neckW = appr.gender === 'female' ? 72 : 88;
         ctx.fillStyle = pal.mid;
         ctx.fillRect(256 - neckW / 2, 326, neckW, 76);
         ctx.fillStyle = pal.sh;
-        ctx.beginPath();
-        ctx.ellipse(256, 344, neckW * 0.54, 28, 0, 0, Math.PI * 2);
-        ctx.fill();
+        ctx.beginPath(); ctx.ellipse(256, 344, neckW * 0.54, 28, 0, 0, Math.PI * 2); ctx.fill();
 
-        // Back hair volume behind ears (WAI / MARK)
         if (tpl === 'messy' || tpl === 'street') {
           ctx.fillStyle = pal.hair;
-          ctx.beginPath();
-          ctx.ellipse(256, 198, 148, 142, 0, 0, Math.PI * 2);
-          ctx.fill();
+          ctx.beginPath(); ctx.ellipse(256, 198, 148, 142, 0, 0, Math.PI * 2); ctx.fill();
         }
 
-        // Ears
         const earY = tx.earY;
         const earOff = appr.gender === 'female' ? 104 : 114;
         [-earOff, earOff].forEach((ex) => {
@@ -2585,7 +2526,7 @@
           ctx.beginPath(); ctx.ellipse(256 + ex * 0.96, earY + 2, 8, 16, 0, 0, Math.PI * 2); ctx.fill();
         });
 
-        // Sculpted Head Silhouette
+        // Sculpted Head Silhouette (Clean skin tone fill for ALL 6 fighters)
         const headGrad = ctx.createRadialGradient(256, 200, 24, 256, 232, 165);
         headGrad.addColorStop(0, pal.hi);
         headGrad.addColorStop(0.68, pal.base);
@@ -2617,10 +2558,9 @@
         ctx.closePath();
         ctx.fill();
 
-        // Facial features + signature glasses
         this.drawFacialFeatures(ctx, id, 256, tx.faceCy, tx.faceScale, true);
 
-        // Signature Hair Silhouette on top & sides
+        // Foreground Hair Silhouette
         ctx.fillStyle = pal.hair;
         if (tpl === 'messy') {
           ctx.beginPath();
@@ -2633,14 +2573,12 @@
           ctx.lineTo(212, 198); ctx.lineTo(182, 166); ctx.lineTo(156, 196);
           ctx.closePath();
           ctx.fill();
-
           ctx.strokeStyle = pal.hairHi;
           ctx.lineWidth = 6;
           ctx.lineCap = 'round';
           ctx.beginPath(); ctx.moveTo(175, 118); ctx.quadraticCurveTo(248, 92, 336, 118); ctx.stroke();
           ctx.beginPath(); ctx.moveTo(192, 144); ctx.quadraticCurveTo(256, 126, 320, 146); ctx.stroke();
         } else if (tpl === 'longhair') {
-          // MISTY: Left-parted side-swept bangs & sleek dark-brown long hair
           ctx.beginPath();
           ctx.moveTo(124, 385);
           ctx.quadraticCurveTo(116, 148, 174, 86);
@@ -2671,7 +2609,6 @@
           ctx.fillStyle = 'rgba(38, 27, 21, 0.45)';
           ctx.fillRect(142, 160, 12, 58);
           ctx.fillRect(358, 160, 12, 58);
-
           ctx.fillStyle = pal.hair;
           ctx.beginPath();
           ctx.moveTo(144, 192);
@@ -2683,14 +2620,12 @@
           ctx.quadraticCurveTo(174, 136, 158, 174);
           ctx.closePath();
           ctx.fill();
-
           ctx.strokeStyle = pal.hairHi;
           ctx.lineWidth = 7;
           ctx.lineCap = 'round';
           ctx.beginPath(); ctx.moveTo(188, 98); ctx.quadraticCurveTo(252, 76, 318, 96); ctx.stroke();
           ctx.beginPath(); ctx.moveTo(205, 120); ctx.quadraticCurveTo(265, 104, 324, 124); ctx.stroke();
         } else if (tpl === 'fade') {
-          // JOHNNY: High forehead short-cropped fade
           ctx.fillStyle = 'rgba(21, 21, 25, 0.35)';
           ctx.fillRect(142, 148, 11, 64);
           ctx.fillRect(359, 148, 11, 64);
@@ -2717,7 +2652,6 @@
           ctx.lineCap = 'round';
           ctx.beginPath(); ctx.moveTo(188, 86); ctx.quadraticCurveTo(256, 72, 322, 88); ctx.stroke();
         } else if (tpl === 'street') {
-          // MARK: Full dark hair with thick side-swept bangs
           ctx.beginPath();
           ctx.moveTo(130, 216);
           ctx.quadraticCurveTo(116, 104, 186, 66);
@@ -2747,7 +2681,6 @@
           ctx.quadraticCurveTo(180, 126, 156, 178);
           ctx.closePath();
           ctx.fill();
-
           ctx.strokeStyle = pal.hairHi;
           ctx.lineWidth = 6;
           ctx.lineCap = 'round';
@@ -2766,7 +2699,7 @@
       }
     }
 
-    const faceTexMgr = new FaceTextureManager();
+    let faceTexMgr = null;
 
     // =========================================================================
     // 5. FLOATING DAMAGE NUMBERS & PARTICLE SYSTEM
@@ -2856,7 +2789,127 @@
     }
 
     // =========================================================================
-    // 6. 3D CHARACTER MODEL BUILDER & PROCEDURAL ANIMATOR
+    // 6. STREET WEAPONS (Glass Bottle & Wooden Bat — 10 Hits Durability)
+    // =========================================================================
+    const WEAPON_DEFS = {
+      bottle: {
+        type: 'bottle',
+        name: '玻璃瓶',
+        icon: '🍾',
+        maxHits: 10,
+        mult: 1.42,
+        heavyMult: 1.72,
+        range: 2.08,
+        knockback: 3.8,
+        heavyKnockback: 6.8,
+        duration: 0.25,
+        hitSfx: 'bottleHit',
+        breakSfx: 'bottleBreak',
+        sparkColor: 0x52b788,
+        breakText: '玻璃瓶碎裂!'
+      },
+      bat: {
+        type: 'bat',
+        name: '木棒',
+        icon: '🏏',
+        maxHits: 10,
+        mult: 1.62,
+        heavyMult: 2.0,
+        range: 2.38,
+        knockback: 5.0,
+        heavyKnockback: 8.2,
+        duration: 0.30,
+        hitSfx: 'batHit',
+        breakSfx: 'batBreak',
+        sparkColor: 0xd4a373,
+        breakText: '木棒斷裂!'
+      }
+    };
+
+    class WeaponModelBuilder {
+      static createMesh(type) {
+        const g = new THREE.Group();
+        if (type === 'bottle') {
+          const glassMat = new THREE.MeshStandardMaterial({
+            color: 0x2d8a4e,
+            emissive: 0x0b2e19,
+            roughness: 0.14,
+            metalness: 0.12,
+            transparent: true,
+            opacity: 0.88
+          });
+          const labelMat = new THREE.MeshStandardMaterial({ color: 0xf4e4c1, roughness: 0.72 });
+          const capMat = new THREE.MeshStandardMaterial({ color: 0xd4af37, metalness: 0.75, roughness: 0.28 });
+
+          const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.032, 0.036, 0.20, 12), glassMat);
+          neck.position.y = 0.04;
+          const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.036, 0.036, 0.035, 12), capMat);
+          cap.position.y = -0.07;
+          const shoulder = new THREE.Mesh(new THREE.CylinderGeometry(0.088, 0.036, 0.12, 14), glassMat);
+          shoulder.position.y = 0.19;
+          const body = new THREE.Mesh(new THREE.CylinderGeometry(0.088, 0.088, 0.32, 14), glassMat);
+          body.position.y = 0.41;
+          body.castShadow = true;
+          const label = new THREE.Mesh(new THREE.CylinderGeometry(0.091, 0.091, 0.15, 14), labelMat);
+          label.position.y = 0.40;
+          g.add(cap, neck, shoulder, body, label);
+        } else {
+          const woodMat = new THREE.MeshStandardMaterial({ color: 0xc99252, roughness: 0.52, metalness: 0.04 });
+          const gripMat = new THREE.MeshStandardMaterial({ color: 0x1e2028, roughness: 0.92 });
+          const ringMat = new THREE.MeshStandardMaterial({ color: 0x8a1c24, roughness: 0.65 });
+
+          const knob = new THREE.Mesh(new THREE.CylinderGeometry(0.044, 0.038, 0.035, 12), gripMat);
+          knob.position.y = -0.10;
+          const handle = new THREE.Mesh(new THREE.CylinderGeometry(0.034, 0.030, 0.24, 12), gripMat);
+          handle.position.y = 0.03;
+          const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.056, 0.034, 0.36, 14), woodMat);
+          shaft.position.y = 0.33;
+          shaft.castShadow = true;
+          const barrel = new THREE.Mesh(new THREE.CylinderGeometry(0.072, 0.056, 0.38, 14), woodMat);
+          barrel.position.y = 0.70;
+          barrel.castShadow = true;
+          const tip = new THREE.Mesh(new THREE.SphereGeometry(0.072, 14, 10), woodMat);
+          tip.scale.set(1, 0.55, 1);
+          tip.position.y = 0.89;
+          const band = new THREE.Mesh(new THREE.CylinderGeometry(0.068, 0.065, 0.05, 14), ringMat);
+          band.position.y = 0.66;
+          g.add(knob, handle, shaft, barrel, tip, band);
+        }
+        return g;
+      }
+
+      static createGroundPickup(type, x, z) {
+        const root = new THREE.Group();
+        root.position.set(x, 0, z);
+
+        const itemPivot = new THREE.Group();
+        const mesh = WeaponModelBuilder.createMesh(type);
+        mesh.rotation.z = Math.PI / 2.2;
+        mesh.rotation.y = 0.4;
+        mesh.scale.setScalar(1.22);
+        mesh.position.set(type === 'bat' ? -0.35 : -0.18, 0.22, 0);
+        itemPivot.add(mesh);
+        root.add(itemPivot);
+
+        const ring = new THREE.Mesh(
+          new THREE.RingGeometry(0.48, 0.62, 24),
+          new THREE.MeshBasicMaterial({
+            color: type === 'bottle' ? 0x38ef7d : 0xffb703,
+            side: THREE.DoubleSide,
+            transparent: true,
+            opacity: 0.78
+          })
+        );
+        ring.rotation.x = -Math.PI / 2;
+        ring.position.y = 0.035;
+        root.add(ring);
+
+        return { root, itemPivot, ring };
+      }
+    }
+
+    // =========================================================================
+    // 7. 3D CHARACTER MODEL BUILDER & PROCEDURAL ANIMATOR
     // =========================================================================
     class CharacterModelBuilder {
       static getHeadConfig(faceId) {
@@ -2900,6 +2953,7 @@
         if (CharacterModelBuilder._hairMatCache[baseColorHex]) {
           return CharacterModelBuilder._hairMatCache[baseColorHex];
         }
+
         const c = document.createElement('canvas');
         c.width = 256;
         c.height = 256;
@@ -2995,10 +3049,13 @@
           const ux = pos.getX(i);
           const uy = pos.getY(i);
           const uz = pos.getZ(i);
+
           const rXZ = Math.hypot(ux, uz);
-          let sx = 0, sz = 0;
+          let sx = 0;
+          let sz = 0;
           if (rXZ > 1e-4) {
-            const dx = ux / rXZ, dz = uz / rXZ;
+            const dx = ux / rXZ;
+            const dz = uz / rXZ;
             const p = 2.45;
             const se = 1 / Math.pow(Math.pow(Math.abs(dx), p) + Math.pow(Math.abs(dz), p), 1 / p);
             sx = dx * se;
@@ -3006,7 +3063,9 @@
           }
 
           const t = (uy + 1) * 0.5;
-          let yLocal = 0, wProfile = 1.0, dProfile = 1.0;
+          let yLocal = 0;
+          let wProfile = 1.0;
+          let dProfile = 1.0;
 
           if (t < 0.08) {
             const u = t / 0.08;
@@ -3058,7 +3117,11 @@
           tex.encoding = THREE.sRGBEncoding;
           tex.needsUpdate = true;
           CharacterModelBuilder._chestPrintCache[kind] = new THREE.MeshStandardMaterial({
-            map: tex, transparent: true, alphaTest: 0.08, roughness: 0.62, metalness: 0.02
+            map: tex,
+            transparent: true,
+            alphaTest: 0.08,
+            roughness: 0.62,
+            metalness: 0.02
           });
         }
 
@@ -3150,7 +3213,6 @@
             thickness = 0.010 + crownCap * 0.032 + frontLift * 0.014 - sideTaper * 0.005 + brushTex;
             liftY = crownCap * 0.022 + frontLift * 0.012;
           } else if (tpl === 'fade') {
-            // JOHNNY: High exposed forehead with neat short close-cropped fade
             const frontWeight = Math.exp(-Math.pow(absPhi / 0.90, 2));
             const backWeight = smoothstep(1.55, 2.6, absPhi);
             const sideSweep = -0.04 * Math.exp(-Math.pow((phi + 0.52) / 0.35, 2));
@@ -3159,7 +3221,6 @@
             thickness = 0.007 + topFlat * 0.015;
             liftY = topFlat * 0.008;
           } else if (tpl === 'street') {
-            // MARK: Full dark hair with thick side-swept bangs
             const frontWeight = Math.exp(-Math.pow(absPhi / 0.88, 2));
             const backWeight = smoothstep(1.30, 2.4, absPhi);
             const sidePart = 0.07 * Math.exp(-Math.pow((phi - 0.42) / 0.32, 2));
@@ -3298,7 +3359,8 @@
 
         const skinMat = new THREE.MeshStandardMaterial({
           color: CharacterModelBuilder.srgbColor(app.skin || 0xdca583),
-          roughness: 0.56, metalness: 0.02
+          roughness: 0.56,
+          metalness: 0.02
         });
         const shirtTex = CharacterModelBuilder.createFabricTexture(app.shirt || 0x333333, 'cotton');
         const shirtMat = new THREE.MeshStandardMaterial({ map: shirtTex, roughness: 0.82, metalness: 0.02 });
@@ -3313,6 +3375,7 @@
         const isSlim = app.gender === 'female';
         const isHoodie = !!app.hoodie;
 
+        // 1. Torso + Optional Chest Print (Doraemon / NBA / SUP)
         const torso = new THREE.Mesh(
           CharacterModelBuilder.createSculptedTorsoGeo(torsoW, isPower, isSlim),
           shirtMat
@@ -3330,6 +3393,7 @@
           color: CharacterModelBuilder.srgbColor(app.shirt || 0x333333).multiplyScalar(0.84),
           roughness: 0.88
         });
+
         if (isHoodie) {
           const hoodRim = new THREE.Mesh(new THREE.TorusGeometry(0.142, 0.036, 12, 24), collarMat);
           hoodRim.rotation.x = Math.PI / 2 + 0.14;
@@ -3413,9 +3477,10 @@
           });
         }
 
+        // Head
         const headGroup = new THREE.Group();
         headGroup.position.set(0, 1.88, 0);
-        const faceTex = app.faceId ? faceTexMgr.getTexture(app.faceId) : null;
+        const faceTex = app.faceId && faceTexMgr ? faceTexMgr.getTexture(app.faceId) : null;
 
         if (faceTex) {
           const headMesh = new THREE.Mesh(
@@ -3493,6 +3558,7 @@
         }
         bodyPivot.add(headGroup);
 
+        // 2. Arms (Seamless Sloped Shoulders + Short Sleeves or Long Hoodie Sleeves + Weapon Mount)
         const sleeveRimMat = new THREE.MeshStandardMaterial({
           color: CharacterModelBuilder.srgbColor(app.shirt || 0x333333).multiplyScalar(0.82),
           roughness: 0.9
@@ -3561,6 +3627,13 @@
           thumb.rotation.x = 0.28;
           elbowPivot.add(thumb);
 
+          if (side === 1) {
+            const weaponMount = new THREE.Group();
+            weaponMount.name = 'weaponMount';
+            weaponMount.position.set(0, -0.30, 0.035);
+            elbowPivot.add(weaponMount);
+          }
+
           if (app.blades) {
             const blade = new THREE.Mesh(
               new THREE.BoxGeometry(0.045, 0.56, 0.11),
@@ -3578,6 +3651,7 @@
         const leftArm = makeArm(-1);
         const rightArm = makeArm(1);
 
+        // 3. Legs & Sculpted Sneakers
         const legThick = isSlim ? 0.88 : 1.0;
         const cuffMat = new THREE.MeshStandardMaterial({
           color: CharacterModelBuilder.srgbColor(app.pants || 0x1a1a1a).multiplyScalar(0.75),
@@ -3650,6 +3724,7 @@
           torso,
           head: headGroup,
           hairDrape: headGroup.getObjectByName('longHairDrape') || null,
+          weaponMount: rightArm.elbow.getObjectByName('weaponMount') || null,
           armL: leftArm.pivot,
           armR: rightArm.pivot,
           elbowL: leftArm.elbow,
@@ -3663,7 +3738,7 @@
       }
 
       static animateRig(rig, state, time, progress = 0) {
-        const { bodyPivot, armL, armR, elbowL, elbowR, legL, legR, kneeL, kneeR, head, hairDrape } = rig;
+        const { bodyPivot, armL, armR, elbowL, elbowR, legL, legR, kneeL, kneeR, head } = rig;
         bodyPivot.position.set(0, 0, 0);
         bodyPivot.rotation.set(0, 0, 0);
         head.rotation.set(0, 0, 0);
@@ -3675,9 +3750,10 @@
         legR.rotation.set(0, 0, 0);
         if (kneeL) kneeL.rotation.set(0, 0, 0);
         if (kneeR) kneeR.rotation.set(0, 0, 0);
-        if (hairDrape) {
-          hairDrape.rotation.x = state === 'run' ? 0.34 : state === 'walk' ? 0.18 : 0.05 + Math.sin(time * 3.2) * 0.04;
-          hairDrape.rotation.z = Math.sin(time * 2.6) * 0.04;
+
+        if (rig.hairDrape) {
+          rig.hairDrape.rotation.x = state === 'run' ? 0.34 : state === 'walk' ? 0.18 : 0.05 + Math.sin(time * 3.2) * 0.04;
+          rig.hairDrape.rotation.z = Math.sin(time * 2.6) * 0.04;
         }
 
         if (state === 'idle') {
@@ -3735,6 +3811,49 @@
           if (elbowR) elbowR.rotation.x = -0.12;
           if (elbowL) elbowL.rotation.x = -0.35;
           bodyPivot.rotation.x = 0.24 * swing;
+        } else if (state === 'pickup') {
+          const bend = Math.sin(Math.min(1, progress) * Math.PI);
+          bodyPivot.rotation.x = 0.88 * bend;
+          bodyPivot.position.y = -0.30 * bend;
+          legL.rotation.x = -0.38 * bend;
+          legR.rotation.x = 0.22 * bend;
+          if (kneeL) kneeL.rotation.x = 0.72 * bend;
+          if (kneeR) kneeR.rotation.x = 0.58 * bend;
+          armR.rotation.x = -0.82 * bend;
+          if (elbowR) elbowR.rotation.x = -0.15;
+          armL.rotation.x = 0.22 * bend;
+        } else if (state === 'weaponSwing1') {
+          const p = Math.min(1, progress);
+          const swing = Math.sin(p * Math.PI);
+          armR.rotation.x = -1.35 * swing - 0.35;
+          armR.rotation.y = -0.95 + p * 2.15;
+          armR.rotation.z = -0.55 * swing;
+          if (elbowR) elbowR.rotation.x = -0.12;
+          armL.rotation.x = -0.45;
+          if (elbowL) elbowL.rotation.x = -0.85;
+          bodyPivot.rotation.y = -0.45 + p * 0.95;
+        } else if (state === 'weaponSwing2') {
+          const p = Math.min(1, progress);
+          const swing = Math.sin(p * Math.PI);
+          armR.rotation.x = -1.45 * swing - 0.30;
+          armR.rotation.y = 1.15 - p * 2.25;
+          armR.rotation.z = -0.35 * swing;
+          if (elbowR) elbowR.rotation.x = -0.12;
+          armL.rotation.x = -0.38;
+          bodyPivot.rotation.y = 0.45 - p * 0.90;
+        } else if (state === 'weaponHeavy') {
+          const p = Math.min(1, progress);
+          if (p < 0.35) {
+            const wind = p / 0.35;
+            armR.rotation.x = -2.75 * wind;
+            bodyPivot.rotation.x = -0.18 * wind;
+          } else {
+            const slam = (p - 0.35) / 0.65;
+            armR.rotation.x = -2.75 + slam * 2.35;
+            bodyPivot.rotation.x = -0.18 + slam * 0.56;
+          }
+          if (elbowR) elbowR.rotation.x = -0.10;
+          armL.rotation.x = -0.50;
         } else if (state === 'kick') {
           const swing = Math.sin(Math.min(1, progress) * Math.PI);
           legR.rotation.x = -1.5 * swing;
@@ -3783,7 +3902,7 @@
     }
 
     // =========================================================================
-    // 7. BASE FIGHTER CLASS (Physics, Hitboxes, Health, 2.5D Facing)
+    // 8. BASE FIGHTER CLASS (Physics, Hitboxes, Health, 2.5D Facing)
     // =========================================================================
     class Fighter {
       constructor(scene, cfg) {
@@ -3801,6 +3920,7 @@
         this.pos = new THREE.Vector3(cfg.x || 0, 0, cfg.z || 0);
         this.vel = new THREE.Vector3(0, 0, 0);
         this.facing = this.isPlayer ? 1 : -1;
+        this.enteringZone = !!cfg.enteringZone;
 
         this.state = 'idle';
         this.stateTimer = 0;
@@ -3826,19 +3946,6 @@
         this.animTime = Math.random() * 5;
         this.flashTimer = 0;
         this.mixer = null;
-      }
-
-      // Hook for future GLTF / GLB character model replacement
-      loadGLTFModel(url, loader) {
-        if (!loader || !url) return;
-        loader.load(url, (gltf) => {
-          this.rig.bodyPivot.clear();
-          this.rig.bodyPivot.add(gltf.scene);
-          if (gltf.animations && gltf.animations.length > 0) {
-            this.mixer = new THREE.AnimationMixer(gltf.scene);
-            this.mixer.clipAction(gltf.animations[0]).play();
-          }
-        });
       }
 
       getMoveSpeed() {
@@ -3868,7 +3975,9 @@
           hitStart: opts.hitStart || 0.25,
           hitEnd: opts.hitEnd || 0.72,
           hitTargets: new Set(),
-          sfx: opts.sfx || 'punch'
+          sfx: opts.sfx || 'punch',
+          weaponAttack: !!opts.weaponAttack,
+          weaponType: opts.weaponType || null
         };
       }
 
@@ -3888,12 +3997,11 @@
 
       takeDamage(rawDmg, knockDir, knockForce, knockdown, game) {
         if (this.dead || this.invulnTimer > 0) return false;
+        this.enteringZone = false;
 
-        // Defense mitigation
         const defFactor = 1 - (this.stats.def / 220);
         let dmg = Math.max(2, Math.round(rawDmg * defFactor));
 
-        // Blocking reduces damage and prevents knockdown
         if (this.state === 'block') {
           dmg = Math.max(1, Math.round(dmg * 0.25));
           this.vel.x = knockDir * knockForce * 0.3;
@@ -3905,6 +4013,14 @@
             game.highQuality
           );
           spawnFloatingText(this.pos, game.camera, `BLOCK -${dmg}`);
+          this.hp = Math.max(0, this.hp - dmg);
+          if (this.hp <= 0) {
+            this.dead = true;
+            this.isDead = true;
+            this.state = 'dead';
+            this.deathTimer = this.isPlayer ? 1.5 : 1.1;
+            game.audio.sfx('death');
+          }
         } else {
           this.hp = Math.max(0, this.hp - dmg);
           this.activeAttack = null;
@@ -3920,7 +4036,7 @@
             this.deathTimer = this.isPlayer ? 1.5 : 1.1;
             this.removeTimer = 1.25;
             game.audio.sfx('death');
-            spawnFloatingText(this.pos, game.camera, `KO!`, 'crit');
+            spawnFloatingText(this.pos, game.camera, 'KO!', 'crit');
           } else if (knockdown) {
             this.state = 'fall';
             this.stateTimer = 0.85;
@@ -3944,17 +4060,6 @@
             game.highQuality
           );
         }
-
-        if (this.state === 'block') {
-          this.hp = Math.max(0, this.hp - dmg);
-          if (this.hp <= 0) {
-            this.dead = true;
-            this.isDead = true;
-            this.state = 'dead';
-            this.deathTimer = this.isPlayer ? 1.5 : 1.1;
-            game.audio.sfx('death');
-          }
-        }
         return true;
       }
 
@@ -3973,7 +4078,6 @@
           this.rig.torso.material.emissive.setHex(this.flashTimer > 0 ? 0x661111 : 0x000000);
         }
 
-        // Gravity & vertical movement
         if (this.pos.y > 0 || this.vel.y !== 0) {
           this.vel.y -= 24 * dt;
           this.pos.y += this.vel.y * dt;
@@ -3984,18 +4088,23 @@
           }
         }
 
-        // Horizontal movement & friction
         this.pos.x += this.vel.x * dt;
         this.pos.z += this.vel.z * dt;
         const friction = this.pos.y > 0 ? 2.5 : 10.5;
         this.vel.x *= Math.max(0, 1 - friction * dt);
         this.vel.z *= Math.max(0, 1 - friction * dt);
 
-        // Clamp within stage combat lane
-        this.pos.x = Math.max(minX, Math.min(maxX, this.pos.x));
+        // Allow right-side offscreen wave enemies to stride naturally into combat zone
+        if (this.enteringZone) {
+          this.pos.x = Math.max(minX, this.pos.x);
+          if (this.pos.x <= maxX - 0.85) {
+            this.enteringZone = false;
+          }
+        } else {
+          this.pos.x = Math.max(minX, Math.min(maxX, this.pos.x));
+        }
         this.pos.z = Math.max(-3.8, Math.min(3.8, this.pos.z));
 
-        // State timer progression
         if (this.dead) {
           this.state = 'dead';
           this.deathTimer = Math.max(0, this.deathTimer - dt);
@@ -4008,12 +4117,10 @@
           }
         }
 
-        // Smooth 2.5D 3/4 facing interpolation (never reset to face camera)
         const targetYaw = this.facing * (Math.PI * 0.44);
         this.rig.root.rotation.y += (targetYaw - this.rig.root.rotation.y) * Math.min(1, dt * 16);
         this.rig.root.position.set(this.pos.x, this.pos.y, this.pos.z);
 
-        // Keep shadow pinned to ground
         this.rig.shadow.position.y = -this.pos.y + 0.02;
         const sScale = Math.max(0.55, 1 - this.pos.y * 0.14);
         this.rig.shadow.scale.setScalar(sScale);
@@ -4028,7 +4135,7 @@
     }
 
     // =========================================================================
-    // 8. PLAYER CONTROLLER
+    // 9. PLAYER CONTROLLER (Moves from characters.js + Street Weapon Pickup)
     // =========================================================================
     class Player extends Fighter {
       constructor(scene, charKey, x, z) {
@@ -4050,6 +4157,49 @@
         this.moves = data.moves;
         this.dashTimer = 0;
         this.grabbedEnemy = null;
+        this.weapon = null;
+      }
+
+      equipWeapon(type) {
+        const def = WEAPON_DEFS[type];
+        if (!def || !this.rig.weaponMount) return;
+        this.clearWeaponMesh();
+        const mesh = WeaponModelBuilder.createMesh(type);
+        mesh.rotation.x = Math.PI * 0.48;
+        mesh.rotation.z = -0.12;
+        this.rig.weaponMount.add(mesh);
+        this.weapon = {
+          type: def.type,
+          name: def.name,
+          icon: def.icon,
+          hitsLeft: def.maxHits,
+          maxHits: def.maxHits,
+          def,
+          mesh
+        };
+      }
+
+      clearWeaponMesh() {
+        if (this.rig.weaponMount) {
+          while (this.rig.weaponMount.children.length > 0) {
+            this.rig.weaponMount.remove(this.rig.weaponMount.children[0]);
+          }
+        }
+      }
+
+      breakWeapon(game) {
+        if (!this.weapon) return;
+        const def = this.weapon.def;
+        this.clearWeaponMesh();
+        game.audio.sfx(def.breakSfx);
+        game.particles.spawnHitSparks(
+          new THREE.Vector3(this.pos.x + this.facing * 0.9, this.pos.y + 1.25, this.pos.z),
+          def.sparkColor,
+          16,
+          game.highQuality
+        );
+        spawnFloatingText(this.pos, game.camera, def.breakText, 'crit');
+        this.weapon = null;
       }
 
       castSpecial(sp, game) {
@@ -4067,7 +4217,10 @@
           return;
         }
 
-        const busy = ['punch', 'punch2', 'heavy', 'kick', 'special', 'hit', 'fall', 'grab'].includes(this.state);
+        const busy = [
+          'punch', 'punch2', 'heavy', 'kick', 'special', 'hit', 'fall', 'grab',
+          'pickup', 'weaponSwing1', 'weaponSwing2', 'weaponHeavy'
+        ].includes(this.state);
 
         // Dash trigger
         const dashDir = input.consumeDash();
@@ -4105,17 +4258,17 @@
           }
         }
 
-        // Jump (L)
+        // Jump (L / 跳)
         if (input.consumeAny(['KeyL']) && !busy && this.pos.y === 0) {
           this.vel.y = 9.8;
           this.state = 'jump';
           game.audio.sfx('jump');
         }
 
-        // Simultaneous Punch + Kick (拳+腳 / J+K) Special & Ultimate trigger
+        // Simultaneous Punch + Kick (拳+腳 / J+K) Special & Ultimate
         const chordSpec = input.consumeChordSpecial();
         const canCancelToSpecial = !busy || (
-          ['punch', 'punch2', 'heavy', 'kick'].includes(this.state) &&
+          ['punch', 'punch2', 'heavy', 'kick', 'weaponSwing1', 'weaponSwing2', 'weaponHeavy'].includes(this.state) &&
           (this.stateDuration - this.stateTimer) < 0.28
         );
 
@@ -4133,18 +4286,78 @@
           this.castSpecial(sp1, game);
         } else if (chordSpec && canCancelToSpecial && this.energy < sp1.cost) {
           spawnFloatingText(this.pos, game.camera, `NEED ${sp1.cost} EN`);
-        } else if (input.consumeAny(['KeyJ']) && this.attackCooldown <= 0 && !['hit', 'fall', 'special'].includes(this.state)) {
-          if (this.dashTimer > 0) {
-            this.startAttack(moves.dashAttack.anim || 'heavy', moves.dashAttack);
-          } else {
-            const combo = moves.combo;
-            this.comboStep = (this.comboStep % combo.length) + 1;
-            this.comboWindow = moves.comboWindow;
-            const step = combo[this.comboStep - 1];
-            this.startAttack(step.anim || 'punch', step);
-            if (this.comboStep === combo.length) this.comboStep = 0;
+        } else if (input.consumeAny(['KeyJ']) && this.attackCooldown <= 0 && !['hit', 'fall', 'special', 'pickup'].includes(this.state)) {
+          // 1. Bend down & pick up nearby street weapon when unarmed
+          let pickedUp = false;
+          if (!this.weapon && this.pos.y === 0) {
+            const nearIdx = game.levelMgr.weapons.findIndex(
+              (w) => Math.hypot(w.pos.x - this.pos.x, w.pos.z - this.pos.z) < 1.85
+            );
+            if (nearIdx >= 0) {
+              const w = game.levelMgr.weapons[nearIdx];
+              game.scene.remove(w.root);
+              game.levelMgr.weapons.splice(nearIdx, 1);
+              this.equipWeapon(w.type);
+              this.state = 'pickup';
+              this.stateTimer = 0.28;
+              this.stateDuration = 0.28;
+              this.attackCooldown = 0.26;
+              this.vel.x *= 0.2;
+              this.vel.z *= 0.2;
+              game.audio.sfx('pickup');
+              spawnFloatingText(this.pos, game.camera, `拾取${this.weapon.name}!`, 'heal');
+              pickedUp = true;
+            }
           }
-        } else if (input.consumeAny(['KeyK']) && this.attackCooldown <= 0 && !['hit', 'fall', 'special'].includes(this.state)) {
+
+          if (!pickedUp && this.weapon) {
+            // 2. Street Weapon 3-Hit Combo
+            const def = this.weapon.def;
+            if (this.dashTimer > 0) {
+              this.startAttack('weaponHeavy', {
+                duration: def.duration * 1.05,
+                mult: def.heavyMult,
+                range: def.range + 0.15,
+                zRange: 1.25,
+                knockback: def.heavyKnockback,
+                knockdown: true,
+                sfx: def.hitSfx,
+                weaponAttack: true,
+                weaponType: def.type
+              });
+              this.comboStep = 0;
+            } else {
+              this.comboStep = (this.comboStep % 3) + 1;
+              this.comboWindow = 0.85;
+              const isFinisher = this.comboStep === 3;
+              const anim = this.comboStep === 1 ? 'weaponSwing1' : this.comboStep === 2 ? 'weaponSwing2' : 'weaponHeavy';
+              this.startAttack(anim, {
+                duration: isFinisher ? def.duration * 1.18 : def.duration,
+                mult: isFinisher ? def.heavyMult : def.mult,
+                range: isFinisher ? def.range + 0.12 : def.range,
+                zRange: 1.25,
+                knockback: isFinisher ? def.heavyKnockback : def.knockback,
+                knockdown: isFinisher,
+                sfx: def.hitSfx,
+                weaponAttack: true,
+                weaponType: def.type
+              });
+              if (isFinisher) this.comboStep = 0;
+            }
+          } else if (!pickedUp) {
+            // 3. Unarmed Combo from characters.js
+            if (this.dashTimer > 0) {
+              this.startAttack(moves.dashAttack.anim || 'heavy', moves.dashAttack);
+            } else {
+              const combo = moves.combo;
+              this.comboStep = (this.comboStep % combo.length) + 1;
+              this.comboWindow = moves.comboWindow;
+              const step = combo[this.comboStep - 1];
+              this.startAttack(step.anim || 'punch', step);
+              if (this.comboStep === combo.length) this.comboStep = 0;
+            }
+          }
+        } else if (input.consumeAny(['KeyK']) && this.attackCooldown <= 0 && !['hit', 'fall', 'special', 'pickup'].includes(this.state)) {
           const air = this.pos.y > 0.25;
           const k = air ? moves.airKick : moves.kick;
           const knockdown = air
@@ -4172,15 +4385,88 @@
     }
 
     // =========================================================================
-    // 9. ENEMY & BOSS CLASSES (Distinct AI Archetypes + 3-Phase Final Boss)
+    // 10. ENEMY & BOSS CLASSES (Smooth Right-Side Entry + AI Archetypes)
     // =========================================================================
     class Enemy extends Fighter {
       constructor(scene, cfg) {
         super(scene, cfg);
-        this.archetype = cfg.archetype || 'brawler'; // brawler, fast, heavy, ranged, elite
+        this.archetype = cfg.archetype || 'brawler';
         this.aiTimer = 0.2 + Math.random() * 0.4;
         this.strafeDir = Math.random() < 0.5 ? 1 : -1;
-        this.projectileCooldown = 1.6;
+        this.weapon = null;
+        this.weaponSwingToggle = false;
+
+        // Convert former ranged enemies (and explicit weapon enemies) into melee weapon fighters
+        if (cfg.weapon || this.archetype === 'weapon' || this.archetype === 'ranged') {
+          const wType = cfg.weapon || (this.archetype === 'ranged' ? 'bat' : 'bottle');
+          this.equipWeapon(wType, 2);
+        }
+      }
+
+      equipWeapon(type, hitsToBreak = 2) {
+        const def = WEAPON_DEFS[type];
+        if (!def || !this.rig.weaponMount) return;
+        this.clearWeaponMesh();
+        const mesh = WeaponModelBuilder.createMesh(type);
+        mesh.rotation.x = Math.PI * 0.48;
+        mesh.rotation.z = -0.12;
+        this.rig.weaponMount.add(mesh);
+        this.weapon = {
+          type: def.type,
+          name: def.name,
+          hitsLeft: hitsToBreak,
+          maxHits: hitsToBreak,
+          def,
+          mesh
+        };
+      }
+
+      clearWeaponMesh() {
+        if (this.rig.weaponMount) {
+          while (this.rig.weaponMount.children.length > 0) {
+            this.rig.weaponMount.remove(this.rig.weaponMount.children[0]);
+          }
+        }
+      }
+
+      breakWeapon(game) {
+        if (!this.weapon) return;
+        const def = this.weapon.def;
+        this.clearWeaponMesh();
+        game.audio.sfx(def.breakSfx);
+        game.particles.spawnHitSparks(
+          new THREE.Vector3(this.pos.x + this.facing * 0.55, this.pos.y + 1.25, this.pos.z),
+          def.sparkColor,
+          14,
+          game.highQuality
+        );
+        spawnFloatingText(
+          new THREE.Vector3(this.pos.x, this.pos.y + 0.35, this.pos.z),
+          game.camera,
+          def.breakText,
+          'crit'
+        );
+        this.weapon = null;
+      }
+
+      takeDamage(rawDmg, knockDir, knockForce, knockdown, game) {
+        const tookHit = super.takeDamage(rawDmg, knockDir, knockForce, knockdown, game);
+        if (tookHit && this.weapon) {
+          this.weapon.hitsLeft--;
+          if (this.weapon.hitsLeft <= 0 || this.dead) {
+            this.breakWeapon(game);
+          } else {
+            // Visual & audio crack feedback on first hit before breaking on the second hit
+            game.audio.sfx(this.weapon.def.hitSfx);
+            game.particles.spawnHitSparks(
+              new THREE.Vector3(this.pos.x + this.facing * 0.45, this.pos.y + 1.2, this.pos.z),
+              this.weapon.def.sparkColor,
+              6,
+              game.highQuality
+            );
+          }
+        }
+        return tookHit;
       }
 
       updateAI(dt, player, game, minX, maxX) {
@@ -4190,8 +4476,21 @@
           return;
         }
 
-        if (this.projectileCooldown > 0) this.projectileCooldown -= dt;
-        const busy = ['punch', 'punch2', 'heavy', 'kick', 'special', 'hit', 'fall', 'block'].includes(this.state);
+        // Smooth walk-in from right edge of screen (never pops in behind player)
+        if (this.enteringZone) {
+          const spd = this.getMoveSpeed() * 0.92;
+          this.facing = -1;
+          this.vel.x = -spd;
+          this.vel.z = Math.sign(player.pos.z - this.pos.z) * spd * 0.25;
+          this.state = this.archetype === 'fast' ? 'run' : 'walk';
+          this.updateBase(dt, minX, maxX);
+          return;
+        }
+
+        const busy = [
+          'punch', 'punch2', 'heavy', 'kick', 'special', 'hit', 'fall', 'block',
+          'weaponSwing1', 'weaponSwing2', 'weaponHeavy'
+        ].includes(this.state);
         if (busy) {
           this.updateBase(dt, minX, maxX);
           return;
@@ -4205,41 +4504,7 @@
         this.aiTimer -= dt;
         const spd = this.getMoveSpeed() * 0.72;
 
-        // Ranged enemy AI: keeps medium distance, strafes vertically if cornered at zone edges
-        if (this.archetype === 'ranged') {
-          const atLeftWall = this.pos.x <= minX + 0.6;
-          const atRightWall = this.pos.x >= maxX - 0.6;
-          if (Math.abs(dx) < 3.0 && !(dx > 0 && atLeftWall) && !(dx < 0 && atRightWall)) {
-            this.vel.x = -Math.sign(dx || 1) * spd * 0.9;
-            this.vel.z = this.strafeDir * spd * 0.55;
-            this.state = 'walk';
-          } else if (Math.abs(dx) < 3.0) {
-            // Cornered: strafe vertically instead of walking into invisible wall
-            this.vel.x = 0;
-            this.vel.z = this.strafeDir * spd * 0.85;
-            if (Math.abs(this.pos.z) > 3.2) this.strafeDir *= -1;
-            this.state = 'walk';
-          } else if (Math.abs(dx) > 6.2) {
-            this.vel.x = Math.sign(dx) * spd;
-            this.vel.z = Math.sign(dz) * spd * 0.6;
-            this.state = 'walk';
-          } else if (Math.abs(dz) > 0.75) {
-            this.vel.z = Math.sign(dz) * spd * 0.75;
-            this.state = 'walk';
-          } else if (this.projectileCooldown <= 0) {
-            this.projectileCooldown = 2.1;
-            this.state = 'punch';
-            this.stateTimer = 0.35;
-            this.stateDuration = 0.35;
-            game.spawnProjectile(this.pos.x + this.facing * 0.7, this.pos.z, this.facing * 9.5, Math.round(this.stats.atk * 0.2), this);
-          } else {
-            this.state = 'idle';
-          }
-          this.updateBase(dt, minX, maxX);
-          return;
-        }
-
-        // Elite enemy can occasionally block incoming attacks
+        // Elite enemy occasional block
         if (this.archetype === 'elite' && dist < 2.2 && player.activeAttack && Math.random() < 0.04) {
           this.state = 'block';
           this.stateTimer = 0.45;
@@ -4248,8 +4513,11 @@
           return;
         }
 
-        // Melee approach & attack
-        const desiredX = this.archetype === 'heavy' ? 1.55 : 1.35;
+        // Melee approach & attack (uses equipped bottle/bat until broken after 2 hits)
+        const desiredX = this.weapon
+          ? (this.weapon.type === 'bat' ? 1.92 : 1.72)
+          : (this.archetype === 'heavy' ? 1.55 : 1.35);
+
         if (Math.abs(dx) > desiredX || Math.abs(dz) > 0.68) {
           const moveX = Math.abs(dx) > desiredX ? Math.sign(dx) * spd : 0;
           const moveZ = Math.abs(dz) > 0.45 ? Math.sign(dz) * spd * 0.72 : 0;
@@ -4257,13 +4525,45 @@
           this.vel.z = moveZ;
           this.state = this.archetype === 'fast' ? 'run' : 'walk';
         } else if (this.attackCooldown <= 0 && this.aiTimer <= 0) {
-          this.aiTimer = this.archetype === 'fast' ? 0.35 : this.archetype === 'heavy' ? 0.85 : 0.55;
-          if (this.archetype === 'heavy') {
-            this.startAttack('heavy', { duration: 0.52, mult: 1.35, range: 1.75, knockback: 6.2, knockdown: true, sfx: 'heavy' });
-          } else if (this.archetype === 'fast') {
-            this.startAttack('kick', { duration: 0.3, mult: 0.95, range: 1.55, knockback: 3.0, sfx: 'kick' });
+          if (this.weapon) {
+            const def = this.weapon.def;
+            const isHeavy = Math.random() < 0.28;
+            this.aiTimer = def.type === 'bat' ? 0.74 : 0.58;
+            if (isHeavy) {
+              this.startAttack('weaponHeavy', {
+                duration: 0.56,
+                mult: 1.28,
+                range: def.range * 0.92,
+                zRange: 1.15,
+                knockback: 5.8,
+                knockdown: true,
+                sfx: def.hitSfx,
+                weaponAttack: true,
+                weaponType: def.type
+              });
+            } else {
+              this.weaponSwingToggle = !this.weaponSwingToggle;
+              this.startAttack(this.weaponSwingToggle ? 'weaponSwing1' : 'weaponSwing2', {
+                duration: 0.42,
+                mult: 1.10,
+                range: def.range * 0.88,
+                zRange: 1.10,
+                knockback: 3.6,
+                knockdown: false,
+                sfx: def.hitSfx,
+                weaponAttack: true,
+                weaponType: def.type
+              });
+            }
           } else {
-            this.startAttack(Math.random() < 0.5 ? 'punch' : 'kick', { duration: 0.38, mult: 0.9, range: 1.5, knockback: 2.8 });
+            this.aiTimer = this.archetype === 'fast' ? 0.35 : this.archetype === 'heavy' ? 0.85 : 0.55;
+            if (this.archetype === 'heavy') {
+              this.startAttack('heavy', { duration: 0.52, mult: 1.35, range: 1.75, knockback: 6.2, knockdown: true, sfx: 'heavy' });
+            } else if (this.archetype === 'fast') {
+              this.startAttack('kick', { duration: 0.3, mult: 0.95, range: 1.55, knockback: 3.0, sfx: 'kick' });
+            } else {
+              this.startAttack(Math.random() < 0.5 ? 'punch' : 'kick', { duration: 0.38, mult: 0.9, range: 1.5, knockback: 2.8 });
+            }
           }
         } else {
           this.state = 'idle';
@@ -4287,7 +4587,16 @@
           return;
         }
 
-        // Multi-phase transitions (Stage 5 Final Boss has 3 phases; other bosses have 2 phases)
+        if (this.enteringZone) {
+          const spd = this.getMoveSpeed() * 0.85;
+          this.facing = -1;
+          this.vel.x = -spd;
+          this.vel.z = Math.sign(player.pos.z - this.pos.z) * spd * 0.25;
+          this.state = 'walk';
+          this.updateBase(dt, minX, maxX);
+          return;
+        }
+
         const hpRatio = this.hp / this.maxHp;
         if (this.stageIndex === 4) {
           if (hpRatio <= 0.35 && this.phase < 3) {
@@ -4324,7 +4633,6 @@
         const dist = Math.hypot(dx, dz);
         this.facing = dx >= 0 ? 1 : -1;
 
-        // Boss AOE Special / Dash Attack
         if (this.specialCooldown <= 0 && dist < 4.5) {
           this.specialCooldown = this.phase >= 3 ? 2.4 : this.phase === 2 ? 3.2 : 4.4;
           this.startAttack('special', {
@@ -4342,13 +4650,12 @@
           return;
         }
 
-        // Standard Boss melee pursuit
         super.updateAI(dt, player, game, minX, maxX);
       }
     }
 
     // =========================================================================
-    // 10. STAGE DEFINITIONS (5 Complete Stages, Enemies, Bosses & Street Themes)
+    // 11. STAGE DEFINITIONS (5 Complete Stages, Enemies, Bosses & Themes)
     // =========================================================================
     const STAGES = [
       {
@@ -4391,8 +4698,23 @@
         neon: [0xff00cc, 0x00f5d4, 0x9b5de5],
         enemies: [
           { name: 'Neon Striker', archetype: 'fast', hp: 68, def: 42, atk: 62, spd: 78, appearance: { shirt: 0x7209b7, pants: 0x161426, hair: 0x00f5d4 } },
-          { name: 'Cyber Thrower', archetype: 'ranged', hp: 62, def: 38, atk: 58, spd: 64, appearance: { shirt: 0x480ca8, pants: 0x181a2b, hair: 0xff00cc } },
+          { name: 'Cyber Bottle Thug', archetype: 'weapon', weapon: 'bottle', hp: 66, def: 40, atk: 58, spd: 64, appearance: { shirt: 0x480ca8, pants: 0x181a2b, hair: 0xff00cc } },
           { name: 'Shadow Runner', archetype: 'fast', hp: 74, def: 46, atk: 66, spd: 82, appearance: { shirt: 0x240046, pants: 0x14121f, hair: 0xffbe0b, blades: true } }
+        ],
+        boss: { name: 'TWIN-BLADE ASSASSIN', archetype: 'fast', hp: 92, def: 52, atk: 78, spd: 86, appearance: { shirt: 0x10002b, pants: 0x1a1426, hair: 0x00f5d4, blades: true } }
+      },
+      {
+        name: 'STAGE 4 — CRIMINAL HQ',
+        sky: 0x18080c,
+        fog: 0x1c0a10,
+        road: 0x221c22,
+        sidewalk: 0x473a42,
+        accent: 0xff2a5f,
+        neon: [0xff2a5f, 0xff9e00, 0x00b4d8],
+        enemies: [
+          { name: 'Syndicate Elite', archetype: 'elite', hp: 88, def: 60, atk: 70, spd: 68, appearance: { shirt: 0x1b1b22, pants: 0x121218, hair: 0x222222 } },
+          { name: 'HQ Heavy Guard', archetype: 'heavy', hp: 105, def: 68, atk: 74, spd: 44, appearance: { shirt: 0x590d22, pants: 0x1a1518, hair: 0x111111, armor: true } },
+          { name: 'Syndicate Bat Guard', archetype: 'weapon', weapon: 'bat', hp: 78, def: 50, atk: 64, spd: 60, appearance: { shirt: 0x2b2d42, pants: 0x15161f, hair: 0x444444 } }
         ],
         boss: { name: 'TWIN-BLADE ASSASSIN', archetype: 'fast', hp: 92, def: 52, atk: 78, spd: 86, appearance: { shirt: 0x10002b, pants: 0x1a1426, hair: 0x00f5d4, blades: true } }
       },
@@ -4429,7 +4751,7 @@
     ];
 
     // =========================================================================
-    // 11. LEVEL MANAGER (3D Street Props, Waves, Layered Crates & Pickups)
+    // 12. LEVEL MANAGER (3D Shopping Street, Crates, Health Pickups & Weapons)
     // =========================================================================
     class LevelManager {
       constructor(scene) {
@@ -4438,6 +4760,7 @@
         this.scene.add(this.envGroup);
         this.crates = [];
         this.pickups = [];
+        this.weapons = [];
         this.textures = [];
         this.stageIndex = 0;
         this.zoneIndex = 0;
@@ -4453,9 +4776,11 @@
         }
         this.crates.forEach((c) => this.scene.remove(c.mesh));
         this.pickups.forEach((p) => this.scene.remove(p.mesh));
+        this.weapons.forEach((w) => this.scene.remove(w.root));
         this.textures.forEach((t) => t.dispose());
         this.crates = [];
         this.pickups = [];
+        this.weapons = [];
         this.textures = [];
       }
 
@@ -4476,7 +4801,6 @@
         ctx.fillStyle = bgHex;
         ctx.fillRect(0, 0, 512, 128);
 
-        // Glowing neon inner border
         ctx.strokeStyle = accentHex;
         ctx.lineWidth = 8;
         ctx.strokeRect(8, 8, 496, 112);
@@ -4535,7 +4859,6 @@
         c.height = 256;
         const ctx = c.getContext('2d');
 
-        // Warm lit shop interior gradient
         const bgGrad = ctx.createLinearGradient(0, 0, 0, 256);
         if (shopType === 'arcade' || shopType === 'tech') {
           bgGrad.addColorStop(0, '#18244a');
@@ -4551,15 +4874,12 @@
         ctx.fillStyle = bgGrad;
         ctx.fillRect(0, 0, 512, 256);
 
-        // Interior ceiling light fixtures
         ctx.fillStyle = 'rgba(255, 245, 200, 0.85)';
         for (let lx = 64; lx < 512; lx += 128) {
           ctx.fillRect(lx - 32, 10, 64, 10);
         }
 
-        // Interior merchandise / silhouettes
         if (shopType === 'ramen' || shopType === 'cafe' || shopType === 'bar') {
-          // Counter & hanging lanterns / pendant lamps
           ctx.fillStyle = '#331a0d';
           ctx.fillRect(0, 172, 512, 84);
           ctx.fillStyle = '#5c3318';
@@ -4567,19 +4887,13 @@
           for (let i = 0; i < 4; i++) {
             const x = 68 + i * 124;
             ctx.fillStyle = accentHex;
-            ctx.beginPath();
-            ctx.ellipse(x, 54, 22, 28, 0, 0, Math.PI * 2);
-            ctx.fill();
+            ctx.beginPath(); ctx.ellipse(x, 54, 22, 28, 0, 0, Math.PI * 2); ctx.fill();
             ctx.fillStyle = '#1b1b22';
-            ctx.fillRect(x - 16, 178, 32, 74); // stools
+            ctx.fillRect(x - 16, 178, 32, 74);
           }
-          // Menu posters on back wall
           ctx.fillStyle = '#f8edeb';
-          for (let m = 0; m < 6; m++) {
-            ctx.fillRect(36 + m * 76, 86, 46, 56);
-          }
+          for (let m = 0; m < 6; m++) ctx.fillRect(36 + m * 76, 86, 46, 56);
         } else if (shopType === 'mart') {
-          // Bright convenience store shelves with colorful items
           const itemCols = ['#e63946', '#2a9d8f', '#f4a261', '#457b9d', '#ffb703'];
           for (let row = 0; row < 3; row++) {
             const sy = 56 + row * 60;
@@ -4591,7 +4905,6 @@
             }
           }
         } else if (shopType === 'arcade' || shopType === 'tech') {
-          // Glowing arcade cabinets / TV monitors
           const scrCols = ['#00f5d4', '#ff2a5f', '#ffd166', '#8338ec'];
           for (let i = 0; i < 4; i++) {
             const ax = 36 + i * 116;
@@ -4603,7 +4916,6 @@
             ctx.fillRect(ax + 10, 68, 64, 12);
           }
         } else {
-          // Apparel / Bakery / Boutique display shelves
           ctx.fillStyle = 'rgba(255,255,255,0.16)';
           ctx.fillRect(32, 170, 448, 86);
           for (let i = 0; i < 3; i++) {
@@ -4611,13 +4923,10 @@
             ctx.fillStyle = accentHex;
             ctx.fillRect(mx - 26, 88, 52, 82);
             ctx.fillStyle = '#f1faee';
-            ctx.beginPath();
-            ctx.arc(mx, 68, 16, 0, Math.PI * 2);
-            ctx.fill();
+            ctx.beginPath(); ctx.arc(mx, 68, 16, 0, Math.PI * 2); ctx.fill();
           }
         }
 
-        // Window frame mullions & diagonal glass reflections
         ctx.fillStyle = 'rgba(255, 255, 255, 0.14)';
         ctx.beginPath();
         ctx.moveTo(40, 0); ctx.lineTo(115, 0); ctx.lineTo(25, 256); ctx.lineTo(-50, 256);
@@ -4629,9 +4938,7 @@
         ctx.strokeStyle = '#1f2430';
         ctx.lineWidth = 10;
         ctx.strokeRect(5, 5, 502, 246);
-        ctx.beginPath();
-        ctx.moveTo(256, 0); ctx.lineTo(256, 256);
-        ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(256, 0); ctx.lineTo(256, 256); ctx.stroke();
 
         return this.registerTex(c);
       }
@@ -4658,11 +4965,9 @@
         c.height = 512;
         const ctx = c.getContext('2d');
 
-        // Outer metallic front face
         ctx.fillStyle = bodyHex;
         ctx.fillRect(0, 0, 256, 512);
 
-        // Top glowing brand marquee header
         ctx.fillStyle = accentHex;
         ctx.fillRect(14, 14, 228, 44);
         ctx.fillStyle = '#ffffff';
@@ -4671,7 +4976,6 @@
         ctx.textBaseline = 'middle';
         ctx.fillText('COLD DRINKS', 128, 36);
 
-        // Illuminated glass beverage display window (left side)
         const dispX = 16, dispY = 72, dispW = 164, dispH = 266;
         const gGrad = ctx.createLinearGradient(dispX, dispY, dispX, dispY + dispH);
         gGrad.addColorStop(0, '#e8f8ff');
@@ -4682,7 +4986,6 @@
         ctx.lineWidth = 6;
         ctx.strokeRect(dispX, dispY, dispW, dispH);
 
-        // 4 shelves of colorful cans & bottles
         const canColors = ['#e63946', '#00b4d8', '#2a9d8f', '#ff9f1c', '#8338ec', '#52b788'];
         for (let row = 0; row < 4; row++) {
           const ry = dispY + 12 + row * 64;
@@ -4690,71 +4993,45 @@
             const cx = dispX + 10 + col * 30;
             ctx.fillStyle = canColors[(row * 3 + col) % canColors.length];
             ctx.fillRect(cx, ry + 6, 20, 34);
-            // White label band
             ctx.fillStyle = 'rgba(255,255,255,0.75)';
             ctx.fillRect(cx + 2, ry + 16, 16, 10);
-            // Can top rim
             ctx.fillStyle = '#dce3ea';
             ctx.fillRect(cx + 2, ry + 3, 16, 4);
           }
-          // Metal shelf + glowing price strip
           ctx.fillStyle = '#2b303a';
           ctx.fillRect(dispX + 3, ry + 41, dispW - 6, 6);
           ctx.fillStyle = row % 2 === 0 ? '#00b4d8' : '#e63946';
           ctx.fillRect(dispX + 6, ry + 47, dispW - 12, 8);
         }
 
-        // Glass specular glare
         ctx.fillStyle = 'rgba(255,255,255,0.22)';
         ctx.beginPath();
-        ctx.moveTo(dispX + 10, dispY);
-        ctx.lineTo(dispX + 55, dispY);
-        ctx.lineTo(dispX + 5, dispY + 180);
-        ctx.lineTo(dispX, dispY + 120);
+        ctx.moveTo(dispX + 10, dispY); ctx.lineTo(dispX + 55, dispY);
+        ctx.lineTo(dispX + 5, dispY + 180); ctx.lineTo(dispX, dispY + 120);
         ctx.fill();
 
-        // Right control panel (digital screen, bill/coin slot, keypad)
         ctx.fillStyle = '#181c26';
         ctx.fillRect(190, 72, 52, 266);
-        // LED price display
         ctx.fillStyle = '#00f5d4';
         ctx.fillRect(196, 86, 40, 18);
-        // Keypad buttons
         for (let r = 0; r < 4; r++) {
           for (let k = 0; k < 2; k++) {
             ctx.fillStyle = '#d0d7e2';
             ctx.fillRect(198 + k * 20, 120 + r * 20, 14, 12);
           }
         }
-        // Bill acceptor + coin slot
-        ctx.fillStyle = '#2d3340';
-        ctx.fillRect(198, 214, 36, 24);
-        ctx.fillStyle = '#38ef7d';
-        ctx.fillRect(204, 224, 24, 4);
-        ctx.fillStyle = '#8b95a5';
-        ctx.beginPath();
-        ctx.arc(216, 266, 10, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = '#090b10';
-        ctx.fillRect(214, 259, 4, 14);
-        // Coin return
-        ctx.fillStyle = '#0d1016';
-        ctx.fillRect(200, 294, 32, 28);
+        ctx.fillStyle = '#2d3340'; ctx.fillRect(198, 214, 36, 24);
+        ctx.fillStyle = '#38ef7d'; ctx.fillRect(204, 224, 24, 4);
+        ctx.fillStyle = '#8b95a5'; ctx.beginPath(); ctx.arc(216, 266, 10, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = '#090b10'; ctx.fillRect(214, 259, 4, 14);
+        ctx.fillStyle = '#0d1016'; ctx.fillRect(200, 294, 32, 28);
 
-        // Bottom recessed pickup flap
-        ctx.fillStyle = '#14171f';
-        ctx.fillRect(22, 362, 160, 78);
-        ctx.strokeStyle = '#3e4656';
-        ctx.lineWidth = 4;
-        ctx.strokeRect(22, 362, 160, 78);
-        ctx.fillStyle = '#262c38';
-        ctx.fillRect(30, 370, 144, 26);
+        ctx.fillStyle = '#14171f'; ctx.fillRect(22, 362, 160, 78);
+        ctx.strokeStyle = '#3e4656'; ctx.lineWidth = 4; ctx.strokeRect(22, 362, 160, 78);
+        ctx.fillStyle = '#262c38'; ctx.fillRect(30, 370, 144, 26);
 
-        // Ventilation louver lines at very bottom
         ctx.fillStyle = 'rgba(0,0,0,0.35)';
-        for (let v = 0; v < 4; v++) {
-          ctx.fillRect(26, 460 + v * 10, 204, 4);
-        }
+        for (let v = 0; v < 4; v++) ctx.fillRect(26, 460 + v * 10, 204, 4);
 
         return this.registerTex(c);
       }
@@ -4780,7 +5057,6 @@
           roughness: 0.35
         });
 
-        // Main vending cabinet sitting cleanly on legs above sidewalk (y = 0)
         const cabinet = new THREE.Mesh(
           new THREE.BoxGeometry(1.26, 2.08, 0.84),
           [sideMat, sideMat, sideMat, sideMat, frontMat, sideMat]
@@ -4790,7 +5066,6 @@
         cabinet.receiveShadow = true;
         g.add(cabinet);
 
-        // Base plinth / feet
         const base = new THREE.Mesh(
           new THREE.BoxGeometry(1.18, 0.1, 0.76),
           new THREE.MeshStandardMaterial({ color: 0x181b22, roughness: 0.8 })
@@ -4798,7 +5073,6 @@
         base.position.y = 0.05;
         g.add(base);
 
-        // Small protective visor over top marquee
         const visor = new THREE.Mesh(
           new THREE.BoxGeometry(1.3, 0.07, 0.14),
           new THREE.MeshStandardMaterial({ color: 0x222630, metalness: 0.5 })
@@ -4817,46 +5091,39 @@
         const rimMat = new THREE.MeshStandardMaterial({ color: 0xcbd2dc, metalness: 0.85, roughness: 0.25 });
         const tireMat = new THREE.MeshStandardMaterial({ color: 0x121316, roughness: 0.92 });
 
-        // Lower body chassis (tires at y = 0, radius 0.34)
         const chassis = new THREE.Mesh(new THREE.BoxGeometry(3.85, 0.64, 1.56), bodyMat);
         chassis.position.y = 0.56;
         chassis.castShadow = true;
         chassis.receiveShadow = true;
         car.add(chassis);
 
-        // Front & rear bumpers
         const frontBumper = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.26, 1.6), darkMat);
         frontBumper.position.set(1.94, 0.36, 0);
         const rearBumper = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.26, 1.6), darkMat);
         rearBumper.position.set(-1.94, 0.36, 0);
         car.add(frontBumper, rearBumper);
 
-        // Cabin greenhouse
         const cabin = new THREE.Mesh(new THREE.BoxGeometry(2.05, 0.56, 1.42), bodyMat);
         cabin.position.set(-0.15, 1.15, 0);
         cabin.castShadow = true;
         car.add(cabin);
 
-        // Tinted side windows & front/rear windshields
         const sideWin = new THREE.Mesh(new THREE.BoxGeometry(1.78, 0.4, 1.45), glassMat);
         sideWin.position.set(-0.15, 1.15, 0);
         const windshields = new THREE.Mesh(new THREE.BoxGeometry(2.09, 0.4, 1.24), glassMat);
         windshields.position.set(-0.15, 1.15, 0);
         car.add(sideWin, windshields);
 
-        // Center B-pillar dividing front & rear side windows
         const pillar = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.44, 1.47), bodyMat);
         pillar.position.set(-0.18, 1.15, 0);
         car.add(pillar);
 
-        // Side mirrors
         [-0.84, 0.84].forEach((mz) => {
           const mir = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.12, 0.16), bodyMat);
           mir.position.set(0.68, 0.94, mz);
           car.add(mir);
         });
 
-        // 4 Wheels touching road y = 0
         [[-1.18, 0.76], [1.18, 0.76], [-1.18, -0.76], [1.18, -0.76]].forEach(([wx, wz]) => {
           const tire = new THREE.Mesh(new THREE.CylinderGeometry(0.34, 0.34, 0.24, 14), tireMat);
           tire.rotation.x = Math.PI / 2;
@@ -4869,7 +5136,6 @@
           car.add(rim);
         });
 
-        // Headlights (front +X) and Taillights (rear -X)
         [-0.54, 0.54].forEach((lz) => {
           const hl = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.18, 0.34), new THREE.MeshBasicMaterial({ color: 0xfff3b0 }));
           hl.position.set(1.94, 0.64, lz);
@@ -4880,7 +5146,6 @@
           car.add(tl);
         });
 
-        // Ground shadow under car on road
         const shadow = new THREE.Mesh(
           new THREE.PlaneGeometry(4.2, 1.9),
           new THREE.MeshBasicMaterial({ color: 0x000000, transparent: true, opacity: 0.45 })
@@ -4897,7 +5162,7 @@
         this.stageIndex = index;
         this.zoneIndex = 0;
         this.zoneMinX = -10;
-        this.zoneMaxX = 12;
+        this.zoneMaxX = 14;
         this.waveSpawned = false;
         this.bossSpawned = false;
 
@@ -4909,7 +5174,7 @@
         const centerX = 36;
         const texCache = {};
 
-        // 1. Road Asphalt (spans z = -5.8 to +4.8, leaving a roadside parking lane z = -5.8..-4.0)
+        // 1. Road Asphalt
         const road = new THREE.Mesh(
           new THREE.PlaneGeometry(length, 10.6),
           new THREE.MeshStandardMaterial({ color: st.road, roughness: 0.92 })
@@ -4919,7 +5184,6 @@
         road.receiveShadow = true;
         this.envGroup.add(road);
 
-        // Roadside curbside white parking lane line (separating parking strip from driving lane)
         const curbLine = new THREE.Mesh(
           new THREE.PlaneGeometry(length, 0.1),
           new THREE.MeshBasicMaterial({ color: 0xd8dee9, transparent: true, opacity: 0.42 })
@@ -4928,7 +5192,6 @@
         curbLine.position.set(centerX, 0.014, -4.05);
         this.envGroup.add(curbLine);
 
-        // Road dashed yellow center lines & manhole covers
         const dashMat = new THREE.MeshBasicMaterial({ color: 0xe9c46a, transparent: true, opacity: 0.72 });
         const manholeMat = new THREE.MeshStandardMaterial({ color: 0x3a3f4a, metalness: 0.65, roughness: 0.55 });
         for (let x = -16; x < 92; x += 4.5) {
@@ -4945,7 +5208,7 @@
           }
         }
 
-        // 2. Sidewalk Promenade (z = -5.8 curb to z = -9.4 shop walls, height 0.30)
+        // 2. Sidewalk Promenade
         const sidewalk = new THREE.Mesh(
           new THREE.BoxGeometry(length, 0.30, 3.6),
           new THREE.MeshStandardMaterial({ color: st.sidewalk, roughness: 0.85 })
@@ -4954,7 +5217,6 @@
         sidewalk.receiveShadow = true;
         this.envGroup.add(sidewalk);
 
-        // Light concrete curbstone strip along the sidewalk front edge (z = -5.82)
         const curbEdge = new THREE.Mesh(
           new THREE.BoxGeometry(length, 0.32, 0.18),
           new THREE.MeshStandardMaterial({ color: 0x7a808f, roughness: 0.75 })
@@ -4962,7 +5224,7 @@
         curbEdge.position.set(centerX, 0.16, -5.82);
         this.envGroup.add(curbEdge);
 
-        // 3. Shopping Street Buildings (商店街外觀, front wall flush at z = -9.4)
+        // 3. Shopping Street Buildings
         const shopCatalog = [
           { title: 'RAMEN 麵館', sub: 'NOODLES • GYOZA', type: 'ramen', vLines: ['拉', '麵', '館'], bg: '#3b0d14', accent: '#ff4d6d', awningA: '#c1121f', awningB: '#f8f9fa', wall: 0x26222c },
           { title: 'ARCADE 電玩', sub: 'GAME CENTER 24H', type: 'arcade', vLines: ['遊', '戲', '城'], bg: '#101438', accent: '#00f5d4', awningA: '#3a0ca3', awningB: '#00b4d8', wall: 0x1d233a },
@@ -4988,7 +5250,6 @@
           const bGroup = new THREE.Group();
           bGroup.position.set(x, 0.30, -9.4);
 
-          // Main building volume (front wall at local z = 0)
           const bld = new THREE.Mesh(
             new THREE.BoxGeometry(bw, bh, 6.0),
             new THREE.MeshStandardMaterial({ color: shop.wall, roughness: 0.88 })
@@ -4996,7 +5257,6 @@
           bld.position.set(0, bh / 2, -3.0);
           bGroup.add(bld);
 
-          // Ground floor stone / tile fascia trim
           const gfWall = new THREE.Mesh(
             new THREE.BoxGeometry(bw + 0.04, 3.65, 0.14),
             new THREE.MeshStandardMaterial({ color: 0x353b4a, roughness: 0.8 })
@@ -5004,7 +5264,6 @@
           gfWall.position.set(0, 1.825, 0.02);
           bGroup.add(gfWall);
 
-          // Glowing Shop Display Window (left-center of ground floor)
           const winKey = `win_${shop.type}`;
           if (!texCache[winKey]) texCache[winKey] = this.makeShopWindowTexture(shop.type, shop.accent);
           const shopWin = new THREE.Mesh(
@@ -5014,7 +5273,6 @@
           shopWin.position.set(-1.15, 1.65, 0.12);
           bGroup.add(shopWin);
 
-          // Shop Entrance Door (right side of ground floor)
           const doorFrame = new THREE.Mesh(new THREE.BoxGeometry(1.56, 2.58, 0.14), doorMat);
           doorFrame.position.set(2.35, 1.29, 0.08);
           const doorGlass = new THREE.Mesh(new THREE.PlaneGeometry(1.16, 1.92), doorGlassMat);
@@ -5023,7 +5281,6 @@
           doorHandle.position.set(1.88, 1.2, 0.18);
           bGroup.add(doorFrame, doorGlass, doorHandle);
 
-          // 3D Striped Fabric Awning (遮雨棚) over shop window & door
           const awnKey = `awn_${shopIdx % shopCatalog.length}`;
           if (!texCache[awnKey]) texCache[awnKey] = this.makeAwningTexture(shop.awningA, shop.awningB);
           const awning = new THREE.Mesh(
@@ -5035,26 +5292,19 @@
           awning.castShadow = true;
           bGroup.add(awning);
 
-          // Horizontal Illuminated Fascia Shop Signboard above awning
           const signKey = `sign_${shopIdx % shopCatalog.length}`;
           if (!texCache[signKey]) texCache[signKey] = this.makeShopSignTexture(shop.title, shop.sub, shop.bg, shop.accent);
           const signBox = new THREE.Mesh(
             new THREE.BoxGeometry(6.8, 1.25, 0.34),
-            [
-              doorMat, doorMat, doorMat, doorMat,
-              new THREE.MeshBasicMaterial({ map: texCache[signKey] }),
-              doorMat
-            ]
+            [doorMat, doorMat, doorMat, doorMat, new THREE.MeshBasicMaterial({ map: texCache[signKey] }), doorMat]
           );
           signBox.position.set(0, 4.18, 0.22);
           bGroup.add(signBox);
 
-          // Upper-floor architectural cornice ledge
           const ledge = new THREE.Mesh(new THREE.BoxGeometry(bw + 0.16, 0.24, 0.42), acMat);
           ledge.position.set(0, 4.95, 0.14);
           bGroup.add(ledge);
 
-          // Upper-story windows (2F & 3F) + AC Condenser Units (冷氣機)
           const floors = bh > 10.5 ? 2 : 1;
           for (let f = 0; f < floors; f++) {
             const fy = 6.2 + f * 2.55;
@@ -5068,7 +5318,6 @@
               wPane.position.set(wx, fy, 0.13);
               bGroup.add(wFrame, wPane);
 
-              // Wall-mounted AC unit under one window
               if (w === 1 && f === 0) {
                 const ac = new THREE.Mesh(new THREE.BoxGeometry(0.72, 0.48, 0.42), acMat);
                 ac.position.set(wx + 0.15, fy - 1.02, 0.24);
@@ -5079,7 +5328,6 @@
             }
           }
 
-          // Protruding Vertical Neon Street Signboard (alternating buildings)
           if (shopIdx % 2 === 0) {
             const vKey = `vsign_${shopIdx % shopCatalog.length}`;
             if (!texCache[vKey]) texCache[vKey] = this.makeVerticalSignTexture(shop.vLines, shop.bg, shop.accent);
@@ -5091,7 +5339,6 @@
             vSign.position.set(3.4, 6.45, 0.95);
             bGroup.add(vSign);
 
-            // Support brackets
             [5.4, 7.4].forEach((by) => {
               const br = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.12, 0.9), doorMat);
               br.position.set(3.4, by, 0.45);
@@ -5103,13 +5350,10 @@
           shopIdx++;
         }
 
-        // 4. Street Props — Properly Placed & Non-Overlapping!
-        //    - Parked cars & traffic cones ON THE ROAD (y = 0, z = -4.85 / -5.25)
-        //    - Lamps, trash cans, benches, fire hydrants & vending machines ON SIDEWALK (y = 0.30)
+        // 4. Street Props
         const carColors = [0x2d4739, 0x314b70, 0x721c24, 0x495057, 0x1d3557];
         let bayIndex = 0;
         for (let x = -12; x < 92; x += 12) {
-          // Street Lamp on sidewalk near curb (with overhang arm toward road)
           const pole = new THREE.Mesh(
             new THREE.CylinderGeometry(0.08, 0.11, 6.2, 8),
             new THREE.MeshStandardMaterial({ color: 0x2c303a, metalness: 0.6 })
@@ -5131,7 +5375,6 @@
           lampHead.position.set(x, 6.32, -4.82);
           this.envGroup.add(lampHead);
 
-          // Hooded Street Trash Can on sidewalk (x + 1.45, z = -6.22)
           const canGroup = new THREE.Group();
           canGroup.position.set(x + 1.45, 0.30, -6.22);
           const canBody = new THREE.Mesh(
@@ -5154,7 +5397,6 @@
           this.envGroup.add(canGroup);
 
           if (bayIndex % 2 === 0) {
-            // Wooden Street Bench on sidewalk (x + 4.3, z = -6.38 — completely clear of vending machine!)
             const bench = new THREE.Group();
             bench.position.set(x + 4.3, 0.30, -6.38);
             const woodMat = new THREE.MeshStandardMaterial({ color: 0x8a5429, roughness: 0.82 });
@@ -5171,12 +5413,10 @@
             bench.add(seat, back);
             this.envGroup.add(bench);
 
-            // Detailed Illuminated Vending Machine backed cleanly against shop wall (x + 8.4, z = -8.78)
             const vm = this.createVendingMachine(bayIndex / 2, texCache);
             vm.position.set(x + 8.4, 0.30, -8.78);
             this.envGroup.add(vm);
           } else {
-            // Fire Hydrant on sidewalk curb (x + 3.0, z = -6.08)
             const hydGroup = new THREE.Group();
             hydGroup.position.set(x + 3.0, 0.30, -6.08);
             const hydMat = new THREE.MeshStandardMaterial({ color: 0xc1121f, roughness: 0.45 });
@@ -5190,7 +5430,6 @@
             hydGroup.add(hydBody, hydCap, hydSide);
             this.envGroup.add(hydGroup);
 
-            // Traffic Cones on the road edge (y = 0, z = -5.2)
             [4.0, 4.9].forEach((cx) => {
               const coneGroup = new THREE.Group();
               coneGroup.position.set(x + cx, 0, -5.2);
@@ -5213,7 +5452,6 @@
               this.envGroup.add(coneGroup);
             });
 
-            // Parked Car ON THE ASPHALT ROAD curbside lane (y = 0, z = -4.88, clear of combat z = -3.8)
             const car = this.createParkedCar(carColors[bayIndex % carColors.length]);
             car.position.set(x + 8.3, 0, -4.88);
             this.envGroup.add(car);
@@ -5222,7 +5460,7 @@
           bayIndex++;
         }
 
-        // Spawn breakable layered 3D supply crates along the stage
+        // 5. Breakable Supply Crates
         const crateSpots = [
           { x: 6, z: -2.5 },
           { x: 24, z: 2.3 },
@@ -5242,6 +5480,26 @@
             pos: new THREE.Vector3(pt.x, 0, pt.z),
             hp: 25,
             broken: false
+          });
+        });
+
+        // 6. Pickable Street Weapons (Glass Bottles & Wooden Bats, 10 hits durability)
+        const weaponSpots = [
+          { type: 'bottle', x: 2.2,  z: -1.8 },
+          { type: 'bat',    x: 19.5, z: 1.7 },
+          { type: 'bottle', x: 38.0, z: -1.7 },
+          { type: 'bat',    x: 55.5, z: 1.6 }
+        ];
+        weaponSpots.forEach((wp) => {
+          const obj = WeaponModelBuilder.createGroundPickup(wp.type, wp.x, wp.z);
+          this.scene.add(obj.root);
+          this.weapons.push({
+            type: wp.type,
+            root: obj.root,
+            itemPivot: obj.itemPivot,
+            ring: obj.ring,
+            pos: new THREE.Vector3(wp.x, 0, wp.z),
+            phase: Math.random() * Math.PI * 2
           });
         });
       }
@@ -5268,7 +5526,7 @@
     }
 
     // =========================================================================
-    // 12. MAIN GAME MANAGER (Loop, Combat, Collisions, UI, Stages, Game Over)
+    // 13. MAIN GAME MANAGER (Loop, Combat, Weapons, Collisions, UI & Stages)
     // =========================================================================
     class GameManager {
       constructor() {
@@ -5286,7 +5544,6 @@
         this.camera = new THREE.PerspectiveCamera(44, window.innerWidth / window.innerHeight, 0.1, 160);
         this.camera.position.set(0, 6.0, 13.8);
 
-        // Lighting (Balanced Hemisphere + Key + Soft Front Fill so faces stay clear & natural)
         this.hemiLight = new THREE.HemisphereLight(0xf2f6ff, 0x2d2838, 0.65);
         this.scene.add(this.hemiLight);
 
@@ -5316,10 +5573,11 @@
         this.levelMgr = new LevelManager(this.scene);
 
         this.highQuality = true;
-        this.state = 'MENU'; // MENU, CHAR_SELECT, PLAYING, PAUSED, STAGE_CLEAR, GAME_OVER, VICTORY
+        this.state = 'MENU';
         this.selectedChar = CharacterRegistry.ids[0];
-        this.currentStage = 0;
         this.charSelectCamX = 0;
+        this.currentStage = 0;
+
         this.players = [];
         this.enemies = [];
         this.projectiles = [];
@@ -5342,7 +5600,6 @@
         this.buildCharSelectCards();
         this.buildPreviewModels();
 
-        // Auto-enable touch controls on touch devices
         if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
           document.getElementById('touch-controls').classList.add('active');
         }
@@ -5446,11 +5703,18 @@
           document.getElementById('touch-controls').classList.toggle('active');
         });
 
+        document.getElementById('btn-toggle-bgm').addEventListener('click', (e) => {
+          this.audio.ensureCtx();
+          const on = this.audio.toggleBgmMute();
+          e.target.textContent = on ? 'BGM ON' : 'BGM OFF';
+          e.target.classList.toggle('bgm-off', !on);
+        });
+
         document.getElementById('opt-bgm').addEventListener('input', (e) => {
-          this.audio.bgmVol = parseFloat(e.target.value);
+          this.audio.setBgmVol(parseFloat(e.target.value));
         });
         document.getElementById('opt-sfx').addEventListener('input', (e) => {
-          this.audio.sfxVol = parseFloat(e.target.value);
+          this.audio.setSfxVol(parseFloat(e.target.value));
         });
         document.getElementById('opt-quality').addEventListener('click', (e) => {
           this.highQuality = !this.highQuality;
@@ -5510,7 +5774,7 @@
         const n = ids.length;
         const step = 1.52;
         ids.forEach((key, i) => {
-          const rig = CharacterModelBuilder.createRig(CharacterRegistry.get(key).appearance, false, 1.12);
+          const rig = CharacterModelBuilder.createRig(CharacterRegistry.get(key).appearance, false, 1.18);
           rig.root.position.set((i - (n - 1) / 2) * step, 0.35, 0);
           rig.root.rotation.y = 0;
           this.previewGroup.add(rig.root);
@@ -5540,6 +5804,7 @@
         } else if (this.state === 'PAUSED') {
           this.state = 'PLAYING';
           this.audio.startBGM(this.currentStage);
+          if (this.activeBoss && !this.activeBoss.dead) this.audio.setBossMode(true);
           this.showScreen(null);
         }
       }
@@ -5593,32 +5858,95 @@
         document.getElementById('hud-p1-name').textContent = p1.name;
         document.getElementById('hud-p1-portrait').src = faceTexMgr.getPortraitUrl(this.selectedChar);
         document.getElementById('hud-p1-ko').classList.remove('show');
+        document.getElementById('hud-weapon').classList.remove('active', 'low');
         document.getElementById('hud-stage-name').textContent = STAGES[stageIndex].name;
         document.getElementById('boss-hud').classList.remove('active');
         document.getElementById('go-indicator').style.display = 'none';
         document.getElementById('hud').classList.add('active');
         this.showScreen(null);
 
-        this.camera.position.set(0, 6.2, 13.5);
+        const initCam = this.getZoneCameraBounds();
+        const startCamX = Math.max(initCam.camMinX, Math.min(initCam.camMaxX, p1.pos.x + 1.5));
+        this.camera.position.set(startCamX, 6.0, 13.8);
         this.audio.startBGM(stageIndex);
         this.showBanner(STAGES[stageIndex].name, 2.0);
         this.spawnWaveForZone(0);
+      }
+
+      // Exact visible horizontal half-width at combat lane depth z (camera at y=6, z=13.8 looking at y=1.65, z=-0.7)
+      getVisibleHalfWidthAtZ(z = 0) {
+        const halfFovRad = THREE.MathUtils.degToRad(this.camera.fov * 0.5);
+        const depth = 1.466 + (13.8 - z) * 0.9578;
+        return Math.tan(halfFovRad) * this.camera.aspect * depth;
+      }
+
+      // Keep locked-zone camera framed within zone bounds so no dead space appears past the right/left walls
+      getZoneCameraBounds() {
+        const halfVisMid = this.getVisibleHalfWidthAtZ(0);
+        const usableHalfMid = Math.max(2.0, halfVisMid - 0.85);
+        let zoneMinX = this.levelMgr.zoneMinX;
+        let zoneMaxX = this.levelMgr.zoneMaxX;
+        const center = (zoneMinX + zoneMaxX) * 0.5;
+
+        let camMinX = zoneMinX + usableHalfMid;
+        let camMaxX = zoneMaxX - usableHalfMid;
+
+        // Ultrawide screens wider than the zone: center camera & expand playable zone to full visible width
+        if (camMinX > camMaxX) {
+          camMinX = center;
+          camMaxX = center;
+          zoneMinX = Math.max(-18, center - usableHalfMid);
+          zoneMaxX = Math.min(86, center + usableHalfMid);
+        }
+
+        return { camMinX, camMaxX, zoneMinX, zoneMaxX, halfVisMid, usableHalfMid };
+      }
+
+      // Per-lane (z) walkable X bounds aligned right up to the visible screen edges without clipping off-screen
+      getFighterXBounds(z, allowAdvance = false) {
+        const zb = this.getZoneCameraBounds();
+        const halfAtZ = this.getVisibleHalfWidthAtZ(z);
+        const laneUsable = Math.max(1.6, halfAtZ - 0.85);
+
+        const minX = Math.max(-18, zb.camMinX - laneUsable);
+        const lockedMaxX = Math.min(
+          86,
+          zb.camMaxX + laneUsable,
+          zb.camMaxX + zb.halfVisMid + 1.0
+        );
+        const maxX = allowAdvance ? Math.min(86, zb.zoneMaxX + 20) : lockedMaxX;
+        return { minX, maxX };
+      }
+
+      // Compute visible right edge (at back lane) so new waves stride cleanly from off-screen right
+      getOffscreenRightSpawnX() {
+        const zb = this.getZoneCameraBounds();
+        const refCamX = Math.max(this.camera.position.x, zb.camMaxX);
+        const backHalfW = this.getVisibleHalfWidthAtZ(-3.0);
+        return Math.max(zb.zoneMaxX + 1.6, refCamX + backHalfW + 1.2);
       }
 
       spawnWaveForZone(zoneIdx) {
         const st = STAGES[this.currentStage];
         this.levelMgr.zoneIndex = zoneIdx;
         this.levelMgr.zoneMinX = -10 + zoneIdx * 20;
-        this.levelMgr.zoneMaxX = 12 + zoneIdx * 20;
+        this.levelMgr.zoneMaxX = 14 + zoneIdx * 20;
         this.levelMgr.waveSpawned = true;
 
+        const baseRightX = zoneIdx === 0
+          ? this.levelMgr.zoneMaxX - 1.8
+          : this.getOffscreenRightSpawnX();
+        const walkIn = zoneIdx > 0;
+
+        // Zone 3 is Boss Zone
         if (zoneIdx >= 3) {
           this.levelMgr.bossSpawned = true;
           const bCfg = st.boss;
           const boss = new Boss(this.scene, Object.assign({}, bCfg, {
             stageIndex: this.currentStage,
-            x: this.levelMgr.zoneMaxX - 2.2,
-            z: 0
+            x: baseRightX + 1.8,
+            z: 0,
+            enteringZone: true
           }));
           this.enemies.push(boss);
           this.activeBoss = boss;
@@ -5626,25 +5954,34 @@
           for (let i = 0; i < 2; i++) {
             const tmpl = st.enemies[i % st.enemies.length];
             this.enemies.push(new Enemy(this.scene, Object.assign({}, tmpl, {
-              x: this.levelMgr.zoneMaxX - 3.5 - i * 1.6,
-              z: i === 0 ? -2.2 : 2.2
+              x: baseRightX + 0.4 + i * 1.4,
+              z: i === 0 ? -2.2 : 2.2,
+              enteringZone: true
             })));
           }
 
           document.getElementById('boss-name').textContent = boss.name;
           document.getElementById('boss-phase').textContent = 'PHASE 1';
           document.getElementById('boss-hud').classList.add('active');
+          this.audio.setBossMode(true);
           this.audio.sfx('bossIntro');
           this.showBanner(`WARNING: ${boss.name}!`, 2.2);
           return;
         }
 
+        // Standard wave enemies — all enter from right ahead (never behind player)
         const count = 3 + zoneIdx;
         for (let i = 0; i < count; i++) {
           const tmpl = st.enemies[(i + zoneIdx) % st.enemies.length];
-          const ex = this.levelMgr.zoneMaxX - 1.5 - Math.random() * 2.5;
+          const ex = walkIn
+            ? baseRightX + i * 1.35 + Math.random() * 0.6
+            : baseRightX - i * 1.15 - Math.random() * 0.8;
           const ez = -2.6 + (i / Math.max(1, count - 1)) * 5.2;
-          this.enemies.push(new Enemy(this.scene, Object.assign({}, tmpl, { x: ex, z: ez })));
+          this.enemies.push(new Enemy(this.scene, Object.assign({}, tmpl, {
+            x: ex,
+            z: ez,
+            enteringZone: walkIn
+          })));
         }
       }
 
@@ -5683,14 +6020,20 @@
         const grooveMat = new THREE.MeshStandardMaterial({ color: 0x2b1709, roughness: 0.95 });
         const metalMat = new THREE.MeshStandardMaterial({ color: 0x3b424d, metalness: 0.78, roughness: 0.32 });
         const badgeMat = new THREE.MeshStandardMaterial({
-          color: 0xffb703, emissive: 0xff8800, emissiveIntensity: 0.45, roughness: 0.35
+          color: 0xffb703,
+          emissive: 0xff8800,
+          emissiveIntensity: 0.45,
+          roughness: 0.35
         });
 
-        const t = 0.11, p = 0.035;
+        const t = 0.11;
+        const p = 0.035;
+
         [-h * 0.18, h * 0.18].forEach((gy) => {
           const gFB = new THREE.Mesh(new THREE.BoxGeometry(w - t * 1.4, 0.025, d + 0.015), grooveMat);
           gFB.position.y = gy;
           mesh.add(gFB);
+
           const gLR = new THREE.Mesh(new THREE.BoxGeometry(w + 0.015, 0.025, d - t * 1.4), grooveMat);
           gLR.position.y = gy;
           mesh.add(gLR);
@@ -5753,11 +6096,22 @@
         const plateF = new THREE.Mesh(new THREE.BoxGeometry(0.32, 0.32, 0.03), metalMat);
         plateF.position.set(0, 0, d / 2 + 0.035);
         mesh.add(plateF);
+
         const crossFH = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.065, 0.02), badgeMat);
         crossFH.position.set(0, 0, d / 2 + 0.052);
         const crossFV = new THREE.Mesh(new THREE.BoxGeometry(0.065, 0.2, 0.02), badgeMat);
         crossFV.position.set(0, 0, d / 2 + 0.052);
         mesh.add(crossFH, crossFV);
+
+        const plateT = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.03, 0.3), metalMat);
+        plateT.position.set(0, h / 2 + 0.035, 0);
+        mesh.add(plateT);
+
+        const crossTH = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.02, 0.06), badgeMat);
+        crossTH.position.set(0, h / 2 + 0.052, 0);
+        const crossTV = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.02, 0.18), badgeMat);
+        crossTV.position.set(0, h / 2 + 0.052, 0);
+        mesh.add(crossTH, crossTV);
 
         const shadow = new THREE.Mesh(
           new THREE.CircleGeometry(Math.max(w, d) * 0.68, 18),
@@ -5768,7 +6122,7 @@
         mesh.add(shadow);
       }
 
-      resolveBodyCollisions(maxPlayerX) {
+      resolveBodyCollisions(canAdvance) {
         const active = [
           ...this.players.filter((p) => p && !p.dead),
           ...this.enemies.filter((e) => e && !e.dead)
@@ -5789,10 +6143,12 @@
             if (dist < minCrateDist) {
               if (dist < 0.001) { dx = 0.01; dz = 0; dist = 0.01; }
               const push = (minCrateDist - dist) * 0.5;
-              posA.x -= (dx / dist) * push;
-              posA.z = Math.max(-3.6, Math.min(3.6, posA.z - (dz / dist) * push));
-              posB.x += (dx / dist) * push;
-              posB.z = Math.max(-3.6, Math.min(3.6, posB.z + (dz / dist) * push));
+              const nx = dx / dist;
+              const nz = dz / dist;
+              posA.x -= nx * push;
+              posA.z = Math.max(-3.6, Math.min(3.6, posA.z - nz * push));
+              posB.x += nx * push;
+              posB.z = Math.max(-3.6, Math.min(3.6, posB.z + nz * push));
               crates[i].mesh.position.set(posA.x, crates[i].mesh.position.y, posA.z);
               crates[j].mesh.position.set(posB.x, crates[j].mesh.position.y, posB.z);
             }
@@ -5820,7 +6176,8 @@
                   dist = Math.hypot(dx, dz);
                 }
                 const overlap = minDist - dist;
-                const nx = dx / dist, nz = dz / dist;
+                const nx = dx / dist;
+                const nz = dz / dist;
                 const weightA = a.isBoss ? 0.35 : 0.5;
                 const weightB = b.isBoss ? 0.35 : 0.5;
                 const totalW = weightA + weightB;
@@ -5858,8 +6215,12 @@
           }
 
           for (const f of active) {
-            const maxX = f.isPlayer ? maxPlayerX : this.levelMgr.zoneMaxX;
-            f.pos.x = Math.max(this.levelMgr.zoneMinX, Math.min(maxX, f.pos.x));
+            const bounds = this.getFighterXBounds(f.pos.z, canAdvance && f.isPlayer);
+            if (f.enteringZone) {
+              f.pos.x = Math.max(bounds.minX, f.pos.x);
+            } else {
+              f.pos.x = Math.max(bounds.minX, Math.min(bounds.maxX, f.pos.x));
+            }
             f.pos.z = Math.max(-3.8, Math.min(3.8, f.pos.z));
             f.rig.root.position.set(f.pos.x, f.pos.y, f.pos.z);
           }
@@ -5870,6 +6231,7 @@
         const p1 = this.players[0];
         if (!p1) return;
 
+        // Player attacks vs Enemies & Crates (includes 10-hit weapon durability & break finisher)
         const pBox = p1.getHitbox();
         if (pBox) {
           for (const e of this.enemies) {
@@ -5877,7 +6239,20 @@
             if (Math.abs(e.pos.x - pBox.x) <= pBox.rx && Math.abs(e.pos.z - pBox.z) <= pBox.rz) {
               pBox.attack.hitTargets.add(e);
               const dir = e.pos.x >= p1.pos.x ? 1 : -1;
-              if (e.takeDamage(pBox.attack.damage, dir, pBox.attack.knockback, pBox.attack.knockdown, this)) {
+              const isWeapon = pBox.attack.weaponAttack && p1.weapon;
+              const willBreak = isWeapon && p1.weapon.hitsLeft <= 1;
+              const dmg = pBox.attack.damage + (willBreak ? 14 : 0);
+              const kd = pBox.attack.knockdown || willBreak;
+              const kb = pBox.attack.knockback + (willBreak ? 2.4 : 0);
+
+              if (e.takeDamage(dmg, dir, kb, kd, this)) {
+                if (isWeapon) {
+                  this.audio.sfx(pBox.attack.sfx);
+                  p1.weapon.hitsLeft--;
+                  if (p1.weapon.hitsLeft <= 0) {
+                    p1.breakWeapon(this);
+                  }
+                }
                 p1.energy = Math.min(p1.maxEnergy, p1.energy + 9);
                 this.registerHit(p1);
                 if (e.dead) {
@@ -5892,13 +6267,18 @@
             }
           }
 
-          // Hit breakable crates
           for (const c of this.levelMgr.crates) {
             if (c.broken || pBox.attack.hitTargets.has(c)) continue;
             if (Math.abs(c.pos.x - pBox.x) <= pBox.rx + 0.45 && Math.abs(c.pos.z - pBox.z) <= pBox.rz + 0.45) {
               pBox.attack.hitTargets.add(c);
               c.hp -= pBox.attack.damage;
-              this.audio.sfx('heavy');
+              if (pBox.attack.weaponAttack && p1.weapon) {
+                this.audio.sfx(pBox.attack.sfx);
+                p1.weapon.hitsLeft--;
+                if (p1.weapon.hitsLeft <= 0) p1.breakWeapon(this);
+              } else {
+                this.audio.sfx('heavy');
+              }
               this.particles.spawnHitSparks(new THREE.Vector3(c.pos.x, 0.7, c.pos.z), 0xd4a373, 10, this.highQuality);
               if (c.hp <= 0) {
                 c.broken = true;
@@ -5918,7 +6298,9 @@
             if (Math.abs(p1.pos.x - eBox.x) <= eBox.rx && Math.abs(p1.pos.z - eBox.z) <= eBox.rz) {
               eBox.attack.hitTargets.add(p1);
               const dir = p1.pos.x >= e.pos.x ? 1 : -1;
-              p1.takeDamage(eBox.attack.damage, dir, eBox.attack.knockback, eBox.attack.knockdown, this);
+              if (p1.takeDamage(eBox.attack.damage, dir, eBox.attack.knockback, eBox.attack.knockdown, this) && eBox.attack.weaponAttack) {
+                this.audio.sfx(eBox.attack.sfx);
+              }
             }
           }
         }
@@ -5941,30 +6323,27 @@
         const p1 = this.players[0];
         const aliveEnemies = this.enemies.filter((e) => !e.dead);
         const canAdvance = aliveEnemies.length === 0 && !this.levelMgr.bossSpawned;
-        const maxPlayerX = canAdvance ? this.levelMgr.zoneMaxX + 20 : this.levelMgr.zoneMaxX;
+        const zoneCam = this.getZoneCameraBounds();
 
-        // Update Player
         if (p1) {
-          p1.updatePlayer(dt, this.input, this, this.levelMgr.zoneMinX, maxPlayerX);
+          const p1Bounds = this.getFighterXBounds(p1.pos.z, canAdvance);
+          p1.updatePlayer(dt, this.input, this, p1Bounds.minX, p1Bounds.maxX);
         }
 
-        // Update Enemies & remove expired corpses
         for (let i = this.enemies.length - 1; i >= 0; i--) {
           const e = this.enemies[i];
-          e.updateAI(dt, p1, this, this.levelMgr.zoneMinX, this.levelMgr.zoneMaxX);
+          const eBounds = this.getFighterXBounds(e.pos.z, false);
+          e.updateAI(dt, p1, this, eBounds.minX, eBounds.maxX);
           if (e.dead && e.removeTimer <= 0) {
             e.dispose();
             this.enemies.splice(i, 1);
           }
         }
 
-        // Solid non-overlapping collision (Players, Enemies, and Crates)
-        this.resolveBodyCollisions(maxPlayerX);
-
-        // Hitbox / Hurtbox combat resolution
+        this.resolveBodyCollisions(canAdvance);
         this.resolveCombat();
 
-        // Update Projectiles
+        // Projectiles
         for (let i = this.projectiles.length - 1; i >= 0; i--) {
           const pr = this.projectiles[i];
           pr.life -= dt;
@@ -5981,7 +6360,7 @@
           }
         }
 
-        // Update Pickups
+        // Health Pickups
         for (let i = this.levelMgr.pickups.length - 1; i >= 0; i--) {
           const pk = this.levelMgr.pickups[i];
           pk.mesh.rotation.y += dt * 2.4;
@@ -5994,17 +6373,32 @@
           }
         }
 
+        // Ground Street Weapons glow pulse (accelerates when player is in pickup range)
+        const tNow = performance.now() * 0.001;
+        for (const w of this.levelMgr.weapons) {
+          const near = p1 && !p1.dead && !p1.weapon && Math.hypot(p1.pos.x - w.pos.x, p1.pos.z - w.pos.z) < 1.85;
+          const speed = near ? 9.5 : 3.2;
+          const pulse = 1 + Math.sin(tNow * speed + w.phase) * (near ? 0.18 : 0.08);
+          w.ring.scale.set(pulse, pulse, 1);
+          w.ring.material.opacity = near ? 0.95 : 0.62;
+          w.itemPivot.position.y = Math.sin(tNow * 2.6 + w.phase) * 0.04;
+        }
+
         this.particles.update(dt);
 
         // Zone progression & GO indicator
         document.getElementById('go-indicator').style.display = canAdvance ? 'block' : 'none';
-        if (canAdvance && p1 && !p1.dead && p1.pos.x >= this.levelMgr.zoneMaxX + 2.2) {
+        if (canAdvance && p1 && !p1.dead && p1.pos.x >= zoneCam.zoneMaxX + 3.2) {
           this.spawnWaveForZone(this.levelMgr.zoneIndex + 1);
         }
 
-        // Camera smooth follow
+        // Smooth camera tracking locked neatly to visible edges of the active zone
         if (p1) {
-          const targetCamX = Math.max(this.levelMgr.zoneMinX + 6, Math.min(this.levelMgr.zoneMaxX - 2, p1.pos.x + 1.5));
+          const camMinX = zoneCam.camMinX;
+          const camMaxX = canAdvance
+            ? Math.min(86 - zoneCam.usableHalfMid, zoneCam.camMaxX + 20)
+            : zoneCam.camMaxX;
+          const targetCamX = Math.max(camMinX, Math.min(camMaxX, p1.pos.x + 1.5));
           this.camera.position.x += (targetCamX - this.camera.position.x) * Math.min(1, dt * 5.5);
           this.camera.position.y = 6.0;
           this.camera.position.z = 13.8;
@@ -6015,13 +6409,11 @@
 
         this.updateHUD();
 
-        // Check Player Death -> Game Over
         if (p1 && p1.dead && p1.deathTimer <= 0) {
           this.triggerGameOver();
           return;
         }
 
-        // Check Stage Clear (Boss defeated and all enemies gone)
         if (this.levelMgr.bossSpawned && this.enemies.length === 0) {
           this.triggerStageClear();
         }
@@ -6035,7 +6427,20 @@
           document.getElementById('hud-p1-en').style.width = `${(p1.energy / p1.maxEnergy) * 100}%`;
           document.getElementById('hud-p1-ko').classList.toggle('show', p1.dead);
 
-          // Highlight 拳 & 腳 buttons and hint pill when Special / Ultimate is ready
+          const wHud = document.getElementById('hud-weapon');
+          if (wHud) {
+            if (p1.weapon) {
+              wHud.classList.add('active');
+              wHud.classList.toggle('low', p1.weapon.hitsLeft <= 3);
+              document.getElementById('hud-weapon-label').textContent =
+                `${p1.weapon.icon} ${p1.weapon.name} ${p1.weapon.hitsLeft}/${p1.weapon.maxHits}`;
+              document.getElementById('hud-weapon-fill').style.width =
+                `${Math.max(0, (p1.weapon.hitsLeft / p1.weapon.maxHits) * 100)}%`;
+            } else {
+              wHud.classList.remove('active', 'low');
+            }
+          }
+
           const btnP = document.getElementById('btn-t-punch');
           const btnK = document.getElementById('btn-t-kick');
           const hint = document.getElementById('touch-spec-hint');
@@ -6180,8 +6585,14 @@
       }
     }
 
-    // Boot on window load
+    // Boot on window load (with graceful notice if characters.js is missing)
     window.onload = function () {
+      if (typeof CharacterRegistry === 'undefined') {
+        document.querySelectorAll('.screen').forEach((s) => s.classList.remove('active'));
+        document.getElementById('error-screen').classList.add('active');
+        return;
+      }
+      faceTexMgr = new FaceTextureManager();
       const game = new GameManager();
       game.animate(performance.now());
     };
