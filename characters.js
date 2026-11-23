@@ -26,6 +26,8 @@
      knockback  擊退力度           knockdown  true = 打低對手
      hitStart / hitEnd  判定生效嘅動作進度 0~1（預設 0.25 ~ 0.72）
      sfx        音效：'punch' | 'kick' | 'heavy' | 'special'
+   fx.anim 專屬姿勢：slam | dashKick | whirlKick | shield | dunk | stomp｜fx.move 位移：{type:'leap',up,plunge,fwd} 跳起落地砸擊（落地先判定傷害）| {type:'dash',speed,trail} 前衝｜fx.shield 護盾｜fx.ball 籃球｜fx.petals 花瓣｜fx.decal 地面圖案（crack / text）
+   必殺技額外演出 special1/special2 內嘅 fx：rings [[顏色,半徑],..] 多重衝擊波｜shake 鏡頭震動｜stop 頓幀(秒)｜invuln 無敵/加防秒數｜banner 自訂大字
    ============================================================================= */
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -94,8 +96,8 @@ const CharacterRoster = [
     name: 'WAI',
     role: 'POWER TYPE',
     hp: 85, def: 65, atk: 100, spd: 55,
-    special1: { name: 'Earthquake Slam',    cost: 35,  mult: 1.85, radius: 3.6, color: 0xff9e00 },
-    special2: { name: 'Titan Meteor Crush', cost: 100, mult: 3.10, radius: 4.8, color: 0xff2a5f },
+    special1: { name: 'Earthquake Slam',    cost: 35,  mult: 1.85, radius: 3.6, color: 0xff9e00, duration: 0.90, fx: { anim: 'slam', move: { type: 'leap', up: 8, plunge: 16 }, decal: { kind: 'crack', color: '#ffc928' }, rings: [[0xffc928, 2.4]], shake: 0.30 } },
+    special2: { name: 'Titan Earthquake Slam', cost: 100, mult: 3.10, radius: 4.8, color: 0xff2a5f, duration: 1.10, fx: { anim: 'slam', move: { type: 'leap', up: 12, plunge: 20 }, decal: { kind: 'crack', color: '#ffc928' }, rings: [[0xffc928, 3.4], [0xff8a00, 4.8]], shake: 0.60, stop: 0.13 } },
     appearance: {
       faceId: 'WAI',
       skin: 0xd9a886, hair: 0x17171a, hairStyle: 'messy',
@@ -122,8 +124,8 @@ const CharacterRoster = [
     name: 'SHING',
     role: 'SPEED TYPE',
     hp: 75, def: 55, atk: 75, spd: 100,
-    special1: { name: 'Cyclone Kick',       cost: 35,  mult: 1.70, radius: 3.8, color: 0x00d4ff },
-    special2: { name: 'Hyper Blitz Flurry', cost: 100, mult: 2.95, radius: 5.0, color: 0x00f5d4 },
+    special1: { name: 'Cyclone Kick',       cost: 35,  mult: 1.70, radius: 3.8, color: 0x00d4ff, duration: 0.55, fx: { anim: 'whirlKick', rings: [[0xffffff, 4.4]], shake: 0.16, stop: 0.05 } },
+    special2: { name: 'Hyper Blitz Flurry', cost: 100, mult: 2.95, radius: 5.0, color: 0x00f5d4, duration: 0.80, fx: { anim: 'dashKick', move: { type: 'dash', speed: 14, trail: 0x6ff3ff }, rings: [[0x6ff3ff, 3.0], [0xffffff, 5.4]], shake: 0.28 } },
     appearance: {
       faceId: 'SHING',
       skin: 0xe8bfa4, hair: 0x261b15, hairStyle: 'undercut',
@@ -150,8 +152,8 @@ const CharacterRoster = [
     name: 'GEORGE',
     role: 'DEFENSE TYPE',
     hp: 100, def: 100, atk: 70, spd: 45,
-    special1: { name: 'Aegis Shockwave', cost: 35,  mult: 1.75, radius: 4.0, color: 0x4cc9f0 },
-    special2: { name: 'Fortress Nova',   cost: 100, mult: 3.00, radius: 5.2, color: 0x4361ee },
+    special1: { name: 'Shockwave', cost: 35,  mult: 1.75, radius: 4.0, color: 0x4cc9f0, duration: 0.70, fx: { anim: 'shield', shield: { color: 0x4cc9f0, scale: 1.5, life: 0.9 }, rings: [[0x3d7bff, 3.4]], shake: 0.22, invuln: 1.2 } },
+    special2: { name: 'Large Shockwave',   cost: 100, mult: 3.00, radius: 5.2, color: 0x4361ee, duration: 1.00, fx: { anim: 'shield', shield: { color: 0x4361ee, scale: 2.2, life: 1.5 }, rings: [[0x9bc4ff, 3.6], [0x4cc9f0, 5.4]], shake: 0.35, invuln: 2.6 } },
     appearance: {
       faceId: 'GEORGE',
       skin: 0xe0ad8b, hair: 0x141518, hairStyle: 'sidepart',
@@ -178,8 +180,8 @@ const CharacterRoster = [
     name: 'MISTY',
     role: 'AGILE STRIKER',
     hp: 78, def: 62, atk: 80, spd: 92,
-    special1: { name: 'Pocket Bell Spin',     cost: 35,  mult: 1.78, radius: 3.9, color: 0x00b4d8 },
-    special2: { name: 'Midnight Lotus Storm', cost: 100, mult: 3.05, radius: 5.1, color: 0xff4d8d },
+    special1: { name: 'Pocket Spin',     cost: 35,  mult: 1.78, radius: 3.9, color: 0x00b4d8, duration: 0.60, fx: { anim: 'whirlKick', petals: { colors: [0xff9ecb, 0x9be8ff], count: 22 }, rings: [[0xff9ecb, 3.0]], shake: 0.16, stop: 0.05 } },
+    special2: { name: 'Pocket Spin Storm', cost: 100, mult: 3.05, radius: 5.1, color: 0xff4d8d, duration: 0.90, fx: { anim: 'whirlKick', petals: { colors: [0xff9ecb, 0x9be8ff, 0xffc2dd], count: 44 }, rings: [[0x9be8ff, 3.4], [0xffc2dd, 4.8]], shake: 0.28 } },
     appearance: {
       faceId: 'MISTY',
       gender: 'female',
@@ -218,8 +220,8 @@ const CharacterRoster = [
     name: 'JOHNNY',
     role: 'AERIAL BRAWLER',
     hp: 82, def: 60, atk: 88, spd: 82,
-    special1: { name: 'Alley-Oop Slam',     cost: 35,  mult: 1.82, radius: 3.8, color: 0x9b5de5 },
-    special2: { name: 'Court Breaker Dunk', cost: 100, mult: 3.15, radius: 5.0, color: 0xffbe0b },
+    special1: { name: 'Alley-Oop Slam',     cost: 35,  mult: 1.82, radius: 3.8, color: 0x9b5de5, duration: 0.95, fx: { anim: 'dunk', move: { type: 'leap', up: 9, plunge: 18, fwd: 2 }, ball: true, rings: [[0xff7a1a, 3.0]], shake: 0.34 } },
+    special2: { name: 'Court Breaker SlamDunk', cost: 100, mult: 3.15, radius: 5.0, color: 0xffbe0b, duration: 1.20, fx: { anim: 'dunk', move: { type: 'leap', up: 13, plunge: 22, fwd: 2.5 }, ball: true, rings: [[0xff7a1a, 3.6], [0xffd08a, 5.0]], shake: 0.55, stop: 0.13 } },
     appearance: {
       faceId: 'JOHNNY',
       skin: 0xdead8c, hair: 0x151519, hairStyle: 'fade',
@@ -252,8 +254,8 @@ const CharacterRoster = [
     name: 'MARK',
     role: 'STREET BRAWLER',
     hp: 90, def: 82, atk: 82, spd: 60,
-    special1: { name: 'Hype Shockwave',   cost: 35,  mult: 1.80, radius: 3.9, color: 0xe6192e },
-    special2: { name: 'Drop Zone Impact', cost: 100, mult: 3.10, radius: 5.1, color: 0xff3b30 },
+    special1: { name: 'Hyper Hit',   cost: 35,  mult: 1.80, radius: 3.9, color: 0xe6192e, duration: 0.90, fx: { anim: 'stomp', move: { type: 'leap', up: 8, plunge: 18 }, decal: { kind: 'text', text: 'SUP', color: '#ff2030' }, rings: [[0xffffff, 3.0]], shake: 0.28 } },
+    special2: { name: 'Drop Zone Impact', cost: 100, mult: 3.10, radius: 5.1, color: 0xff3b30, duration: 1.10, fx: { anim: 'stomp', move: { type: 'leap', up: 11, plunge: 22 }, decal: { kind: 'text', text: 'SUP', color: '#ff2030' }, rings: [[0xe6192e, 3.6], [0xffffff, 5.0]], shake: 0.50, stop: 0.12 } },
     appearance: {
       faceId: 'MARK',
       skin: 0xdfb091, hair: 0x161517, hairStyle: 'street',
